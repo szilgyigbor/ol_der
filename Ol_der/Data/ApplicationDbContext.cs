@@ -10,7 +10,7 @@ namespace Ol_der.Data
 {
     class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ApplicationDbContext(DbContextOptions options)
         : base(options)
         {
         }
