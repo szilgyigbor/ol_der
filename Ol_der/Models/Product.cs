@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace Ol_der.Models
 {
     class Product
     {
+        public int ProductId { get; set; }
+        
         public string ItemNumber { get; set; }
         public string Name { get; set; }
         public int SupplierId { get; set; }
