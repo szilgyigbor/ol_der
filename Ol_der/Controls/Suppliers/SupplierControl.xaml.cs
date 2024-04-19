@@ -23,26 +23,39 @@ namespace Ol_der.Controls.Suppliers
     public partial class SupplierControl : UserControl
     {
         private SupplierViewModel _viewModel;
+        private AddSupplierControl _addSupplierControl;
+        private ShowAllSupplierControl _showAllSupplierControl;
 
         public SupplierControl()
         {
             InitializeComponent();
             _viewModel = new SupplierViewModel();
+            _addSupplierControl = new AddSupplierControl();
+            _showAllSupplierControl = new ShowAllSupplierControl();
             this.Unloaded += OnUnloaded;
         }
 
         private void Add_Supplier_Click(object sender, RoutedEventArgs e)
         {
-            var addControl = new AddSupplierControl();
-            addControl.OnSupplierAdded += _viewModel.AddSupplier;
-            ContentArea.Content = addControl;
+            _addSupplierControl.OnSupplierAdded += _viewModel.AddSupplier;
+            ContentArea.Content = _addSupplierControl;
         }
 
         private void Show_All_Supplier_Click(object sender, RoutedEventArgs e)
         {
-            var showAllControl = new ShowAllSupplierControl();
-            showAllControl.DisplaySuppliers(GetSuppliers());
-            ContentArea.Content = showAllControl;
+            _showAllSupplierControl.DisplaySuppliers(GetSuppliers());
+            ContentArea.Content = _showAllSupplierControl;
+        }
+
+        private void Delete_Supplier_Click(object sender, RoutedEventArgs e)
+        {
+            int supplierId = _showAllSupplierControl.DeleteSupplier();
+
+            if (supplierId >= 0)
+            {
+                _viewModel.RemoveSupplier(supplierId);
+                _showAllSupplierControl.DisplaySuppliers(GetSuppliers());
+            }
         }
 
         private List<Supplier> GetSuppliers()
