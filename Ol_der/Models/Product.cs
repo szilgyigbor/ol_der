@@ -9,7 +9,7 @@ namespace Ol_der.Models
 {
     class Product
     {
-        public int ProductId { get; set; }
+        public int Id { get; set; }
         
         public string ItemNumber { get; set; }
         public string Name { get; set; }
