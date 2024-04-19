@@ -16,19 +16,13 @@ using System.Windows.Shapes;
 namespace Ol_der.Controls.Suppliers
 {
     /// <summary>
-    /// Interaction logic for SupplierControl.xaml
+    /// Interaction logic for AddSupplierControl.xaml
     /// </summary>
-    public partial class SupplierControl : UserControl
+    public partial class AddSupplierControl : UserControl
     {
-        public SupplierControl()
+        public AddSupplierControl()
         {
             InitializeComponent();
         }
-
-        private void Add_Supplier_Click(object sender, RoutedEventArgs e)
-        {
-            ContentArea.Content = new AddSupplierControl();
-        }
- 
     }
 }
