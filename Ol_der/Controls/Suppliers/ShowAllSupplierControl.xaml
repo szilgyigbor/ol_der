@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Ol_der.Controls.Suppliers.ShowAllSupplierControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ol_der.Controls.Suppliers"
+             mc:Ignorable="d"
+             FontSize="18"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <ListView x:Name="SuppliersListView" Background="White" AlternationCount="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Név" DisplayMemberBinding="{Binding Name}" Width="240"/>
+                    <GridViewColumn Header="Cím" DisplayMemberBinding="{Binding Address}" Width="460"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="280"/>
+                    <GridViewColumn Header="Telefon" DisplayMemberBinding="{Binding Phone}" Width="180"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+    </Grid>
+</UserControl>
