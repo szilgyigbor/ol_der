@@ -12,6 +12,16 @@ namespace Ol_der.Data
     {
         public ApplicationDbContext CreateDbContext(string[] args)
         {
+            return CreateApplicationDbContext();
+        }
+
+        public static ApplicationDbContext Create()
+        {
+            return CreateApplicationDbContext();
+        }
+
+        private static ApplicationDbContext CreateApplicationDbContext()
+        {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
