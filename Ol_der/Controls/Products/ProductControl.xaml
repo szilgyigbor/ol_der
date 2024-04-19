@@ -7,7 +7,40 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Termékek kezelése" FontSize="28" HorizontalAlignment="Center"/>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Background="DarkGray">
+            <TextBlock Text="Termékek kezelése"
+           FontSize="28"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"/>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="8.8*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Új Beszállító" Margin="5 5 5 15" Padding="5" FontSize="18"/>
+                <Button Content="Szerkesztés" Margin="5 5 5 15" Padding="5" FontSize="18"/>
+                <Button Content="Törlés" Margin="5 5 5 15" Padding="5" FontSize="18"/>
+            </StackPanel>
+
+            <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
+          Background="Black" VerticalAlignment="Stretch"/>
+
+            <ContentControl Grid.Column="1" VerticalAlignment="Top" Margin="5" x:Name="ContentArea"/>
+        </Grid>
     </Grid>
 </UserControl>
