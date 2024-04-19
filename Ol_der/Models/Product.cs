@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ol_der.Models
 {
-    class Product
+    public class Product
     {
         public int Id { get; set; }
         

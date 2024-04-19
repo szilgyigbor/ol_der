@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ol_der.Models
 {
-    class Sale
+    public class Sale
     {
         public int SaleId { get; set; }
         public string ItemNumber { get; set; }
