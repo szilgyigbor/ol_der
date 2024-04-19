@@ -16,16 +16,11 @@
 
         <Border Grid.Column="0" Background="Tan">
             <StackPanel>
-                <!-- Első gomb -->
-                <Button Content="Gomb1" Margin="5 35 5 15" Width="160" Click="Button_Click"/>
-                <!-- Második gomb -->
-                <Button Content="Gomb2" Margin="5 15 5 15" Width="160" Click="Button_Click"/>
-                <!-- Harmadik gomb -->
-                <Button Content="Gomb3" Margin="5 15 5 15" Width="160" Click="Button_Click"/>
-                <!-- Negyedik gomb -->
-                <Button Content="Gomb4" Margin="5 15 5 15" Width="160" Click="Button_Click"/>
-                <!-- Ötödik gomb -->
-                <Button Content="Gomb5" Margin="5 15 5 15" Width="160" Click="Button_Click"/>
+                <Button Content="Gomb1" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" Click="Button_Click"/>
+                <Button Content="Gomb2" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" Click="Button_Click"/>
+                <Button Content="Gomb3" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" Click="Button_Click"/>
+                <Button Content="Gomb4" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" Click="Button_Click"/>
+                <Button Content="Gomb5" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" Click="Button_Click"/>
             </StackPanel>
             
         </Border>
