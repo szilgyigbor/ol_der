@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,40 @@ namespace Ol_der.Controls.Suppliers
     /// </summary>
     public partial class AddSupplierControl : UserControl
     {
+        public event Action<Supplier> OnSupplierAdded;
+
         public AddSupplierControl()
         {
             InitializeComponent();
+        }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+            {
+                MessageBox.Show("A név mező kitöltése kötelező!");
+                return;
+            }
+
+            Supplier newSupplier = new Supplier
+            {
+                Name = nameTextBox.Text,
+                Address = addressTextBox.Text,
+                Email = emailTextBox.Text,
+                Phone = phoneTextBox.Text
+            };
+
+            OnSupplierAdded?.Invoke(newSupplier);
+
+            var label = new Label
+            {
+                Content = "A beszállító sikeresen rögzítésre került!",
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                FontSize = 20
+            };
+            this.Content = label;
+
         }
     }
 }

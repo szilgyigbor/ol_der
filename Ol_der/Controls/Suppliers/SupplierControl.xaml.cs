@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +21,26 @@ namespace Ol_der.Controls.Suppliers
     /// </summary>
     public partial class SupplierControl : UserControl
     {
+        private SupplierViewModel _viewModel;
+
         public SupplierControl()
         {
             InitializeComponent();
+            _viewModel = new SupplierViewModel();
+            this.Unloaded += OnUnloaded;
         }
 
         private void Add_Supplier_Click(object sender, RoutedEventArgs e)
         {
-            ContentArea.Content = new AddSupplierControl();
+            var addControl = new AddSupplierControl();
+            addControl.OnSupplierAdded += _viewModel.AddSupplier;
+            ContentArea.Content = addControl;
         }
- 
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Dispose();
+        }
+
     }
 }
