@@ -23,6 +23,11 @@ namespace Ol_der.Controls.Suppliers
             _context.SaveChanges();
         }
 
+        private List<Supplier> GetAllSupplier()
+        {
+            return _context.Suppliers.ToList();
+        }
+
         public void Dispose()
         {
             _context?.Dispose();
