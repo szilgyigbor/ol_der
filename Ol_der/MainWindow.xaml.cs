@@ -21,8 +21,18 @@ namespace Ol_der
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Menu_Button_Click(object sender, RoutedEventArgs e)
         {
+            var button = sender as Button;
+            switch (button.Name)
+            {
+                case "btnProduct":
+                    ContentArea.Content = new ProductsControl();
+                    break;
+                case "btnOther":
+                    //ContentArea.Content = new OtherControl();
+                    break;
+            }
         }
     }
 }
