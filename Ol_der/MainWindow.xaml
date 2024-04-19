@@ -16,11 +16,11 @@
 
         <Border Grid.Column="0" Background="Tan">
             <StackPanel Orientation="Vertical">
-                <Button Content="Termékek felvitele" Name="btnProduct" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="18" Click="Menu_Button_Click"/>
-                <Button Content="Eladások kezelése" Name="btnSales" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="18" Click="Menu_Button_Click"/>
-                <Button Content="Gomb3" Name="btnOther3" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="18" Click="Menu_Button_Click"/>
-                <Button Content="Gomb4" Name="btnOther4" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="18" Click="Menu_Button_Click"/>
-                <Button Content="Gomb5" Name="btnOther5" Margin="5 15 10 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="18" Click="Menu_Button_Click"/>
+                <Button Content="Beszállítók" Name="btnSupplier" Margin="10 15 15 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
+                <Button Content="Termékek" Name="btnProduct" Margin="10 15 15 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
+                <Button Content="Eladások" Name="btnSale" Margin="10 15 15 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
+                <Button Content="Gomb4" Name="btnOther4" Margin="10 15 15 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
+                <Button Content="Gomb5" Name="btnOther5" Margin="10 15 15 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
             </StackPanel>
             
         </Border>

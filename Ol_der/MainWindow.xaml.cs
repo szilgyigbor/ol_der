@@ -9,6 +9,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Ol_der.Controls;
+
 namespace Ol_der
 {
     /// <summary>
@@ -26,11 +28,14 @@ namespace Ol_der
             var button = sender as Button;
             switch (button.Name)
             {
-                case "btnProduct":
-                    ContentArea.Content = new ProductsControl();
+                case "btnSupplier":
+                    ContentArea.Content = new SupplierControl();
                     break;
-                case "btnSales":
-                    ContentArea.Content = new SalesControl();
+                case "btnProduct":
+                    ContentArea.Content = new ProductControl();
+                    break;
+                case "btnSale":
+                    ContentArea.Content = new SaleControl();
                     break;
             }
         }

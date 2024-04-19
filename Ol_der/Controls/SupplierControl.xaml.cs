@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ol_der
+namespace Ol_der.Controls
 {
     /// <summary>
-    /// Interaction logic for SalesControl.xaml
+    /// Interaction logic for SupplierControl.xaml
     /// </summary>
-    public partial class SalesControl : UserControl
+    public partial class SupplierControl : UserControl
     {
-        public SalesControl()
+        public SupplierControl()
         {
             InitializeComponent();
         }

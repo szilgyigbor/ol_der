@@ -16,16 +16,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ol_der
+namespace Ol_der.Controls
 {
     /// <summary>
     /// Interaction logic for ProductsControl.xaml
     /// </summary>
-    public partial class ProductsControl : UserControl
+    public partial class ProductControl : UserControl
     {
         private ApplicationDbContext _context;
 
-        public ProductsControl()
+        public ProductControl()
         {
             InitializeComponent();
             this.Loaded += OnLoaded;
