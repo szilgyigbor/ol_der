@@ -39,5 +39,10 @@ namespace Ol_der
                     break;
             }
         }
+
+        private void Exit_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
