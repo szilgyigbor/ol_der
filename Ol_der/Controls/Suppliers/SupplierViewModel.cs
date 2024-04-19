@@ -23,6 +23,16 @@ namespace Ol_der.Controls.Suppliers
             _context.SaveChanges();
         }
 
+        public void RemoveSupplier(int SupplierId) 
+        {
+            var supplier = _context.Suppliers.FirstOrDefault(s => s.SupplierId == SupplierId);
+            if (supplier != null)
+            {
+                _context.Suppliers.Remove(supplier);
+                _context.SaveChanges();
+            }
+        }
+
         public List<Supplier> GetAllSupplier()
         {
             return _context.Suppliers.ToList();
