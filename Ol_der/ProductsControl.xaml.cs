@@ -28,8 +28,20 @@ namespace Ol_der
         public ProductsControl()
         {
             InitializeComponent();
+            this.Loaded += OnLoaded;
+            this.Unloaded += OnUnloaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
             _context = ApplicationDbContextFactory.Create();
         }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            _context?.Dispose();
+        }
+
 
         private void AddProduct(Product product)
         {

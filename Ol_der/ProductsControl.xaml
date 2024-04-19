@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Termékek kezelése" FontSize="24" HorizontalAlignment="Center"/>
+        <TextBlock Text="Termékek kezelése" FontSize="28" HorizontalAlignment="Center"/>
         
     </Grid>
 </UserControl>
