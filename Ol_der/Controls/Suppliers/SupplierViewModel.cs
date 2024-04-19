@@ -23,7 +23,7 @@ namespace Ol_der.Controls.Suppliers
             _context.SaveChanges();
         }
 
-        private List<Supplier> GetAllSupplier()
+        public List<Supplier> GetAllSupplier()
         {
             return _context.Suppliers.ToList();
         }

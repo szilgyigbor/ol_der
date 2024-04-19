@@ -1,4 +1,5 @@
 ﻿using Ol_der.Data;
+using Ol_der.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,18 @@ namespace Ol_der.Controls.Suppliers
             var addControl = new AddSupplierControl();
             addControl.OnSupplierAdded += _viewModel.AddSupplier;
             ContentArea.Content = addControl;
+        }
+
+        private void Show_All_Supplier_Click(object sender, RoutedEventArgs e)
+        {
+            var showAllControl = new ShowAllSupplierControl();
+            showAllControl.DisplaySuppliers(GetSuppliers());
+            ContentArea.Content = showAllControl;
+        }
+
+        private List<Supplier> GetSuppliers()
+        {
+            return _viewModel.GetAllSupplier();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)

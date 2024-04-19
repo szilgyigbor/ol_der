@@ -22,11 +22,11 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Orientation="Vertical">
-                    <Button Content="Beszállítók" Name="btnSupplier" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
-                    <Button Content="Termékek" Name="btnProduct" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
-                    <Button Content="Eladások" Name="btnSale" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
-                    <Button Content="Gomb4" Name="btn4" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
-                    <Button Content="Gomb5" Name="btn5" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Menu_Button_Click"/>
+                    <Button Content="Beszállítók" Name="btnSupplier" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
+                    <Button Content="Termékek" Name="btnProduct" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
+                    <Button Content="Eladások" Name="btnSale" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
+                    <Button Content="Gomb4" Name="btn4" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
+                    <Button Content="Gomb5" Name="btn5" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
                 </StackPanel>
 
                 <Button Content="Kilépés" Name="btnExit" Grid.Row="1" Margin="20 15 25 25" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Exit_Button_Click"/>
