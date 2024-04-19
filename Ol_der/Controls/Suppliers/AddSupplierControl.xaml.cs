@@ -51,7 +51,7 @@ namespace Ol_der.Controls.Suppliers
                 Content = "A beszállító sikeresen rögzítésre került!",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
-                FontSize = 20
+                FontSize = 22
             };
             this.Content = label;
 
