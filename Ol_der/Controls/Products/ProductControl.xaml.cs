@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ol_der.Controls
+namespace Ol_der.Controls.Products
 {
     /// <summary>
     /// Interaction logic for ProductsControl.xaml

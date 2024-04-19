@@ -10,6 +10,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Ol_der.Controls;
+using Ol_der.Controls.Products;
+using Ol_der.Controls.Sales;
+using Ol_der.Controls.Suppliers;
 
 namespace Ol_der
 {
