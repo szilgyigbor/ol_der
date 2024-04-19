@@ -29,8 +29,8 @@ namespace Ol_der
                 case "btnProduct":
                     ContentArea.Content = new ProductsControl();
                     break;
-                case "btnOther":
-                    //ContentArea.Content = new OtherControl();
+                case "btnSales":
+                    ContentArea.Content = new SalesControl();
                     break;
             }
         }
