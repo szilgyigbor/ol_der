@@ -57,7 +57,7 @@ namespace Ol_der.Controls.Products
 
         private void DeleteProduct(int productId)
         {
-            var product = _context.Products.FirstOrDefault(p => p.Id == productId);
+            var product = _context.Products.FirstOrDefault(p => p.ProductId == productId);
             if (product != null)
             {
                 _context.Products.Remove(product);
