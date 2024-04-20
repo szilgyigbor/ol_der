@@ -30,22 +30,7 @@ namespace Ol_der.Controls.Suppliers
         {
             SuppliersListView.ItemsSource = suppliers;
         }
-
-        /*public void ModifyButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (SuppliersListView.SelectedItem is Supplier selectedSupplier)
-            {
-                // Módosítás logikájának implementálása
-                // Például megnyit egy új ablakot vagy UserControl-t a Supplier adatainak szerkesztéséhez
-                var editWindow = new EditSupplierWindow(selectedSupplier);
-                editWindow.Show();
-            }
-            else
-            {
-                MessageBox.Show("Válasszon ki egy beszállítót a módosításhoz!");
-            }
-        }*/
-
+ 
         public int SupplierIdToDelete()
         {
             if (SuppliersListView.SelectedItem is Supplier selectedSupplier)
@@ -69,10 +54,6 @@ namespace Ol_der.Controls.Suppliers
             if (SuppliersListView.SelectedItem is Supplier selectedSupplier)
             {
                 return selectedSupplier;
-            }
-            else
-            {
-                MessageBox.Show("Válasszon ki egy beszállítót a módosításhoz!");
             }
 
             return null;
