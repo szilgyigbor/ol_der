@@ -33,6 +33,19 @@ namespace Ol_der.Controls.Suppliers
             }
         }
 
+        public void ModifySupplier(Supplier modifiedSupplier)
+        {
+            var supplier = _context.Suppliers.FirstOrDefault(s => s.SupplierId == modifiedSupplier.SupplierId);
+            if (supplier != null)
+            {
+                supplier.Name = modifiedSupplier.Name;
+                supplier.Address = modifiedSupplier.Address;
+                supplier.Email = modifiedSupplier.Email;
+                supplier.Phone = modifiedSupplier.Phone;
+                _context.SaveChanges();
+            }
+        }
+
         public List<Supplier> GetAllSupplier()
         {
             return _context.Suppliers.ToList();
