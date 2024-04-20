@@ -25,6 +25,7 @@ namespace Ol_der.Controls.Suppliers
         private SupplierViewModel _viewModel;
         private AddSupplierControl _addSupplierControl;
         private ShowAllSupplierControl _showAllSupplierControl;
+        private ModifySupplierControl _modifySupplierControl;
 
         public SupplierControl()
         {
@@ -32,6 +33,8 @@ namespace Ol_der.Controls.Suppliers
             _viewModel = new SupplierViewModel();
             _addSupplierControl = new AddSupplierControl();
             _showAllSupplierControl = new ShowAllSupplierControl();
+            _modifySupplierControl = new ModifySupplierControl();
+            Show_All_Supplier();
             this.Unloaded += OnUnloaded;
         }
 
@@ -43,19 +46,46 @@ namespace Ol_der.Controls.Suppliers
 
         private void Show_All_Supplier_Click(object sender, RoutedEventArgs e)
         {
+            Show_All_Supplier();
+        }
+
+        private void Show_All_Supplier()
+        {
             _showAllSupplierControl.DisplaySuppliers(GetSuppliers());
             ContentArea.Content = _showAllSupplierControl;
         }
 
         private void Delete_Supplier_Click(object sender, RoutedEventArgs e)
         {
-            int supplierId = _showAllSupplierControl.DeleteSupplier();
+            int supplierId = _showAllSupplierControl.SupplierIdToDelete();
 
             if (supplierId >= 0)
             {
                 _viewModel.RemoveSupplier(supplierId);
-                _showAllSupplierControl.DisplaySuppliers(GetSuppliers());
+                Show_All_Supplier();
             }
+        }
+
+        private void Modify_Supplier_Click(object sender, RoutedEventArgs e)
+        {
+            Supplier selectedSupplier = _showAllSupplierControl.SupplierToModify();
+
+            if (selectedSupplier == null)
+            {
+                MessageBox.Show("Válasszon ki egy beszállítót a módosításhoz!");
+                return;
+            }
+
+            _modifySupplierControl.OnSupplierModified += ModifySupplier;
+
+            Show_All_Supplier();
+        }
+
+        private void ModifySupplier(Supplier modifiedSupplier)
+        {
+            _viewModel.ModifySupplier(modifiedSupplier);
+            _showAllSupplierControl.DisplaySuppliers(GetSuppliers());
+            MessageBox.Show("A beszállító adatai sikeresen módosításra kerültek!");
         }
 
         private List<Supplier> GetSuppliers()
