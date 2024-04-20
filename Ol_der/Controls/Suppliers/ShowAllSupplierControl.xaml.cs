@@ -46,7 +46,7 @@ namespace Ol_der.Controls.Suppliers
             }
         }*/
 
-        public int DeleteSupplier()
+        public int SupplierIdToDelete()
         {
             if (SuppliersListView.SelectedItem is Supplier selectedSupplier)
             {
@@ -62,6 +62,20 @@ namespace Ol_der.Controls.Suppliers
             }
 
             return -1;
+        }
+
+        public Supplier SupplierToModify()
+        { 
+            if (SuppliersListView.SelectedItem is Supplier selectedSupplier)
+            {
+                return selectedSupplier;
+            }
+            else
+            {
+                MessageBox.Show("Válasszon ki egy beszállítót a módosításhoz!");
+            }
+
+            return null;
         }
     }
 }
