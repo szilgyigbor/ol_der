@@ -78,14 +78,15 @@ namespace Ol_der.Controls.Suppliers
 
             _modifySupplierControl.OnSupplierModified += ModifySupplier;
 
-            Show_All_Supplier();
+            _modifySupplierControl.GetModifiedDatas(selectedSupplier);
+            ContentArea.Content = _modifySupplierControl;
         }
 
         private void ModifySupplier(Supplier modifiedSupplier)
         {
             _viewModel.ModifySupplier(modifiedSupplier);
-            _showAllSupplierControl.DisplaySuppliers(GetSuppliers());
             MessageBox.Show("A beszállító adatai sikeresen módosításra kerültek!");
+            Show_All_Supplier();
         }
 
         private List<Supplier> GetSuppliers()
