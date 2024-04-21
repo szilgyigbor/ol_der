@@ -32,7 +32,8 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-                <Button Content="Új Beszállító" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
+                <Button Content="Összes Termék" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
+                <Button Content="Új Termék" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
                 <Button Content="Szerkesztés" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
                 <Button Content="Törlés" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
             </StackPanel>
