@@ -1,4 +1,5 @@
-﻿using Ol_der.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Ol_der.Data;
 using Ol_der.Models;
 using System;
 using System.Collections.Generic;
@@ -17,31 +18,32 @@ namespace Ol_der.Controls.Products
             _context = ApplicationDbContextFactory.Create();
         }
 
-        private void AddProduct(Product product)
+        public void AddProduct(Product product)
         {
             _context.Products.Add(product);
             _context.SaveChanges();
         }
 
-        private void UpdateProduct(Product product)
+        public void UpdateProduct(Product product)
         {
             _context.Products.Update(product);
             _context.SaveChanges();
         }
 
-        private void DeleteProduct(int productId)
+        public void DeleteProduct(Product product)
         {
-            var product = _context.Products.FirstOrDefault(p => p.ProductId == productId);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-                _context.SaveChanges();
-            }
+            _context.Products.Remove(product);
+            _context.SaveChanges();
         }
 
-        private List<Product> GetAllProducts()
+        public List<Product> GetAllProduct()
         {
-            return _context.Products.ToList();
+            return _context.Products.Include(p => p.Supplier).ToList();
+        }
+
+        public List<Supplier> GetAllSupplier()
+        {
+            return _context.Suppliers.ToList();
         }
 
         public void Dispose()
