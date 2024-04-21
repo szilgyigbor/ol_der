@@ -44,16 +44,12 @@ namespace Ol_der.Controls.Suppliers
                 Phone = phoneTextBox.Text
             };
 
-            OnSupplierAdded?.Invoke(newSupplier);
+            nameTextBox.Text = "";
+            addressTextBox.Text = "";
+            emailTextBox.Text = "";
+            phoneTextBox.Text = "";
 
-            var label = new Label
-            {
-                Content = "A beszállító sikeresen rögzítésre került!",
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                FontSize = 22
-            };
-            this.Content = label;
+            OnSupplierAdded?.Invoke(newSupplier);
 
         }
     }
