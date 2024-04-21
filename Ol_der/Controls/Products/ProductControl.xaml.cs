@@ -23,51 +23,21 @@ namespace Ol_der.Controls.Products
     /// </summary>
     public partial class ProductControl : UserControl
     {
-        private ApplicationDbContext _context;
+        private ProductViewModel _viewModel;
 
         public ProductControl()
         {
-            InitializeComponent();
-            this.Loaded += OnLoaded;
+            InitializeComponent();         
+            _viewModel = new ProductViewModel();
             this.Unloaded += OnUnloaded;
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            _context = ApplicationDbContextFactory.Create();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
-            _context?.Dispose();
+            _viewModel?.Dispose();
         }
 
 
-        private void AddProduct(Product product)
-        {
-            _context.Products.Add(product);
-            _context.SaveChanges();
-        }
 
-        private void UpdateProduct(Product product)
-        {
-            _context.Products.Update(product);
-            _context.SaveChanges();
-        }
-
-        private void DeleteProduct(int productId)
-        {
-            var product = _context.Products.FirstOrDefault(p => p.ProductId == productId);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-                _context.SaveChanges();
-            }
-        }
-
-        private List<Product> GetAllProducts()
-        {
-            return _context.Products.ToList();
-        }
     }
 }
