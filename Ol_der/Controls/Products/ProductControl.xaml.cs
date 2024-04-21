@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
+using Ol_der.Controls.Suppliers;
 using Ol_der.Data;
 using Ol_der.Models;
 using System;
@@ -23,21 +24,54 @@ namespace Ol_der.Controls.Products
     /// </summary>
     public partial class ProductControl : UserControl
     {
-        private ProductViewModel _viewModel;
+        private AddProductControl _addProductControl;
+        private ShowAllProductControl _showAllProductControl;
 
         public ProductControl()
         {
-            InitializeComponent();         
-            _viewModel = new ProductViewModel();
-            this.Unloaded += OnUnloaded;
+            InitializeComponent();
+            _addProductControl = null;
+            _showAllProductControl = new ShowAllProductControl();
+            Show_All_Product();
         }
 
-        private void OnUnloaded(object sender, RoutedEventArgs e)
+        public void Add_New_Item_Click(object sender, RoutedEventArgs e)
         {
-            _viewModel?.Dispose();
+            if (_addProductControl == null)
+            {
+                _addProductControl = new AddProductControl();
+                _addProductControl.Unloaded += (s, e) => _addProductControl = null;
+            }
+
+            ContentArea.Content = _addProductControl;
         }
 
+        public void Show_All_Product_Click(object sender, RoutedEventArgs e)
+        {
+            Show_All_Product();
+        }
 
+        public void Show_All_Product()
+        {
+            if (_showAllProductControl == null)
+            {
+                _showAllProductControl = new ShowAllProductControl();
+                _showAllProductControl.Unloaded += (s, e) => _showAllProductControl = null;
+            }
 
+            ContentArea.Content = _showAllProductControl;
+        }
+
+        public void Delete_Product_Click(object sender, RoutedEventArgs e)
+        {
+            if (_showAllProductControl == null)
+            {
+                _showAllProductControl = new ShowAllProductControl();
+                _showAllProductControl.Unloaded += (s, e) => _showAllProductControl = null;
+            }
+            _showAllProductControl.DeleteProduct();
+
+            Show_All_Product();
+        }
     }
 }
