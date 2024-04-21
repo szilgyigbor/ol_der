@@ -40,8 +40,16 @@ namespace Ol_der.Controls.Suppliers
 
         private void Add_Supplier_Click(object sender, RoutedEventArgs e)
         {
-            _addSupplierControl.OnSupplierAdded += _viewModel.AddSupplier;
+            _addSupplierControl.OnSupplierAdded -= Add_Supplier;
+            _addSupplierControl.OnSupplierAdded += Add_Supplier;
             ContentArea.Content = _addSupplierControl;
+        }
+
+        private void Add_Supplier(Supplier newSupplier) 
+        {
+            _viewModel.AddSupplier(newSupplier);
+            MessageBox.Show("A beszállító sikeresen rögzítésre került!");
+            Show_All_Supplier();
         }
 
         private void Show_All_Supplier_Click(object sender, RoutedEventArgs e)
@@ -76,6 +84,7 @@ namespace Ol_der.Controls.Suppliers
                 return;
             }
 
+            _modifySupplierControl.OnSupplierModified -= ModifySupplier;
             _modifySupplierControl.OnSupplierModified += ModifySupplier;
 
             _modifySupplierControl.GetModifiedDatas(selectedSupplier);
