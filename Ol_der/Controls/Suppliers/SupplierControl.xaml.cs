@@ -35,6 +35,7 @@ namespace Ol_der.Controls.Suppliers
             _showAllSupplierControl = new ShowAllSupplierControl();
             _modifySupplierControl = new ModifySupplierControl();
             Show_All_Supplier();
+            this.Unloaded -= OnUnloaded;
             this.Unloaded += OnUnloaded;
         }
 
