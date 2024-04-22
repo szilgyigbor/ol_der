@@ -32,7 +32,7 @@ namespace Ol_der.Controls.Suppliers
             _supplierToModify = new Supplier();
         }
 
-        public void GetModifiedDatas(Supplier supplierToModify)
+        public void GetDatasToModify(Supplier supplierToModify)
         {
             _supplierToModify = supplierToModify;
 
