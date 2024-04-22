@@ -81,14 +81,14 @@ namespace Ol_der.Controls.Suppliers
 
             if (selectedSupplier == null)
             {
-                MessageBox.Show("Válasszon ki egy beszállítót a módosításhoz!");
+                MessageBox.Show("Válassz ki egy beszállítót a módosításhoz!");
                 return;
             }
 
             _modifySupplierControl.OnSupplierModified -= ModifySupplier;
             _modifySupplierControl.OnSupplierModified += ModifySupplier;
 
-            _modifySupplierControl.GetModifiedDatas(selectedSupplier);
+            _modifySupplierControl.GetDatasToModify(selectedSupplier);
             ContentArea.Content = _modifySupplierControl;
         }
 
