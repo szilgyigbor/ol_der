@@ -21,14 +21,11 @@ namespace Ol_der.Controls.Products
     /// </summary>
     public partial class AddProductControl : UserControl
     {
-        private ProductViewModel _viewModel;
-        public AddProductControl()
+        public event Action<Product> OnProductAdded;
+        public AddProductControl(List<Supplier> suppliers)
         {
             InitializeComponent();
-            _viewModel = new ProductViewModel();
-            LoadSuppliers();
-            this.Unloaded -= OnUnloaded;
-            this.Unloaded += OnUnloaded;
+            LoadSuppliers(suppliers);
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -49,21 +46,15 @@ namespace Ol_der.Controls.Products
             nameTextBox.Text = "";
             itemNumberTextBox.Text = "";
 
-            _viewModel.AddProduct(newProduct);
-
-            MessageBox.Show("A termék sikeresen rögzítésre került!");
+            OnProductAdded?.Invoke(newProduct);
+           
         }
 
-        private void LoadSuppliers()
+        private void LoadSuppliers(List<Supplier>suppliers)
         {
-            var suppliers = _viewModel.GetAllSupplier();
             suppliersComboBox.ItemsSource = suppliers;
             suppliersComboBox.SelectedIndex = 0;
         }
 
-        private void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            _viewModel?.Dispose();
-        }
     }
 }

@@ -21,20 +21,25 @@ namespace Ol_der.Controls.Products
     /// </summary>
     public partial class ShowAllProductControl : UserControl
     {
-        private ProductViewModel _viewModel;
+        public event Action<Product> OnProductDeleted;
         public ShowAllProductControl()
         {
             InitializeComponent();
-            _viewModel = new ProductViewModel();
-            Show_All_Product();
-            this.Unloaded -= OnUnloaded;
-            this.Unloaded += OnUnloaded;
         }
 
-        public void Show_All_Product()
+        public void Show_All_Product(List<Product> products)
         {
-            var products = _viewModel.GetAllProduct();
             ProductsListView.ItemsSource = products;
+        }
+
+        public Product ProductToModify()
+        {
+            if (ProductsListView.SelectedItem is Product selectedProduct)
+            {
+                return selectedProduct;
+            }
+
+            return null;
         }
 
         public void DeleteProduct()
@@ -43,12 +48,8 @@ namespace Ol_der.Controls.Products
             {
                 if (MessageBox.Show("Biztosan törölni szeretnéd ezt a terméker?", "Megerősítés", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    Product product = selectedProduct;
-                    _viewModel.DeleteProduct(product);
+                    OnProductDeleted?.Invoke(selectedProduct);
 
-                    MessageBox.Show("A termék sikeresen törölve lett!");
-
-                    Show_All_Product();
                 }
             }
             else
@@ -56,11 +57,6 @@ namespace Ol_der.Controls.Products
                 MessageBox.Show("Válassz ki egy terméket a törléshez!");
             }
 
-        }
-
-        private void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            _viewModel?.Dispose();
         }
     }
 }
