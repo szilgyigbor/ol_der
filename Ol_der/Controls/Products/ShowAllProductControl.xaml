@@ -12,7 +12,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Cikkszám" DisplayMemberBinding="{Binding ItemNumber}" Width="240"/>
-                    <GridViewColumn Header="Megnevezés" DisplayMemberBinding="{Binding Name}" Width="460"/>
+                    <GridViewColumn Header="Megnevezés" DisplayMemberBinding="{Binding Name}" Width="600"/>
                     <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Supplier.Name}" Width="280"/>
                 </GridView>
             </ListView.View>
