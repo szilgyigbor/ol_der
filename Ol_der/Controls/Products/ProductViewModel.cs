@@ -30,6 +30,14 @@ namespace Ol_der.Controls.Products
             _context.SaveChanges();
         }
 
+        public List<Product> SearchProductById(string id)
+        {
+            var upperId = id.ToUpper();
+            return _context.Products
+                           .Where(p => p.ItemNumber.ToUpper().Contains(upperId))
+                           .ToList();
+        }
+
         public void DeleteProduct(Product product)
         {
             _context.Products.Remove(product);
