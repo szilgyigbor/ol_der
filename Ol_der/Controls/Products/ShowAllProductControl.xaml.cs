@@ -27,7 +27,7 @@ namespace Ol_der.Controls.Products
             InitializeComponent();
         }
 
-        public void Show_All_Product(List<Product> products)
+        public void ShowAllProduct(List<Product> products)
         {
             ProductsListView.ItemsSource = products;
         }
