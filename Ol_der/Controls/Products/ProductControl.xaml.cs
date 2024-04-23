@@ -90,6 +90,7 @@ namespace Ol_der.Controls.Products
             if (selectedProduct == null)
             {
                 MessageBox.Show("Válassz ki egy terméket a módosításhoz!");
+                ContentArea.Content = _showAllProductControl;
                 return;
             }
 
