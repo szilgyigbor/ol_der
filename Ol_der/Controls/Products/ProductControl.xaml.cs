@@ -28,6 +28,7 @@ namespace Ol_der.Controls.Products
         private AddProductControl _addProductControl;
         private ShowAllProductControl _showAllProductControl;
         private ModifyProductControl _modifyProductControl;
+        private SearchProductControl _searchProductControl;
         
 
         public ProductControl()
@@ -37,7 +38,8 @@ namespace Ol_der.Controls.Products
             _addProductControl = new AddProductControl(GetAllSupplier());
             _showAllProductControl = new ShowAllProductControl();
             _modifyProductControl = new ModifyProductControl();
-            Show_All_Product();
+            _searchProductControl = new SearchProductControl();
+            ShowAllProduct();
             this.Unloaded -= OnUnloaded;
             this.Unloaded += OnUnloaded;
         }
@@ -58,14 +60,21 @@ namespace Ol_der.Controls.Products
         public void Delete_Product_Click(object sender, RoutedEventArgs e)
         {
             _showAllProductControl.DeleteProduct();
-            Show_All_Product();
+            ShowAllProduct();
             _showAllProductControl.OnProductDeleted -= Delete_Product;
             _showAllProductControl.OnProductDeleted += Delete_Product;
         }
 
         public void Show_All_Product_Click(object sender, RoutedEventArgs e)
         {
-            Show_All_Product();
+            ShowAllProduct();
+        }
+
+        public void Search_Product_Click(object sender, RoutedEventArgs e)
+        {
+            ContentArea.Content = _searchProductControl;
+            _searchProductControl.OnProductId -= SearchProductById;
+            _searchProductControl.OnProductId += SearchProductById;
         }
 
         public void Add_Product(Product newProduct)
@@ -73,14 +82,27 @@ namespace Ol_der.Controls.Products
             _viewModel.AddProduct(newProduct);
             MessageBox.Show("A termék sikeresen rögzítésre került!");
 
-            Show_All_Product();
+            ShowAllProduct();
+        }
+
+        private void SearchProductById(string productId)
+        {
+            List<Product> product = _viewModel.SearchProductById(productId);
+            if (product == null)
+            {
+                MessageBox.Show("Nincs ilyen termék az adatbázisban!");
+                return;
+            }
+
+            _showAllProductControl.ShowAllProduct(product);
+            ContentArea.Content = _showAllProductControl;
         }
 
         private void Delete_Product(Product product)
         {
             _viewModel.DeleteProduct(product);
             MessageBox.Show("A termék sikeresen törölve lett!");
-            Show_All_Product();
+            ShowAllProduct();
         }
 
         private void Modify_Product_Click(object sender, RoutedEventArgs e)
@@ -105,13 +127,13 @@ namespace Ol_der.Controls.Products
         {
             _viewModel.UpdateProduct(modifiedProduct);
             MessageBox.Show("A termék adatai sikeresen módosításra kerültek!");
-            Show_All_Product();
+            ShowAllProduct();
         }
 
-        public void Show_All_Product()
+        public void ShowAllProduct()
         {
             ContentArea.Content = _showAllProductControl;
-            _showAllProductControl.Show_All_Product(GetAllProduct());
+            _showAllProductControl.ShowAllProduct(GetAllProduct());
         }
 
         public List<Supplier> GetAllSupplier()
