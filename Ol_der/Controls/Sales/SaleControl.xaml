@@ -32,13 +32,14 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-                <Button Content="Új Beszállító" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
+                <Button Content="Eladások" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
+                <Button Content="Új eladás" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
                 <Button Content="Szerkesztés" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
                 <Button Content="Törlés" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20"/>
             </StackPanel>
 
             <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
-          Background="Black" VerticalAlignment="Stretch"/>
+                Background="Black" VerticalAlignment="Stretch"/>
 
             <ContentControl Grid.Column="1" VerticalAlignment="Top" Margin="5" x:Name="ContentArea"/>
         </Grid>
