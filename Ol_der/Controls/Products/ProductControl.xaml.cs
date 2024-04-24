@@ -29,12 +29,15 @@ namespace Ol_der.Controls.Products
         private ShowAllProductControl _showAllProductControl;
         private ModifyProductControl _modifyProductControl;
         private SearchProductControl _searchProductControl;
-        
+
+
 
         public ProductControl()
         {
             InitializeComponent();
             _viewModel = new ProductViewModel();
+            this.DataContext = _viewModel;
+            LoadProductCount();
             _addProductControl = new AddProductControl(GetAllSupplier());
             _showAllProductControl = new ShowAllProductControl();
             _modifyProductControl = new ModifyProductControl();
@@ -47,6 +50,11 @@ namespace Ol_der.Controls.Products
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             _viewModel.Dispose();
+        }
+
+        public void LoadProductCount()
+        {
+            _viewModel.ProductCount = _viewModel.GetProductCount();
         }
 
         public void Add_New_Product_Click(object sender, RoutedEventArgs e)
@@ -81,7 +89,7 @@ namespace Ol_der.Controls.Products
         {
             _viewModel.AddProduct(newProduct);
             MessageBox.Show("A termék sikeresen rögzítésre került!");
-
+            LoadProductCount();
             ShowAllProduct();
         }
 
@@ -102,6 +110,7 @@ namespace Ol_der.Controls.Products
         {
             _viewModel.DeleteProduct(product);
             MessageBox.Show("A termék sikeresen törölve lett!");
+            LoadProductCount();
             ShowAllProduct();
         }
 
