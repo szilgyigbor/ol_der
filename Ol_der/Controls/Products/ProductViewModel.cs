@@ -52,11 +52,11 @@ namespace Ol_der.Controls.Products
             _context.SaveChanges();
         }
 
-        public List<Product> SearchProductById(string id)
+        public List<Product> SearchProductByItemNumber(string itemNumber)
         {
-            var upperId = id.ToUpper();
+            var upperitemNumber = itemNumber.ToUpper();
             return _context.Products
-                           .Where(p => p.ItemNumber.ToUpper().Contains(upperId))
+                           .Where(p => p.ItemNumber.ToUpper().Contains(upperitemNumber))
                            .ToList();
         }
 

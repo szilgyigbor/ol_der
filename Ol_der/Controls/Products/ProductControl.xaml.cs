@@ -95,7 +95,7 @@ namespace Ol_der.Controls.Products
 
         private void SearchProductById(string productId)
         {
-            List<Product> product = _viewModel.SearchProductById(productId);
+            List<Product> product = _viewModel.SearchProductByItemNumber(productId);
             if (product == null)
             {
                 MessageBox.Show("Nincs ilyen termék az adatbázisban!");
