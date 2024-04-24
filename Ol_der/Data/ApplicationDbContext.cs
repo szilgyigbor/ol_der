@@ -15,6 +15,21 @@ namespace Ol_der.Data
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Sale>()
+                .Property(s => s.CardTransactionAmount)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Sale>()
+                .Property(s => s.TotalAmount)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<SaleItem>()
+                .Property(si => si.Price)
+                .HasPrecision(18, 2);
+        }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Sale> Sales { get; set; }
