@@ -10,6 +10,7 @@ namespace Ol_der.Models
     {
         Cash,
         Card,
+        Transfer,
         RN
     }
 }
