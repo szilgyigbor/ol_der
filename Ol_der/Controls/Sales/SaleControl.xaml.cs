@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Controls.Suppliers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,17 @@ namespace Ol_der.Controls.Sales
     /// </summary>
     public partial class SaleControl : UserControl
     {
+
+        private AddNewSaleControl _addSaleControl;
         public SaleControl()
         {
             InitializeComponent();
+            _addSaleControl = new AddNewSaleControl();
+        }
+
+        private void Add_Sale_Click(object sender, RoutedEventArgs e)
+        {
+            ContentArea.Content = _addSaleControl;
         }
     }
 }
