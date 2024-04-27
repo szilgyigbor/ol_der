@@ -23,15 +23,28 @@ namespace Ol_der.Controls.Sales
     {
 
         private AddNewSaleControl _addSaleControl;
+        private ShowAllSaleControl _showAllSaleControl;
         public SaleControl()
         {
             InitializeComponent();
             _addSaleControl = new AddNewSaleControl();
+            _showAllSaleControl = new ShowAllSaleControl();
+            ShowAllSale();
         }
 
-        private void Add_Sale_Click(object sender, RoutedEventArgs e)
+        private void AddSale_Click(object sender, RoutedEventArgs e)
         {
             ContentArea.Content = _addSaleControl;
+        }
+
+        private void ShowAllSale()
+        {
+            ContentArea.Content = _showAllSaleControl;
+        }
+
+        private void ShowAllSale_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAllSale();
         }
     }
 }
