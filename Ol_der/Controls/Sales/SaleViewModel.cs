@@ -3,6 +3,7 @@ using Ol_der.Data;
 using Ol_der.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,14 @@ namespace Ol_der.Controls.Sales
             _context.SaveChanges();
         }
 
-        public void GetAllSale()
+        public List<Sale> GetAllSale()
         {
-            _context.Sales
-                       .Include(s => s.SaleItems.Select(si => si.Product.Supplier))
-                       .ToList();
+            return _context.Sales
+                   .Include(s => s.SaleItems)
+                       .ThenInclude(si => si.Product)
+                   .Include(s => s.SaleItems)
+                       .ThenInclude(si => si.Product.Supplier)
+                   .ToList();
         }
 
         public Product SearchProductByItemNumber(string itemNumber)
