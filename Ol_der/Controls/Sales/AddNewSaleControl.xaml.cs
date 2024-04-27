@@ -104,6 +104,8 @@ namespace Ol_der.Controls.Sales
             {
                 var saleItem = new SaleItem { Product = product, Quantity = 1, Price = 0 };
                 lstSaleItems.Items.Add(saleItem);
+
+                txtItemNumber.Text = "";
             }
             else
             {
