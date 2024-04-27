@@ -111,6 +111,20 @@ namespace Ol_der.Controls.Sales
             }
         }
 
+        private void btnSaveSale_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Biztosan el akarod menteni az eladást?", "Eladás mentése", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            SaveSale();
+            MessageBox.Show("Eladás sikeresen hozzáadva!");
+            ClearFields();
+        }
+
         private void SaveSale()
         {
             
@@ -130,6 +144,15 @@ namespace Ol_der.Controls.Sales
             }
    
             _viewModel.AddSale(sale);
+        }
+
+        private void ClearFields()
+        {
+            txtCustomerName.Text = "";
+            txtItemNumber.Text = "";
+            txtTotalAmount.Text = "";
+            txtNotes.Text = "";
+            lstSaleItems.Items.Clear();
         }
 
         private Product FindProductByItemNumber(string itemNumber)
