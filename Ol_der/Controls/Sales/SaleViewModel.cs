@@ -1,4 +1,5 @@
-﻿using Ol_der.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Ol_der.Data;
 using Ol_der.Models;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,13 @@ namespace Ol_der.Controls.Sales
         {
             _context.Sales.Add(newSale);
             _context.SaveChanges();
+        }
+
+        public void GetAllSales()
+        {
+            _context.Sales
+                       .Include(s => s.SaleItems.Select(si => si.Product.Supplier))
+                       .ToList();
         }
 
         public Product SearchProductByItemNumber(string itemNumber)
