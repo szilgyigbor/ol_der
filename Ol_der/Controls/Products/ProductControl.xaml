@@ -17,7 +17,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Background="DarkGray">
+        <Grid Grid.Row="0" Grid.Column="0" Background="#98B4D4">
             <TextBlock Text="{Binding ProductCount, StringFormat='Termékek kezelése ({0})'}"
                FontSize="28"
                HorizontalAlignment="Center"
