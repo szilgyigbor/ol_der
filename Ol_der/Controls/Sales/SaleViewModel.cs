@@ -42,6 +42,12 @@ namespace Ol_der.Controls.Sales
                            .FirstOrDefault(p => p.ItemNumber.ToUpper().Contains(upperitemNumber));
         }
 
+        public void DeleteSale(Sale sale)
+        {
+            _context.Sales.Remove(sale);
+            _context.SaveChanges();
+        }
+
         public void Dispose()
         {
             _context?.Dispose();
