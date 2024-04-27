@@ -62,13 +62,13 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
                         <TextBlock Text="db" Width="40"/>
-                        <TextBlock Text="{Binding Product.ItemNumber}" Width="100"/>
-                        <TextBlock Text="{Binding Product.Name}" Width="150"/>
+                        <TextBlock Text="{Binding Product.ItemNumber}" Width="120"/>
+                        <TextBlock Text="{Binding Product.Name}" Width="350"/>
                         <TextBox Text="{Binding Price, Mode=TwoWay}" Width="100"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Grid.Row="8" Content="Vásárlás rögzítése" Margin="5" Width="220" FontSize="22"/>
+        <Button Grid.Row="8" Content="Vásárlás rögzítése" Margin="5" Width="220" FontSize="22" Click="btnSaveSale_Click"/>
     </Grid>
 </UserControl>
