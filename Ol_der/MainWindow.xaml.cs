@@ -45,7 +45,11 @@ namespace Ol_der
 
         private void Exit_Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            MessageBoxResult result = MessageBox.Show("Biztosan ki szeretnél lépni?", "Megerősítés", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
         }
     }
 }
