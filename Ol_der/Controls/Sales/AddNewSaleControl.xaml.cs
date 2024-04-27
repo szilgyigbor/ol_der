@@ -122,6 +122,7 @@ namespace Ol_der.Controls.Sales
                 return;
             }
 
+            CalculateTotal();
             SaveSale();
             MessageBox.Show("Eladás sikeresen hozzáadva!");
             ClearFields();
