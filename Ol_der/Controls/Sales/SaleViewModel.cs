@@ -24,7 +24,7 @@ namespace Ol_der.Controls.Sales
             _context.SaveChanges();
         }
 
-        public void GetAllSales()
+        public void GetAllSale()
         {
             _context.Sales
                        .Include(s => s.SaleItems.Select(si => si.Product.Supplier))
