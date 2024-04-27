@@ -23,11 +23,13 @@ namespace Ol_der.Controls.Sales
     public partial class AddNewSaleControl : UserControl
     {
         private SaleViewModel _viewModel;
+        private ShowAllSaleControl _showAllSaleControl;
 
         public AddNewSaleControl()
         {
             InitializeComponent();
             _viewModel = new SaleViewModel();
+            _showAllSaleControl = new ShowAllSaleControl();
 
             LoadPaymentTypes();
             
@@ -126,6 +128,7 @@ namespace Ol_der.Controls.Sales
             SaveSale();
             MessageBox.Show("Eladás sikeresen hozzáadva!");
             ClearFields();
+            _showAllSaleControl.ShowAllSale();
         }
 
         private void SaveSale()
