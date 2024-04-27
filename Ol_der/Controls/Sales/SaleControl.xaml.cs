@@ -28,7 +28,6 @@ namespace Ol_der.Controls.Sales
         {
             InitializeComponent();
             _addSaleControl = new AddNewSaleControl();
-            _showAllSaleControl = new ShowAllSaleControl();
             ShowAllSale();
         }
 
@@ -39,6 +38,7 @@ namespace Ol_der.Controls.Sales
 
         private void ShowAllSale()
         {
+            _showAllSaleControl = new ShowAllSaleControl();
             ContentArea.Content = _showAllSaleControl;
         }
 
@@ -46,5 +46,12 @@ namespace Ol_der.Controls.Sales
         {
             ShowAllSale();
         }
+
+        private void btnDeleteSale_Click(object sender, RoutedEventArgs e)
+        {
+            _showAllSaleControl.DeleteSale();
+            ShowAllSale();
+        }
+
     }
 }
