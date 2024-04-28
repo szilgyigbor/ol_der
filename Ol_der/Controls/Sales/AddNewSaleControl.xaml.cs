@@ -180,15 +180,15 @@ namespace Ol_der.Controls.Sales
                 _saleToSave.SaleItems.Add(item);
             }
 
-            _context.SaveChanges();
-
             if (_saleId.HasValue)
             {
+                _context.SaveChanges();
                 MessageBox.Show("Eladás sikeresen módosítva!");
             }
 
             else 
             {
+                _context.Sales.Add(_saleToSave);
                 MessageBox.Show("Eladás sikeresen hozzáadva!");
             }
             
