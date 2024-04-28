@@ -1,4 +1,6 @@
-﻿using Ol_der.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Ol_der.Data;
+using Ol_der.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,24 +24,51 @@ namespace Ol_der.Controls.Sales
     /// </summary>
     public partial class AddNewSaleControl : UserControl
     {
-        private SaleViewModel _viewModel;
+        private ApplicationDbContext _context;
         private ShowAllSaleControl _showAllSaleControl;
+        private int? _saleId = null;
+        private Sale _saleToSave;
 
-        public AddNewSaleControl()
+        public AddNewSaleControl(int? saleId = null)
         {
             InitializeComponent();
-            _viewModel = new SaleViewModel();
+            _context = ApplicationDbContextFactory.Create();
             _showAllSaleControl = new ShowAllSaleControl();
-
+            _saleId = saleId;
+            _saleToSave = new Sale();
             LoadPaymentTypes();
-            
-            Unloaded -= Dispose;
-            Unloaded += Dispose;
+            LoadSaleIfExists();
+            this.Unloaded -= OnUnloaded;
+            this.Unloaded += OnUnloaded;
         }
 
-        public void Dispose(object sender, RoutedEventArgs e)
+        private void LoadSaleIfExists()
         {
-            _viewModel.Dispose();
+            if (_saleId.HasValue)
+            {
+                _saleToSave = _context.Sales
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product)
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product.Supplier).FirstOrDefault(s => s.SaleId == _saleId.Value);
+                if (_saleToSave != null)
+                {
+                    txtCustomerName.Text = _saleToSave.CustomerName;
+                    txtNotes.Text = _saleToSave.Notes;
+                    cmbPaymentType.SelectedItem = _saleToSave.PaymentType;
+                    lstSaleItems.Items.Clear();
+                    foreach (var item in _saleToSave.SaleItems)
+                    {
+                        lstSaleItems.Items.Add(item);
+                    }
+                    CalculateTotal();
+                }
+            }
+        }
+
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            _context?.Dispose();
         }
 
         public void LoadPaymentTypes()
@@ -117,7 +146,9 @@ namespace Ol_der.Controls.Sales
 
         private void btnSaveSale_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Biztosan el akarod menteni az eladást?", "Eladás mentése", MessageBoxButton.YesNo);
+            string saveOrModify = _saleId.HasValue ? "módosítani" : "menteni";
+
+            MessageBoxResult result = MessageBox.Show($"Biztosan {saveOrModify} akarod az eladást?", "Eladás mentése", MessageBoxButton.YesNo);
 
             if (result == MessageBoxResult.No)
             {
@@ -126,30 +157,41 @@ namespace Ol_der.Controls.Sales
 
             CalculateTotal();
             SaveSale();
-            MessageBox.Show("Eladás sikeresen hozzáadva!");
+            
             ClearFields();
+
             _showAllSaleControl.ShowAllSale();
         }
 
         private void SaveSale()
         {
-            
-            Sale sale = new Sale()
+            if (!_saleId.HasValue) 
             {
-                CustomerName = txtCustomerName.Text,
-                Date = DateTime.Now,
-                PaymentType = (PaymentType)cmbPaymentType.SelectedItem,
-                TotalAmount = decimal.Parse(txtTotalAmount.Text),
-                Notes = txtNotes.Text,
-                SaleItems = new List<SaleItem>()
-            };
+                _saleToSave.Date = DateTime.Now;
+            }
+
+            _saleToSave.CustomerName = txtCustomerName.Text;
+            _saleToSave.PaymentType = (PaymentType)cmbPaymentType.SelectedItem;
+            _saleToSave.TotalAmount = decimal.Parse(txtTotalAmount.Text);
+            _saleToSave.Notes = txtNotes.Text;
 
             foreach (SaleItem item in lstSaleItems.Items)
             {
-                sale.SaleItems.Add(item);
+                _saleToSave.SaleItems.Add(item);
             }
-   
-            _viewModel.AddSale(sale);
+
+            _context.SaveChanges();
+
+            if (_saleId.HasValue)
+            {
+                MessageBox.Show("Eladás sikeresen módosítva!");
+            }
+
+            else 
+            {
+                MessageBox.Show("Eladás sikeresen hozzáadva!");
+            }
+            
         }
 
         private void ClearFields()
@@ -163,8 +205,9 @@ namespace Ol_der.Controls.Sales
 
         private Product FindProductByItemNumber(string itemNumber)
         {
-            Product product = _viewModel.SearchProductByItemNumber(itemNumber);
-            return product;
+            var upperItemNumber = itemNumber.ToUpper();
+            return _context.Products
+                .FirstOrDefault(p => p.ItemNumber.ToUpper().Contains(upperItemNumber));
         }
     }
 }

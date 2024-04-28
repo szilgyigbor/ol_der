@@ -27,25 +27,24 @@ namespace Ol_der.Controls.Sales
         public ShowAllSaleControl()
         {
             InitializeComponent();
+            _viewModel = new SaleViewModel();
             ShowAllSale();
         }
 
         public void ShowAllSale()
         {
-            _viewModel = new SaleViewModel();
             Sales = _viewModel.GetAllSale();
             SalesListView.ItemsSource = Sales;
-            _viewModel.Dispose();
         }
 
-        public Sale SaleToModify()
+        public int SaleIdToModify()
         {
             if (SalesListView.SelectedItem is Sale SelectedSale)
             {
-                return SelectedSale;
+                return SelectedSale.SaleId;
             }
 
-            return null;
+            return -1;
         }
 
         public void DeleteSale()
@@ -54,9 +53,7 @@ namespace Ol_der.Controls.Sales
             {
                 if (MessageBox.Show("Biztosan törölni szeretnéd ezt az eladást?", "Megerősítés", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    _viewModel = new SaleViewModel();
                     _viewModel.DeleteSale(SelectedSale);
-                    _viewModel.Dispose();
                     ShowAllSale();
                 }
             }

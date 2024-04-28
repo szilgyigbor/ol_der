@@ -27,6 +27,7 @@ namespace Ol_der.Controls.Sales
         public SaleControl()
         {
             InitializeComponent();
+            _showAllSaleControl = new ShowAllSaleControl();
             _addSaleControl = new AddNewSaleControl();
             ShowAllSale();
         }
@@ -34,6 +35,23 @@ namespace Ol_der.Controls.Sales
         private void AddSale_Click(object sender, RoutedEventArgs e)
         {
             ContentArea.Content = _addSaleControl;
+        }
+
+        private void ModifySale_Click(object sender, RoutedEventArgs e)
+        {
+            ContentArea.Content = _showAllSaleControl;
+            int saleId = _showAllSaleControl.SaleIdToModify();
+
+            if (saleId != -1)
+            {
+                _addSaleControl = new AddNewSaleControl(saleId);
+                ContentArea.Content = _addSaleControl;
+            }
+
+            else
+            {
+                MessageBox.Show("Válassz ki egy eladást a módosításhoz!");
+            }
         }
 
         private void ShowAllSale()

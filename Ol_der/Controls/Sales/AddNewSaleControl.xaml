@@ -69,6 +69,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Grid.Row="8" Content="Vásárlás rögzítése" Margin="5" Width="220" FontSize="22" Click="btnSaveSale_Click"/>
+        <Button Grid.Row="8" Content="Mentés" Margin="5" Width="200" FontSize="26" Click="btnSaveSale_Click"/>
     </Grid>
 </UserControl>

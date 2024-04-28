@@ -10,47 +10,47 @@ using System.Threading.Tasks;
 
 namespace Ol_der.Controls.Sales
 {
-    internal class SaleViewModel : IDisposable
+    internal class SaleViewModel
     {
-        private ApplicationDbContext _context;
-
-        public SaleViewModel()
-        {
-            _context = ApplicationDbContextFactory.Create();
-        }
-
         public void AddSale(Sale newSale)
         {
-            _context.Sales.Add(newSale);
-            _context.SaveChanges();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Sales.Add(newSale);
+                context.SaveChanges();
+            }
         }
 
         public List<Sale> GetAllSale()
         {
-            return _context.Sales
-                   .Include(s => s.SaleItems)
-                       .ThenInclude(si => si.Product)
-                   .Include(s => s.SaleItems)
-                       .ThenInclude(si => si.Product.Supplier)
-                   .ToList();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return context.Sales
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product)
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product.Supplier)
+                    .ToList();
+            }
         }
 
         public Product SearchProductByItemNumber(string itemNumber)
         {
-            var upperitemNumber = itemNumber.ToUpper();
-            return _context.Products
-                           .FirstOrDefault(p => p.ItemNumber.ToUpper().Contains(upperitemNumber));
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var upperItemNumber = itemNumber.ToUpper();
+                return context.Products
+                    .FirstOrDefault(p => p.ItemNumber.ToUpper().Contains(upperItemNumber));
+            }
         }
 
         public void DeleteSale(Sale sale)
         {
-            _context.Sales.Remove(sale);
-            _context.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            _context?.Dispose();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Sales.Remove(sale);
+                context.SaveChanges();
+            }
         }
     }
 }
