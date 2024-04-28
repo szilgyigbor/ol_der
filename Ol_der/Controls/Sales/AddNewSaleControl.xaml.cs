@@ -182,6 +182,7 @@ namespace Ol_der.Controls.Sales
 
             if (_saleId.HasValue)
             {
+                _context.Sales.Update(_saleToSave);
                 _context.SaveChanges();
                 MessageBox.Show("Eladás sikeresen módosítva!");
             }
