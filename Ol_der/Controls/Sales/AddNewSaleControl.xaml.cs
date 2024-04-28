@@ -189,6 +189,7 @@ namespace Ol_der.Controls.Sales
             else 
             {
                 _context.Sales.Add(_saleToSave);
+                _context.SaveChanges();
                 MessageBox.Show("Eladás sikeresen hozzáadva!");
             }
             
