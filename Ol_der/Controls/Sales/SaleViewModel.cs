@@ -30,6 +30,7 @@ namespace Ol_der.Controls.Sales
                         .ThenInclude(si => si.Product)
                     .Include(s => s.SaleItems)
                         .ThenInclude(si => si.Product.Supplier)
+                    .OrderByDescending(s => s.Date)
                     .ToList();
             }
         }
