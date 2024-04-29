@@ -24,51 +24,42 @@ namespace Ol_der.Controls.Sales
     /// </summary>
     public partial class AddNewSaleControl : UserControl
     {
-        private ApplicationDbContext _context;
         private ShowAllSaleControl _showAllSaleControl;
+        private SaleViewModel _saleViewModel;
         private int? _saleId = null;
         private Sale _saleToSave;
 
         public AddNewSaleControl(int? saleId = null)
         {
             InitializeComponent();
-            _context = ApplicationDbContextFactory.Create();
+            _saleViewModel = new SaleViewModel();
             _showAllSaleControl = new ShowAllSaleControl();
             _saleId = saleId;
             _saleToSave = new Sale();
             LoadPaymentTypes();
             LoadSaleIfExists();
-            this.Unloaded -= OnUnloaded;
-            this.Unloaded += OnUnloaded;
         }
 
         private void LoadSaleIfExists()
         {
+            _saleToSave = new Sale();
+
             if (_saleId.HasValue)
             {
-                _saleToSave = _context.Sales
-                    .Include(s => s.SaleItems)
-                        .ThenInclude(si => si.Product)
-                    .Include(s => s.SaleItems)
-                        .ThenInclude(si => si.Product.Supplier).FirstOrDefault(s => s.SaleId == _saleId.Value);
+                _saleToSave = _saleViewModel.GetSale(_saleId.Value);
                 if (_saleToSave != null)
                 {
                     txtCustomerName.Text = _saleToSave.CustomerName;
                     txtNotes.Text = _saleToSave.Notes;
                     cmbPaymentType.SelectedItem = _saleToSave.PaymentType;
+                    txtTotalAmount.Text = _saleToSave.TotalAmount.ToString();
                     lstSaleItems.Items.Clear();
                     foreach (var item in _saleToSave.SaleItems)
                     {
                         lstSaleItems.Items.Add(item);
                     }
-                    CalculateTotal();
                 }
             }
-        }
-
-        private void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            _context?.Dispose();
         }
 
         public void LoadPaymentTypes()
@@ -155,16 +146,21 @@ namespace Ol_der.Controls.Sales
                 return;
             }
 
-            CalculateTotal();
             SaveSale();
-            
             ClearFields();
-
             _showAllSaleControl.ShowAllSale();
         }
 
         private void SaveSale()
         {
+            decimal totalAmount;
+
+            if (!decimal.TryParse(txtTotalAmount.Text, out totalAmount))
+            {
+                totalAmount = 0;
+            }
+
+
             if (!_saleId.HasValue) 
             {
                 _saleToSave.Date = DateTime.Now;
@@ -172,7 +168,7 @@ namespace Ol_der.Controls.Sales
 
             _saleToSave.CustomerName = txtCustomerName.Text;
             _saleToSave.PaymentType = (PaymentType)cmbPaymentType.SelectedItem;
-            _saleToSave.TotalAmount = decimal.Parse(txtTotalAmount.Text);
+            _saleToSave.TotalAmount = totalAmount;
             _saleToSave.Notes = txtNotes.Text;
 
             foreach (SaleItem item in lstSaleItems.Items)
@@ -182,16 +178,16 @@ namespace Ol_der.Controls.Sales
 
             if (_saleId.HasValue)
             {
-                _context.Sales.Update(_saleToSave);
-                _context.SaveChanges();
+                _saleViewModel.UpdateSale(_saleToSave);
                 MessageBox.Show("Eladás sikeresen módosítva!");
+                _saleToSave = new Sale();
             }
 
             else 
             {
-                _context.Sales.Add(_saleToSave);
-                _context.SaveChanges();
+                _saleViewModel.AddSale(_saleToSave);
                 MessageBox.Show("Eladás sikeresen hozzáadva!");
+                _saleToSave = new Sale();
             }
             
         }
@@ -208,8 +204,7 @@ namespace Ol_der.Controls.Sales
         private Product FindProductByItemNumber(string itemNumber)
         {
             var upperItemNumber = itemNumber.ToUpper();
-            return _context.Products
-                .FirstOrDefault(p => p.ItemNumber.ToUpper().Contains(upperItemNumber));
+            return _saleViewModel.SearchProductByItemNumber(upperItemNumber);
         }
     }
 }
