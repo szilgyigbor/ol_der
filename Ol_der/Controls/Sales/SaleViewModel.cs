@@ -53,5 +53,28 @@ namespace Ol_der.Controls.Sales
                 context.SaveChanges();
             }
         }
+
+        public Sale GetSale(int saleId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+               return context.Sales
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product)
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product.Supplier).FirstOrDefault(s => s.SaleId == saleId);
+
+            }
+        }
+
+        public void UpdateSale(Sale sale)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Sales.Update(sale);
+                context.SaveChanges();
+            }
+        }
+
     }
 }
