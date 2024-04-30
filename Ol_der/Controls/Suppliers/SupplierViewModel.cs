@@ -10,50 +10,50 @@ namespace Ol_der.Controls.Suppliers
 {
     class SupplierViewModel
     {
-        private ApplicationDbContext _context;
-
-        public SupplierViewModel()
-        {
-            _context = ApplicationDbContextFactory.Create();
-        }
-
         public void AddSupplier(Supplier newSupplier)
         {
-            _context.Suppliers.Add(newSupplier);
-            _context.SaveChanges();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Suppliers.Add(newSupplier);
+                context.SaveChanges();
+            }
         }
 
-        public void RemoveSupplier(int SupplierId) 
+        public void RemoveSupplier(int SupplierId)
         {
-            var supplier = _context.Suppliers.FirstOrDefault(s => s.SupplierId == SupplierId);
-            if (supplier != null)
+            using (var context = ApplicationDbContextFactory.Create())
             {
-                _context.Suppliers.Remove(supplier);
-                _context.SaveChanges();
+                var supplier = context.Suppliers.FirstOrDefault(s => s.SupplierId == SupplierId);
+                if (supplier != null)
+                {
+                    context.Suppliers.Remove(supplier);
+                    context.SaveChanges();
+                }
             }
         }
 
         public void ModifySupplier(Supplier modifiedSupplier)
         {
-            var supplier = _context.Suppliers.FirstOrDefault(s => s.SupplierId == modifiedSupplier.SupplierId);
-            if (supplier != null)
+            using (var context = ApplicationDbContextFactory.Create())
             {
-                supplier.Name = modifiedSupplier.Name;
-                supplier.Address = modifiedSupplier.Address;
-                supplier.Email = modifiedSupplier.Email;
-                supplier.Phone = modifiedSupplier.Phone;
-                _context.SaveChanges();
+                var supplier = context.Suppliers.FirstOrDefault(s => s.SupplierId == modifiedSupplier.SupplierId);
+                if (supplier != null)
+                {
+                    supplier.Name = modifiedSupplier.Name;
+                    supplier.Address = modifiedSupplier.Address;
+                    supplier.Email = modifiedSupplier.Email;
+                    supplier.Phone = modifiedSupplier.Phone;
+                    context.SaveChanges();
+                }
             }
         }
 
         public List<Supplier> GetAllSupplier()
         {
-            return _context.Suppliers.ToList();
-        }
-
-        public void Dispose()
-        {
-            _context?.Dispose();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return context.Suppliers.ToList();
+            }
         }
     }
 }
