@@ -68,6 +68,8 @@ namespace Ol_der.Controls.Products
             _productToModify.Supplier = selectedSupplier; 
 
             OnProductModified?.Invoke(_productToModify);
+
+            _productToModify = new Product();
         }
     }
 }
