@@ -43,13 +43,6 @@ namespace Ol_der.Controls.Products
             _modifyProductControl = new ModifyProductControl();
             _searchProductControl = new SearchProductControl();
             ShowAllProduct();
-            this.Unloaded -= OnUnloaded;
-            this.Unloaded += OnUnloaded;
-        }
-
-        private void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            _viewModel.Dispose();
         }
 
         public void LoadProductCount()
