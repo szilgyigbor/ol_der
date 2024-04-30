@@ -35,8 +35,6 @@ namespace Ol_der.Controls.Suppliers
             _showAllSupplierControl = new ShowAllSupplierControl();
             _modifySupplierControl = new ModifySupplierControl();
             Show_All_Supplier();
-            this.Unloaded -= OnUnloaded;
-            this.Unloaded += OnUnloaded;
         }
 
         private void Add_Supplier_Click(object sender, RoutedEventArgs e)
@@ -103,11 +101,5 @@ namespace Ol_der.Controls.Suppliers
         {
             return _viewModel.GetAllSupplier();
         }
-
-        private void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            _viewModel.Dispose();
-        }
-
     }
 }
