@@ -12,8 +12,6 @@ namespace Ol_der.Controls.Products
 {
     internal class ProductViewModel : INotifyPropertyChanged
     {
-        private ApplicationDbContext _context;
-
         private int _productCount;
         public int ProductCount
         {
@@ -28,11 +26,6 @@ namespace Ol_der.Controls.Products
             }
         }
 
-        public ProductViewModel()
-        {
-            _context = ApplicationDbContextFactory.Create();
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
@@ -42,48 +35,64 @@ namespace Ol_der.Controls.Products
 
         public void AddProduct(Product product)
         {
-            _context.Products.Add(product);
-            _context.SaveChanges();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Products.Add(product);
+                context.SaveChanges();
+            }
         }
 
         public void UpdateProduct(Product product)
         {
-            _context.Products.Update(product);
-            _context.SaveChanges();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Products.Update(product);
+                context.SaveChanges();
+            }
         }
 
         public List<Product> SearchProductByItemNumber(string itemNumber)
         {
-            var upperitemNumber = itemNumber.ToUpper();
-            return _context.Products
-                           .Where(p => p.ItemNumber.ToUpper().Contains(upperitemNumber))
-                           .ToList();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var upperitemNumber = itemNumber.ToUpper();
+                return context.Products
+                              .Where(p => p.ItemNumber.ToUpper().Contains(upperitemNumber))
+                              .ToList();
+            }
         }
 
         public void DeleteProduct(Product product)
         {
-            _context.Products.Remove(product);
-            _context.SaveChanges();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Products.Remove(product);
+                context.SaveChanges();
+            }
         }
 
         public List<Product> GetAllProduct()
         {
-            return _context.Products.Include(p => p.Supplier).ToList();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return context.Products.Include(p => p.Supplier).ToList();
+            }
         }
 
         public List<Supplier> GetAllSupplier()
         {
-            return _context.Suppliers.ToList();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return context.Suppliers.ToList();
+            }
         }
 
         public int GetProductCount()
         {
-            return _context.Products.Count();
-        }
-
-        public void Dispose()
-        {
-            _context?.Dispose();
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return context.Products.Count();
+            }
         }
     }
 }
