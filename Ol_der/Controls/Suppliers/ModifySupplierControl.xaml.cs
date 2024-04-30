@@ -58,6 +58,8 @@ namespace Ol_der.Controls.Suppliers
 
             OnSupplierModified?.Invoke(_supplierToModify);
 
+            _supplierToModify = new Supplier();
+
                   
         }
     }
