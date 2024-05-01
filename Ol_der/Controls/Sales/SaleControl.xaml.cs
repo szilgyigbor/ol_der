@@ -45,7 +45,8 @@ namespace Ol_der.Controls.Sales
 
             if (saleId != -1)
             {
-                _addSaleControl = new AddNewSaleControl(saleId);
+                _addSaleControl = new AddNewSaleControl();
+                _addSaleControl.LoadExistsSale(saleId);
                 ContentArea.Content = _addSaleControl;
             }
 
