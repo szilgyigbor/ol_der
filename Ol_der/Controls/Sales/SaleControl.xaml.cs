@@ -35,6 +35,7 @@ namespace Ol_der.Controls.Sales
 
         private void AddSale_Click(object sender, RoutedEventArgs e)
         {
+            _addSaleControl = new AddNewSaleControl();
             ContentArea.Content = _addSaleControl;
         }
 
