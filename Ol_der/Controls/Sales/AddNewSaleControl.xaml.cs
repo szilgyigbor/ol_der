@@ -26,27 +26,27 @@ namespace Ol_der.Controls.Sales
     {
         private ShowAllSaleControl _showAllSaleControl;
         private SaleViewModel _saleViewModel;
-        private int? _saleId = null;
+        private int _saleId;
         private Sale _saleToSave;
 
-        public AddNewSaleControl(int? saleId = null)
+        public AddNewSaleControl()
         {
             InitializeComponent();
             _saleViewModel = new SaleViewModel();
             _showAllSaleControl = new ShowAllSaleControl();
-            _saleId = saleId;
+            _saleId = -1;
             _saleToSave = new Sale();
             LoadPaymentTypes();
-            LoadSaleIfExists();
         }
 
-        private void LoadSaleIfExists()
+        public void LoadExistsSale(int saleId)
         {
             _saleToSave = new Sale();
+            _saleId = saleId;
 
-            if (_saleId.HasValue)
+            if (_saleId > 0)
             {
-                _saleToSave = _saleViewModel.GetSale(_saleId.Value);
+                _saleToSave = _saleViewModel.GetSale(_saleId);
                 if (_saleToSave != null)
                 {
                     txtCustomerName.Text = _saleToSave.CustomerName;
@@ -114,7 +114,6 @@ namespace Ol_der.Controls.Sales
         private void btnSearchProduct_Click(object sender, RoutedEventArgs e)
         {
             var itemNumber = txtItemNumber.Text;
-
             if (string.IsNullOrWhiteSpace(itemNumber))
             {
                 MessageBox.Show("Írd be a cikkszámot, amit hozzá akarsz adni!");
@@ -124,7 +123,13 @@ namespace Ol_der.Controls.Sales
             var product = FindProductByItemNumber(itemNumber);
             if (product != null)
             {
-                var saleItem = new SaleItem { Product = product, Quantity = 1, Price = 0 };
+                var saleItem = new SaleItem
+                {
+                    ProductId = product.ProductId,
+                    Product = product,
+                    Quantity = 1,
+                    Price = 0
+                };
                 lstSaleItems.Items.Add(saleItem);
 
                 txtItemNumber.Text = "";
@@ -137,7 +142,7 @@ namespace Ol_der.Controls.Sales
 
         private void btnSaveSale_Click(object sender, RoutedEventArgs e)
         {
-            string saveOrModify = _saleId.HasValue ? "módosítani" : "menteni";
+            string saveOrModify = _saleId < 0 ? "menteni" : "módosítani";
 
             MessageBoxResult result = MessageBox.Show($"Biztosan {saveOrModify} akarod az eladást?", "Eladás mentése", MessageBoxButton.YesNo);
 
@@ -160,36 +165,47 @@ namespace Ol_der.Controls.Sales
                 totalAmount = 0;
             }
 
-
-            if (!_saleId.HasValue) 
-            {
-                _saleToSave.Date = DateTime.Now;
-            }
-
             _saleToSave.CustomerName = txtCustomerName.Text;
             _saleToSave.PaymentType = (PaymentType)cmbPaymentType.SelectedItem;
             _saleToSave.TotalAmount = totalAmount;
             _saleToSave.Notes = txtNotes.Text;
 
-            foreach (SaleItem item in lstSaleItems.Items)
+            if (_saleId > 0)
             {
-                _saleToSave.SaleItems.Add(item);
-            }
-
-            if (_saleId.HasValue)
-            {
+                _saleToSave.SaleItems.Clear();
+                _saleViewModel.RemoveAllSaleItemsFromSale(_saleId);
+                foreach (SaleItem item in lstSaleItems.Items)
+                {
+                    _saleToSave.SaleItems.Add(new SaleItem
+                    {
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                        Price = item.Price,
+                        IsOrdered = item.IsOrdered
+                    });
+                }
                 _saleViewModel.UpdateSale(_saleToSave);
                 MessageBox.Show("Eladás sikeresen módosítva!");
-                _saleToSave = new Sale();
             }
-
-            else 
+            else
             {
+                _saleToSave.Date = DateTime.Now;
+                foreach (SaleItem item in lstSaleItems.Items)
+                {
+                    _saleToSave.SaleItems.Add(new SaleItem
+                    {
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                        Price = item.Price,
+                        IsOrdered = item.IsOrdered
+                    });
+                }
                 _saleViewModel.AddSale(_saleToSave);
                 MessageBox.Show("Eladás sikeresen hozzáadva!");
-                _saleToSave = new Sale();
             }
-            
+
+            _saleToSave = new Sale();
+            _saleId = -1;
         }
 
         private void ClearFields()
