@@ -76,5 +76,22 @@ namespace Ol_der.Controls.Sales
             }
         }
 
+        public void RemoveAllSaleItemsFromSale(int saleId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var sale = context.Sales
+                    .Include(s => s.SaleItems)
+                    .FirstOrDefault(s => s.SaleId == saleId);
+
+                if (sale != null && sale.SaleItems.Any())
+                {
+                    sale.SaleItems.Clear();
+                    context.Sales.Update(sale);
+                    context.SaveChanges();
+                }
+            }
+        }
+
     }
 }
