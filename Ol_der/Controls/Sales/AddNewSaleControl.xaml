@@ -64,7 +64,7 @@
                         <TextBlock Text="db" Width="40"/>
                         <TextBlock Text="{Binding Product.ItemNumber}" Width="120"/>
                         <TextBlock Text="{Binding Product.Name}" Width="350"/>
-                        <TextBox Text="{Binding Price, Mode=TwoWay}" Width="100"/>
+                        <TextBox Text="{Binding Price, Mode=TwoWay, StringFormat=F0}" Width="100"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
