@@ -18,10 +18,6 @@ namespace Ol_der.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Sale>()
-                .Property(s => s.CardTransactionAmount)
-                .HasPrecision(18, 2);
-
-            modelBuilder.Entity<Sale>()
                 .Property(s => s.TotalAmount)
                 .HasPrecision(18, 2);
 
