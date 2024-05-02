@@ -34,7 +34,7 @@
                                                     <Condition Binding="{Binding PaymentType}" Value="Card"/>
                                                     <Condition Binding="{Binding IsCardTransactionProcessed}" Value="True"/>
                                                 </MultiDataTrigger.Conditions>
-                                                <Setter Property="Text" Value="{Binding CardTransactionAmount, StringFormat='{}{0:C}'}"/>
+                                                <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (könyvelt)'}"/>
                                             </MultiDataTrigger>
                                         </Style.Triggers>
                                     </Style>

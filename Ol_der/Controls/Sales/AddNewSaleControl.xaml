@@ -30,6 +30,7 @@
             <Label Content="Teljes összeg:" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBox Margin="5" x:Name="txtTotalAmount" Width="100" HorizontalContentAlignment="Right"/>
             <TextBlock Text=".-Ft." Width="40" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <CheckBox x:Name="chkIsTransactionProcessed" Content="Könyvelt" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding IsTransactionProcessed, Mode=TwoWay}"/>
             <Label Margin="20 0 0 0" x:Name="lblDiscountedTotal" VerticalAlignment="Center"/>
         </WrapPanel>
 

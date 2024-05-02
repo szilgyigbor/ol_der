@@ -36,6 +36,7 @@ namespace Ol_der.Controls.Sales
             _showAllSaleControl = new ShowAllSaleControl();
             _saleId = -1;
             _saleToSave = new Sale();
+            this.DataContext = _saleToSave;
             LoadPaymentTypes();
         }
 
@@ -58,6 +59,7 @@ namespace Ol_der.Controls.Sales
                     {
                         lstSaleItems.Items.Add(item);
                     }
+                    chkIsTransactionProcessed.IsChecked = _saleToSave.IsCardTransactionProcessed;
                 }
             }
         }
@@ -169,6 +171,7 @@ namespace Ol_der.Controls.Sales
             _saleToSave.PaymentType = (PaymentType)cmbPaymentType.SelectedItem;
             _saleToSave.TotalAmount = totalAmount;
             _saleToSave.Notes = txtNotes.Text;
+            _saleToSave.IsCardTransactionProcessed = chkIsTransactionProcessed.IsChecked ?? false;
 
             if (_saleId > 0)
             {
