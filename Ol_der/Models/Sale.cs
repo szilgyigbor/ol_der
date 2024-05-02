@@ -15,7 +15,6 @@ namespace Ol_der.Models
         public DateTime Date { get; set; }
         public PaymentType PaymentType { get; set; }
         public decimal TotalAmount { get; set; }
-        public decimal? CardTransactionAmount { get; set; }
         public bool IsCardTransactionProcessed { get; set; }
         public string CustomerName { get; set; }
         public string Notes { get; set; }
