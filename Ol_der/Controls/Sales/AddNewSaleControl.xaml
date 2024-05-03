@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              FontSize="20"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -20,9 +24,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-
         <WrapPanel Grid.Row="0" HorizontalAlignment="Left">
-            <Label Content="Vásárló neve:"  VerticalAlignment="Center"/>
+            <Label Content="Vásárló neve:" VerticalAlignment="Center"/>
             <TextBox Margin="5" x:Name="txtCustomerName" Width="400"/>
         </WrapPanel>
 
@@ -30,13 +33,27 @@
             <Label Content="Teljes összeg:" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBox Margin="5" x:Name="txtTotalAmount" Width="100" HorizontalContentAlignment="Right"/>
             <TextBlock Text=".-Ft." Width="40" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <CheckBox x:Name="chkIsTransactionProcessed" Content="Könyvelt" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding IsTransactionProcessed, Mode=TwoWay}"/>
+            <CheckBox x:Name="chkIsTransactionProcessed" Content="Könyvelt" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding IsTransactionProcessed, Mode=TwoWay}">
+                <CheckBox.Style>
+                    <Style TargetType="CheckBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedItem, ElementName=cmbPaymentType}" Value="Card">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding SelectedItem, ElementName=cmbPaymentType}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </Style>
+                </CheckBox.Style>
+            </CheckBox>
             <Label Margin="20 0 0 0" x:Name="lblDiscountedTotal" VerticalAlignment="Center"/>
         </WrapPanel>
 
         <WrapPanel Grid.Row="2" HorizontalAlignment="Left">
             <Label Content="Fizetési mód:" VerticalAlignment="Center"/>
-            <ComboBox Margin="5" x:Name="cmbPaymentType" Width="100"/>
+            <ComboBox Margin="5" x:Name="cmbPaymentType" Width="100" ItemsSource="{Binding PaymentTypes}"/>
         </WrapPanel>
 
         <WrapPanel Grid.Row="3" HorizontalAlignment="Left">
@@ -48,15 +65,15 @@
 
         <WrapPanel Grid.Row="5" HorizontalAlignment="Center">
             <Label Content="Keresett cikkszám:" VerticalAlignment="Center"/>
-            <TextBox  x:Name="txtItemNumber" Margin="5" Width="200" KeyDown="txtItemNumber_KeyDown"/>
+            <TextBox x:Name="txtItemNumber" Margin="5" Width="200" KeyDown="txtItemNumber_KeyDown"/>
         </WrapPanel>
 
         <WrapPanel Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
-    
             <Button Content="Termék hozzáadása" Margin="5 5 25 5" Click="btnSearchProduct_Click" Width="220" FontSize="22"/>
             <Button Content="Total számítása" Margin="5" FontSize="18" Click="UpdateItem_Click"/>
             <Button Content="Termék törlése a listából" Margin="5" FontSize="18" Click="DeleteItem_Click"/>
         </WrapPanel>
+
         <ListBox x:Name="lstSaleItems" Grid.Row="7" Margin="5">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -70,6 +87,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
         <Button Grid.Row="8" Content="Mentés" Margin="5" Width="200" FontSize="26" Click="btnSaveSale_Click"/>
     </Grid>
 </UserControl>
