@@ -35,7 +35,7 @@ namespace Ol_der.Controls.Products
 
         public bool AddProduct(Product product)
         {
-            if (SearchProductByItemNumber(product.ItemNumber) != null) 
+            if (SearchProductByItemNumber(product.ItemNumber).Count != 0) 
             {
                 return false;
             }
