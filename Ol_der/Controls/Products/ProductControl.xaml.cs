@@ -80,7 +80,14 @@ namespace Ol_der.Controls.Products
 
         public void Add_Product(Product newProduct)
         {
-            _viewModel.AddProduct(newProduct);
+            bool isProductAdded = _viewModel.AddProduct(newProduct);
+
+            if (!isProductAdded)
+            {
+                MessageBox.Show("A termék cikkszáma már szerepel az adatbázisban!");
+                return;
+            }
+
             MessageBox.Show("A termék sikeresen rögzítésre került!");
             LoadProductCount();
             ShowAllProduct();
@@ -134,6 +141,7 @@ namespace Ol_der.Controls.Products
 
         public void ShowAllProduct()
         {
+            _showAllProductControl = new ShowAllProductControl();
             ContentArea.Content = _showAllProductControl;
             _showAllProductControl.ShowAllProduct(GetAllProduct());
         }

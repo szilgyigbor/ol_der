@@ -33,13 +33,20 @@ namespace Ol_der.Controls.Products
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void AddProduct(Product product)
+        public bool AddProduct(Product product)
         {
+            if (SearchProductByItemNumber(product.ItemNumber) != null) 
+            {
+                return false;
+            }
+
             using (var context = ApplicationDbContextFactory.Create())
             {
                 context.Products.Add(product);
                 context.SaveChanges();
             }
+
+            return true;
         }
 
         public void UpdateProduct(Product product)
