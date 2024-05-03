@@ -39,9 +39,8 @@ namespace Ol_der.Controls.Sales
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                var upperItemNumber = itemNumber.ToUpper();
                 return context.Products
-                    .FirstOrDefault(p => p.ItemNumber.ToUpper().Contains(upperItemNumber));
+                    .FirstOrDefault(p => p.ItemNumber == itemNumber);
             }
         }
 
