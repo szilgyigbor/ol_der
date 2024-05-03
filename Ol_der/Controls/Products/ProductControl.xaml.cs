@@ -60,10 +60,10 @@ namespace Ol_der.Controls.Products
 
         public void Delete_Product_Click(object sender, RoutedEventArgs e)
         {
-            _showAllProductControl.DeleteProduct();
-            ShowAllProduct();
             _showAllProductControl.OnProductDeleted -= Delete_Product;
             _showAllProductControl.OnProductDeleted += Delete_Product;
+            _showAllProductControl.DeleteProduct();
+            ShowAllProduct();
         }
 
         public void Show_All_Product_Click(object sender, RoutedEventArgs e)
@@ -141,7 +141,6 @@ namespace Ol_der.Controls.Products
 
         public void ShowAllProduct()
         {
-            _showAllProductControl = new ShowAllProductControl();
             ContentArea.Content = _showAllProductControl;
             _showAllProductControl.ShowAllProduct(GetAllProduct());
         }
