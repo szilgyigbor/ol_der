@@ -10,12 +10,27 @@ namespace Ol_der.Controls.Suppliers
 {
     class SupplierViewModel
     {
-        public void AddSupplier(Supplier newSupplier)
+        public bool AddSupplier(Supplier newSupplier)
         {
+            if (SearchSupplierByName(newSupplier.Name))
+            {
+                return false;
+            }
+
             using (var context = ApplicationDbContextFactory.Create())
             {
                 context.Suppliers.Add(newSupplier);
                 context.SaveChanges();
+            }
+
+            return true;
+        }
+
+        public bool SearchSupplierByName(string name)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return context.Suppliers.Any(s => s.Name == name);
             }
         }
 

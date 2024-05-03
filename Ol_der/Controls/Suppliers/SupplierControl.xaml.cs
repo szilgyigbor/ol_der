@@ -46,7 +46,14 @@ namespace Ol_der.Controls.Suppliers
 
         private void Add_Supplier(Supplier newSupplier) 
         {
-            _viewModel.AddSupplier(newSupplier);
+            bool IsSupplierAdded = _viewModel.AddSupplier(newSupplier);
+
+            if (!IsSupplierAdded)
+            {
+                MessageBox.Show("A beszállító már létezik!");
+                return;
+            }
+
             MessageBox.Show("A beszállító sikeresen rögzítésre került!");
             Show_All_Supplier();
         }
