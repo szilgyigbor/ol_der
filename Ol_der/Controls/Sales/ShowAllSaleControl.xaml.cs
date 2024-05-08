@@ -28,14 +28,9 @@ namespace Ol_der.Controls.Sales
         {
             InitializeComponent();
             _viewModel = new SaleViewModel();
-            ShowAllSale();
+            this.DataContext = _viewModel;
         }
 
-        public void ShowAllSale()
-        {
-            Sales = _viewModel.GetAllSale();
-            SalesListView.ItemsSource = Sales;
-        }
 
         public int SaleIdToModify()
         {
@@ -47,14 +42,18 @@ namespace Ol_der.Controls.Sales
             return -1;
         }
 
-        public void DeleteSale()
+        public async Task RefreshSales()
+        {
+            await _viewModel.RefreshData();
+        }
+
+        public async Task DeleteSale()
         {
             if (SalesListView.SelectedItem is Sale SelectedSale)
             {
                 if (MessageBox.Show("Biztosan törölni szeretnéd ezt az eladást?", "Megerősítés", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    _viewModel.DeleteSale(SelectedSale);
-                    ShowAllSale();
+                    await _viewModel.DeleteSaleAsync(SelectedSale);
                 }
             }
             else

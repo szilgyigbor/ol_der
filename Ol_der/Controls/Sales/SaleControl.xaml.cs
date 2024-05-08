@@ -39,7 +39,7 @@ namespace Ol_der.Controls.Sales
             ContentArea.Content = _addSaleControl;
         }
 
-        private void ModifySale_Click(object sender, RoutedEventArgs e)
+        private async void ModifySale_Click(object sender, RoutedEventArgs e)
         {
             ContentArea.Content = _showAllSaleControl;
             int saleId = _showAllSaleControl.SaleIdToModify();
@@ -47,7 +47,7 @@ namespace Ol_der.Controls.Sales
             if (saleId != -1)
             {
                 _addSaleControl = new AddNewSaleControl();
-                _addSaleControl.LoadExistsSale(saleId);
+                await _addSaleControl.LoadExistsSale(saleId);
                 ContentArea.Content = _addSaleControl;
             }
 
@@ -57,21 +57,21 @@ namespace Ol_der.Controls.Sales
             }
         }
 
-        private void ShowAllSale()
+        private async Task ShowAllSale()
         {
-            _showAllSaleControl = new ShowAllSaleControl();
+            await _showAllSaleControl.RefreshSales();
             ContentArea.Content = _showAllSaleControl;
         }
 
-        private void ShowAllSale_Click(object sender, RoutedEventArgs e)
+        private async void ShowAllSale_Click(object sender, RoutedEventArgs e)
         {
-            ShowAllSale();
+            await ShowAllSale();
         }
 
-        private void btnDeleteSale_Click(object sender, RoutedEventArgs e)
+        private async void btnDeleteSale_Click(object sender, RoutedEventArgs e)
         {
-            _showAllSaleControl.DeleteSale();
-            ShowAllSale();
+            await _showAllSaleControl.DeleteSale();
+            await ShowAllSale();
         }
 
     }

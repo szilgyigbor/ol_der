@@ -40,14 +40,14 @@ namespace Ol_der.Controls.Sales
             LoadPaymentTypes();
         }
 
-        public void LoadExistsSale(int saleId)
+        public async Task LoadExistsSale(int saleId)
         {
             _saleToSave = new Sale();
             _saleId = saleId;
 
             if (_saleId > 0)
             {
-                _saleToSave = _saleViewModel.GetSale(_saleId);
+                _saleToSave = await _saleViewModel.GetSaleAsync(_saleId);
                 if (_saleToSave != null)
                 {
                     txtCustomerName.Text = _saleToSave.CustomerName;
@@ -113,7 +113,7 @@ namespace Ol_der.Controls.Sales
             }
         }
 
-        private void btnSearchProduct_Click(object sender, RoutedEventArgs e)
+        private async void btnSearchProduct_Click(object sender, RoutedEventArgs e)
         {
             var itemNumber = txtItemNumber.Text;
             if (string.IsNullOrWhiteSpace(itemNumber))
@@ -122,7 +122,7 @@ namespace Ol_der.Controls.Sales
                 return;
             }
 
-            var product = FindProductByItemNumber(itemNumber);
+            var product = await FindProductByItemNumberAsync(itemNumber);
             if (product != null)
             {
 
@@ -160,7 +160,7 @@ namespace Ol_der.Controls.Sales
             }
         }
 
-        private void btnSaveSale_Click(object sender, RoutedEventArgs e)
+        private async void btnSaveSale_Click(object sender, RoutedEventArgs e)
         {
             string saveOrModify = _saleId < 0 ? "menteni" : "módosítani";
 
@@ -171,12 +171,11 @@ namespace Ol_der.Controls.Sales
                 return;
             }
 
-            SaveSale();
+            await SaveSale();
             ClearFields();
-            _showAllSaleControl.ShowAllSale();
         }
 
-        private void SaveSale()
+        private async Task SaveSale()
         {
             decimal totalAmount;
 
@@ -194,7 +193,7 @@ namespace Ol_der.Controls.Sales
             if (_saleId > 0)
             {
                 _saleToSave.SaleItems.Clear();
-                _saleViewModel.RemoveAllSaleItemsFromSale(_saleId);
+                await _saleViewModel.RemoveAllSaleItemsFromSaleAsync(_saleId);
                 foreach (SaleItem item in lstSaleItems.Items)
                 {
                     _saleToSave.SaleItems.Add(new SaleItem
@@ -205,7 +204,7 @@ namespace Ol_der.Controls.Sales
                         IsOrdered = item.IsOrdered
                     });
                 }
-                _saleViewModel.UpdateSale(_saleToSave);
+                await _saleViewModel.UpdateSaleAsync(_saleToSave);
                 MessageBox.Show("Eladás sikeresen módosítva!");
             }
             else
@@ -221,7 +220,7 @@ namespace Ol_der.Controls.Sales
                         IsOrdered = item.IsOrdered
                     });
                 }
-                _saleViewModel.AddSale(_saleToSave);
+                await _saleViewModel.AddSaleAsync(_saleToSave);
                 MessageBox.Show("Eladás sikeresen hozzáadva!");
             }
 
@@ -238,10 +237,10 @@ namespace Ol_der.Controls.Sales
             lstSaleItems.Items.Clear();
         }
 
-        private Product FindProductByItemNumber(string itemNumber)
+        private async Task<Product> FindProductByItemNumberAsync(string itemNumber)
         {
             var upperItemNumber = itemNumber.ToUpper();
-            return _saleViewModel.SearchProductByItemNumber(upperItemNumber);
+            return await _saleViewModel.SearchProductByItemNumberAsync(upperItemNumber);
         }
     }
 }
