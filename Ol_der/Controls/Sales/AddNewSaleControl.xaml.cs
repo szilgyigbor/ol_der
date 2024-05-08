@@ -53,7 +53,7 @@ namespace Ol_der.Controls.Sales
                     txtCustomerName.Text = _saleToSave.CustomerName;
                     txtNotes.Text = _saleToSave.Notes;
                     cmbPaymentType.SelectedItem = _saleToSave.PaymentType;
-                    txtTotalAmount.Text = _saleToSave.TotalAmount.ToString();
+                    txtTotalAmount.Text = _saleToSave.TotalAmount.ToString("0");
                     lstSaleItems.Items.Clear();
                     foreach (var item in _saleToSave.SaleItems)
                     {
