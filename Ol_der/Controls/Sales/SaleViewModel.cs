@@ -12,84 +12,46 @@ namespace Ol_der.Controls.Sales
 {
     internal class SaleViewModel
     {
+        private readonly SaleRepository _saleRepository;
+
+        public SaleViewModel()
+        {
+            _saleRepository = new SaleRepository();
+        }
+
         public void AddSale(Sale newSale)
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                context.Sales.Add(newSale);
-                context.SaveChanges();
-            }
+            _saleRepository.AddSale(newSale);
         }
 
         public List<Sale> GetAllSale()
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                return context.Sales
-                    .Include(s => s.SaleItems)
-                        .ThenInclude(si => si.Product)
-                    .Include(s => s.SaleItems)
-                        .ThenInclude(si => si.Product.Supplier)
-                    .OrderByDescending(s => s.Date)
-                    .ToList();
-            }
+            return _saleRepository.GetAllSale();
         }
 
         public Product SearchProductByItemNumber(string itemNumber)
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                return context.Products
-                    .FirstOrDefault(p => p.ItemNumber == itemNumber);
-            }
+            return _saleRepository.SearchProductByItemNumber(itemNumber);
         }
 
         public void DeleteSale(Sale sale)
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                context.Sales.Remove(sale);
-                context.SaveChanges();
-            }
+            _saleRepository.DeleteSale(sale);
         }
 
         public Sale GetSale(int saleId)
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-               return context.Sales
-                    .Include(s => s.SaleItems)
-                        .ThenInclude(si => si.Product)
-                    .Include(s => s.SaleItems)
-                        .ThenInclude(si => si.Product.Supplier).FirstOrDefault(s => s.SaleId == saleId);
-
-            }
+            return _saleRepository.GetSale(saleId);
         }
 
         public void UpdateSale(Sale sale)
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                context.Sales.Update(sale);
-                context.SaveChanges();
-            }
+            _saleRepository.UpdateSale(sale);
         }
 
         public void RemoveAllSaleItemsFromSale(int saleId)
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                var sale = context.Sales
-                    .Include(s => s.SaleItems)
-                    .FirstOrDefault(s => s.SaleId == saleId);
-
-                if (sale != null && sale.SaleItems.Any())
-                {
-                    sale.SaleItems.Clear();
-                    context.Sales.Update(sale);
-                    context.SaveChanges();
-                }
-            }
+            _saleRepository.RemoveAllSaleItemsFromSale(saleId);
         }
 
     }
