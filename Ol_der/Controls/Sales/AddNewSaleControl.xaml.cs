@@ -125,6 +125,24 @@ namespace Ol_der.Controls.Sales
             var product = FindProductByItemNumber(itemNumber);
             if (product != null)
             {
+
+                bool productAlreadyAdded = false;
+                foreach (SaleItem existingItem in lstSaleItems.Items)
+                {
+                    if (existingItem.Product.ItemNumber == product.ItemNumber)
+                    {
+                        productAlreadyAdded = true;
+                        break;
+                    }
+                }
+
+                if (productAlreadyAdded)
+                {
+                    MessageBox.Show("Ez a termék már szerepel a listában, növeld a darabszámot!");
+                    txtItemNumber.Text = "";
+                    return;
+                }
+
                 var saleItem = new SaleItem
                 {
                     ProductId = product.ProductId,
@@ -132,8 +150,8 @@ namespace Ol_der.Controls.Sales
                     Quantity = 1,
                     Price = 0
                 };
-                lstSaleItems.Items.Add(saleItem);
 
+                lstSaleItems.Items.Add(saleItem);
                 txtItemNumber.Text = "";
             }
             else
