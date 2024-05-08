@@ -14,7 +14,8 @@ namespace Ol_der.Controls.Sales
         {
             if (value is DateTime date)
             {
-                return date.Date;
+                CultureInfo huCulture = new CultureInfo("hu-HU");
+                return date.ToString("yyyy-MM-dd, dddd", huCulture);
             }
             return value;
         }
