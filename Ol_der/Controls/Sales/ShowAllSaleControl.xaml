@@ -16,16 +16,16 @@
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Name, Converter={StaticResource DateToDayConverter}}" FontWeight="Bold" FontSize="24"/>
+                            <TextBlock Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="DemiBold" FontSize="22"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
             </ListView.GroupStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="10">
+                    <StackPanel Margin="15">
                         <WrapPanel>
-                            <TextBlock Text="{Binding Date, StringFormat='yyyy-MM-dd HH:mm'}" FontSize="22" FontStyle="Italic" Margin="15"/>
+                            <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="22" FontStyle="Italic" Margin="15"/>
                             <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}"  FontSize="26" FontStyle="Italic" Margin="15"/>
                             <TextBlock FontSize="26" FontStyle="Italic" Margin="15">
                                 <TextBlock.Style>

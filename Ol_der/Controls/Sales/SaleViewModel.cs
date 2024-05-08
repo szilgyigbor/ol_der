@@ -50,7 +50,7 @@ namespace Ol_der.Controls.Sales
             {
                 GroupedSales.Source = Sales;
                 GroupedSales.GroupDescriptions.Clear();
-                GroupedSales.GroupDescriptions.Add(new PropertyGroupDescription("Date", new DateToDayConverter()));
+                GroupedSales.GroupDescriptions.Add(new PropertyGroupDescription("Date", new DateConverter()));
             }
         }
 
