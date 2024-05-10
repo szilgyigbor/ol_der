@@ -40,6 +40,9 @@ namespace Ol_der
                 case "btnSale":
                     ContentArea.Content = new SaleControl();
                     break;
+                case "btnPackage":
+                    ContentArea.Content = new SaleControl();
+                    break;
             }
         }
 

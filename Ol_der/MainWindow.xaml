@@ -25,7 +25,7 @@
                     <Button Content="Beszállítók" Background="#E5F0F9" Name="btnSupplier" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
                     <Button Content="Termékek" Background="#E5F0F9" Name="btnProduct" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
                     <Button Content="Eladások" Background="#E5F0F9" Name="btnSale" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
-                    <Button Content="Gomb4" Background="#E5F0F9" Name="btn4" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
+                    <Button Content="Csomagok" Background="#E5F0F9" Name="btnPackage" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
                     <Button Content="Gomb5" Background="#E5F0F9" Name="btn5" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
                 </StackPanel>
 
