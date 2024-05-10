@@ -36,7 +36,7 @@
                 <Button Content="Új Termék" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Add_New_Product_Click"/>
                 <Button Content="Szerkesztés" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Modify_Product_Click"/>
                 <Button Content="Keresés" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Search_Product_Click"/>
-                <Button Content="Törlés" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Delete_Product_Click"/>
+                <Button Content="Törlés" Background="#F9E5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Delete_Product_Click"/>
             </StackPanel>
 
             <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"

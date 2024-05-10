@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Ol-der" Height="850" Width="1200" 
         WindowState="Maximized" FontSize="15"
-        Background="LightGray">
+        Background="#F4F4F4">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.2*"/>
@@ -29,7 +29,7 @@
                     <Button Content="Gomb5" Name="btn5" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
                 </StackPanel>
 
-                <Button Content="Kilépés" Name="btnExit" Grid.Row="1" Margin="20 15 25 25" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Exit_Button_Click"/>
+                <Button Content="Kilépés" Background="#F9E5E5" Name="btnExit" Grid.Row="1" Margin="20 15 25 25" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Exit_Button_Click"/>
             </Grid>
         </Border>
 
