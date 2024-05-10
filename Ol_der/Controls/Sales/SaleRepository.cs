@@ -30,6 +30,7 @@ namespace Ol_der.Controls.Sales
                     .Include(s => s.SaleItems)
                         .ThenInclude(si => si.Product.Supplier)
                     .OrderByDescending(s => s.Date)
+                    .Where(s => !s.IsPackage)
                     .Take(limit)
                     .ToListAsync();
             }
@@ -103,6 +104,7 @@ namespace Ol_der.Controls.Sales
                         .ThenInclude(si => si.Product.Supplier)
                         .Where(s => s.SaleItems.Any(si => si.Product.ItemNumber == productNumber))
                     .OrderByDescending(s => s.Date)
+                    .Where(s => !s.IsPackage)
                     .ToListAsync();
             }
         }
