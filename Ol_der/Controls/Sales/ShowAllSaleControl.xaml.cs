@@ -58,7 +58,7 @@ namespace Ol_der.Controls.Sales
             }
             else
             {
-                MessageBox.Show("Válassz ki egy terméket a törléshez!");
+                MessageBox.Show("Válassz ki egy eladást a törléshez!");
             }
 
         }
