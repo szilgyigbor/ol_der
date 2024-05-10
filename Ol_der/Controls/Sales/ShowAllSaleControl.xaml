@@ -14,6 +14,11 @@
         <ListView x:Name="SalesListView" ItemsSource="{Binding GroupedSales.View}">
             <ListView.GroupStyle>
                 <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="GroupItem">
+                            <Setter Property="Margin" Value="20 30 50 30"/>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="DemiBold" FontSize="22"/>
