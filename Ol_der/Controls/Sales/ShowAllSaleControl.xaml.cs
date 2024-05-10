@@ -42,9 +42,9 @@ namespace Ol_der.Controls.Sales
             return -1;
         }
 
-        public async Task RefreshSales()
+        public async Task RefreshSales(int limit)
         {
-            await _viewModel.RefreshData();
+            await _viewModel.RefreshData(limit);
         }
 
         public async Task DeleteSale()

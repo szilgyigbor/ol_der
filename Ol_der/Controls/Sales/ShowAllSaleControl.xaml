@@ -76,7 +76,7 @@
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="#E5E5E5"/>
+                    <Setter Property="Background" Value="#F4F4F4"/>
                     <Setter Property="Foreground" Value="Black"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding PaymentType}" Value="Card">

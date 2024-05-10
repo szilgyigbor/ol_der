@@ -20,7 +20,7 @@ namespace Ol_der.Controls.Sales
             }
         }
 
-        public async Task<List<Sale>> GetAllSaleAsync()
+        public async Task<List<Sale>> GetAllSaleAsync(int limit)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
@@ -30,6 +30,7 @@ namespace Ol_der.Controls.Sales
                     .Include(s => s.SaleItems)
                         .ThenInclude(si => si.Product.Supplier)
                     .OrderByDescending(s => s.Date)
+                    .Take(limit)
                     .ToListAsync();
             }
         }

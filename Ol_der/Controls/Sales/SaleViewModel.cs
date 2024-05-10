@@ -25,17 +25,17 @@ namespace Ol_der.Controls.Sales
             _saleRepository = new SaleRepository();
             Sales = new ObservableCollection<Sale>();
             GroupedSales = new CollectionViewSource();
-            LoadDataAsync();
+            LoadDataAsync(100);
         }
 
-        public async Task RefreshData() 
+        public async Task RefreshData(int limit) 
         {
-            await LoadDataAsync();
+            await LoadDataAsync(limit);
         }
 
-        private async Task LoadDataAsync()
+        private async Task LoadDataAsync(int limit)
         {
-            var salesData = await GetAllSaleAsync();
+            var salesData = await GetAllSaleAsync(limit);
             Sales.Clear();
             foreach (var sale in salesData)
             {
@@ -65,9 +65,9 @@ namespace Ol_der.Controls.Sales
             await _saleRepository.AddSaleAsync(newSale);
         }
 
-        public async Task<List<Sale>> GetAllSaleAsync()
+        public async Task<List<Sale>> GetAllSaleAsync(int limit)
         {
-            return await _saleRepository.GetAllSaleAsync();
+            return await _saleRepository.GetAllSaleAsync(limit);
         }
 
         public async Task<Product> SearchProductByItemNumberAsync(string itemNumber)

@@ -57,15 +57,20 @@ namespace Ol_der.Controls.Sales
             }
         }
 
-        private async Task ShowAllSale()
+        private async Task ShowAllSale(int limit = 100)
         {
-            await _showAllSaleControl.RefreshSales();
+            await _showAllSaleControl.RefreshSales(limit);
             ContentArea.Content = _showAllSaleControl;
         }
 
         private async void ShowAllSale_Click(object sender, RoutedEventArgs e)
         {
-            await ShowAllSale();
+            InputSaleNumberWindow dialog = new InputSaleNumberWindow();
+            if (dialog.ShowDialog() == true)
+            {
+                int numberToShow = dialog.NumberResult ?? 100;
+                await ShowAllSale(numberToShow);
+            }
         }
 
         private async void btnDeleteSale_Click(object sender, RoutedEventArgs e)
