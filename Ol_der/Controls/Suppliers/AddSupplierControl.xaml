@@ -44,7 +44,7 @@
             <Label Content="Telefon:" Grid.Row="3" VerticalAlignment="Center"/>
             <TextBox x:Name="phoneTextBox" Grid.Row="3" Margin="5" HorizontalAlignment="Center" Width="600"/>
 
-            <Button Content="Hozzáadás" Grid.Row="4" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SubmitButton_Click" Width="120" FontSize="22"/>
+            <Button Content="Hozzáadás" Background="#E5F5E5" Grid.Row="4" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SubmitButton_Click" Width="120" FontSize="22"/>
         </Grid>
     </Grid>
 </UserControl>

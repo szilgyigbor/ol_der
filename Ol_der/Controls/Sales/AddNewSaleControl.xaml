@@ -69,9 +69,9 @@
         </WrapPanel>
 
         <WrapPanel Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Termék hozzáadása" Margin="5 5 25 5" Click="btnSearchProduct_Click" Width="220" FontSize="22"/>
-            <Button Content="Total számítása" Margin="5" FontSize="18" Click="UpdateItem_Click"/>
-            <Button Content="Termék törlése a listából" Margin="5" FontSize="18" Click="DeleteItem_Click"/>
+            <Button Content="Termék hozzáadása" Background="#E5F0F9" Margin="5 5 25 5" Click="btnSearchProduct_Click" Width="220" FontSize="22"/>
+            <Button Content="Total számítása" Background="#E5F0F9" Margin="5" FontSize="18" Click="UpdateItem_Click"/>
+            <Button Content="Termék törlése a listából" Background="#E5F0F9" Margin="5" FontSize="18" Click="DeleteItem_Click"/>
         </WrapPanel>
 
         <ListBox x:Name="lstSaleItems" Grid.Row="7" Margin="5">
@@ -89,6 +89,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Grid.Row="8" Content="Mentés" Margin="5" Width="200" FontSize="26" Click="btnSaveSale_Click"/>
+        <Button Grid.Row="8" Content="Mentés" Background="#E5F5E5" Margin="5" Width="200" FontSize="26" Click="btnSaveSale_Click"/>
     </Grid>
 </UserControl>

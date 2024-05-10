@@ -34,7 +34,7 @@
             <Label Content="Cikkszám:" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="itemNumberTextBox" Grid.Row="0" Margin="5" HorizontalAlignment="Center" Width="600"/>
 
-            <Button Content="Keresés" Grid.Row="4" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SubmitButton_Click" Width="120" FontSize="22" IsDefault="True"/>
+            <Button Content="Keresés" Background="#E5F0F9" Grid.Row="4" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Click="SubmitButton_Click" Width="120" FontSize="22" IsDefault="True"/>
         </Grid>
 
     </Grid>
