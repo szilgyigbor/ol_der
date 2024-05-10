@@ -17,13 +17,12 @@ namespace Ol_der.Controls.Sales
             {
                 DateTime date = (DateTime)group.Name;
                 CultureInfo huCulture = new CultureInfo("hu-HU");
-                decimal totalCash = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.Cash).Sum(s => s.TotalAmount);
-                decimal totalCard = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.Card).Sum(s => s.TotalAmount);
-                decimal totalRN = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.RN).Sum(s => s.TotalAmount);
-                decimal totalTransfer = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.Transfer).Sum(s => s.TotalAmount);
-
+                decimal totalCash = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.Cash && !s.IsPackage).Sum(s => s.TotalAmount);
+                decimal totalCard = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.Card && !s.IsPackage).Sum(s => s.TotalAmount);
+                decimal totalRN = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.RN && !s.IsPackage).Sum(s => s.TotalAmount);
+                decimal totalTransfer = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.Transfer && !s.IsPackage).Sum(s => s.TotalAmount);
                 string formattedDate = date.ToString("yyyy-MM-dd, dddd", huCulture);
-                return $"{formattedDate}:  (Cash: {totalCash:0}.-Ft,   RN: {totalRN:0}.-Ft,   Card: {totalCard:0}.-Ft,   Transfer: {totalTransfer:0}.-Ft   Teljes bevétel: {totalCash + totalCard + totalRN + totalTransfer:0}.-Ft)";
+                return $"{formattedDate}:  (Cash: {totalCash:0}.-Ft,   RN: {totalRN:0}.-Ft,   Card: {totalCard:0}.-Ft,   Transfer: {totalTransfer:0}.-Ft   Napi teljes bevétel: {totalCash + totalCard + totalRN + totalTransfer:0}.-Ft)";
             }
             return null;
         }
