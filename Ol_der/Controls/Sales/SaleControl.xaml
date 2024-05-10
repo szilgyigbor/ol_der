@@ -32,9 +32,9 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-                <Button Content="Eladások" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="ShowAllSale_Click"/>
-                <Button Content="Új eladás" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="AddSale_Click"/>
-                <Button Content="Szerkesztés" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="ModifySale_Click"/>
+                <Button Content="Eladások" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="ShowAllSale_Click"/>
+                <Button Content="Új eladás" Background="#E5F5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="AddSale_Click"/>
+                <Button Content="Szerkesztés" Background="#F9F9E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="ModifySale_Click"/>
                 <Button Content="Törlés" Background="#F9E5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="btnDeleteSale_Click"/>
             </StackPanel>
 
