@@ -91,5 +91,21 @@ namespace Ol_der.Controls.Sales
                 }
             }
         }
+
+        public async Task<List<Sale>> GetSalesByItemNumberAsync(string productNumber)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Sales
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product)
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product.Supplier)
+                        .Where(s => s.SaleItems.Any(si => si.Product.ItemNumber == productNumber))
+                    .OrderByDescending(s => s.Date)
+                    .ToListAsync();
+            }
+        }
+
     }
 }

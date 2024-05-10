@@ -36,12 +36,24 @@ namespace Ol_der.Controls.Sales
         private async Task LoadDataAsync(int limit)
         {
             var salesData = await GetAllSaleAsync(limit);
+            FillSales(salesData);
+            SetupGrouping();
+        }
+
+        public async Task LoadSearchedSalesAsync(string itemNumber)
+        {
+            var salesData = await _saleRepository.GetSalesByItemNumberAsync(itemNumber);
+            FillSales(salesData);
+            SetupGrouping();
+        }
+
+        private void FillSales(List<Sale> salesData)
+        {
             Sales.Clear();
             foreach (var sale in salesData)
             {
                 Sales.Add(sale);
             }
-            SetupGrouping();
         }
 
         private void SetupGrouping()

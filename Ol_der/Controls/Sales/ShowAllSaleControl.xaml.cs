@@ -63,5 +63,10 @@ namespace Ol_der.Controls.Sales
 
         }
 
+        public async Task LoadSearchedSales(string productNumber)
+        {
+            await _viewModel.LoadSearchedSalesAsync(productNumber);
+        }
+
     }
 }

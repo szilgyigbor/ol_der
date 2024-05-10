@@ -79,5 +79,21 @@ namespace Ol_der.Controls.Sales
             await ShowAllSale();
         }
 
+        private async void SearchSalesByProductNumber_Click(object sender, RoutedEventArgs e)
+        {
+            InputProductNumberWindow dialog = new InputProductNumberWindow();
+            if (dialog.ShowDialog() == true)
+            {
+                string productNumber = dialog.ProductNumber;
+                await ShowSalesByProductNumber(productNumber);
+            }
+        }
+
+        private async Task ShowSalesByProductNumber(string productNumber)
+        {
+            await _showAllSaleControl.LoadSearchedSales(productNumber);
+            ContentArea.Content = _showAllSaleControl;
+        }
+
     }
 }
