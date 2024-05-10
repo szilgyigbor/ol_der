@@ -18,5 +18,6 @@ namespace Ol_der.Models
         public bool IsCardTransactionProcessed { get; set; }
         public string CustomerName { get; set; }
         public string Notes { get; set; }
+        public bool IsPackage { get; set; } = false;
     }
 }
