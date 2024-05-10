@@ -17,7 +17,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Background="#98B4D4">
+        <Grid Grid.Row="0" Grid.Column="0" Background="#B3C9E1">
             <TextBlock Text="Eladások kezelése"
            FontSize="28"
            HorizontalAlignment="Center"
