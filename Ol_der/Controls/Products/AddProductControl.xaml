@@ -15,11 +15,11 @@
 
         <Grid Grid.Row="0" Margin="0 20 0 0">
             <TextBlock Text="Új termék hozzáadása"
-       FontSize="22"
-       HorizontalAlignment="Center"
-       VerticalAlignment="Center"
-       Grid.Row="0"
-       Grid.Column="0"/>
+               FontSize="22"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Grid.Row="0"
+               Grid.Column="0"/>
         </Grid>
 
         <Grid Grid.Row="1">
