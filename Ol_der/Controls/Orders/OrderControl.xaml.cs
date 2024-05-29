@@ -30,7 +30,7 @@ namespace Ol_der.Controls.Orders
 
         private void AddOrder_Click(object sender, RoutedEventArgs e)
         {
-            int supplierId = 0;
+            int supplierId = -1;
 
             SelectSupplierWindow dialog = new SelectSupplierWindow();
             if (dialog.ShowDialog() == true)
