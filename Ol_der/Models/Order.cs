@@ -15,6 +15,9 @@ namespace Ol_der.Models
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
-        public bool IsConfirmed { get; set; }
+        public bool IsColored { get; set; } = false;
+        public bool IsOpen { get; set; } = true;
+        public bool ReOrdered { get; set; } = false;
+        public string Comment { get; set; }
     }
 }

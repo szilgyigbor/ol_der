@@ -18,7 +18,5 @@ namespace Ol_der.Models
         public Product Product { get; set; }
         public int QuantityOrdered { get; set; }
         public int QuantityReceived { get; set; }
-        public decimal Price { get; set; }
-        public bool IsArrived { get; set; }
     }
 }
