@@ -26,7 +26,7 @@
                     <Button Content="Termékek" Background="#E5F0F9" Name="btnProduct" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
                     <Button Content="Eladások" Background="#E5F0F9" Name="btnSale" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
                     <Button Content="Csomagok" Background="#E5F0F9" Name="btnPackage" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
-                    <Button Content="Gomb5" Background="#E5F0F9" Name="btn5" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
+                    <Button Content="Rendelések" Background="#E5F0F9" Name="btnOrder" Margin="20 15 25 5" HorizontalAlignment="Stretch" Padding="15 5 15 5" FontSize="22" Click="Menu_Button_Click"/>
                 </StackPanel>
 
                 <Button Content="Kilépés" Background="#F9E5E5" Name="btnExit" Grid.Row="1" Margin="20 15 25 25" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Exit_Button_Click"/>

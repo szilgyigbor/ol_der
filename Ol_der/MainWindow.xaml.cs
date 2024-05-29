@@ -14,6 +14,7 @@ using Ol_der.Controls.Products;
 using Ol_der.Controls.Sales;
 using Ol_der.Controls.Suppliers;
 using Ol_der.Controls.SalePackages;
+using Ol_der.Controls.Orders;
 
 
 namespace Ol_der
@@ -44,6 +45,9 @@ namespace Ol_der
                     break;
                 case "btnPackage":
                     ContentArea.Content = new PackageControl();
+                    break;
+                case "btnOrder":
+                    ContentArea.Content = new OrderControl();
                     break;
             }
         }
