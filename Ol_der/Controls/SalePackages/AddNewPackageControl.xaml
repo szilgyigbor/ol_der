@@ -63,6 +63,8 @@
                         <TextBlock Text="{Binding Product.Name}" Width="350"/>
                         <TextBox Text="{Binding Price, Mode=TwoWay, StringFormat=F0}" Width="100"/>
                         <TextBlock Text=".-Ft." Width="40" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <CheckBox x:Name="chkNeedToOrder" Content="legyen rendelve?" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding NeedToOrder, Mode=TwoWay}">
+                        </CheckBox>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

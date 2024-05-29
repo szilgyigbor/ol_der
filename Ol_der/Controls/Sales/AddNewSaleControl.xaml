@@ -81,9 +81,11 @@
                         <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
                         <TextBlock Text="db" Width="40"/>
                         <TextBlock Text="{Binding Product.ItemNumber}" Width="120"/>
-                        <TextBlock Text="{Binding Product.Name}" Width="350"/>
+                        <TextBlock Text="{Binding Product.Name}" Width="450"/>
                         <TextBox Text="{Binding Price, Mode=TwoWay, StringFormat=F0}" Width="100"/>
                         <TextBlock Text=".-Ft." Width="40" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        <CheckBox x:Name="chkNeedToOrder" Content="legyen rendelve?" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding NeedToOrder, Mode=TwoWay}">
+                        </CheckBox>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
