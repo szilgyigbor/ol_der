@@ -127,9 +127,13 @@ namespace Ol_der.Controls.SalePackages
 
                 if (productAlreadyAdded)
                 {
-                    MessageBox.Show("Ez a termék már szerepel a listában, növeld a darabszámot!");
-                    txtItemNumber.Text = "";
-                    return;
+                    MessageBoxResult result = MessageBox.Show("Ez a termék már szerepel a listában, újból hozzáadjam?", "Termék Ellenőrzés", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+
+                    if (result != MessageBoxResult.OK)
+                    {
+                        txtItemNumber.Text = "";
+                        return;
+                    }
                 }
 
                 var saleItem = new SaleItem
