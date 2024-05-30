@@ -18,5 +18,13 @@ namespace Ol_der.Controls.Orders
                 return await context.Suppliers.ToListAsync();
             }
         }
+
+        public async Task<List<Order>> GetAllOrderAsync()
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Orders.Include(o => o.Supplier).ToListAsync();
+            }
+        }
     }
 }
