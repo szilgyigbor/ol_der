@@ -19,9 +19,9 @@
 
         <Grid Grid.Row="0" Grid.Column="0" Background="#B3C9E1">
             <TextBlock Text="Rendelések kezelése"
-       FontSize="28"
-       HorizontalAlignment="Center"
-       VerticalAlignment="Center"/>
+               FontSize="28"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"/>
         </Grid>
 
 
