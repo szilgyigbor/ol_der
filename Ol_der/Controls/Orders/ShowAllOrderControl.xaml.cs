@@ -20,9 +20,13 @@ namespace Ol_der.Controls.Orders
     /// </summary>
     public partial class ShowAllOrderControl : UserControl
     {
+        private OrderViewModel _viewModel;
+
         public ShowAllOrderControl()
         {
             InitializeComponent();
+            _viewModel = new OrderViewModel();
+            this.DataContext = _viewModel;
         }
     }
 }
