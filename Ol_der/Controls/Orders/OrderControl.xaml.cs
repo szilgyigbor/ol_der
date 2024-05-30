@@ -22,10 +22,13 @@ namespace Ol_der.Controls.Orders
     public partial class OrderControl : UserControl
     {
         private AddNewOrderControl _addOrderControl;
+        private ShowAllOrderControl _showAllOrderControl;
 
         public OrderControl()
         {
             InitializeComponent();
+            _showAllOrderControl = new ShowAllOrderControl();
+            ContentArea.Content = _showAllOrderControl;
         }
 
         private void AddOrder_Click(object sender, RoutedEventArgs e)
@@ -63,18 +66,13 @@ namespace Ol_der.Controls.Orders
 
         private async Task ShowAllOrder(int limit = 100)
         {
-            /*await _showAllSaleControl.RefreshSales(limit);
-            ContentArea.Content = _showAllSaleControl;*/
+            _showAllOrderControl = new ShowAllOrderControl();
+            ContentArea.Content = _showAllOrderControl;
         }
 
         private async void ShowAllOrder_Click(object sender, RoutedEventArgs e)
         {
-            /*InputSaleNumberWindow dialog = new InputSaleNumberWindow();
-            if (dialog.ShowDialog() == true)
-            {
-                int numberToShow = dialog.NumberResult ?? 100;
-                await ShowAllSale(numberToShow);
-            }*/
+            ShowAllOrder();
         }
 
         private async void btnDeleteOrder_Click(object sender, RoutedEventArgs e)
