@@ -49,6 +49,12 @@ namespace Ol_der.Controls.Orders
             return await _orderRepository.GetAllSupplierAsync();
         }
 
+        public async Task LoadOrdersAsync()
+        {
+            var orders = await _orderRepository.GetAllOrderAsync();
+            Orders = new ObservableCollection<Order>(orders);
+        }
+
     }
 
 }
