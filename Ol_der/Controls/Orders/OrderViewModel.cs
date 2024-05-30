@@ -5,27 +5,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ol_der.Models;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace Ol_der.Controls.Orders
 {
-    internal class OrderViewModel
+    public class OrderViewModel : INotifyPropertyChanged
     {
-        private readonly OrderRepository _orderRepository;
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private OrderRepository _orderRepository;
+
+        private ObservableCollection<Order> _orders;
+        public ObservableCollection<Order> Orders
+        {
+            get { return _orders; }
+            set
+            {
+                _orders = value;
+                OnPropertyChanged(nameof(Orders));
+            }
+        }
 
         public OrderViewModel()
         {
             _orderRepository = new OrderRepository();
+
+            Orders = new ObservableCollection<Order>
+        {
+            new Order { OrderId = 1, Supplier = new Supplier { Name = "Supplier 1" }, OrderDate = DateTime.Now, Comment = "First order" },
+            new Order { OrderId = 2, Supplier = new Supplier { Name = "Supplier 2" }, OrderDate = DateTime.Now, Comment = "Second order" }
+        };
         }
 
-        /*public List<Order> GetOrders()
+        protected void OnPropertyChanged(string propertyName)
         {
-            return _orderRepository.GetOrders();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
-        }*/
 
         public async Task<List<Supplier>> GetAllSupplierAsync()
         {
             return await _orderRepository.GetAllSupplierAsync();
         }
+
     }
+
 }
