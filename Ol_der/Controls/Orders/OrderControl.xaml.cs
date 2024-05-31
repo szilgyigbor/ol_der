@@ -1,4 +1,5 @@
 ﻿using Ol_der.Controls.Sales;
+using Ol_der.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +32,10 @@ namespace Ol_der.Controls.Orders
             ContentArea.Content = _showAllOrderControl;
         }
 
-        private void AddOrder_Click(object sender, RoutedEventArgs e)
+        private async void AddOrder_Click(object sender, RoutedEventArgs e)
         {
             int supplierId = -1;
+            
 
             SelectSupplierWindow dialog = new();
             if (dialog.ShowDialog() == true)
@@ -41,9 +43,19 @@ namespace Ol_der.Controls.Orders
                 supplierId = dialog.supplierId;
             }
 
-            _addOrderControl = new AddNewOrderControl(supplierId);
+            
+            OrderViewModel viewModel = new();
 
-            ContentArea.Content = _addOrderControl;
+            viewModel.SupplierId = supplierId;
+
+            Order order = await viewModel.CreateOrUpdateOrder();
+
+            if (order == null)
+            {
+                _addOrderControl = new AddNewOrderControl(supplierId);
+                ContentArea.Content = _addOrderControl;
+            }
+
 
         }
 

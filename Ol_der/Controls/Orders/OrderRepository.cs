@@ -45,11 +45,22 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public async Task<Supplier> GetSupplierById(int supplierId)
+        public async Task<Supplier> GetSupplierByIdAsync(int supplierId)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
                 return await context.Suppliers.FindAsync(supplierId);
+            }
+        }
+
+        public async Task<Order> GetLastOrderBySupplierIdAsync(int supplierId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Orders
+                    .Where(o => o.SupplierId == supplierId && o.IsOpen)
+                    .OrderByDescending(o => o.OrderDate)
+                    .FirstOrDefaultAsync();
             }
         }
     }

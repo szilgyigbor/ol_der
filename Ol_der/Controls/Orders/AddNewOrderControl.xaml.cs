@@ -25,8 +25,9 @@ namespace Ol_der.Controls.Orders
         public AddNewOrderControl(int supplierId)
         {
             InitializeComponent();
-            _viewModel = new OrderViewModel(supplierId);
+            _viewModel = new OrderViewModel();
             this.DataContext = _viewModel;
+            _viewModel.SupplierId = supplierId;
         }
     }
 }

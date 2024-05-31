@@ -27,6 +27,8 @@ namespace Ol_der.Controls.Orders
             }
         }
 
+        public int SupplierId { get; set; }
+
         public OrderViewModel()
         {
             _orderRepository = new OrderRepository();
@@ -69,9 +71,16 @@ namespace Ol_der.Controls.Orders
 
         public async Task<Supplier> GetSupplierById(int supplierId)
         {
-            return await _orderRepository.GetSupplierById(supplierId);
+            return await _orderRepository.GetSupplierByIdAsync(supplierId);
         }
 
+
+        public async Task<Order> CreateOrUpdateOrder()
+        {
+            Order newOrder = await _orderRepository.GetLastOrderBySupplierIdAsync(SupplierId);
+
+            return newOrder;
+        }
     }
 
 }

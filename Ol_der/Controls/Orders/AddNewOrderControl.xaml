@@ -6,7 +6,5 @@
              xmlns:local="clr-namespace:Ol_der.Controls.Orders"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Name="supplier" Text="Add New Order" FontSize="20" FontWeight="Bold" Margin="10"/>
-    </Grid>
+    
 </UserControl>

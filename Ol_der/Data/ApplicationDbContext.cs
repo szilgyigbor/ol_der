@@ -24,6 +24,10 @@ namespace Ol_der.Data
             modelBuilder.Entity<SaleItem>()
                 .Property(si => si.Price)
                 .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Order>()
+                .HasIndex(o => new { o.SupplierId, o.OrderDate, o.IsOpen })
+                .HasDatabaseName("IDX_Orders_SupplierId_OrderDate_IsOpen");
         }
 
         public DbSet<Product> Products { get; set; }
