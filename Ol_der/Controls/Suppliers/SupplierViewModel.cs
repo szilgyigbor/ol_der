@@ -30,7 +30,7 @@ namespace Ol_der.Controls.Suppliers
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return context.Suppliers.Any(s => s.Name == name);
+                return context.Suppliers.Where(s => !s.IsDeleted).Any(s => s.Name == name);
             }
         }
 
@@ -38,10 +38,10 @@ namespace Ol_der.Controls.Suppliers
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                var supplier = context.Suppliers.FirstOrDefault(s => s.SupplierId == SupplierId);
-                if (supplier != null)
+                var supplierInDb = context.Suppliers.Find(SupplierId);
+                if (supplierInDb != null)
                 {
-                    context.Suppliers.Remove(supplier);
+                    supplierInDb.IsDeleted = true;
                     context.SaveChanges();
                 }
             }
@@ -67,7 +67,7 @@ namespace Ol_der.Controls.Suppliers
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return context.Suppliers.ToList();
+                return context.Suppliers.Where(s => !s.IsDeleted).ToList();
             }
         }
     }
