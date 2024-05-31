@@ -60,6 +60,10 @@ namespace Ol_der.Controls.Orders
                 return await context.Orders
                     .Where(o => o.SupplierId == supplierId && o.IsOpen)
                     .OrderByDescending(o => o.OrderDate)
+                    .Include(o => o.Supplier)
+                    .Include(o => o.OrderItems)
+                        .ThenInclude(oi => oi.Product)
+                            .ThenInclude(p => p.Supplier)
                     .FirstOrDefaultAsync();
             }
         }

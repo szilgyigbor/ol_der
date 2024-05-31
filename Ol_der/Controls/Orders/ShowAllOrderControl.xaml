@@ -11,10 +11,10 @@
         <ListView x:Name="ProductsListView" Background="White" AlternationCount="2" ItemsSource="{Binding Orders}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Rendelési azonosító" DisplayMemberBinding="{Binding OrderId}" Width="240"/>
-                    <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Supplier.Name}" Width="280"/>
-                    <GridViewColumn Header="Létrehozva" DisplayMemberBinding="{Binding OrderDate, StringFormat='yyyy:mm:dd'}" Width="280"/>
-                    <GridViewColumn Header="Megjegyzés" DisplayMemberBinding="{Binding Comment}" Width="600"/>
+                    <GridViewColumn Header="Azonosító" DisplayMemberBinding="{Binding OrderId}" Width="150"/>
+                    <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Supplier.Name}" Width="250"/>
+                    <GridViewColumn Header="Létrehozva" DisplayMemberBinding="{Binding OrderDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="280"/>
+                    <GridViewColumn Header="Megjegyzés" DisplayMemberBinding="{Binding Comment}" Width="700"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>

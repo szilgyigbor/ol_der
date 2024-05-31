@@ -35,28 +35,18 @@ namespace Ol_der.Controls.Orders
         private async void AddOrder_Click(object sender, RoutedEventArgs e)
         {
             int supplierId = -1;
-            
 
             SelectSupplierWindow dialog = new();
             if (dialog.ShowDialog() == true)
             {
                 supplierId = dialog.supplierId;
             }
-
             
             OrderViewModel viewModel = new();
-
-            viewModel.SupplierId = supplierId;
-
-            Order order = await viewModel.CreateOrUpdateOrder();
-
-            if (order == null)
-            {
-                _addOrderControl = new AddNewOrderControl(supplierId);
-                ContentArea.Content = _addOrderControl;
-            }
-
-
+            Order order = await viewModel.CreateOrUpdateOrder(supplierId);
+           
+            _addOrderControl = new AddNewOrderControl(order, supplierId);
+            ContentArea.Content = _addOrderControl;
         }
 
         private async void ModifyOrder_Click(object sender, RoutedEventArgs e)

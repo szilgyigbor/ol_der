@@ -27,17 +27,10 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public int SupplierId { get; set; }
-
         public OrderViewModel()
         {
             _orderRepository = new OrderRepository();
-
-            Orders = new ObservableCollection<Order>
-        {
-            new Order { OrderId = 1, Supplier = new Supplier { Name = "Supplier 1" }, OrderDate = DateTime.Now, Comment = "First order" },
-            new Order { OrderId = 2, Supplier = new Supplier { Name = "Supplier 2" }, OrderDate = DateTime.Now, Comment = "Second order" }
-        };
+            LoadOrdersAsync();
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -75,9 +68,9 @@ namespace Ol_der.Controls.Orders
         }
 
 
-        public async Task<Order> CreateOrUpdateOrder()
+        public async Task<Order> CreateOrUpdateOrder(int supplierId)
         {
-            Order newOrder = await _orderRepository.GetLastOrderBySupplierIdAsync(SupplierId);
+            Order newOrder = await _orderRepository.GetLastOrderBySupplierIdAsync(supplierId);
 
             return newOrder;
         }
