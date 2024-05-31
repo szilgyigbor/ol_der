@@ -40,7 +40,7 @@ namespace Ol_der.Controls.Sales
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return await context.Products
+                return await context.Products.Where(s => !s.IsDeleted)
                     .FirstOrDefaultAsync(p => p.ItemNumber == itemNumber);
             }
         }

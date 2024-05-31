@@ -15,7 +15,7 @@ namespace Ol_der.Controls.Orders
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return await context.Suppliers.ToListAsync();
+                return await context.Suppliers.Where(s => !s.IsDeleted).ToListAsync();
             }
         }
 

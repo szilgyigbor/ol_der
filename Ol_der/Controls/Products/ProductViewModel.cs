@@ -63,7 +63,7 @@ namespace Ol_der.Controls.Products
             using (var context = ApplicationDbContextFactory.Create())
             {
                 var upperitemNumber = itemNumber.ToUpper();
-                return context.Products.Include(p => p.Supplier)
+                return context.Products.Where(s => !s.IsDeleted).Include(p => p.Supplier)
                               .Where(p => p.ItemNumber.ToUpper().Contains(upperitemNumber))
                               .ToList();
             }
@@ -94,7 +94,7 @@ namespace Ol_der.Controls.Products
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return context.Suppliers.ToList();
+                return context.Suppliers.Where(s => !s.IsDeleted).ToList();
             }
         }
 
