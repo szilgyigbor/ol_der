@@ -20,20 +20,13 @@ namespace Ol_der.Controls.Orders
     /// </summary>
     public partial class AddNewOrderControl : UserControl
     {
-        private int _selectedSupplierId;
+        private OrderViewModel _viewModel;
 
-        public AddNewOrderControl(int selectedSupplierId)
+        public AddNewOrderControl(int supplierId)
         {
             InitializeComponent();
-            _selectedSupplierId = selectedSupplierId;
-            showSupplier();
-        }
-
-        private void showSupplier() 
-        {
-            string selectedSupplier = _selectedSupplierId.ToString();
-
-            supplier.Text = $"Supplier: {selectedSupplier}";
+            _viewModel = new OrderViewModel(supplierId);
+            this.DataContext = _viewModel;
         }
     }
 }

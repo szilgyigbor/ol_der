@@ -35,13 +35,14 @@ namespace Ol_der.Controls.Orders
         {
             int supplierId = -1;
 
-            SelectSupplierWindow dialog = new SelectSupplierWindow();
+            SelectSupplierWindow dialog = new();
             if (dialog.ShowDialog() == true)
             {
                 supplierId = dialog.supplierId;
             }
 
             _addOrderControl = new AddNewOrderControl(supplierId);
+
             ContentArea.Content = _addOrderControl;
 
         }

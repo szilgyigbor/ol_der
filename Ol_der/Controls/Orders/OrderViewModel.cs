@@ -15,6 +15,7 @@ namespace Ol_der.Controls.Orders
         public event PropertyChangedEventHandler PropertyChanged;
 
         private OrderRepository _orderRepository;
+        private int _supplierId;
 
         private ObservableCollection<Order> _orders;
         public ObservableCollection<Order> Orders
@@ -27,7 +28,7 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public OrderViewModel()
+        public OrderViewModel(int supplierId)
         {
             _orderRepository = new OrderRepository();
 
@@ -36,6 +37,7 @@ namespace Ol_der.Controls.Orders
             new Order { OrderId = 1, Supplier = new Supplier { Name = "Supplier 1" }, OrderDate = DateTime.Now, Comment = "First order" },
             new Order { OrderId = 2, Supplier = new Supplier { Name = "Supplier 2" }, OrderDate = DateTime.Now, Comment = "Second order" }
         };
+            _supplierId = supplierId;
         }
 
         protected void OnPropertyChanged(string propertyName)
