@@ -26,5 +26,31 @@ namespace Ol_der.Controls.Orders
                 return await context.Orders.Include(o => o.Supplier).ToListAsync();
             }
         }
+
+        public async Task AddOrderAsync(Order newOrder)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Orders.Add(newOrder);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteOrderAsync(Order order)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Orders.Remove(order);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<Supplier> GetSupplierById(int supplierId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Suppliers.FindAsync(supplierId);
+            }
+        }
     }
 }
