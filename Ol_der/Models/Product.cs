@@ -16,5 +16,6 @@ namespace Ol_der.Models
         public string Name { get; set; }
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }
