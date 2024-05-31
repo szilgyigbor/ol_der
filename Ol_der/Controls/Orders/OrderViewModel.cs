@@ -15,7 +15,6 @@ namespace Ol_der.Controls.Orders
         public event PropertyChangedEventHandler PropertyChanged;
 
         private OrderRepository _orderRepository;
-        private int _supplierId;
 
         private ObservableCollection<Order> _orders;
         public ObservableCollection<Order> Orders
@@ -28,7 +27,7 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public OrderViewModel(int supplierId)
+        public OrderViewModel()
         {
             _orderRepository = new OrderRepository();
 
@@ -37,7 +36,6 @@ namespace Ol_der.Controls.Orders
             new Order { OrderId = 1, Supplier = new Supplier { Name = "Supplier 1" }, OrderDate = DateTime.Now, Comment = "First order" },
             new Order { OrderId = 2, Supplier = new Supplier { Name = "Supplier 2" }, OrderDate = DateTime.Now, Comment = "Second order" }
         };
-            _supplierId = supplierId;
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -55,6 +53,23 @@ namespace Ol_der.Controls.Orders
         {
             var orders = await _orderRepository.GetAllOrderAsync();
             Orders = new ObservableCollection<Order>(orders);
+        }
+
+        public async Task AddOrderAsync(Order newOrder)
+        {
+            await _orderRepository.AddOrderAsync(newOrder);
+            await LoadOrdersAsync();
+        }
+
+        public async Task DeleteOrderAsync(Order order)
+        {
+            await _orderRepository.DeleteOrderAsync(order);
+            await LoadOrdersAsync();
+        }
+
+        public async Task<Supplier> GetSupplierById(int supplierId)
+        {
+            return await _orderRepository.GetSupplierById(supplierId);
         }
 
     }
