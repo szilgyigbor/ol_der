@@ -73,8 +73,12 @@ namespace Ol_der.Controls.Products
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                context.Products.Remove(product);
-                context.SaveChanges();
+                var productInDb = context.Products.Find(product.ProductId);
+                if (productInDb != null)
+                {
+                    productInDb.IsDeleted = true;
+                    context.SaveChanges();
+                }
             }
         }
 
@@ -82,7 +86,7 @@ namespace Ol_der.Controls.Products
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return context.Products.Include(p => p.Supplier).ToList();
+                return context.Products.Where(p => !p.IsDeleted).Include(p => p.Supplier).ToList();
             }
         }
 
@@ -98,7 +102,7 @@ namespace Ol_der.Controls.Products
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return context.Products.Count();
+                return context.Products.Where(p => !p.IsDeleted).Count();
             }
         }
     }
