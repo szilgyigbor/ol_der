@@ -53,7 +53,7 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public async Task<Order> GetLastOrderBySupplierIdAsync(int supplierId)
+        public async Task<Order> GetLastOpenOrderBySupplierIdAsync(int supplierId)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
@@ -65,6 +65,40 @@ namespace Ol_der.Controls.Orders
                         .ThenInclude(oi => oi.Product)
                             .ThenInclude(p => p.Supplier)
                     .FirstOrDefaultAsync();
+            }
+        }
+
+        public async Task<Order> GetLastOpenOrderByOrderIdIdAsync(int orderId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Orders
+                    .Where(o => o.OrderId == orderId && o.IsOpen)
+                    .OrderByDescending(o => o.OrderDate)
+                    .Include(o => o.Supplier)
+                    .Include(o => o.OrderItems)
+                        .ThenInclude(oi => oi.Product)
+                            .ThenInclude(p => p.Supplier)
+                    .FirstOrDefaultAsync();
+            }
+        }
+
+
+        public async Task<Product> SearchProductByItemNumberAsync(string itemNumber)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Products.Where(s => !s.IsDeleted)
+                    .FirstOrDefaultAsync(p => p.ItemNumber == itemNumber);
+            }
+        }
+
+        public async Task UpdateOrderAsync(Order order)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Orders.Update(order);
+                await context.SaveChangesAsync(); 
             }
         }
     }

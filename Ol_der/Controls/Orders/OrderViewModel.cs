@@ -68,11 +68,18 @@ namespace Ol_der.Controls.Orders
         }
 
 
-        public async Task<Order> CreateOrUpdateOrder(int supplierId)
+        public async Task<Order> GetLastOpenOrderBySupplierIdAsync(int supplierId)
         {
-            Order newOrder = await _orderRepository.GetLastOrderBySupplierIdAsync(supplierId);
+            Order OrderToModify = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(supplierId);
 
-            return newOrder;
+            return OrderToModify;
+        }
+
+        public async Task<Order> GetLastOpenOrderByOrderIdIdAsync(int orderId)
+        {
+            Order OrderToModify = await _orderRepository.GetLastOpenOrderByOrderIdIdAsync(orderId);
+
+            return OrderToModify;
         }
     }
 

@@ -43,7 +43,7 @@ namespace Ol_der.Controls.Orders
             }
             
             OrderViewModel viewModel = new();
-            Order order = await viewModel.CreateOrUpdateOrder(supplierId);
+            Order order = await viewModel.GetLastOpenOrderBySupplierIdAsync(supplierId);
            
             _addOrderControl = new AddNewOrderControl(order, supplierId);
             ContentArea.Content = _addOrderControl;
@@ -51,20 +51,30 @@ namespace Ol_der.Controls.Orders
 
         private async void ModifyOrder_Click(object sender, RoutedEventArgs e)
         {
-            /*ContentArea.Content = _showAllSaleControl;
-            int saleId = _showAllSaleControl.SaleIdToModify();
+            ContentArea.Content = _showAllOrderControl;
+            int orderId = _showAllOrderControl.OrderIdToModify();
 
-            if (saleId != -1)
+            if (orderId != -1)
             {
-                _addSaleControl = new AddNewSaleControl();
-                await _addSaleControl.LoadExistsSale(saleId);
-                ContentArea.Content = _addSaleControl;
+                OrderViewModel viewModel = new();
+                Order order = await viewModel.GetLastOpenOrderByOrderIdIdAsync(orderId);
+
+                if (order == null)
+                {
+                    MessageBoxWindow messageBoxWindow = new("A kiválasztott rendelés már le van zárva!");
+                    messageBoxWindow.ShowDialog();
+                    return;
+                }
+
+                _addOrderControl = new AddNewOrderControl(order, order.SupplierId);
+                ContentArea.Content = _addOrderControl;
             }
 
             else
             {
-                MessageBox.Show("Válassz ki egy eladást a módosításhoz!");
-            }*/
+                MessageBoxWindow messageBoxWindow1 = new("Válassz ki egy rendelést a módosításhoz!");
+                messageBoxWindow1.ShowDialog();
+            }
         }
 
         private async Task ShowAllOrder(int limit = 100)
