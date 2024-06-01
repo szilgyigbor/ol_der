@@ -41,6 +41,8 @@ namespace Ol_der.Controls.Orders
             {
                 supplierId = dialog.supplierId;
             }
+
+            else return;
             
             OrderViewModel viewModel = new();
             Order order = await viewModel.GetLastOpenOrderBySupplierIdAsync(supplierId);
@@ -57,7 +59,7 @@ namespace Ol_der.Controls.Orders
             if (orderId != -1)
             {
                 OrderViewModel viewModel = new();
-                Order order = await viewModel.GetLastOpenOrderByOrderIdIdAsync(orderId);
+                Order order = await viewModel.GetLastOpenOrderByOrderIdAsync(orderId);
 
                 if (order == null)
                 {

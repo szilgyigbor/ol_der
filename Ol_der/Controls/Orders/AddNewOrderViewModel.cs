@@ -102,7 +102,7 @@ namespace Ol_der.Controls.Orders
         {
             if (Order == null)
             {
-                string message = "Nincs nyitott rendelés ehhez a beszállítóhoz, újat kezdjünk?";
+                string message = "Nincs nyitott rendelés ehhez a beszállítóhoz, újat kezdjünk!";
 
                 MessageBoxWindow messageBoxWindow = new(message);
 

@@ -75,9 +75,9 @@ namespace Ol_der.Controls.Orders
             return OrderToModify;
         }
 
-        public async Task<Order> GetLastOpenOrderByOrderIdIdAsync(int orderId)
+        public async Task<Order> GetLastOpenOrderByOrderIdAsync(int orderId)
         {
-            Order OrderToModify = await _orderRepository.GetLastOpenOrderByOrderIdIdAsync(orderId);
+            Order OrderToModify = await _orderRepository.GetLastOpenOrderByOrderIdAsync(orderId);
 
             return OrderToModify;
         }

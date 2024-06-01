@@ -23,7 +23,7 @@ namespace Ol_der.Controls.Orders
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return await context.Orders.Include(o => o.Supplier).ToListAsync();
+                return await context.Orders.OrderByDescending(o => o.OrderDate).Include(o => o.Supplier).ToListAsync();
             }
         }
 
@@ -68,7 +68,7 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public async Task<Order> GetLastOpenOrderByOrderIdIdAsync(int orderId)
+        public async Task<Order> GetLastOpenOrderByOrderIdAsync(int orderId)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
