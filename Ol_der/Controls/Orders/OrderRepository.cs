@@ -101,5 +101,24 @@ namespace Ol_der.Controls.Orders
                 await context.SaveChangesAsync(); 
             }
         }
+
+        public async Task UpdateOrderItemAsync(OrderItem orderItem)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.OrderItems.Update(orderItem);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task RemoveOrderItemAsync(OrderItem orderItem)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.OrderItems.Remove(orderItem);
+                await context.SaveChangesAsync();
+            }
+        }
+
     }
 }

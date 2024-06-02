@@ -20,6 +20,7 @@ namespace Ol_der.Controls.Orders
         private int _supplierId;
         private string _productDescription;
         private string _quantity;
+        private OrderItem _selectedOrderItem;
 
         public OrderItem OrderItem { get; set; }
 
@@ -77,6 +78,17 @@ namespace Ol_der.Controls.Orders
             }
         }
 
+        public OrderItem SelectedOrderItem
+        {
+            get { return _selectedOrderItem; }
+            set
+            {
+                _selectedOrderItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public ICommand SearchProductCommand { get; }
 
         public ICommand AddItemCommand { get; }
@@ -84,6 +96,8 @@ namespace Ol_der.Controls.Orders
         public ICommand SaveCommentCommand { get; }
 
         public ICommand UpdateOrderCommand { get; }
+
+        public ICommand DeleteOrderItemFromOrderCommand { get; }
 
         public AddNewOrderViewModel(Order order, int supplierId)
         {
@@ -94,6 +108,7 @@ namespace Ol_der.Controls.Orders
             AddItemCommand = new RelayCommand(param => AddItemToOrder());
             SaveCommentCommand = new RelayCommand(param => SaveComment());
             UpdateOrderCommand = new RelayCommand(param => UpdateOrder());
+            DeleteOrderItemFromOrderCommand = new RelayCommand(param => DeleteOrderItemFromOrder());
             CheckOrder();
         }
 
@@ -243,9 +258,6 @@ namespace Ol_der.Controls.Orders
             messageBoxWindow2.ShowDialog();
 
             Order = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(_supplierId);
-
-            OnPropertyChanged();
-
         }
 
         public async Task SaveComment()
@@ -301,6 +313,31 @@ namespace Ol_der.Controls.Orders
 
             MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen elmentve!");
             messageBoxOkWindow.ShowDialog();
+        }
+
+        public async Task DeleteOrderItemFromOrder()
+        {
+            if (SelectedOrderItem == null)
+            {
+                MessageBoxOkWindow messageBoxWindow0 = new("Előbb válassz ki egy tételt!");
+                messageBoxWindow0.ShowDialog();
+                return;
+            }
+
+            MessageBoxWindow messageBoxWindow = new("Biztosan törölni akarod a tételt?");
+            messageBoxWindow.ShowDialog();
+
+            if (messageBoxWindow.DialogResult != true)
+            {
+                return;
+            }
+
+            await _orderRepository.RemoveOrderItemAsync(SelectedOrderItem);
+
+            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen törölve!");
+            messageBoxOkWindow.ShowDialog();
+
+            Order = await _orderRepository.GetLastOpenOrderByOrderIdAsync(Order.OrderId);
         }
     }
 }
