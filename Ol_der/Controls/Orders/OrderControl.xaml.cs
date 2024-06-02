@@ -63,7 +63,7 @@ namespace Ol_der.Controls.Orders
 
                 if (order == null)
                 {
-                    MessageBoxWindow messageBoxWindow = new("A kiválasztott rendelés már le van zárva!");
+                    MessageBoxOkWindow messageBoxWindow = new("A kiválasztott rendelés már le van zárva!");
                     messageBoxWindow.ShowDialog();
                     return;
                 }
@@ -74,7 +74,7 @@ namespace Ol_der.Controls.Orders
 
             else
             {
-                MessageBoxWindow messageBoxWindow1 = new("Válassz ki egy rendelést a módosításhoz!");
+                MessageBoxOkWindow messageBoxWindow1 = new("Válassz ki egy rendelést a módosításhoz!");
                 messageBoxWindow1.ShowDialog();
             }
         }
