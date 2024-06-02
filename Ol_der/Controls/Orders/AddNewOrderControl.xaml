@@ -51,7 +51,9 @@
                 <TextBox Text="{Binding Order.Comment, Mode=TwoWay}" Width="400" AcceptsReturn="True" TextWrapping="Wrap" Height="75" VerticalScrollBarVisibility="Auto"/>
                 <Button Content="Mentés" Command="{Binding SaveCommentCommand}" Width="100" Margin="0 10 0 0" Padding="5"/>
             </StackPanel>
-            
+
+            <Button Content="Rendelés firssítése (mentés)" Command="{Binding UpdateOrderCommand}" Width="250" Margin="0 20 0 0" Padding="5"/>
+
         </StackPanel>
 
         <ListView ItemsSource="{Binding Order.OrderItems}" Grid.Row="1" Grid.Column="1" Margin="10">

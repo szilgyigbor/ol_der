@@ -83,6 +83,8 @@ namespace Ol_der.Controls.Orders
 
         public ICommand SaveCommentCommand { get; }
 
+        public ICommand UpdateOrderCommand { get; }
+
         public AddNewOrderViewModel(Order order, int supplierId)
         {
             _orderRepository = new OrderRepository();
@@ -91,6 +93,7 @@ namespace Ol_der.Controls.Orders
             SearchProductCommand = new RelayCommand(param => SearchProduct());
             AddItemCommand = new RelayCommand(param => AddItemToOrder());
             SaveCommentCommand = new RelayCommand(param => SaveComment());
+            UpdateOrderCommand = new RelayCommand(param => UpdateOrder());
             CheckOrder();
         }
 
@@ -104,38 +107,19 @@ namespace Ol_der.Controls.Orders
             if (Order == null)
             {
                 string message = "Nincs nyitott rendelés ehhez a beszállítóhoz, újat kezdjünk!";
-
-                MessageBoxWindow messageBoxWindow = new(message);
-
+                MessageBoxOkWindow messageBoxWindow = new(message);
                 messageBoxWindow.ShowDialog();
-
-                if (messageBoxWindow.DialogResult == true)
-                {
-                    Title = "Új rendelés kezelése";
-                    Order newOrder = await CreateOrderAsync();
-
-                    Order = newOrder;
-                }
-                else
-                {
-                    return;
-                }
+                Title = "Új rendelés kezelése";
+                Order newOrder = await CreateOrderAsync();
+                Order = newOrder;
                 
             }
             else
             {
                 string message = "A kiválasztott (beszállítóhoz tartozó) rendelés módosítása!";
-                MessageBoxWindow messageBoxWindow = new(message);
+                MessageBoxOkWindow messageBoxWindow = new(message);
                 messageBoxWindow.ShowDialog();
-                if (messageBoxWindow.DialogResult == true)
-                {
-                    Title = "Rendelés módosítása";
-                }
-                else
-                {
-                    return;
-                }
-
+                Title = "Rendelés módosítása";
             }
         }
 
@@ -164,7 +148,7 @@ namespace Ol_der.Controls.Orders
             {
                 if (product.SupplierId != _supplierId)
                 {
-                    MessageBoxWindow messageBoxWindow = new("Nem ehhez a beszállítóhoz tartozik a termék!");
+                    MessageBoxOkWindow messageBoxWindow = new("Nem ehhez a beszállítóhoz tartozik a termék!");
                     messageBoxWindow.ShowDialog();
                     return;
                 }
@@ -187,7 +171,7 @@ namespace Ol_der.Controls.Orders
             }
             else
             {
-                MessageBoxWindow messageBoxWindow = new("Nincs ilyen termék!");
+                MessageBoxOkWindow messageBoxWindow = new("Nincs ilyen termék!");
                 messageBoxWindow.ShowDialog();
             }
         }
@@ -196,21 +180,21 @@ namespace Ol_der.Controls.Orders
         {
             if (ItemNumber == null)
             {
-                MessageBoxWindow messageBoxWindow = new("Előbb adj hozzá egy terméket");
+                MessageBoxOkWindow messageBoxWindow = new("Előbb adj hozzá egy terméket");
                 messageBoxWindow.ShowDialog();
                 return;
             }
 
             if (string.IsNullOrEmpty(Quantity))
             {
-                MessageBoxWindow messageBoxWindow = new("Nem adtál meg mennyiséget!");
+                MessageBoxOkWindow messageBoxWindow = new("Nem adtál meg mennyiséget!");
                 messageBoxWindow.ShowDialog();
                 return;
             }
 
             if (!int.TryParse(Quantity, out int quantity))
             {
-                MessageBoxWindow messageBoxWindow = new("Nem számot adtál meg!");
+                MessageBoxOkWindow messageBoxWindow = new("Nem számot adtál meg!");
                 messageBoxWindow.ShowDialog();
                 return;
             }
@@ -223,7 +207,7 @@ namespace Ol_der.Controls.Orders
         {
             if (OrderItem == null)
             {
-                MessageBoxWindow messageBoxWindow1 = new("Előbb adj hozzá egy terméket");
+                MessageBoxOkWindow messageBoxWindow1 = new("Előbb adj hozzá egy terméket");
                 messageBoxWindow1.ShowDialog();
                 return;
             }
@@ -251,7 +235,7 @@ namespace Ol_der.Controls.Orders
 
             await _orderRepository.UpdateOrderAsync(Order);
 
-            MessageBoxWindow messageBoxWindow2 = new("Sikeresen hozzáadva!");
+            MessageBoxOkWindow messageBoxWindow2 = new("Sikeresen hozzáadva!");
             messageBoxWindow2.ShowDialog();
 
             Order = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(_supplierId);
@@ -269,6 +253,45 @@ namespace Ol_der.Controls.Orders
             {
                 return;
             }
+
+            await _orderRepository.UpdateOrderAsync(Order);
+
+            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen elmentve!");
+            messageBoxOkWindow.ShowDialog();
+        }
+
+        public async Task UpdateOrder()
+        {
+            MessageBoxWindow messageBoxWindow = new("Biztosan el akarod menteni a rendelést?");
+            messageBoxWindow.ShowDialog();
+
+            if (messageBoxWindow.DialogResult != true)
+            {
+                return;
+            }
+
+            Order.OrderDate = DateTime.Now;
+
+            await _orderRepository.UpdateOrderAsync(Order);
+
+            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen elmentve!");
+            messageBoxOkWindow.ShowDialog();
+        }
+
+
+
+        public async Task CloseAndSaveOrder()
+        {
+            MessageBoxWindow messageBoxWindow = new("Biztosan el akarod menteni a rendelést?");
+            messageBoxWindow.ShowDialog();
+
+            if (messageBoxWindow.DialogResult != true)
+            {
+                return;
+            }
+
+            Order.IsOpen = false;
+            Order.OrderDate = DateTime.Now;
 
             await _orderRepository.UpdateOrderAsync(Order);
 
