@@ -176,30 +176,31 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public void CheckQuantity() 
+        public bool CheckQuantity() 
         {
             if (ItemNumber == null)
             {
                 MessageBoxOkWindow messageBoxWindow = new("Előbb adj hozzá egy terméket");
                 messageBoxWindow.ShowDialog();
-                return;
+                return false;
             }
 
             if (string.IsNullOrEmpty(Quantity))
             {
                 MessageBoxOkWindow messageBoxWindow = new("Nem adtál meg mennyiséget!");
                 messageBoxWindow.ShowDialog();
-                return;
+                return false;
             }
 
             if (!int.TryParse(Quantity, out int quantity))
             {
                 MessageBoxOkWindow messageBoxWindow = new("Nem számot adtál meg!");
                 messageBoxWindow.ShowDialog();
-                return;
+                return false;
             }
 
             OrderItem.QuantityOrdered = quantity;
+            return true;
         }
 
 
@@ -220,7 +221,10 @@ namespace Ol_der.Controls.Orders
                 return;
             }
 
-            CheckQuantity();
+            if (CheckQuantity() == false)
+            {
+                return;
+            }
 
             var existingItem = Order.OrderItems.FirstOrDefault(oi => oi.ProductId == OrderItem.ProductId);
 
