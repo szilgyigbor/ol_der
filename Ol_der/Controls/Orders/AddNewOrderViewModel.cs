@@ -81,6 +81,8 @@ namespace Ol_der.Controls.Orders
 
         public ICommand AddItemCommand { get; }
 
+        public ICommand SaveCommentCommand { get; }
+
         public AddNewOrderViewModel(Order order, int supplierId)
         {
             _orderRepository = new OrderRepository();
@@ -88,6 +90,7 @@ namespace Ol_der.Controls.Orders
             _supplierId = supplierId;
             SearchProductCommand = new RelayCommand(param => SearchProduct());
             AddItemCommand = new RelayCommand(param => AddItemToOrder());
+            SaveCommentCommand = new RelayCommand(param => SaveComment());
             CheckOrder();
         }
 
@@ -255,6 +258,19 @@ namespace Ol_der.Controls.Orders
 
             OnPropertyChanged();
 
+        }
+
+        public async Task SaveComment()
+        {
+            MessageBoxWindow messageBoxWindow = new("Biztosan el akarod menteni a megjegyzést?");
+            messageBoxWindow.ShowDialog();
+
+            if (messageBoxWindow.DialogResult != true)
+            {
+                return;
+            }
+
+            await _orderRepository.UpdateOrderAsync(Order);
         }
     }
 }
