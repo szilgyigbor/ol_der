@@ -79,7 +79,6 @@ namespace Ol_der.Controls.Orders
 
         public ICommand SearchProductCommand { get; }
 
-        public ICommand SetQuantityCommand { get; }
         public ICommand AddItemCommand { get; }
 
         public AddNewOrderViewModel(Order order, int supplierId)
@@ -88,7 +87,6 @@ namespace Ol_der.Controls.Orders
             Order = order;
             _supplierId = supplierId;
             SearchProductCommand = new RelayCommand(param => SearchProduct());
-            SetQuantityCommand = new RelayCommand(param => SetQuantity());
             AddItemCommand = new RelayCommand(param => AddItemToOrder());
             CheckOrder();
         }
@@ -191,7 +189,7 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public async Task SetQuantity() 
+        public void CheckQuantity() 
         {
             if (ItemNumber == null)
             {
@@ -220,7 +218,6 @@ namespace Ol_der.Controls.Orders
 
         public async Task AddItemToOrder()
         {
-
             if (OrderItem == null)
             {
                 MessageBoxWindow messageBoxWindow1 = new("Előbb adj hozzá egy terméket");
@@ -235,7 +232,8 @@ namespace Ol_der.Controls.Orders
             {
                 return;
             }
-                
+
+            CheckQuantity();
 
             var existingItem = Order.OrderItems.FirstOrDefault(oi => oi.ProductId == OrderItem.ProductId);
 

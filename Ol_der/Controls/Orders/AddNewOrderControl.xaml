@@ -22,55 +22,29 @@
                    Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
-            <Grid Margin="0 0 0 10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Termék beállítása" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0"/>
-                <TextBlock Text="Cikkszám:" Grid.Row="1" Grid.Column="0" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <StackPanel Grid.Row="2" Grid.Column="0" >
-                    <TextBox x:Name="txtItemNumber" Text="{Binding ItemNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="150" />
-                    <Button Content="Keresés" Command="{Binding SearchProductCommand}" Width="100" Margin="0 5" Padding="5"/>
-                </StackPanel>
+            <TextBlock Text="Termék beállítása" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0"/>
+            
 
-                <TextBlock Text="Mennyiség:" Grid.Row="1" Grid.Column="1" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                <StackPanel Grid.Row="2" Grid.Column="1" >
-                    <WrapPanel Grid.Column="1" HorizontalAlignment="Center">
-                        <TextBox x:Name="txtItemQuantity" Text="{Binding Quantity}"  Margin="5" Width="80" />
-                        <TextBlock Text="db" VerticalAlignment="Center"/>
-                    </WrapPanel>
-                    <Button Content="Beállítás" Command="{Binding SetQuantityCommand}" Width="100" Margin="0 5" Padding="5"/>
-                </StackPanel>
+            <WrapPanel Grid.Row="5" HorizontalAlignment="Center">
+                <Label Content="Keresett cikkszám:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtItemNumber" Text="{Binding ItemNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200"/>
+            </WrapPanel>
 
-            </Grid>
+            <WrapPanel Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Keresés" Command="{Binding SearchProductCommand}" Background="#E5F0F9" Margin="5 5 25 5" Width="220" FontSize="22"/>
+            </WrapPanel>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
+                <TextBlock Text="db" Width="40"/>
+                <TextBlock Text="{Binding ProductDescription}" Background="White" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="20"/>
+            </StackPanel>
 
-                <TextBlock Text="Termék hozzáadása" Grid.Row="0" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Padding="0 0 0 20"/>
-                <WrapPanel Margin="20">
-                    <TextBlock Text="{Binding Quantity}" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="10" Padding="5"/>
-                    <TextBlock Text="{Binding ProductDescription}" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="20" Margin="10" Padding="5"/>
-                    
-                </WrapPanel>
-                <StackPanel Grid.Row="2">
-                    <Button Content="Hozzáadás" Command="{Binding AddItemCommand}" Width="100" Margin="0" Padding="5"/>
-                </StackPanel>
-            </Grid>
+            <StackPanel Grid.Row="2">
+                <Button Content="Hozzáadás a rendeléshez" Command="{Binding AddItemCommand}" Width="240" Margin="0 20 0 0" Padding="5"/>
+            </StackPanel>
+
         </StackPanel>
 
         <ListView ItemsSource="{Binding Order.OrderItems}" Grid.Row="1" Grid.Column="1" Margin="10">
