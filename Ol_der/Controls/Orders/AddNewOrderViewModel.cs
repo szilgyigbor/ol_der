@@ -271,6 +271,9 @@ namespace Ol_der.Controls.Orders
             }
 
             await _orderRepository.UpdateOrderAsync(Order);
+
+            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen elmentve!");
+            messageBoxOkWindow.ShowDialog();
         }
     }
 }
