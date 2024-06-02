@@ -57,7 +57,7 @@
                 <Button Content="Mentés" Command="{Binding SaveCommentCommand}" Width="100" Margin="0 10 0 0" Padding="5"/>
             </StackPanel>
 
-            <Button Content="Rendelés firssítése (mentés)" Command="{Binding UpdateOrderCommand}" Width="250" Margin="0 20 0 0" Padding="5"/>
+            <Button Content="Rendelés frissítése (mentés)" Command="{Binding UpdateOrderCommand}" Width="250" Margin="0 20 0 0" Padding="5"/>
 
         </StackPanel>
 
@@ -65,7 +65,7 @@
                   SelectedItem="{Binding SelectedOrderItem, Mode=TwoWay}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Mennyiség" DisplayMemberBinding="{Binding QuantityOrdered}" Width="80"/>
+                    <GridViewColumn Header="Mennyiség" DisplayMemberBinding="{Binding QuantityOrdered}" Width="100"/>
                     <GridViewColumn Header="Cikkszám" DisplayMemberBinding="{Binding Product.ItemNumber}" Width="180"/>
                     <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Product.Name}" Width="600"/>
                 </GridView>
