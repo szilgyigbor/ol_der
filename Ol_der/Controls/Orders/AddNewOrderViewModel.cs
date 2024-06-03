@@ -84,6 +84,9 @@ namespace Ol_der.Controls.Orders
             set
             {
                 _selectedOrderItem = value;
+                Quantity = _selectedOrderItem?.QuantityOrdered.ToString();
+                ProductDescription = "";
+                ProductDescription += SelectedOrderItem.Product.ItemNumber + "   " + SelectedOrderItem.Product.Name;
                 OnPropertyChanged();
             }
         }
@@ -99,6 +102,8 @@ namespace Ol_der.Controls.Orders
 
         public ICommand DeleteOrderItemFromOrderCommand { get; }
 
+        public ICommand UpdateQuantityOfOrderItemCommand { get; }
+
         public AddNewOrderViewModel(Order order, int supplierId)
         {
             _orderRepository = new OrderRepository();
@@ -109,6 +114,7 @@ namespace Ol_der.Controls.Orders
             SaveCommentCommand = new RelayCommand(param => SaveComment());
             UpdateOrderCommand = new RelayCommand(param => UpdateOrder());
             DeleteOrderItemFromOrderCommand = new RelayCommand(param => DeleteOrderItemFromOrder());
+            UpdateQuantityOfOrderItemCommand = new RelayCommand(param => UpdateQuantityOfOrderItem());
             CheckOrder();
         }
 
@@ -193,12 +199,6 @@ namespace Ol_der.Controls.Orders
 
         public bool CheckQuantity() 
         {
-            if (ItemNumber == null)
-            {
-                MessageBoxOkWindow messageBoxWindow = new("Előbb adj hozzá egy terméket");
-                messageBoxWindow.ShowDialog();
-                return false;
-            }
 
             if (string.IsNullOrEmpty(Quantity))
             {
@@ -214,7 +214,11 @@ namespace Ol_der.Controls.Orders
                 return false;
             }
 
-            OrderItem.QuantityOrdered = quantity;
+            if (OrderItem != null) 
+            {
+                OrderItem.QuantityOrdered = quantity;
+            }
+            
             return true;
         }
 
@@ -335,6 +339,39 @@ namespace Ol_der.Controls.Orders
             await _orderRepository.RemoveOrderItemAsync(SelectedOrderItem);
 
             MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen törölve!");
+            messageBoxOkWindow.ShowDialog();
+
+            Order = await _orderRepository.GetLastOpenOrderByOrderIdAsync(Order.OrderId);
+        }
+
+        public async Task UpdateQuantityOfOrderItem()
+        {
+            if (SelectedOrderItem == null)
+            {
+                MessageBoxOkWindow messageBoxWindow0 = new("Előbb válassz ki egy tételt!");
+                messageBoxWindow0.ShowDialog();
+                return;
+            }
+
+            MessageBoxWindow messageBoxWindow = new("Biztosan módosítani akarod a darabszámot?");
+            messageBoxWindow.ShowDialog();
+
+            if (messageBoxWindow.DialogResult != true)
+            {
+                return;
+            }
+
+            if (CheckQuantity() == false)
+            {
+                return;
+            }
+
+
+            SelectedOrderItem.QuantityOrdered = int.Parse(Quantity);
+
+            await _orderRepository.UpdateOrderItemQuantityOrderedAsync(SelectedOrderItem.OrderItemId, int.Parse(Quantity));
+
+            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen módosítva!");
             messageBoxOkWindow.ShowDialog();
 
             Order = await _orderRepository.GetLastOpenOrderByOrderIdAsync(Order.OrderId);

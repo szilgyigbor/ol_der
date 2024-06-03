@@ -102,12 +102,14 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public async Task UpdateOrderItemAsync(OrderItem orderItem)
+        public async Task UpdateOrderItemQuantityOrderedAsync(int orderItemId, int quantity)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                context.OrderItems.Update(orderItem);
+                var orderItem = await context.OrderItems.FindAsync(orderItemId);
+                orderItem.QuantityOrdered = quantity;
                 await context.SaveChangesAsync();
+                
             }
         }
 
