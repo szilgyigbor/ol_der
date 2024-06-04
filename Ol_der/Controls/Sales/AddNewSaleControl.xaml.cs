@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ol_der.Data;
 using Ol_der.Models;
+using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,7 +86,10 @@ namespace Ol_der.Controls.Sales
 
             else if (lstSaleItems.SelectedItem == null)
             {
-                MessageBox.Show("Nincs kiválasztott elem!");
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Nincs kiválasztott elem!");
+                messageBoxOkWindow.ShowDialog();
+
+
             }
         }
 
@@ -118,7 +122,8 @@ namespace Ol_der.Controls.Sales
             var itemNumber = txtItemNumber.Text;
             if (string.IsNullOrWhiteSpace(itemNumber))
             {
-                MessageBox.Show("Írd be a cikkszámot, amit hozzá akarsz adni!");
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Írd be a cikkszámot, amit hozzá akarsz adni!");
+                messageBoxOkWindow.ShowDialog();
                 return;
             }
 
@@ -138,13 +143,22 @@ namespace Ol_der.Controls.Sales
 
                 if (productAlreadyAdded)
                 {
-                    MessageBoxResult result = MessageBox.Show("Ez a termék már szerepel a listában, újból hozzáadjam?", "Termék Ellenőrzés", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                    MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Ez a termék már szerepel a listában, újból hozzáadjam?");
+                    messageBoxWindow.ShowDialog();
+
+                    if (messageBoxWindow.DialogResult != true)
+                    {
+                        txtItemNumber.Text = "";
+                        return;
+                    }
+
+                    /*MessageBoxResult result = MessageBox.Show("Ez a termék már szerepel a listában, újból hozzáadjam?", "Termék Ellenőrzés", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
                     if (result != MessageBoxResult.OK)
                     {
                         txtItemNumber.Text = "";
                         return;
-                    }
+                    }*/
                 }
 
                 var saleItem = new SaleItem
@@ -160,7 +174,8 @@ namespace Ol_der.Controls.Sales
             }
             else
             {
-                MessageBox.Show("Nincs ilyen termék!");
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Nincs ilyen termék!");
+                messageBoxOkWindow.ShowDialog();
             }
         }
 
@@ -168,12 +183,21 @@ namespace Ol_der.Controls.Sales
         {
             string saveOrModify = _saleId < 0 ? "menteni" : "módosítani";
 
-            MessageBoxResult result = MessageBox.Show($"Biztosan {saveOrModify} akarod az eladást?", "Eladás mentése", MessageBoxButton.YesNo);
+            MessageBoxWindow messageBoxWindow = new MessageBoxWindow($"Biztosan {saveOrModify} akarod az eladást?");
+            messageBoxWindow.ShowDialog();
+
+            if (messageBoxWindow.DialogResult != true)
+            {
+                return;
+            }
+
+
+            /*MessageBoxResult result = MessageBox.Show($"Biztosan {saveOrModify} akarod az eladást?", "Eladás mentése", MessageBoxButton.YesNo);
 
             if (result == MessageBoxResult.No)
             {
                 return;
-            }
+            }*/
 
             await SaveSale();
             ClearFields();
@@ -209,7 +233,9 @@ namespace Ol_der.Controls.Sales
                     });
                 }
                 await _saleViewModel.UpdateSaleAsync(_saleToSave);
-                MessageBox.Show("Eladás sikeresen módosítva!");
+
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Eladás sikeresen módosítva!");
+                messageBoxOkWindow.ShowDialog();
             }
             else
             {
@@ -225,7 +251,9 @@ namespace Ol_der.Controls.Sales
                     });
                 }
                 await _saleViewModel.AddSaleAsync(_saleToSave);
-                MessageBox.Show("Eladás sikeresen hozzáadva!");
+
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Eladás sikeresen hozzáadva!");
+                messageBoxOkWindow.ShowDialog();
             }
 
             _saleToSave = new Sale();
