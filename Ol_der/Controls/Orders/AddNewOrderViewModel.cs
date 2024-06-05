@@ -104,6 +104,8 @@ namespace Ol_der.Controls.Orders
 
         public ICommand UpdateQuantityOfOrderItemCommand { get; }
 
+        public ICommand UpdateOrderFromSalesCommand { get; }
+
         public AddNewOrderViewModel(Order order, int supplierId)
         {
             _orderRepository = new OrderRepository();
@@ -115,6 +117,7 @@ namespace Ol_der.Controls.Orders
             UpdateOrderCommand = new RelayCommand(param => UpdateOrder());
             DeleteOrderItemFromOrderCommand = new RelayCommand(param => DeleteOrderItemFromOrder());
             UpdateQuantityOfOrderItemCommand = new RelayCommand(param => UpdateQuantityOfOrderItem());
+            UpdateOrderFromSalesCommand = new RelayCommand(param => UpdateOrderFromSales());
             CheckOrder();
         }
 
@@ -372,6 +375,24 @@ namespace Ol_der.Controls.Orders
             await _orderRepository.UpdateOrderItemQuantityOrderedAsync(SelectedOrderItem.OrderItemId, int.Parse(Quantity));
 
             MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen módosítva!");
+            messageBoxOkWindow.ShowDialog();
+
+            Order = await _orderRepository.GetLastOpenOrderByOrderIdAsync(Order.OrderId);
+        }
+
+        public async Task UpdateOrderFromSales() 
+        {
+            MessageBoxWindow messageBoxWindow = new("Biztosan átnézzük az eladásokat?");
+            messageBoxWindow.ShowDialog();
+
+            if (messageBoxWindow.DialogResult != true)
+            {
+                return;
+            }
+
+            await _orderRepository.UpdateOrderFromSalesForSupplierAsync(Order.SupplierId);
+
+            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen frissítve!");
             messageBoxOkWindow.ShowDialog();
 
             Order = await _orderRepository.GetLastOpenOrderByOrderIdAsync(Order.OrderId);
