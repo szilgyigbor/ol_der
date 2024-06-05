@@ -122,5 +122,67 @@ namespace Ol_der.Controls.Orders
             }
         }
 
+        public async Task UpdateOrderFromSalesForSupplierAsync(int supplierId, int monthsToLookBack = 1)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var lookBackDate = DateTime.Now.AddMonths(-monthsToLookBack);
+
+                var saleItems = await context.SaleItems
+                    .Where(si => si.Product.SupplierId == supplierId && !si.IsOrdered && si.Product.Supplier.IsDeleted == false)
+                    .Include(si => si.Product)
+                    .ThenInclude(p => p.Supplier)
+                    .Include(si => si.Product)
+                    .Where(si => si.Product.SupplierId == supplierId && si.Sale.Date >= lookBackDate && si.Sale.Date <= DateTime.Now)
+                    .ToListAsync();
+
+                if (!saleItems.Any())
+                {
+                    return;
+                }
+
+                var openOrder = await context.Orders
+                    .Where(o => o.SupplierId == supplierId && o.IsOpen)
+                    .OrderByDescending(o => o.OrderDate)
+                    .Include(o => o.OrderItems)
+                    .FirstOrDefaultAsync();
+
+                if (openOrder == null)
+                {
+                    openOrder = new Order
+                    {
+                        SupplierId = supplierId,
+                        OrderDate = DateTime.Now,
+                        IsOpen = true,
+                        OrderItems = new List<OrderItem>()
+                    };
+                    context.Orders.Add(openOrder);
+                }
+
+                foreach (var saleItem in saleItems)
+                {
+                    var existingOrderItem = openOrder.OrderItems.FirstOrDefault(oi => oi.ProductId == saleItem.ProductId);
+
+                    if (existingOrderItem != null)
+                    {
+                        existingOrderItem.QuantityOrdered += saleItem.Quantity;
+                    }
+                    else
+                    {
+                        openOrder.OrderItems.Add(new OrderItem
+                        {
+                            ProductId = saleItem.ProductId,
+                            QuantityOrdered = saleItem.Quantity,
+                            QuantityReceived = 0
+                        });
+                    }
+
+                    saleItem.IsOrdered = true;
+                }
+
+                await context.SaveChangesAsync();
+            }
+        }
+
     }
 }
