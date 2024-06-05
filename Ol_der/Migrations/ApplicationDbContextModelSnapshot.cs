@@ -51,7 +51,8 @@ namespace Ol_der.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("SupplierId");
+                    b.HasIndex("SupplierId", "OrderDate", "IsOpen")
+                        .HasDatabaseName("IDX_Orders_SupplierId_OrderDate_IsOpen");
 
                     b.ToTable("Orders");
                 });
@@ -175,7 +176,7 @@ namespace Ol_der.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SaleId")
+                    b.Property<int>("SaleId")
                         .HasColumnType("int");
 
                     b.HasKey("SaleItemId");
@@ -268,11 +269,15 @@ namespace Ol_der.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ol_der.Models.Sale", null)
+                    b.HasOne("Ol_der.Models.Sale", "Sale")
                         .WithMany("SaleItems")
-                        .HasForeignKey("SaleId");
+                        .HasForeignKey("SaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Product");
+
+                    b.Navigation("Sale");
                 });
 
             modelBuilder.Entity("Ol_der.Models.Order", b =>
