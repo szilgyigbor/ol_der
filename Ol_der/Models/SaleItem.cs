@@ -9,11 +9,12 @@ namespace Ol_der.Models
 {
     public class SaleItem
     {
-
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SaleItemId { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
+        public int SaleId { get; set; }
+        public Sale Sale { get; set; }
         public int Quantity { get; set; }
         public bool NeedToOrder { get; set; } = true;
         public bool IsOrdered { get; set; }
