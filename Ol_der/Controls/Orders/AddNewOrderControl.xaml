@@ -67,10 +67,7 @@
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 10 0 10" HorizontalAlignment="Center">
                     <Button Content="Törlés" Command="{Binding DeleteOrderItemFromOrderCommand}" Width="100" Padding="5"/>
                 </StackPanel>
-
-
             </Grid>
-            
             
             <StackPanel Grid.Row="2"  Margin="10">
                 <TextBlock Text="Megjegyzés a rendeléshez" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0 0 0 20"/>
@@ -78,7 +75,13 @@
                 <Button Content="Mentés" Command="{Binding SaveCommentCommand}" Width="100" Margin="0 10 0 0" Padding="5"/>
             </StackPanel>
 
-            <Button Content="Rendelés frissítése (mentés)" Command="{Binding UpdateOrderCommand}" Width="250" Margin="0 20 0 0" Padding="5"/>
+            <StackPanel Grid.Row="2"  Margin="10">
+                <TextBlock Text="Eladások átnézése, termékek hozzáadása a rendeléshez"  TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0 10 0 0"/>
+                <Button Content="Füzet átnézése" Command="{Binding SaveCommentCommand}" Width="150" Margin="0 10 0 0" Padding="5"/>
+            </StackPanel>
+
+
+            <Button Content="Rendelés frissítése (mentés)" Command="{Binding UpdateOrderCommand}" Width="250" Margin="0 100 0 0" Padding="5"/>
 
         </StackPanel>
 
