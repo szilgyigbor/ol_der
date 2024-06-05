@@ -1,4 +1,5 @@
 ﻿using Ol_der.Models;
+using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,15 +47,19 @@ namespace Ol_der.Controls.Products
         {
             if (ProductsListView.SelectedItem is Product selectedProduct)
             {
-                if (MessageBox.Show("Biztosan törölni szeretnéd ezt a terméker?", "Megerősítés", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                MessageBoxWindow messageBoxWindow = new("Biztosan törölni szeretnéd ezt a terméket?");
+                messageBoxWindow.ShowDialog();
+
+                if (messageBoxWindow.DialogResult == true)
                 {
                     OnProductDeleted?.Invoke(selectedProduct);
-
                 }
+
             }
             else
             {
-                MessageBox.Show("Válassz ki egy terméket a törléshez!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy terméket a törléshez!");
+                messageBoxOkWindow.ShowDialog();
             }
 
         }

@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using Ol_der.Models;
+using Ol_der.Controls.Orders;
 
 
 namespace Ol_der.Controls.Suppliers
@@ -47,7 +47,8 @@ namespace Ol_der.Controls.Suppliers
         {
             if (string.IsNullOrWhiteSpace(nameTextBox.Text))
             {
-                MessageBox.Show("A név mező kitöltése kötelező!");
+                MessageBoxOkWindow MessageBoxOkWindow = new("A név mező kitöltése kötelező!");
+                MessageBoxOkWindow.ShowDialog();
                 return;
             }
 

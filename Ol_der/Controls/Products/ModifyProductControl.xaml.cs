@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ol_der.Models;
+using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,9 @@ namespace Ol_der.Controls.Products
         {
             if (string.IsNullOrWhiteSpace(nameTextBox.Text))
             {
-                MessageBox.Show("A név mező kitöltése kötelező!");
+                MessageBoxOkWindow messageBoxOkWindow = new("A név mező kitöltése kötelező!");
+                messageBoxOkWindow.ShowDialog();
+
                 return;
             }
 
@@ -59,7 +62,9 @@ namespace Ol_der.Controls.Products
             Supplier selectedSupplier = _suppliers.Find(s => s.SupplierId == selectedSupplierId);
             if (selectedSupplier == null)
             {
-                MessageBox.Show("A kiválasztott beszállító nem található.");
+                MessageBoxOkWindow messageBoxOkWindow = new("A kiválasztott beszállító nem található.");
+                messageBoxOkWindow.ShowDialog();
+
                 return;
             }
 

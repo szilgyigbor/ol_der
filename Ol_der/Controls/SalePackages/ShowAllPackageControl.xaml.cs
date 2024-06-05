@@ -1,4 +1,5 @@
-﻿using Ol_der.Models;
+﻿using Ol_der.Controls.Orders;
+using Ol_der.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,14 +52,18 @@ namespace Ol_der.Controls.SalePackages
         {
             if (SalesListView.SelectedItem is Sale SelectedSale)
             {
-                if (MessageBox.Show("Biztosan törölni szeretnéd ezt az eladást?", "Megerősítés", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                MessageBoxWindow messageBoxWindow = new("Biztosan törölni szeretnéd ezt az eladást?");
+                messageBoxWindow.ShowDialog();
+
+                if (messageBoxWindow.DialogResult == true)
                 {
                     await _viewModel.DeleteSaleAsync(SelectedSale);
                 }
             }
             else
             {
-                MessageBox.Show("Válassz ki egy eladást a törléshez!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy eladást a törléshez!");
+                messageBoxOkWindow.ShowDialog();
             }
 
         }

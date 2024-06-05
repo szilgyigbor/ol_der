@@ -1,4 +1,5 @@
 ﻿using Ol_der.Models;
+using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,9 @@ namespace Ol_der.Controls.Suppliers
         {
             if (string.IsNullOrWhiteSpace(nameTextBox.Text))
             {
-                MessageBox.Show("A név mező kitöltése kötelező!");
+                MessageBoxOkWindow messageBoxOkWindow = new("A név mező kitöltése kötelező!");
+                messageBoxOkWindow.ShowDialog();
+
                 return;
             }
 

@@ -1,4 +1,5 @@
 ﻿using Ol_der.Models;
+using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,9 @@ namespace Ol_der.Controls.Products
         {
             if (string.IsNullOrWhiteSpace(nameTextBox.Text) || string.IsNullOrWhiteSpace(itemNumberTextBox.Text) || suppliersComboBox.SelectedValue == null)
             {
-                MessageBox.Show("A termék neve, cikkszáma és a beszállító kiválasztása kötelező!");
+                MessageBoxOkWindow messageBoxOkWindow = new("A termék neve, cikkszáma és a beszállító kiválasztása kötelező!");
+                messageBoxOkWindow.ShowDialog();
+
                 return;
             }
 

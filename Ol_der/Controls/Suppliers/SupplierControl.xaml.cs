@@ -1,5 +1,6 @@
 ﻿using Ol_der.Data;
 using Ol_der.Models;
+using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,11 +51,14 @@ namespace Ol_der.Controls.Suppliers
 
             if (!IsSupplierAdded)
             {
-                MessageBox.Show("A beszállító már létezik!");
+                MessageBoxOkWindow messageBoxOkWindow = new("A beszállító már létezik!");
+                messageBoxOkWindow.ShowDialog();
                 return;
             }
 
-            MessageBox.Show("A beszállító sikeresen rögzítésre került!");
+            MessageBoxOkWindow messageBoxOkWindow1 = new("A beszállító sikeresen rögzítésre került!");
+            messageBoxOkWindow1.ShowDialog();
+
             Show_All_Supplier();
         }
 
@@ -86,7 +90,9 @@ namespace Ol_der.Controls.Suppliers
 
             if (selectedSupplier == null)
             {
-                MessageBox.Show("Válassz ki egy beszállítót a módosításhoz!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy beszállítót a módosításhoz!");
+                messageBoxOkWindow.ShowDialog();
+
                 return;
             }
 
@@ -100,7 +106,9 @@ namespace Ol_der.Controls.Suppliers
         private void ModifySupplier(Supplier modifiedSupplier)
         {
             _viewModel.ModifySupplier(modifiedSupplier);
-            MessageBox.Show("A beszállító adatai sikeresen módosításra kerültek!");
+
+            MessageBoxOkWindow messageBoxOkWindow = new("A beszállító adatai sikeresen módosításra kerültek!");
+            messageBoxOkWindow.ShowDialog();
             Show_All_Supplier();
         }
 

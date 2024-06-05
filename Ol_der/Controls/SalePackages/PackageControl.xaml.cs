@@ -1,5 +1,7 @@
-﻿using Ol_der.Controls.Suppliers;
+﻿using Ol_der.Controls.Orders;
+using Ol_der.Controls.Suppliers;
 using Ol_der.Data;
+using Ol_der.Models;
 using System;
 using System.Collections.Generic;
 using System.IO.Packaging;
@@ -54,7 +56,8 @@ namespace Ol_der.Controls.SalePackages
 
             else
             {
-                MessageBox.Show("Válassz ki egy eladást a módosításhoz!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy eladást a módosításhoz!");
+                messageBoxOkWindow.ShowDialog();
             }
         }
 

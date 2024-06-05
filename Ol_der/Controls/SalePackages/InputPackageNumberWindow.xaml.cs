@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Ol_der.Controls.Orders;
+using Ol_der.Models;
 
 namespace Ol_der.Controls.SalePackages
 {
@@ -35,7 +37,8 @@ namespace Ol_der.Controls.SalePackages
             }
             else
             {
-                MessageBox.Show("Kérlek, érvényes számot adj meg!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Kérlek, érvényes számot adj meg!");
+                messageBoxOkWindow.ShowDialog();
             }
         }
 

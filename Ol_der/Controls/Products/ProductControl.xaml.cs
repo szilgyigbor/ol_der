@@ -2,6 +2,7 @@
 using Ol_der.Controls.Suppliers;
 using Ol_der.Data;
 using Ol_der.Models;
+using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,11 +85,15 @@ namespace Ol_der.Controls.Products
 
             if (!isProductAdded)
             {
-                MessageBox.Show("A termék cikkszáma már szerepel az adatbázisban!");
+                MessageBoxOkWindow messageBoxOkWindow = new("A termék cikkszáma már szerepel az adatbázisban!");
+                messageBoxOkWindow.ShowDialog();
+
                 return;
             }
 
-            MessageBox.Show("A termék sikeresen rögzítésre került!");
+            MessageBoxOkWindow messageBoxOkWindow1 = new("A termék sikeresen rögzítésre került!");
+            messageBoxOkWindow1.ShowDialog();
+
             LoadProductCount();
             ShowAllProduct();
         }
@@ -98,7 +103,9 @@ namespace Ol_der.Controls.Products
             List<Product> product = _viewModel.SearchProductByItemNumber(productId);
             if (product == null)
             {
-                MessageBox.Show("Nincs ilyen termék az adatbázisban!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs ilyen termék az adatbázisban!");
+                messageBoxOkWindow.ShowDialog();
+
                 return;
             }
 
@@ -109,7 +116,8 @@ namespace Ol_der.Controls.Products
         private void Delete_Product(Product product)
         {
             _viewModel.DeleteProduct(product);
-            MessageBox.Show("A termék sikeresen törölve lett!");
+            MessageBoxOkWindow messageBoxOkWindow = new("A termék sikeresen törölve lett!");
+            messageBoxOkWindow.ShowDialog();
             LoadProductCount();
             ShowAllProduct();
         }
@@ -120,7 +128,8 @@ namespace Ol_der.Controls.Products
 
             if (selectedProduct == null)
             {
-                MessageBox.Show("Válassz ki egy terméket a módosításhoz!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy terméket a módosításhoz!");
+                messageBoxOkWindow.ShowDialog();
                 ContentArea.Content = _showAllProductControl;
                 return;
             }
@@ -135,7 +144,8 @@ namespace Ol_der.Controls.Products
         private void ModifyProduct(Product modifiedProduct)
         {
             _viewModel.UpdateProduct(modifiedProduct);
-            MessageBox.Show("A termék adatai sikeresen módosításra kerültek!");
+            MessageBoxOkWindow messageBoxOkWindow = new("A termék adatai sikeresen módosításra kerültek!");
+            messageBoxOkWindow.ShowDialog();
             ShowAllProduct();
         }
 

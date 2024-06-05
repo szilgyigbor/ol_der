@@ -1,4 +1,5 @@
 ﻿using Ol_der.Models;
+using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,10 @@ namespace Ol_der.Controls.Suppliers
         {
             if (SuppliersListView.SelectedItem is Supplier selectedSupplier)
             {
-                if (MessageBox.Show("Biztosan törölni szeretnéd ezt a beszállítót?", "Megerősítés", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                MessageBoxWindow messageBoxWindow = new("Biztosan törölni szeretnéd ezt a beszállítót?");
+                messageBoxWindow.ShowDialog();
+
+                if (messageBoxWindow.DialogResult == true)
                 {
                     Supplier supplier = selectedSupplier;
                     return supplier.SupplierId;
@@ -43,7 +47,8 @@ namespace Ol_der.Controls.Suppliers
             }
             else
             {
-                MessageBox.Show("Válassz ki egy beszállítót a törléshez!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy beszállítót a törléshez!");
+                messageBoxOkWindow.ShowDialog();
             }
 
             return -1;

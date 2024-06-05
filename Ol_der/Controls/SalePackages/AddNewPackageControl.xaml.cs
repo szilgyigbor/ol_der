@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ol_der.Data;
 using Ol_der.Models;
+using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +79,8 @@ namespace Ol_der.Controls.SalePackages
 
             else if (lstSaleItems.SelectedItem == null)
             {
-                MessageBox.Show("Nincs kiválasztott elem!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs kiválasztott elem!");
+                messageBoxOkWindow.ShowDialog();
             }
         }
 
@@ -107,7 +109,8 @@ namespace Ol_der.Controls.SalePackages
             var itemNumber = txtItemNumber.Text;
             if (string.IsNullOrWhiteSpace(itemNumber))
             {
-                MessageBox.Show("Írd be a cikkszámot, amit hozzá akarsz adni!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Írd be a cikkszámot, amit hozzá akarsz adni!");
+                messageBoxOkWindow.ShowDialog();
                 return;
             }
 
@@ -127,9 +130,10 @@ namespace Ol_der.Controls.SalePackages
 
                 if (productAlreadyAdded)
                 {
-                    MessageBoxResult result = MessageBox.Show("Ez a termék már szerepel a listában, újból hozzáadjam?", "Termék Ellenőrzés", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+                    MessageBoxWindow messageBoxWindow = new("Ez a termék már szerepel a listában, újból hozzáadjam?");
+                    messageBoxWindow.ShowDialog();
 
-                    if (result != MessageBoxResult.OK)
+                    if (messageBoxWindow.DialogResult == false)
                     {
                         txtItemNumber.Text = "";
                         return;
@@ -149,7 +153,8 @@ namespace Ol_der.Controls.SalePackages
             }
             else
             {
-                MessageBox.Show("Nincs ilyen termék!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs ilyen termék!");
+                messageBoxOkWindow.ShowDialog();
             }
         }
 
@@ -157,9 +162,10 @@ namespace Ol_der.Controls.SalePackages
         {
             string saveOrModify = _saleId < 0 ? "menteni" : "módosítani";
 
-            MessageBoxResult result = MessageBox.Show($"Biztosan {saveOrModify} akarod a csomagot?", "Csomag mentése", MessageBoxButton.YesNo);
+            MessageBoxWindow messageBoxWindow = new($"Biztosan {saveOrModify} akarod a csomagot?");
+            messageBoxWindow.ShowDialog();
 
-            if (result == MessageBoxResult.No)
+            if (messageBoxWindow.DialogResult == false)
             {
                 return;
             }
@@ -198,7 +204,9 @@ namespace Ol_der.Controls.SalePackages
                     });
                 }
                 await _packageViewModel.UpdateSaleAsync(_saleToSave);
-                MessageBox.Show("Csomag sikeresen módosítva!");
+
+                MessageBoxOkWindow messageBoxOkWindow = new("Csomag sikeresen módosítva!");
+                messageBoxOkWindow.ShowDialog();
             }
             else
             {
@@ -214,7 +222,8 @@ namespace Ol_der.Controls.SalePackages
                     });
                 }
                 await _packageViewModel.AddSaleAsync(_saleToSave);
-                MessageBox.Show("Csomag sikeresen hozzáadva!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Csomag sikeresen hozzáadva!");
+                messageBoxOkWindow.ShowDialog();
             }
 
             _saleToSave = new Sale();
