@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Sales"
              mc:Ignorable="d" 
-             FontSize="20"
+             FontSize="18"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:DateToDayConverter x:Key="DateToDayConverter"/>
@@ -17,7 +17,7 @@
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
                         <Style TargetType="GroupItem">
-                            <Setter Property="Margin" Value="20 30 50 30"/>
+                            <Setter Property="Margin" Value="10 20 10 50"/>
                         </Style>
                     </GroupStyle.ContainerStyle>
                     <GroupStyle.HeaderTemplate>
@@ -29,12 +29,12 @@
             </ListView.GroupStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="15">
+                    <StackPanel Margin="10">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="20" FontStyle="Italic" Margin="15" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="24" FontStyle="Italic" Margin="15 15 0 15" VerticalAlignment="Center"/>
-                            <TextBlock Text=".-Ft." FontSize="24" FontStyle="Italic" Margin="0 15 15 15" VerticalAlignment="Center"/>
-                            <TextBlock FontSize="24" FontStyle="Italic" Margin="15" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="20" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="22" FontWeight="DemiBold" Margin="10 10 0 10" VerticalAlignment="Center"/>
+                            <TextBlock Text=".-Ft." FontSize="22" Margin="0 10 10 10" VerticalAlignment="Center"/>
+                            <TextBlock FontSize="22" Margin="10" VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Text" Value="{Binding PaymentType}" />
@@ -58,7 +58,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBlock Text="{Binding CustomerName}" FontSize="22" FontStyle="Italic" Margin="15" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding CustomerName}" FontSize="22" Margin="15" VerticalAlignment="Center"/>
                             <TextBlock Text="{Binding Notes}" FontSize="20" FontStyle="Italic" Margin="15" VerticalAlignment="Center"/>
                         </StackPanel>
                         <ItemsControl ItemsSource="{Binding SaleItems}">
@@ -69,8 +69,8 @@
                                         <TextBlock Text=" db" Width="40" Margin="2 0 0 0"/>
                                         <TextBlock Text="{Binding Product.ItemNumber}" Margin="10 0 0 0"/>
                                         <TextBlock Text="{Binding Product.Name}" Margin="15 0 0 0"/>
-                                        <TextBlock Text="Eladási ár(/db):" Width="140" Margin="20 0 0 0"/>
-                                        <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Margin="5,0,0,0"/>
+                                        <TextBlock Text="Eladási ár(/db):" Width="140" Margin="30 0 0 0"/>
+                                        <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Margin="0"/>
                                         <TextBlock Text="{Binding IsOrdered, Converter={StaticResource IsOrderedToTextConverter}}" Margin="15 0 0 0"/>
                                     </WrapPanel>
                                 </DataTemplate>

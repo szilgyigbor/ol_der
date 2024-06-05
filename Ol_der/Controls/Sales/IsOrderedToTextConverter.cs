@@ -14,7 +14,7 @@ namespace Ol_der.Controls.Sales
         {
             if (value is bool && (bool)value)
             {
-                return "(Be lett rendelve)";
+                return "(Rendelésben van)";
             }
             else
             {
