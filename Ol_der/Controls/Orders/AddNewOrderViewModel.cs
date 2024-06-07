@@ -21,8 +21,9 @@ namespace Ol_der.Controls.Orders
         private string _productDescription;
         private string _quantity;
         private OrderItem _selectedOrderItem;
+        private OrderItem _orderItem;
 
-        public OrderItem OrderItem { get; set; }
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         public Order Order
@@ -78,12 +79,23 @@ namespace Ol_der.Controls.Orders
             }
         }
 
+        public OrderItem OrderItem
+        {
+            get { return _orderItem; }
+            set
+            {
+                _orderItem = value;
+                OnPropertyChanged();
+            }
+        }
+
         public OrderItem SelectedOrderItem
         {
             get { return _selectedOrderItem; }
             set
             {
                 _selectedOrderItem = value;
+                OrderItem = _selectedOrderItem;
                 Quantity = _selectedOrderItem?.QuantityOrdered.ToString();
                 ProductDescription = "";
                 ProductDescription += SelectedOrderItem.Product.ItemNumber + "   " + SelectedOrderItem.Product.Name;
@@ -185,7 +197,8 @@ namespace Ol_der.Controls.Orders
                     QuantityOrdered = 1,
                     QuantityReceived = 0,
                     OrderId = Order.OrderId,
-                    Order = Order
+                    Order = Order,
+                    Comment = ""
                 };
 
                 ProductDescription = "";
@@ -234,7 +247,7 @@ namespace Ol_der.Controls.Orders
                 messageBoxWindow1.ShowDialog();
                 return;
             }
-            
+
             MessageBoxWindow messageBoxWindow = new("Biztosan hozzá akarod adni? ");
             messageBoxWindow.ShowDialog();
 
@@ -356,7 +369,7 @@ namespace Ol_der.Controls.Orders
                 return;
             }
 
-            MessageBoxWindow messageBoxWindow = new("Biztosan módosítani akarod a darabszámot?");
+            MessageBoxWindow messageBoxWindow = new("Biztosan módosítani akarod a tételt?");
             messageBoxWindow.ShowDialog();
 
             if (messageBoxWindow.DialogResult != true)
@@ -369,10 +382,8 @@ namespace Ol_der.Controls.Orders
                 return;
             }
 
-
-            SelectedOrderItem.QuantityOrdered = int.Parse(Quantity);
-
-            await _orderRepository.UpdateOrderItemQuantityOrderedAsync(SelectedOrderItem.OrderItemId, int.Parse(Quantity));
+            OrderItem.QuantityOrdered = int.Parse(Quantity);
+            await _orderRepository.UpdateOrderItemAsync(OrderItem);
 
             MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen módosítva!");
             messageBoxOkWindow.ShowDialog();

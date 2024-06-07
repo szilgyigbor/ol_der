@@ -102,17 +102,6 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public async Task UpdateOrderItemQuantityOrderedAsync(int orderItemId, int quantity)
-        {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                var orderItem = await context.OrderItems.FindAsync(orderItemId);
-                orderItem.QuantityOrdered = quantity;
-                await context.SaveChangesAsync();
-                
-            }
-        }
-
         public async Task RemoveOrderItemAsync(OrderItem orderItem)
         {
             using (var context = ApplicationDbContextFactory.Create())
@@ -180,6 +169,15 @@ namespace Ol_der.Controls.Orders
                     saleItem.IsOrdered = true;
                 }
 
+                await context.SaveChangesAsync();
+            }
+        }
+
+
+        public async Task UpdateOrderItemAsync(OrderItem orderItem) {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.OrderItems.Update(orderItem);
                 await context.SaveChangesAsync();
             }
         }
