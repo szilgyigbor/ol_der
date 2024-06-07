@@ -32,6 +32,11 @@ namespace Ol_der.Controls.Orders
             ContentArea.Content = _showAllOrderControl;
         }
 
+        public void Refresh()
+        {
+            ContentArea.Content = _showAllOrderControl;
+        }
+
         private async void AddOrder_Click(object sender, RoutedEventArgs e)
         {
             int supplierId = -1;

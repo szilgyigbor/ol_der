@@ -54,8 +54,9 @@ namespace Ol_der
 
         private void Exit_Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Biztosan ki szeretnél lépni?", "Megerősítés", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
+            MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Biztosan ki szeretnél lépni?");
+            messageBoxWindow.ShowDialog();
+            if (messageBoxWindow.DialogResult == true)
             {
                 Application.Current.Shutdown();
             }

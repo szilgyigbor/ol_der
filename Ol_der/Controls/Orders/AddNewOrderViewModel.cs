@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Ol_der.Models;
 
@@ -118,6 +119,8 @@ namespace Ol_der.Controls.Orders
 
         public ICommand UpdateOrderFromSalesCommand { get; }
 
+        public ICommand CloseAndSaveOrderCommand { get; }
+
         public AddNewOrderViewModel(Order order, int supplierId)
         {
             _orderRepository = new OrderRepository();
@@ -130,6 +133,7 @@ namespace Ol_der.Controls.Orders
             DeleteOrderItemFromOrderCommand = new RelayCommand(param => DeleteOrderItemFromOrder());
             UpdateOrderItemCommand = new RelayCommand(param => UpdateOrderItem());
             UpdateOrderFromSalesCommand = new RelayCommand(param => UpdateOrderFromSales());
+            CloseAndSaveOrderCommand = new RelayCommand(param => CloseAndSaveOrder());
             CheckOrder();
         }
 
@@ -142,7 +146,7 @@ namespace Ol_der.Controls.Orders
         {
             if (Order == null)
             {
-                string message = "Nincs nyitott rendelés ehhez a beszállítóhoz, újat kezdjünk!";
+                string message = "Nincs nyitott rendelés ehhez a beszállítóhoz, újat kezdünk!";
                 MessageBoxOkWindow messageBoxWindow = new(message);
                 messageBoxWindow.ShowDialog();
                 Title = "Új rendelés kezelése";
@@ -298,7 +302,7 @@ namespace Ol_der.Controls.Orders
 
         public async Task UpdateOrder()
         {
-            MessageBoxWindow messageBoxWindow = new("Biztosan el akarod menteni a rendelést?");
+            MessageBoxWindow messageBoxWindow = new("Biztosan rá akarsz menteni a rendelésre?");
             messageBoxWindow.ShowDialog();
 
             if (messageBoxWindow.DialogResult != true)
@@ -310,7 +314,9 @@ namespace Ol_der.Controls.Orders
 
             await _orderRepository.UpdateOrderAsync(Order);
 
-            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen elmentve!");
+            Order = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(_supplierId);
+
+            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen frissítve!");
             messageBoxOkWindow.ShowDialog();
         }
 
@@ -318,10 +324,18 @@ namespace Ol_der.Controls.Orders
 
         public async Task CloseAndSaveOrder()
         {
-            MessageBoxWindow messageBoxWindow = new("Biztosan el akarod menteni a rendelést?");
+            MessageBoxWindow messageBoxWindow = new("Biztosan le akarod zárni a rendelést?");
             messageBoxWindow.ShowDialog();
 
             if (messageBoxWindow.DialogResult != true)
+            {
+                return;
+            }
+
+            MessageBoxWindow messageBoxWindow1 = new("Tuti biztos?");
+            messageBoxWindow1.ShowDialog();
+
+            if (messageBoxWindow1.DialogResult != true)
             {
                 return;
             }
@@ -331,8 +345,11 @@ namespace Ol_der.Controls.Orders
 
             await _orderRepository.UpdateOrderAsync(Order);
 
-            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen elmentve!");
+            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen lezárva, új rendelést nyitottunk!");
             messageBoxOkWindow.ShowDialog();
+
+            Order = await CreateOrderAsync();
+
         }
 
         public async Task DeleteOrderItemFromOrder()

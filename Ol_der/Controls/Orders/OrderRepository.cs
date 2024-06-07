@@ -181,6 +181,16 @@ namespace Ol_der.Controls.Orders
                 await context.SaveChangesAsync();
             }
         }
+        
 
+        public async Task CloseOrder(Order order)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                order.IsOpen = false;
+                context.Orders.Update(order);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }
