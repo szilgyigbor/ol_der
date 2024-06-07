@@ -114,7 +114,7 @@ namespace Ol_der.Controls.Orders
 
         public ICommand DeleteOrderItemFromOrderCommand { get; }
 
-        public ICommand UpdateQuantityOfOrderItemCommand { get; }
+        public ICommand UpdateOrderItemCommand { get; }
 
         public ICommand UpdateOrderFromSalesCommand { get; }
 
@@ -128,7 +128,7 @@ namespace Ol_der.Controls.Orders
             SaveCommentCommand = new RelayCommand(param => SaveComment());
             UpdateOrderCommand = new RelayCommand(param => UpdateOrder());
             DeleteOrderItemFromOrderCommand = new RelayCommand(param => DeleteOrderItemFromOrder());
-            UpdateQuantityOfOrderItemCommand = new RelayCommand(param => UpdateQuantityOfOrderItem());
+            UpdateOrderItemCommand = new RelayCommand(param => UpdateOrderItem());
             UpdateOrderFromSalesCommand = new RelayCommand(param => UpdateOrderFromSales());
             CheckOrder();
         }
@@ -360,7 +360,7 @@ namespace Ol_der.Controls.Orders
             Order = await _orderRepository.GetLastOpenOrderByOrderIdAsync(Order.OrderId);
         }
 
-        public async Task UpdateQuantityOfOrderItem()
+        public async Task UpdateOrderItem()
         {
             if (SelectedOrderItem == null)
             {
