@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace Ol_der.Controls.Orders
     /// </summary>
     public partial class GreenifyOrderControl : UserControl
     {
-        public GreenifyOrderControl()
+        private GreenifyOrderViewModel _viewModel;
+        public GreenifyOrderControl(Order order)
         {
             InitializeComponent();
+            _viewModel = new GreenifyOrderViewModel(order);
+            this.DataContext = _viewModel;
         }
     }
 }

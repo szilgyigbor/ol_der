@@ -24,6 +24,7 @@ namespace Ol_der.Controls.Orders
     {
         private AddNewOrderControl _addOrderControl;
         private ShowAllOrderControl _showAllOrderControl;
+        private GreenifyOrderControl _greenifyOrderControl;
 
         public OrderControl()
         {
@@ -115,11 +116,8 @@ namespace Ol_der.Controls.Orders
                     return;
                 }
 
-                MessageBoxOkWindow messageBoxWindow1 = new("OK");
-                messageBoxWindow1.ShowDialog();
-
-                /*_addOrderControl = new AddNewOrderControl(order, order.SupplierId);
-                ContentArea.Content = _addOrderControl;*/
+                _greenifyOrderControl = new GreenifyOrderControl(order);
+                ContentArea.Content = _greenifyOrderControl;
             }
 
             else

@@ -5,8 +5,54 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Orders"
              mc:Ignorable="d" 
+             FontSize="18"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="3.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Zöldítés (átnézzük miből mennyi jött)" FontSize="24" FontWeight="Bold" 
+               Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
             
+            <TextBlock Text="{Binding ProductDescription}" Background="White" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="18"/>
+            <TextBlock Text="Mennyi jött belőle?" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="0 0 0 10"/>
+            <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
+
+            <StackPanel Grid.Row="2"  Margin="0 20 0 0">
+                <Button Content="Beállítás" Command="{Binding UpdateOrderItemCommand}" Width="130" Padding="5"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2"  Margin="0 50 0 0">
+                <Button Content="Véglegesítés" Command="{Binding FinalizeGreenifyCommand}" Width="130" Padding="5"/>
+            </StackPanel>
+        </StackPanel>
+
+        <ListView ItemsSource="{Binding Order.OrderItems}" Grid.Row="1" Grid.Column="1" Margin="10"
+              SelectedItem="{Binding SelectedOrderItem, Mode=TwoWay}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Rendeltük" DisplayMemberBinding="{Binding QuantityOrdered}" Width="60"/>
+                    <GridViewColumn Header="Érkezett" DisplayMemberBinding="{Binding QuantityReceived}" Width="60"/>
+                    <GridViewColumn Header="Cikkszám" DisplayMemberBinding="{Binding Product.ItemNumber}" Width="140"/>
+                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Product.Name}" Width="550"/>
+                    <GridViewColumn Header="Megjegyzés" DisplayMemberBinding="{Binding Comment}" Width="400"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="#F4F4F4"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </Grid>
 </UserControl>
