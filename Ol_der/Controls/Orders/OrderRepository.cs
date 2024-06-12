@@ -19,11 +19,15 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public async Task<List<Order>> GetAllOrderAsync()
+        public async Task<List<Order>> GetAllOrderAsync(int limit)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return await context.Orders.OrderByDescending(o => o.OrderId).Include(o => o.Supplier).ToListAsync();
+                return await context.Orders
+                                    .OrderByDescending(o => o.OrderId)
+                                    .Include(o => o.Supplier)
+                                    .Take(limit)
+                                    .ToListAsync();
             }
         }
 

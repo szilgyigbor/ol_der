@@ -27,10 +27,14 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public OrderViewModel()
+        public int limitToShow;
+
+
+        public OrderViewModel(int limit = 100)
         {
             _orderRepository = new OrderRepository();
-            LoadOrdersAsync();
+            limitToShow = limit;
+            LoadOrdersAsync(limitToShow);
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -44,22 +48,22 @@ namespace Ol_der.Controls.Orders
             return await _orderRepository.GetAllSupplierAsync();
         }
 
-        public async Task LoadOrdersAsync()
+        public async Task LoadOrdersAsync(int limit)
         {
-            var orders = await _orderRepository.GetAllOrderAsync();
+            var orders = await _orderRepository.GetAllOrderAsync(limit);
             Orders = new ObservableCollection<Order>(orders);
         }
 
         public async Task AddOrderAsync(Order newOrder)
         {
             await _orderRepository.AddOrderAsync(newOrder);
-            await LoadOrdersAsync();
+            await LoadOrdersAsync(limitToShow);
         }
 
         public async Task DeleteOrderAsync(Order order)
         {
             await _orderRepository.DeleteOrderAsync(order);
-            await LoadOrdersAsync();
+            await LoadOrdersAsync(limitToShow);
         }
 
         public async Task<Supplier> GetSupplierById(int supplierId)

@@ -25,11 +25,12 @@ namespace Ol_der.Controls.Orders
         private AddNewOrderControl _addOrderControl;
         private ShowAllOrderControl _showAllOrderControl;
         private GreenifyOrderControl _greenifyOrderControl;
+        public int NumberToShow { get; set; } = 100;
 
         public OrderControl()
         {
             InitializeComponent();
-            _showAllOrderControl = new ShowAllOrderControl();
+            _showAllOrderControl = new ShowAllOrderControl(NumberToShow);
             ContentArea.Content = _showAllOrderControl;
         }
 
@@ -50,7 +51,7 @@ namespace Ol_der.Controls.Orders
 
             else return;
             
-            OrderViewModel viewModel = new();
+            OrderViewModel viewModel = new(NumberToShow);
             Order order = await viewModel.GetLastOpenOrderBySupplierIdAsync(supplierId);
            
             _addOrderControl = new AddNewOrderControl(order, supplierId);
@@ -64,7 +65,7 @@ namespace Ol_der.Controls.Orders
 
             if (orderId != -1)
             {
-                OrderViewModel viewModel = new();
+                OrderViewModel viewModel = new(NumberToShow);
                 Order order = await viewModel.GetLastOpenOrderByOrderIdAsync(orderId);
 
                 if (order == null)
@@ -92,7 +93,7 @@ namespace Ol_der.Controls.Orders
 
             if (orderId != -1)
             {
-                OrderViewModel viewModel = new();
+                OrderViewModel viewModel = new(NumberToShow);
                 Order order = await viewModel.GetOrderByOrderIdAsync(orderId);
 
                 if (order == null)
@@ -127,15 +128,21 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        private async Task ShowAllOrder(int limit = 100)
+        private async Task ShowAllOrder(int limit)
         {
-            _showAllOrderControl = new ShowAllOrderControl();
+            _showAllOrderControl = new ShowAllOrderControl(limit);
             ContentArea.Content = _showAllOrderControl;
         }
 
         private async void ShowAllOrder_Click(object sender, RoutedEventArgs e)
         {
-            ShowAllOrder();
+            InputOrderNumberWindow dialog = new InputOrderNumberWindow();
+            if (dialog.ShowDialog() == true)
+            {
+                NumberToShow = dialog.NumberResult ?? 100;
+                await ShowAllOrder(NumberToShow);
+            }
+
         }
 
         private async void btnDeleteOrder_Click(object sender, RoutedEventArgs e)

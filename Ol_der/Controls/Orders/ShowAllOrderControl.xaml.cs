@@ -23,10 +23,10 @@ namespace Ol_der.Controls.Orders
     {
         private OrderViewModel _viewModel;
 
-        public ShowAllOrderControl()
+        public ShowAllOrderControl(int limit = 100)
         {
             InitializeComponent();
-            _viewModel = new OrderViewModel();
+            _viewModel = new OrderViewModel(limit);
             this.DataContext = _viewModel;
         }
 
