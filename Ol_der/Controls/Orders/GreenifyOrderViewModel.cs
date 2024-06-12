@@ -58,8 +58,8 @@ namespace Ol_der.Controls.Orders
             {
                 _selectedOrderItem = value;
                 Quantity = _selectedOrderItem?.QuantityReceived.ToString();
-                ProductDescription = $" {SelectedOrderItem.QuantityOrdered} darabot rendeltünk ebből: " +
-                    $"{SelectedOrderItem.Product.ItemNumber}  {SelectedOrderItem.Product.Name} ";
+                ProductDescription = $@"Ennyit rendeltünk:  {SelectedOrderItem.QuantityOrdered}
+Ebből: {SelectedOrderItem.Product.ItemNumber}";
                 OnPropertyChanged();
             }
         }
@@ -121,6 +121,8 @@ namespace Ol_der.Controls.Orders
             await _orderRepository.UpdateOrderItemAsync(SelectedOrderItem);
 
             Order = await _orderRepository.GetOrderByOrderIdAsync(Order.OrderId);
+
+            ProductDescription = "Válassz ki egy terméket a listából";
         }
 
 
