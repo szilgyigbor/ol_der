@@ -23,7 +23,7 @@ namespace Ol_der.Controls.Orders
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return await context.Orders.OrderByDescending(o => o.OrderDate).Include(o => o.Supplier).ToListAsync();
+                return await context.Orders.OrderByDescending(o => o.OrderId).Include(o => o.Supplier).ToListAsync();
             }
         }
 
