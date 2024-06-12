@@ -149,9 +149,39 @@ Ebből: {SelectedOrderItem.Product.ItemNumber}";
 
         public async Task FinalizeGreenify()
         {
-            
-        }
+            MessageBoxWindow messageBoxWindow = new("Biztosan véglegesíted a zöldítést?");
+            messageBoxWindow.ShowDialog();
 
+            if (messageBoxWindow.DialogResult != true)
+            {
+                return;
+            }
+
+            Order orderToAppend = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(Order.SupplierId);
+
+            if (orderToAppend == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs nyitott rendelés, újat kezdtünk!");
+                messageBoxOkWindow.ShowDialog();
+
+                orderToAppend = new Order
+                {
+                    SupplierId = Order.SupplierId,
+                    OrderDate = DateTime.Now,
+                    OrderItems = new List<OrderItem>()
+                };
+            }
+
+            await _orderRepository.AppendMissingItemsToOrderAsync(orderToAppend, Order);
+
+            Order.IsColored = true;
+            Order.ReOrdered = true;
+
+            await _orderRepository.UpdateOrderAsync(Order);
+
+            MessageBoxOkWindow messageBoxOkWindow1 = new("Sikeresen zöldítve!");
+            messageBoxOkWindow1.ShowDialog();
+        }
 
     }
 }

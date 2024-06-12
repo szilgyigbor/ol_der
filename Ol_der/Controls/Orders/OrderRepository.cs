@@ -212,5 +212,38 @@ namespace Ol_der.Controls.Orders
                 await context.SaveChangesAsync();
             }
         }
+
+        public async Task AppendMissingItemsToOrderAsync(Order orderToAppend, Order order)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                foreach (var item in order.OrderItems)
+                {
+                    var missingQuantity = item.QuantityOrdered - item.QuantityReceived;
+                    if (missingQuantity > 0)
+                    {
+                        var existingItem = orderToAppend.OrderItems.FirstOrDefault(oi => oi.ProductId == item.ProductId);
+                        if (existingItem != null)
+                        {
+                            existingItem.QuantityOrdered += missingQuantity;
+                        }
+                        else
+                        {
+                            orderToAppend.OrderItems.Add(new OrderItem
+                            {
+                                ProductId = item.ProductId,
+                                Product = item.Product,
+                                QuantityOrdered = missingQuantity,
+                                QuantityReceived = 0,
+                                Comment = item.Comment 
+                            });
+                        }
+                    }
+                }
+
+                context.Orders.Update(orderToAppend);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }
