@@ -36,6 +36,7 @@
                 <Button Content="Termék keresés" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="SearchOrdersByProductNumber_Click"/>
                 <Button Content="Új rendelés" Background="#E5F5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="AddOrder_Click"/>
                 <Button Content="Szerkesztés" Background="#F9F9E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="ModifyOrder_Click"/>
+                <Button Content="Zöldítés" Background="#F9F9E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="GreenifyOrder_Click"/>
                 <Button Content="Törlés" Background="#F9E5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="btnDeleteOrder_Click"/>
             </StackPanel>
 

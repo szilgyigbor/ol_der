@@ -31,7 +31,7 @@ namespace Ol_der.Controls.Orders
         }
 
 
-        public int OrderIdToModify()
+        public int GetSelectedOrderId()
         {
             if (ProductsListView.SelectedItem is Order SelectedOrder)
             {

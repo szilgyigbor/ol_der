@@ -84,6 +84,22 @@ namespace Ol_der.Controls.Orders
         }
 
 
+        public async Task<Order> GetOrderByOrderIdAsync(int orderId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Orders
+                    .Where(o => o.OrderId == orderId)
+                    .Include(o => o.Supplier)
+                    .Include(o => o.OrderItems)
+                        .ThenInclude(oi => oi.Product)
+                            .ThenInclude(p => p.Supplier)
+                    .FirstOrDefaultAsync();
+            }
+        }
+
+
+
         public async Task<Product> SearchProductByItemNumberAsync(string itemNumber)
         {
             using (var context = ApplicationDbContextFactory.Create())

@@ -59,7 +59,7 @@ namespace Ol_der.Controls.Orders
         private async void ModifyOrder_Click(object sender, RoutedEventArgs e)
         {
             ContentArea.Content = _showAllOrderControl;
-            int orderId = _showAllOrderControl.OrderIdToModify();
+            int orderId = _showAllOrderControl.GetSelectedOrderId();
 
             if (orderId != -1)
             {
@@ -80,6 +80,51 @@ namespace Ol_der.Controls.Orders
             else
             {
                 MessageBoxOkWindow messageBoxWindow1 = new("Válassz ki egy rendelést a módosításhoz!");
+                messageBoxWindow1.ShowDialog();
+            }
+        }
+
+        private async void GreenifyOrder_Click(object sender, RoutedEventArgs e)
+        {
+            ContentArea.Content = _showAllOrderControl;
+            int orderId = _showAllOrderControl.GetSelectedOrderId();
+
+            if (orderId != -1)
+            {
+                OrderViewModel viewModel = new();
+                Order order = await viewModel.GetOrderByOrderIdAsync(orderId);
+
+                if (order == null)
+                {
+                    MessageBoxOkWindow messageBoxWindow = new("Nem sikerült betölteni a rendelést (null)!");
+                    messageBoxWindow.ShowDialog();
+                    return;
+                }
+
+                if (order.IsOpen == true)
+                {
+                    MessageBoxOkWindow messageBoxWindow = new("A kiválasztott rendelés még nincs lezárva!");
+                    messageBoxWindow.ShowDialog();
+                    return;
+                }
+
+                if (order.IsColored == true)
+                {
+                    MessageBoxOkWindow messageBoxWindow = new("A rendelés már zöldítve lett!");
+                    messageBoxWindow.ShowDialog();
+                    return;
+                }
+
+                MessageBoxOkWindow messageBoxWindow1 = new("OK");
+                messageBoxWindow1.ShowDialog();
+
+                /*_addOrderControl = new AddNewOrderControl(order, order.SupplierId);
+                ContentArea.Content = _addOrderControl;*/
+            }
+
+            else
+            {
+                MessageBoxOkWindow messageBoxWindow1 = new("Válassz ki egy rendelést a zöldítéshez!");
                 messageBoxWindow1.ShowDialog();
             }
         }

@@ -81,6 +81,13 @@ namespace Ol_der.Controls.Orders
 
             return OrderToModify;
         }
+
+        public async Task<Order> GetOrderByOrderIdAsync(int orderId)
+        {
+            Order OrderToGreenify = await _orderRepository.GetOrderByOrderIdAsync(orderId);
+
+            return OrderToGreenify;
+        }
     }
 
 }
