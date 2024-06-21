@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ol_der.Controls.Orders"
         mc:Ignorable="d"
-        FontSize="20"
-        Title="MessageBoxOkWindow" Height="160" Width="600">
+        FontSize="16"
+        Title="MessageBoxOkWindow" Height="200" Width="800">
     <StackPanel Margin="10">
-        <TextBlock x:Name="messageToShow" Text="Message" Margin="10" HorizontalAlignment="Center"/>
+        <TextBox x:Name="messageToShow" Text="Message" TextWrapping="Wrap" Margin="10" HorizontalAlignment="Center" IsReadOnly="True" BorderThickness="0" Background="Transparent" IsReadOnlyCaretVisible="False"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
             <Button Content="OK" Padding="10,5,10,5" FontSize="16" Click="OkButton_Click"/>
         </StackPanel>
