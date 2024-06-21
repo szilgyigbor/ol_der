@@ -70,7 +70,7 @@ namespace Ol_der.Controls.Orders
 
                 if (order == null)
                 {
-                    MessageBoxOkWindow messageBoxWindow = new("A kiválasztott rendelés már le van zárva!");
+                    MessageBoxOkWindow messageBoxWindow = new("A kiválasztott rendelés már le van zárva, nem módosítható!");
                     messageBoxWindow.ShowDialog();
                     return;
                 }
@@ -117,7 +117,7 @@ namespace Ol_der.Controls.Orders
                     return;
                 }
 
-                _greenifyOrderControl = new GreenifyOrderControl(order);
+                _greenifyOrderControl = new GreenifyOrderControl(orderId);
                 ContentArea.Content = _greenifyOrderControl;
             }
 
