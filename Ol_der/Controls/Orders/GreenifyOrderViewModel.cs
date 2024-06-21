@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Ol_der.Controls.Orders
@@ -15,6 +17,7 @@ namespace Ol_der.Controls.Orders
         private OrderRepository _orderRepository;
         private Order _order;
         private string _quantity;
+        private int _orderId;
         private string _productDescription = "Válassz ki egy terméket a listából";
         private OrderItem _selectedOrderItem;
         private OrderItem _orderItem;
@@ -58,8 +61,8 @@ namespace Ol_der.Controls.Orders
             {
                 _selectedOrderItem = value;
                 Quantity = _selectedOrderItem?.QuantityReceived.ToString();
-                ProductDescription = $@"Ennyit rendeltünk:  {SelectedOrderItem.QuantityOrdered}
-Ebből: {SelectedOrderItem.Product.ItemNumber}";
+                ProductDescription = $@"Ennyit rendeltünk:  {SelectedOrderItem?.QuantityOrdered}
+Ebből: {SelectedOrderItem?.Product.ItemNumber}";
                 OnPropertyChanged();
             }
         }
@@ -68,10 +71,11 @@ Ebből: {SelectedOrderItem.Product.ItemNumber}";
         public ICommand UpdateOrderItemCommand { get; }
         public ICommand FinalizeGreenifyCommand { get; }
 
-        public GreenifyOrderViewModel(Order order)
+        public GreenifyOrderViewModel(int orderId)
         {
             _orderRepository = new OrderRepository();
-            _order = order;
+            _orderId = orderId;
+            LoadOrderAsync();
             UpdateOrderCommand = new RelayCommand(param => UpdateOrder());
             UpdateOrderItemCommand = new RelayCommand(param => UpdateOrderItem());
             FinalizeGreenifyCommand = new RelayCommand(param => FinalizeGreenify());
@@ -82,6 +86,12 @@ Ebből: {SelectedOrderItem.Product.ItemNumber}";
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public async Task LoadOrderAsync()
+        {
+            Order = await _orderRepository.GetOrderByOrderIdAsync(_orderId);
+        }
+
 
         public bool CheckQuantity()
         {
@@ -120,7 +130,7 @@ Ebből: {SelectedOrderItem.Product.ItemNumber}";
             SelectedOrderItem.QuantityReceived = int.Parse(Quantity);
             await _orderRepository.UpdateOrderItemAsync(SelectedOrderItem);
 
-            Order = await _orderRepository.GetOrderByOrderIdAsync(Order.OrderId);
+            await LoadOrderAsync();
 
             ProductDescription = "Válassz ki egy terméket a listából";
         }
@@ -140,7 +150,7 @@ Ebből: {SelectedOrderItem.Product.ItemNumber}";
 
             await _orderRepository.UpdateOrderAsync(Order);
 
-            Order = await _orderRepository.GetOrderByOrderIdAsync(Order.OrderId);
+            await LoadOrderAsync();
 
             MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen frissítve!");
             messageBoxOkWindow.ShowDialog();
@@ -149,38 +159,93 @@ Ebből: {SelectedOrderItem.Product.ItemNumber}";
 
         public async Task FinalizeGreenify()
         {
-            MessageBoxWindow messageBoxWindow = new("Biztosan véglegesíted a zöldítést?");
-            messageBoxWindow.ShowDialog();
-
-            if (messageBoxWindow.DialogResult != true)
+            try
             {
-                return;
-            }
+                MessageBoxWindow messageBoxWindow = new("Biztosan véglegesíted a zöldítést?");
+                messageBoxWindow.ShowDialog();
 
-            Order orderToAppend = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(Order.SupplierId);
-
-            if (orderToAppend == null)
-            {
-                MessageBoxOkWindow messageBoxOkWindow = new("Nincs nyitott rendelés, újat kezdtünk!");
-                messageBoxOkWindow.ShowDialog();
-
-                orderToAppend = new Order
+                if (messageBoxWindow.DialogResult != true)
                 {
-                    SupplierId = Order.SupplierId,
-                    OrderDate = DateTime.Now,
-                    OrderItems = new List<OrderItem>()
-                };
+                    return;
+                }
+
+                _order = await _orderRepository.GetOrderByOrderIdAsync(_orderId);
+                if (_order == null)
+                {
+                    // Handle case when the order is not found
+                    MessageBoxOkWindow messageBoxOkWindow = new("A rendelés nem található!");
+                    messageBoxOkWindow.ShowDialog();
+                    return;
+                }
+
+                Order orderToAppend = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(Order.SupplierId);
+
+                if (orderToAppend == null)
+                {
+                    MessageBoxOkWindow messageBoxOkWindow = new("Nincs nyitott rendelés, újat kezdtünk!");
+                    messageBoxOkWindow.ShowDialog();
+
+                    orderToAppend = new Order
+                    {
+                        SupplierId = _order.SupplierId,
+                        OrderDate = DateTime.Now,
+                        OrderItems = new List<OrderItem>()
+                    };
+                }
+
+                AppendOrderItems(orderToAppend, _order);
+
+                //_order.IsColored = true;
+                //_order.ReOrdered = true;
+
+                Debug.WriteLine("Updating order to append...");
+                await _orderRepository.UpdateOrderAsync(orderToAppend);
+                Debug.WriteLine("Order to append updated.");
+
+                Debug.WriteLine("Updating current order...");
+                await _orderRepository.UpdateOrderAsync(_order);
+                Debug.WriteLine("Current order updated.");
+
+                MessageBoxOkWindow messageBoxOkWindow1 = new("Sikeresen zöldítve! Kattints valamelyik menüpontra");
+                messageBoxOkWindow1.ShowDialog();
             }
+            catch (InvalidOperationException ex)
+            {
+                MessageBoxOkWindow errorMessageBox = new($"Hiba történt: {ex.Message}");
+                errorMessageBox.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBoxOkWindow errorMessageBox = new($"Hiba történt: {ex.Message}");
+                errorMessageBox.ShowDialog();
+            }
+        }
 
-            await _orderRepository.AppendMissingItemsToOrderAsync(orderToAppend, Order);
-
-            Order.IsColored = true;
-            Order.ReOrdered = true;
-
-            await _orderRepository.UpdateOrderAsync(Order);
-
-            MessageBoxOkWindow messageBoxOkWindow1 = new("Sikeresen zöldítve!");
-            messageBoxOkWindow1.ShowDialog();
+        public void AppendOrderItems(Order orderToAppend, Order closedOrder)
+        {
+            foreach (var item in closedOrder.OrderItems)
+            {
+                var missingQuantity = item.QuantityOrdered - item.QuantityReceived;
+                if (missingQuantity > 0)
+                {
+                    var existingItem = orderToAppend.OrderItems.FirstOrDefault(oi => oi.ProductId == item.ProductId);
+                    if (existingItem != null)
+                    {
+                        existingItem.QuantityOrdered += missingQuantity;
+                    }
+                    else
+                    {
+                        orderToAppend.OrderItems.Add(new OrderItem
+                        {
+                            ProductId = item.ProductId,
+                            Product = item.Product,
+                            QuantityOrdered = missingQuantity,
+                            QuantityReceived = 0,
+                            Comment = item.Comment
+                        });
+                    }
+                }
+            }
         }
 
     }
