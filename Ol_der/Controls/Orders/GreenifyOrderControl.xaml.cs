@@ -22,10 +22,10 @@ namespace Ol_der.Controls.Orders
     public partial class GreenifyOrderControl : UserControl
     {
         private GreenifyOrderViewModel _viewModel;
-        public GreenifyOrderControl(Order order)
+        public GreenifyOrderControl(int orderId)
         {
             InitializeComponent();
-            _viewModel = new GreenifyOrderViewModel(order);
+            _viewModel = new GreenifyOrderViewModel(orderId);
             this.DataContext = _viewModel;
         }
     }
