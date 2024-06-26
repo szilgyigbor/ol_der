@@ -410,7 +410,7 @@ namespace Ol_der.Controls.Orders
 
         public async Task UpdateOrderFromSales() 
         {
-            MessageBoxWindow messageBoxWindow = new("Biztosan átnézzük az eladásokat?");
+            MessageBoxWindow messageBoxWindow = new("Biztosan átnézzük az eladásokat és a csomagokat?");
             messageBoxWindow.ShowDialog();
 
             if (messageBoxWindow.DialogResult != true)
