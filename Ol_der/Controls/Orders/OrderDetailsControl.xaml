@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Ol_der.Controls.Orders.OrderDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ol_der.Controls.Orders"
+             mc:Ignorable="d" 
+             FontSize="18"
+             d:DesignHeight="850" d:DesignWidth="1300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.2*"/>
+            <ColumnDefinition Width="3.8*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox Text="Rendelés részletei" TextWrapping="Wrap" Margin="10" HorizontalAlignment="Center" FontSize="26" 
+                 Grid.Row="0" Grid.ColumnSpan="2" IsReadOnly="True" BorderThickness="0" Background="Transparent" 
+                 IsReadOnlyCaretVisible="False"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
+
+            <TextBlock Text="Megjegyzés" TextWrapping="Wrap" 
+                     Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
+
+            <TextBlock Text="{Binding Order.Comment}" Width="300" Background="AntiqueWhite" TextWrapping="Wrap" Height="Auto"
+                       Margin="10"/>
+
+        </StackPanel>
+
+        <ListView ItemsSource="{Binding Order.OrderItems}" Grid.Row="1" Grid.Column="1" Margin="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Rendeltük" DisplayMemberBinding="{Binding QuantityOrdered}" Width="90"/>
+                    <GridViewColumn Header="Jött" DisplayMemberBinding="{Binding QuantityReceived}" Width="60"/>
+                    <GridViewColumn Header="Cikkszám" DisplayMemberBinding="{Binding Product.ItemNumber}" Width="120"/>
+                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Product.Name}" Width="550"/>
+                    <GridViewColumn Header="Megjegyzés" DisplayMemberBinding="{Binding Comment}" Width="400"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="#F4F4F4"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
+</UserControl>
