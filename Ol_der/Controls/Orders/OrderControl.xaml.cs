@@ -25,6 +25,8 @@ namespace Ol_der.Controls.Orders
         private AddNewOrderControl _addOrderControl;
         private ShowAllOrderControl _showAllOrderControl;
         private GreenifyOrderControl _greenifyOrderControl;
+        private OrderDetailsControl _orderDetailsControl;
+
         public int NumberToShow { get; set; } = 100;
 
         public OrderControl()
@@ -142,7 +144,34 @@ namespace Ol_der.Controls.Orders
                 NumberToShow = dialog.NumberResult ?? 100;
                 await ShowAllOrder(NumberToShow);
             }
+        }
 
+        private async void ShowOrderDetails_Click(object sender, RoutedEventArgs e)
+        {
+            ContentArea.Content = _showAllOrderControl;
+            int orderId = _showAllOrderControl.GetSelectedOrderId();
+
+            if (orderId != -1)
+            {
+                OrderViewModel viewModel = new(NumberToShow);
+                Order order = await viewModel.GetOrderByOrderIdAsync(orderId);
+
+                if (order == null)
+                {
+                    MessageBoxOkWindow messageBoxWindow = new("Nem sikerült betölteni a rendelést");
+                    messageBoxWindow.ShowDialog();
+                    return;
+                }
+
+                _orderDetailsControl = new OrderDetailsControl(orderId);
+                ContentArea.Content = _orderDetailsControl;
+            }
+
+            else
+            {
+                MessageBoxOkWindow messageBoxWindow1 = new("Válassz ki egy rendelést a részletekhez!");
+                messageBoxWindow1.ShowDialog();
+            }
         }
 
         private async void btnDeleteOrder_Click(object sender, RoutedEventArgs e)
