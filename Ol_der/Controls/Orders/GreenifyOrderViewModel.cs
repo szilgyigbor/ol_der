@@ -169,15 +169,6 @@ Ebből: {SelectedOrderItem?.Product.ItemNumber}";
                     return;
                 }
 
-                _order = await _orderRepository.GetOrderByOrderIdAsync(_orderId);
-                if (_order == null)
-                {
-                    // Handle case when the order is not found
-                    MessageBoxOkWindow messageBoxOkWindow = new("A rendelés nem található!");
-                    messageBoxOkWindow.ShowDialog();
-                    return;
-                }
-
                 Order orderToAppend = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(Order.SupplierId);
 
                 if (orderToAppend == null)
@@ -191,22 +182,25 @@ Ebből: {SelectedOrderItem?.Product.ItemNumber}";
                         OrderDate = DateTime.Now,
                         OrderItems = new List<OrderItem>()
                     };
+
+                    await _orderRepository.AddOrderAsync(orderToAppend);
                 }
 
-                AppendOrderItems(orderToAppend, _order);
+                await AppendOrderItems(orderToAppend, Order);
 
                 //_order.IsColored = true;
                 //_order.ReOrdered = true;
 
                 Debug.WriteLine("Updating order to append...");
-                await _orderRepository.UpdateOrderAsync(orderToAppend);
+                
                 Debug.WriteLine("Order to append updated.");
 
                 Debug.WriteLine("Updating current order...");
-                await _orderRepository.UpdateOrderAsync(_order);
+                //await _orderRepository.UpdateOrderAsync(_order);
                 Debug.WriteLine("Current order updated.");
 
                 MessageBoxOkWindow messageBoxOkWindow1 = new("Sikeresen zöldítve! Kattints valamelyik menüpontra");
+                Order = new Order();
                 messageBoxOkWindow1.ShowDialog();
             }
             catch (InvalidOperationException ex)
@@ -221,7 +215,7 @@ Ebből: {SelectedOrderItem?.Product.ItemNumber}";
             }
         }
 
-        public void AppendOrderItems(Order orderToAppend, Order closedOrder)
+        public async Task AppendOrderItems(Order orderToAppend, Order closedOrder)
         {
             foreach (var item in closedOrder.OrderItems)
             {
@@ -232,17 +226,22 @@ Ebből: {SelectedOrderItem?.Product.ItemNumber}";
                     if (existingItem != null)
                     {
                         existingItem.QuantityOrdered += missingQuantity;
+                        await _orderRepository.UpdateOrderItemAsync(existingItem);
                     }
                     else
                     {
-                        orderToAppend.OrderItems.Add(new OrderItem
+                        OrderItem newItem = new OrderItem
                         {
+                            OrderId = orderToAppend.OrderId,
                             ProductId = item.ProductId,
                             Product = item.Product,
                             QuantityOrdered = missingQuantity,
                             QuantityReceived = 0,
                             Comment = item.Comment
-                        });
+                        };
+
+                        await _orderRepository.AddOrderItemAsync(newItem);
+
                     }
                 }
             }
