@@ -201,7 +201,26 @@ namespace Ol_der.Controls.Orders
                 await context.SaveChangesAsync();
             }
         }
-        
+
+        public async Task AddOrderItemAsync(OrderItem orderItem)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var product = await context.Products.Include(p => p.Supplier)
+                                                    .FirstOrDefaultAsync(p => p.ProductId == orderItem.ProductId);
+
+                if (product == null)
+                {
+                    throw new InvalidOperationException("Product not found.");
+                }
+
+                orderItem.Product = product;
+
+                context.OrderItems.Add(orderItem);
+                await context.SaveChangesAsync();
+            }
+        }
+
 
         public async Task CloseOrder(Order order)
         {
