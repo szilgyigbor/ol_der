@@ -36,7 +36,8 @@ namespace Ol_der.Controls.Orders
             {
                 var filePath = "orderItems.txt";
                 var sb = new StringBuilder();
-                sb.AppendLine("Darab".PadRight(8) + "Cikkszám".PadRight(12) + "Terméknév".PadRight(20));
+                sb.AppendLine("Darab".PadRight(8) + "Cikkszám".PadRight(12) + "Terméknév".PadRight(15) +
+                    "( Azonosító szám: " + Order.OrderId + " )" );
                 sb.AppendLine("----------------------------------------------------------------------------");
 
                 foreach (var item in Order.OrderItems)
