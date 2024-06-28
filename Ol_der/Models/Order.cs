@@ -18,6 +18,6 @@ namespace Ol_der.Models
         public bool IsColored { get; set; } = false;
         public bool IsOpen { get; set; } = true;
         public bool ReOrdered { get; set; } = false;
-        public string Comment { get; set; }
+        public string Comment { get; set; } = string.Empty;
     }
 }

@@ -16,8 +16,8 @@ namespace Ol_der.Models
         public PaymentType PaymentType { get; set; }
         public decimal TotalAmount { get; set; }
         public bool IsCardTransactionProcessed { get; set; }
-        public string CustomerName { get; set; }
-        public string Notes { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
+        public string Notes { get; set; } = string.Empty;
         public bool IsPackage { get; set; } = false;
     }
 }

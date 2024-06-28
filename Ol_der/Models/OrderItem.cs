@@ -18,6 +18,6 @@ namespace Ol_der.Models
         public Product Product { get; set; }
         public int QuantityOrdered { get; set; }
         public int QuantityReceived { get; set; }
-        public string Comment { get; set; }
+        public string Comment { get; set; } = string.Empty;
     }
 }
