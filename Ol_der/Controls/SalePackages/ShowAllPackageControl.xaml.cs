@@ -52,7 +52,7 @@ namespace Ol_der.Controls.SalePackages
         {
             if (SalesListView.SelectedItem is Sale SelectedSale)
             {
-                MessageBoxWindow messageBoxWindow = new("Biztosan törölni szeretnéd ezt az eladást?");
+                MessageBoxWindow messageBoxWindow = new("Biztosan törölni szeretnéd ezt az csomagot?");
                 messageBoxWindow.ShowDialog();
 
                 if (messageBoxWindow.DialogResult == true)
@@ -62,7 +62,7 @@ namespace Ol_der.Controls.SalePackages
             }
             else
             {
-                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy eladást a törléshez!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy csomagot a törléshez!");
                 messageBoxOkWindow.ShowDialog();
             }
 

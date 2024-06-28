@@ -56,7 +56,7 @@ namespace Ol_der.Controls.SalePackages
 
             else
             {
-                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy eladást a módosításhoz!");
+                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy csomagot a módosításhoz!");
                 messageBoxOkWindow.ShowDialog();
             }
         }
