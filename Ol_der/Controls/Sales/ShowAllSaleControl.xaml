@@ -22,7 +22,7 @@
                     </GroupStyle.ContainerStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Background="AliceBlue" Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="DemiBold" FontSize="24"/>
+                            <TextBlock Background="AliceBlue" Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="DemiBold" FontSize="22"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
@@ -31,10 +31,10 @@
                 <DataTemplate>
                     <StackPanel Margin="10">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="20" Margin="10" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="22" FontWeight="DemiBold" Margin="10 10 0 10" VerticalAlignment="Center"/>
-                            <TextBlock Text=".-Ft." FontSize="22" Margin="0 10 10 10" VerticalAlignment="Center"/>
-                            <TextBlock FontSize="22" Margin="10" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="18" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="20" FontWeight="DemiBold" Margin="10 10 0 10" VerticalAlignment="Center"/>
+                            <TextBlock Text=".-Ft." FontSize="20" Margin="0 10 10 10" VerticalAlignment="Center"/>
+                            <TextBlock FontSize="20" Margin="10" VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Text" Value="{Binding PaymentType}" />
@@ -58,8 +58,8 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBlock Text="{Binding CustomerName}" FontSize="22" Margin="15" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Notes}" FontSize="20" FontStyle="Italic" Margin="15" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding CustomerName}" FontSize="18" Margin="15" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Notes}" FontSize="18" FontStyle="Italic" Margin="15" VerticalAlignment="Center"/>
                         </StackPanel>
                         <ItemsControl ItemsSource="{Binding SaleItems}">
                             <ItemsControl.ItemTemplate>
