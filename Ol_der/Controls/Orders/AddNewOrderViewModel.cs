@@ -173,7 +173,6 @@ namespace Ol_der.Controls.Orders
                 IsOpen = true,
                 IsColored = false,
                 ReOrdered = false,
-                Comment = "Komment"
             };
             await _orderRepository.AddOrderAsync(newOrder);
 
