@@ -30,15 +30,19 @@ namespace Ol_der.Controls.Orders
             this.DataContext = _viewModel;
         }
 
-
         public int GetSelectedOrderId()
         {
             if (ProductsListView.SelectedItem is Order SelectedOrder)
             {
                 return SelectedOrder.OrderId;
             }
-
             return -1;
         }
+
+        public void SearchOrdersByProductNumber()
+        {
+            _viewModel.SearchOrdersByProductNumber();
+        }
+
     }
 }

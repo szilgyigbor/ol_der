@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -146,6 +147,13 @@ namespace Ol_der.Controls.Orders
             }
         }
 
+        private void ShowFilteredOrders_Click(object sender, RoutedEventArgs e)
+        {
+            _showAllOrderControl = new ShowAllOrderControl(NumberToShow);
+            _showAllOrderControl.SearchOrdersByProductNumber();
+            ContentArea.Content = _showAllOrderControl;
+        }
+
         private async void ShowOrderDetails_Click(object sender, RoutedEventArgs e)
         {
             ContentArea.Content = _showAllOrderControl;
@@ -178,16 +186,6 @@ namespace Ol_der.Controls.Orders
         {
             /*await _showAllSaleControl.DeleteSale();
             await ShowAllSale();*/
-        }
-
-        private async void SearchOrdersByProductNumber_Click(object sender, RoutedEventArgs e)
-        {
-            /*InputProductNumberWindow dialog = new InputProductNumberWindow();
-            if (dialog.ShowDialog() == true)
-            {
-                string productNumber = dialog.ProductNumber;
-                await ShowSalesByProductNumber(productNumber);
-            }*/
         }
     }
 }

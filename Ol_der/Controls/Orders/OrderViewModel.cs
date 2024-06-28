@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Ol_der.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using Ol_der.Controls.Sales;
+using System.Windows;
 
 namespace Ol_der.Controls.Orders
 {
@@ -91,6 +93,17 @@ namespace Ol_der.Controls.Orders
             Order OrderToGreenify = await _orderRepository.GetOrderByOrderIdAsync(orderId);
 
             return OrderToGreenify;
+        }
+
+        public async void SearchOrdersByProductNumber()
+        {
+            Sales.InputProductNumberWindow dialog = new Sales.InputProductNumberWindow();
+            if (dialog.ShowDialog() == true)
+            {
+                string productNumber = dialog.ProductNumber;
+                var orders = await _orderRepository.GetFilteredOrdersByProductNumberAsync(limitToShow ,productNumber);
+                Orders = new ObservableCollection<Order>(orders);
+            }
         }
     }
 

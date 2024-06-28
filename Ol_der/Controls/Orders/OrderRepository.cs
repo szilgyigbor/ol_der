@@ -31,6 +31,21 @@ namespace Ol_der.Controls.Orders
             }
         }
 
+        public async Task<List<Order>> GetFilteredOrdersByProductNumberAsync(int limit, string productNumber)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Orders
+                                    .OrderByDescending(o => o.OrderId)
+                                    .Include(o => o.Supplier)
+                                    .Include(o => o.OrderItems)
+                                        .ThenInclude(oi => oi.Product)
+                                    .Where(o => o.OrderItems.Any(oi => oi.Product.ItemNumber == productNumber))
+                                    .Take(limit)
+                                    .ToListAsync();
+            }
+        }
+
         public async Task AddOrderAsync(Order newOrder)
         {
             using (var context = ApplicationDbContextFactory.Create())
