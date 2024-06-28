@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Ol_der.Controls.Orders
 {
@@ -146,7 +147,7 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public async Task UpdateOrderFromSalesForSupplierAsync(int supplierId, int monthsToLookBack = 1)
+        public async Task UpdateOrderFromSalesForSupplierAsync(int supplierId, int monthsToLookBack = 3)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
@@ -196,6 +197,7 @@ namespace Ol_der.Controls.Orders
                         openOrder.OrderItems.Add(new OrderItem
                         {
                             ProductId = saleItem.ProductId,
+                            Product = saleItem.Product,
                             QuantityOrdered = saleItem.Quantity,
                             QuantityReceived = 0
                         });
