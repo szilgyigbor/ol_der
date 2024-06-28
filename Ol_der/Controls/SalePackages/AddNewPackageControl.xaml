@@ -29,6 +29,9 @@
             <TextBox Margin="5" x:Name="txtCustomerName" Width="400"/>
         </WrapPanel>
 
+        <Button Grid.Row="0" Content="Mentés" Background="#E5F5E5" Margin="5" Width="200" FontSize="22" 
+                Click="btnSaveSale_Click" HorizontalAlignment="Right"/>
+
         <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
             <Label Content="Teljes összeg:" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBox Margin="5" x:Name="txtTotalAmount" Width="100" HorizontalContentAlignment="Right"/>
@@ -40,20 +43,21 @@
             <TextBox Margin="5" x:Name="txtNotes" AcceptsReturn="False" Width="700"/>
         </WrapPanel>
 
-        <Label Content="Termékek hozzáadása a vásárláshoz:" Margin="0 30 0 0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22"/>
+        <Label Content="Termékek hozzáadása a vásárláshoz:" Margin="0 30 0 0" Grid.Row="4" VerticalAlignment="Center" 
+               HorizontalAlignment="Left" FontSize="22"/>
 
-        <WrapPanel Grid.Row="5" HorizontalAlignment="Center">
+        <WrapPanel Grid.Row="5" HorizontalAlignment="Left">
             <Label Content="Keresett cikkszám:" VerticalAlignment="Center"/>
             <TextBox x:Name="txtItemNumber" Margin="5" Width="200" KeyDown="txtItemNumber_KeyDown"/>
         </WrapPanel>
 
-        <WrapPanel Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
+        <WrapPanel Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
             <Button Content="Termék hozzáadása" Background="#E5F0F9" Margin="5 5 25 5" Click="btnSearchProduct_Click" Width="220" FontSize="22"/>
             <Button Content="Total számítása" Background="#E5F0F9" Margin="5" FontSize="18" Click="UpdateItem_Click"/>
             <Button Content="Termék törlése a listából" Background="#E5F0F9" Margin="5" FontSize="18" Click="DeleteItem_Click"/>
         </WrapPanel>
 
-        <ListBox x:Name="lstSaleItems" Grid.Row="7" Margin="5">
+        <ListBox x:Name="lstSaleItems" Grid.Row="7" Margin="5"  Background="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -69,7 +73,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
-        <Button Grid.Row="8" Content="Mentés" Background="#E5F5E5" Margin="5" Width="200" FontSize="26" Click="btnSaveSale_Click"/>
     </Grid>
 </UserControl>
