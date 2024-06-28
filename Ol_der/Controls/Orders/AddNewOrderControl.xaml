@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Ol_der.Controls.Orders"
              mc:Ignorable="d" 
              FontSize="18"
-             d:DesignHeight="850" d:DesignWidth="1300">
+             d:DesignHeight="950" d:DesignWidth="1800">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -27,19 +27,17 @@
             <TextBlock Text="Termék hozzáadása a rendeléshez" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0"/>
             
 
-            <WrapPanel Grid.Row="5" HorizontalAlignment="Center">
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Left" >
                 <Label Content="Keresett cikkszám:" VerticalAlignment="Center"/>
                 <TextBox x:Name="txtItemNumber" Text="{Binding ItemNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200"/>
-            </WrapPanel>
-
-            <WrapPanel Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Keresés" Command="{Binding SearchProductCommand}" Background="#E5F0F9" Margin="5" Width="140" FontSize="22"/>
+                <Button Content="Keresés" Command="{Binding SearchProductCommand}" Background="#E5F0F9" Margin="5" Width="120" 
+                        FontSize="20"/>
             </WrapPanel>
 
             <StackPanel Orientation="Horizontal">
                 <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
                 <TextBlock Text="db" Width="40"/>
-                <TextBlock Text="{Binding ProductDescription}" Background="White" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="20"/>
+                <TextBlock Text="{Binding ProductDescription}" Background="Transparent" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="20"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2"  Margin="5">
