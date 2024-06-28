@@ -23,15 +23,13 @@
                  IsReadOnlyCaretVisible="False"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
-
+            <Button Content="Mentés megrendeléshez" Command="{Binding SaveToFileCommand}" Margin="10"/>
             <TextBlock Text="Megjegyzés" TextWrapping="Wrap" 
-                     Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
-
+                     Grid.Row="1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
             <TextBlock Text="{Binding Order.Comment}" Width="300" Background="AntiqueWhite" TextWrapping="Wrap" Height="Auto"
                        Margin="10"/>
-
         </StackPanel>
-
+        
         <ListView ItemsSource="{Binding Order.OrderItems}" Grid.Row="1" Grid.Column="1" Margin="10">
             <ListView.View>
                 <GridView>
