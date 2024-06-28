@@ -21,7 +21,7 @@ namespace Ol_der.Controls.SalePackages
                         .Where(s => s.PaymentType == PaymentType.Transfer && s.IsPackage)
                         .Sum(s => s.TotalAmount);
                 string formattedDate = date.ToString("yyyy-MM-dd, dddd", huCulture);
-                return $"{formattedDate}:  (Napi össz csomag bevétel: {totalTransfer:0}.-Ft)";
+                return $"{formattedDate}:  (Napi össz csomag érték: {totalTransfer:0}.-Ft)";
             }
             return null;
         }
