@@ -34,7 +34,9 @@ namespace Ol_der.Controls.Orders
         {
             try
             {
-                var filePath = "orderItems.txt";
+                var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                var filePath = Path.Combine(desktopPath, "orderItems.txt");
+
                 var sb = new StringBuilder();
                 sb.AppendLine("Darab".PadRight(8) + "Cikkszám".PadRight(12) + "Terméknév".PadRight(15) +
                     "( Azonosító szám: " + Order.OrderId + " )" );
