@@ -19,11 +19,14 @@
             </ListView.View>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="#F4F4F4"/>
+                    <Setter Property="Background" Value="LightGray"/>
                     <Setter Property="Foreground" Value="Black"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsColored}" Value="True">
                             <Setter Property="Background" Value="#8FBC8F"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsOpen}" Value="True">
+                            <Setter Property="Background" Value="#F4F4F4"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
