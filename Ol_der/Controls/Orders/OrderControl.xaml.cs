@@ -115,9 +115,10 @@ namespace Ol_der.Controls.Orders
 
                 if (order.IsColored == true)
                 {
-                    MessageBoxOkWindow messageBoxWindow = new("A rendelés már zöldítve lett!");
+                    MessageBoxOkWindow messageBoxWindow = new("A rendelés már zöldítve lett! Így már nem lesz átemelve semmi!");
                     messageBoxWindow.ShowDialog();
-                    return;
+                    _greenifyOrderControl = new GreenifyOrderControl(orderId);
+                    ContentArea.Content = _greenifyOrderControl;
                 }
 
                 _greenifyOrderControl = new GreenifyOrderControl(orderId);
