@@ -33,9 +33,9 @@
 
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
                 <Button Content="Termékek" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Show_All_Product_Click"/>
+                <Button Content="Keresés" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Search_Product_Click"/>
                 <Button Content="Új Termék" Background="#E5F5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Add_New_Product_Click"/>
                 <Button Content="Szerkesztés" Background="#F9F9E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Modify_Product_Click"/>
-                <Button Content="Keresés" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Search_Product_Click"/>
                 <Button Content="Törlés" Background="#F9E5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Delete_Product_Click"/>
             </StackPanel>
 
