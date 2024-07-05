@@ -12,8 +12,8 @@ using Ol_der.Data;
 namespace Ol_der.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240626080613_AllIdCanBeNull")]
-    partial class AllIdCanBeNull
+    [Migration("20240705155425_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace Ol_der.Migrations
 
             modelBuilder.Entity("Ol_der.Models.Order", b =>
                 {
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("OrderId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -62,11 +62,11 @@ namespace Ol_der.Migrations
 
             modelBuilder.Entity("Ol_der.Models.OrderItem", b =>
                 {
-                    b.Property<int?>("OrderItemId")
+                    b.Property<int>("OrderItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("OrderItemId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -95,11 +95,11 @@ namespace Ol_der.Migrations
 
             modelBuilder.Entity("Ol_der.Models.Product", b =>
                 {
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ProductId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -124,11 +124,11 @@ namespace Ol_der.Migrations
 
             modelBuilder.Entity("Ol_der.Models.Sale", b =>
                 {
-                    b.Property<int?>("SaleId")
+                    b.Property<int>("SaleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("SaleId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SaleId"));
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -161,11 +161,11 @@ namespace Ol_der.Migrations
 
             modelBuilder.Entity("Ol_der.Models.SaleItem", b =>
                 {
-                    b.Property<int?>("SaleItemId")
+                    b.Property<int>("SaleItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("SaleItemId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SaleItemId"));
 
                     b.Property<bool>("IsOrdered")
                         .HasColumnType("bit");
@@ -197,11 +197,11 @@ namespace Ol_der.Migrations
 
             modelBuilder.Entity("Ol_der.Models.Supplier", b =>
                 {
-                    b.Property<int?>("SupplierId")
+                    b.Property<int>("SupplierId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("SupplierId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SupplierId"));
 
                     b.Property<string>("Address")
                         .IsRequired()
