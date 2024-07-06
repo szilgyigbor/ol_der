@@ -111,3 +111,47 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Notes] (
+    [NoteId] int NOT NULL IDENTITY,
+    [Content] nvarchar(max) NOT NULL,
+    [CreationDate] datetime2 NOT NULL,
+    [IsCompleted] bit NOT NULL,
+    [IsDeleted] bit NOT NULL,
+    CONSTRAINT [PK_Notes] PRIMARY KEY ([NoteId])
+);
+GO
+
+CREATE TABLE [Warranty] (
+    [WarrantyId] int NOT NULL IDENTITY,
+    [CustomerName] nvarchar(max) NOT NULL,
+    [Email] nvarchar(max) NOT NULL,
+    [PhoneNumber] int NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [CreationDate] datetime2 NOT NULL,
+    [FulfilledDate] datetime2 NOT NULL,
+    [ProductId] int NOT NULL,
+    [SupplierId] int NOT NULL,
+    [IsCompleted] bit NOT NULL,
+    [IsDeleted] bit NOT NULL,
+    CONSTRAINT [PK_Warranty] PRIMARY KEY ([WarrantyId]),
+    CONSTRAINT [FK_Warranty_Products_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([ProductId]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Warranty_Suppliers_SupplierId] FOREIGN KEY ([SupplierId]) REFERENCES [Suppliers] ([SupplierId]) ON DELETE CASCADE
+);
+GO
+
+CREATE INDEX [IX_Warranty_ProductId] ON [Warranty] ([ProductId]);
+GO
+
+CREATE INDEX [IX_Warranty_SupplierId] ON [Warranty] ([SupplierId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240706070120_AddWarriantyAndNotes', N'8.0.4');
+GO
+
+COMMIT;
+GO
+
