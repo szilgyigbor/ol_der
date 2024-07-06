@@ -49,6 +49,14 @@ namespace Ol_der.Data
             modelBuilder.Entity<Product>()
                 .Property(p => p.ProductId)
                 .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Warranty>()
+                .Property(w => w.WarrantyId)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Note>()
+                .Property(n => n.NoteId)
+                .ValueGeneratedOnAdd();
         }
 
         public DbSet<Product> Products { get; set; }
@@ -57,6 +65,8 @@ namespace Ol_der.Data
         public DbSet<SaleItem> SaleItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Warranty> Warranty { get; set; }
+        public DbSet<Note> Notes { get; set; }
 
     }
 }
