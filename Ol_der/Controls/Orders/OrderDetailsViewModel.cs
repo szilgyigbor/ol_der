@@ -16,8 +16,17 @@ namespace Ol_der.Controls.Orders
     internal class OrderDetailsViewModel : INotifyPropertyChanged
     {
         private OrderRepository _orderRepository;
+        private Order _order;
 
-        public Order Order { get; set; }
+        public Order Order
+        {
+            get { return _order; }
+            set
+            {
+                _order = value;
+                OnPropertyChanged();
+            }
+        }
         public ICommand SaveToTxtFileCommand { get; }
         public ICommand SaveToXlsxFileCommand { get; }
 
