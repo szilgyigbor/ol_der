@@ -221,7 +221,8 @@ namespace Ol_der.Controls.Sales
                         ProductId = item.ProductId,
                         Quantity = item.Quantity,
                         Price = item.Price,
-                        IsOrdered = item.IsOrdered
+                        IsOrdered = item.IsOrdered,
+                        NeedToOrder = item.NeedToOrder
                     });
                 }
                 await _saleViewModel.UpdateSaleAsync(_saleToSave);
@@ -239,7 +240,8 @@ namespace Ol_der.Controls.Sales
                         ProductId = item.ProductId,
                         Quantity = item.Quantity,
                         Price = item.Price,
-                        IsOrdered = item.IsOrdered
+                        IsOrdered = item.IsOrdered,
+                        NeedToOrder = item.NeedToOrder
                     });
                 }
                 await _saleViewModel.AddSaleAsync(_saleToSave);
