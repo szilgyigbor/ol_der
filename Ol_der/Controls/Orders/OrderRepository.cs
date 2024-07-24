@@ -154,11 +154,14 @@ namespace Ol_der.Controls.Orders
                 var lookBackDate = DateTime.Now.AddMonths(-monthsToLookBack);
 
                 var saleItems = await context.SaleItems
-                    .Where(si => si.Product.SupplierId == supplierId && !si.IsOrdered && si.Product.Supplier.IsDeleted == false)
+                    .Where(si => si.Product.SupplierId == supplierId
+                                && !si.IsOrdered
+                                && si.NeedToOrder
+                                && si.Product.Supplier.IsDeleted == false
+                                && si.Sale.Date >= lookBackDate
+                                && si.Sale.Date <= DateTime.Now)
                     .Include(si => si.Product)
                     .ThenInclude(p => p.Supplier)
-                    .Include(si => si.Product)
-                    .Where(si => si.Product.SupplierId == supplierId && si.Sale.Date >= lookBackDate && si.Sale.Date <= DateTime.Now)
                     .ToListAsync();
 
                 if (!saleItems.Any())
