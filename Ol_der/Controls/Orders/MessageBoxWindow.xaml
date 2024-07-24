@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ol_der.Controls.Orders"
         mc:Ignorable="d"
         FontSize="20"
-        Title="MessageBoxWindow" Height="200" Width="600">
+        Title="MessageBoxWindow" Height="200" Width="800">
     <StackPanel Margin="10">
         <TextBlock x:Name="messageToShow" Text="Message" Margin="10" HorizontalAlignment="Center"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
