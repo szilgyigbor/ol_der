@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace Ol_der.Controls.Sales
 {
@@ -38,6 +39,7 @@ namespace Ol_der.Controls.Sales
             _saleId = -1;
             _saleToSave = new Sale();
             this.DataContext = _saleToSave;
+            txtSaleDate.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
             LoadPaymentTypes();
         }
 
@@ -53,6 +55,7 @@ namespace Ol_der.Controls.Sales
                 {
                     txtCustomerName.Text = _saleToSave.CustomerName;
                     txtNotes.Text = _saleToSave.Notes;
+                    txtSaleDate.Text = _saleToSave.Date.ToString("yyyy-MM-dd HH:mm");
                     cmbPaymentType.SelectedItem = _saleToSave.PaymentType;
                     txtTotalAmount.Text = _saleToSave.TotalAmount.ToString("0");
                     lstSaleItems.Items.Clear();
@@ -192,7 +195,6 @@ namespace Ol_der.Controls.Sales
             }
 
             await SaveSale();
-            ClearFields();
         }
 
         private async Task SaveSale()
@@ -209,6 +211,17 @@ namespace Ol_der.Controls.Sales
             _saleToSave.TotalAmount = totalAmount;
             _saleToSave.Notes = txtNotes.Text;
             _saleToSave.IsCardTransactionProcessed = chkIsTransactionProcessed.IsChecked ?? false;
+
+            if (DateTime.TryParseExact(txtSaleDate.Text, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime newDate))
+            {
+                _saleToSave.Date = newDate;
+            }
+            else
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("A dátum formátuma nem megfelelő. Kérlek, használd a következő formátumot: yyyy-MM-dd HH:mm");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
 
             if (_saleId > 0)
             {
@@ -232,7 +245,6 @@ namespace Ol_der.Controls.Sales
             }
             else
             {
-                _saleToSave.Date = DateTime.Now;
                 foreach (SaleItem item in lstSaleItems.Items)
                 {
                     _saleToSave.SaleItems.Add(new SaleItem
@@ -252,6 +264,8 @@ namespace Ol_der.Controls.Sales
 
             _saleToSave = new Sale();
             _saleId = -1;
+
+            ClearFields();
         }
 
         private void ClearFields()
