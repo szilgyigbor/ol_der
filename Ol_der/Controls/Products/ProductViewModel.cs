@@ -85,7 +85,11 @@ namespace Ol_der.Controls.Products
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return context.Products.Where(p => !p.IsDeleted).Include(p => p.Supplier).ToList();
+                return context.Products
+                              .Where(p => !p.IsDeleted)
+                              .Include(p => p.Supplier)
+                              .OrderByDescending(p => p.ProductId)
+                              .ToList();
             }
         }
 
