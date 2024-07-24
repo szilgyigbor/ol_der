@@ -17,11 +17,17 @@ namespace Ol_der.Controls.SalePackages
             {
                 DateTime date = (DateTime)group.Name;
                 CultureInfo huCulture = new CultureInfo("hu-HU");
+
                 decimal totalTransfer = group.Items.OfType<Sale>()
                         .Where(s => s.PaymentType == PaymentType.Transfer && s.IsPackage)
                         .Sum(s => s.TotalAmount);
+
+                int packageCount = group.Items.OfType<Sale>()
+                        .Count(s => s.PaymentType == PaymentType.Transfer && s.IsPackage);
+
                 string formattedDate = date.ToString("yyyy-MM-dd, dddd", huCulture);
-                return $"{formattedDate}:  (Napi össz csomag érték: {totalTransfer:0}.-Ft)";
+
+                return $"{formattedDate}: (Napi össz csomag érték: {totalTransfer:0}.-Ft, Csomagok száma: {packageCount})";
             }
             return null;
         }
