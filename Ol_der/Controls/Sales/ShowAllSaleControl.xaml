@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:DateToDayConverter x:Key="DateToDayConverter"/>
-        <local:IsOrderedToTextConverter x:Key="IsOrderedToTextConverter"/>
+        <local:OrderStatusConverter x:Key="OrderStatusConverter"/>
     </UserControl.Resources>
     <Grid>
         <ListView x:Name="SalesListView" ItemsSource="{Binding GroupedSales.View}">
@@ -71,7 +71,7 @@
                                         <TextBlock Text="{Binding Product.Name}" Margin="15 0 0 0"/>
                                         <TextBlock Text="Eladási ár(/db):" Width="140" Margin="30 0 0 0"/>
                                         <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Margin="0"/>
-                                        <TextBlock Text="{Binding IsOrdered, Converter={StaticResource IsOrderedToTextConverter}}" Margin="15 0 0 0"/>
+                                        <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}" Margin="15 0 0 0"/>
                                     </WrapPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
