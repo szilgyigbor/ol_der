@@ -191,14 +191,6 @@ namespace Ol_der.Controls.Sales
                 return;
             }
 
-
-            /*MessageBoxResult result = MessageBox.Show($"Biztosan {saveOrModify} akarod az eladást?", "Eladás mentése", MessageBoxButton.YesNo);
-
-            if (result == MessageBoxResult.No)
-            {
-                return;
-            }*/
-
             await SaveSale();
             ClearFields();
         }
