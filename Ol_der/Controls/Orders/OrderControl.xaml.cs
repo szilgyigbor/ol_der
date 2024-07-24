@@ -69,12 +69,19 @@ namespace Ol_der.Controls.Orders
             if (orderId != -1)
             {
                 OrderViewModel viewModel = new(NumberToShow);
-                Order order = await viewModel.GetLastOpenOrderByOrderIdAsync(orderId);
+                Order order = await viewModel.GetOrderByOrderIdAsync(orderId);
 
-                if (order == null)
+                if (!order.IsOpen)
                 {
-                    MessageBoxOkWindow messageBoxWindow = new("A kiválasztott rendelés már le van zárva, nem módosítható!");
+                    MessageBoxWindow messageBoxWindow = new("A kiválasztott rendelés már le van zárva, biztosan módosítani akarod?");
                     messageBoxWindow.ShowDialog();
+
+                    if (messageBoxWindow.DialogResult == true)
+                    {
+                        _addOrderControl = new AddNewOrderControl(order, order.SupplierId);
+                        ContentArea.Content = _addOrderControl;
+                    }
+
                     return;
                 }
 
