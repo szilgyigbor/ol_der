@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Sales"
              mc:Ignorable="d" 
-             FontSize="20"
+             FontSize="18"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -85,16 +85,18 @@
         <ListBox x:Name="lstSaleItems" Grid.Row="7" Margin="5" Background="Transparent">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
-                        <TextBlock Text="db" Width="40"/>
-                        <TextBlock Text="{Binding Product.ItemNumber}" Width="120"/>
-                        <TextBlock Text="{Binding Product.Name}" Width="550"/>
-                        <TextBox Text="{Binding Price, Mode=TwoWay, StringFormat=F0}" Width="100"/>
-                        <TextBlock Text=".-Ft." Width="40" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                        <CheckBox x:Name="chkNeedToOrder" Content="legyen rendelve?" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding NeedToOrder, Mode=TwoWay}">
-                        </CheckBox>
-                    </StackPanel>
+                    <Border BorderBrush="LightGray" BorderThickness="2">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
+                            <TextBlock Text="db" Width="40"/>
+                            <TextBlock Text="{Binding Product.ItemNumber}" Width="120"/>
+                            <TextBlock Text="{Binding Product.Name}" Width="550"/>
+                            <TextBox Text="{Binding Price, Mode=TwoWay, StringFormat=F0}" Width="100"/>
+                            <TextBlock Text=".-Ft." Width="40" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                            <CheckBox x:Name="chkNeedToOrder" Content="legyen rendelve?" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding NeedToOrder, Mode=TwoWay}">
+                            </CheckBox>
+                        </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
