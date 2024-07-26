@@ -23,7 +23,9 @@
                     </GroupStyle.ContainerStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Background="AliceBlue" Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="DemiBold" FontSize="22"/>
+                            <Border BorderBrush="LightBlue" BorderThickness="4">
+                                <TextBlock Background="AliceBlue" Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="DemiBold" FontSize="22"/>
+                            </Border>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
@@ -48,15 +50,17 @@
                         <ItemsControl ItemsSource="{Binding SaleItems}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <WrapPanel Margin="5">
-                                        <TextBlock Text="{Binding Quantity}" Margin="10 0 0 0"/>
-                                        <TextBlock Text=" db" Width="40" Margin="2 0 0 0"/>
-                                        <TextBlock Text="{Binding Product.ItemNumber}" Margin="10 0 0 0"/>
-                                        <TextBlock Text="{Binding Product.Name}" Margin="15 0 0 0"/>
-                                        <TextBlock Text="Eladási ár(/db):" Width="140" Margin="30 0 0 0"/>
-                                        <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Margin="0"/>
-                                        <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}" Margin="15 0 0 0"/>
-                                    </WrapPanel>
+                                    <Border BorderBrush="LightGray" BorderThickness="2">
+                                        <WrapPanel Margin="3">
+                                            <TextBlock Text="{Binding Quantity}" Width="30"/>
+                                            <TextBlock Text=" db" Width="40"/>
+                                            <TextBlock Text="{Binding Product.ItemNumber}" Width="100"/>
+                                            <TextBlock Text="{Binding Product.Name}"  Width="500"/>
+                                            <TextBlock Text="Eladási ár(/db):" Width="140"/>
+                                            <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Width="80"/>
+                                            <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}" Width="200"/>
+                                        </WrapPanel>
+                                    </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
