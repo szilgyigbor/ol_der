@@ -22,7 +22,7 @@ namespace Ol_der.Controls.Sales
                 decimal totalRN = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.RN && !s.IsPackage).Sum(s => s.TotalAmount);
                 decimal totalTransfer = group.Items.OfType<Sale>().Where(s => s.PaymentType == PaymentType.Transfer && !s.IsPackage).Sum(s => s.TotalAmount);
                 string formattedDate = date.ToString("yyyy-MM-dd, dddd", huCulture);
-                return $"{formattedDate}:  (Cash: {totalCash:0}.-Ft,   RN: {totalRN:0}.-Ft,   Card: {totalCard:0}.-Ft,   Transfer: {totalTransfer:0}.-Ft   Napi teljes bevétel: {totalCash + totalCard + totalRN + totalTransfer:0}.-Ft)";
+                return $"{formattedDate}: (Cash: {totalCash:0}.-Ft,   RN: {totalRN:0}.-Ft,   Card: {totalCard:0}.-Ft,   Transfer: {totalTransfer:0}.-Ft   Napi teljes bevétel: {totalCash + totalCard + totalRN + totalTransfer:0}.-Ft)";
             }
             return null;
         }
