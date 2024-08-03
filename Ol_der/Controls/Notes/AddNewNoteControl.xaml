@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Notes"
              mc:Ignorable="d" 
+             FontSize="18"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -13,11 +14,10 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" FontSize="20"  Content="Jegyzet:" HorizontalContentAlignment="Center"/>
-        <TextBox Grid.Row="1" Text="{Binding Note.Content, Mode=TwoWay}" Width="500" AcceptsReturn="True" TextWrapping="Wrap" Height="100" VerticalScrollBarVisibility="Auto"/>
+        <Label Grid.Row="0" FontSize="22"  Content="Jegyzet:" HorizontalContentAlignment="Center"/>
+        <TextBox Grid.Row="1" Text="{Binding Note.Content, Mode=TwoWay}" Width="600" AcceptsReturn="True" TextWrapping="Wrap" Height="125" VerticalScrollBarVisibility="Auto"/>
 
-        <Button Grid.Row="2" Content="Mentés" Background="#E5F5E5" Margin="5" Width="200" FontSize="20" 
+        <Button Grid.Row="2" Content="Mentés" Background="#E5F5E5" Margin="5" Width="200" FontSize="22" 
             Command="{Binding SaveNoteCommand}" HorizontalAlignment="Center"/>
-
     </Grid>
 </UserControl>
