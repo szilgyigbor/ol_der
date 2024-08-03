@@ -20,9 +20,12 @@ namespace Ol_der.Controls.Notes
     /// </summary>
     public partial class ShowAllNoteControl : UserControl
     {
+        private ShowAllNoteViewModel _viewModel;
         public ShowAllNoteControl()
         {
             InitializeComponent();
+            _viewModel = new ShowAllNoteViewModel();
+            this.DataContext = _viewModel;
         }
     }
 }
