@@ -11,11 +11,23 @@ namespace Ol_der.Controls.Notes
 {
     internal class NoteRepository
     {
-        public async Task<List<Note>> GetAllNoteAsync()
+        public async Task<List<Note>> GetAmountOfNotes(int limit)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                return await context.Notes.Where(n => !n.IsDeleted).ToListAsync();
+                return await context.Notes
+                    .OrderByDescending(n => n.NoteId)
+                    .Take(limit)
+                    .ToListAsync();
+            }
+        }
+
+        public async Task AddNewNote (Note note)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Notes.Add(note);
+                await context.SaveChangesAsync();
             }
         }
     }
