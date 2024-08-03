@@ -21,12 +21,12 @@ namespace Ol_der.Controls.Notes
     /// </summary>
     public partial class NoteControl : UserControl
     {
-        private NoteControlViewModel _viewModel;
+        private NoteViewModel _viewModel;
 
         public NoteControl()
         {
             InitializeComponent();
-            _viewModel = new NoteControlViewModel();
+            _viewModel = new NoteViewModel();
             DataContext = _viewModel;
         }
     }
