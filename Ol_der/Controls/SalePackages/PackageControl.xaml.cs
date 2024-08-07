@@ -61,7 +61,7 @@ namespace Ol_der.Controls.SalePackages
             }
         }
 
-        private async Task ShowAllSale(int limit = 100)
+        private async Task ShowAllSale(int limit = 1000)
         {
             await _showAllPackageControl.RefreshSales(limit);
             ContentArea.Content = _showAllPackageControl;
@@ -72,7 +72,7 @@ namespace Ol_der.Controls.SalePackages
             InputPackageNumberWindow dialog = new InputPackageNumberWindow();
             if (dialog.ShowDialog() == true)
             {
-                int numberToShow = dialog.NumberResult ?? 100;
+                int numberToShow = dialog.NumberResult ?? 1000;
                 await ShowAllSale(numberToShow);
             }
         }
