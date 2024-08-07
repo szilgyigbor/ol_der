@@ -1,7 +1,10 @@
-﻿using Ol_der.Models;
+﻿using Ol_der.Controls.Orders;
+using Ol_der.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -11,21 +14,40 @@ namespace Ol_der.Controls.Notes
 {
     public class ShowAllNoteViewModel : INotifyPropertyChanged
     {
-        private List<Note> _notes;
         private readonly NoteRepository _noteRepository;
+        private ObservableCollection<Note> _notes;
+        private Note _selectedNote;
 
-        public List<Note> Notes
+        public ObservableCollection<Note> Notes
         {
             get => _notes;
             set
             {
-                _notes = value;
-                OnPropertyChanged();
+                if (_notes != value)
+                {
+                    _notes = value;
+                    OnPropertyChanged();
+                }
             }
         }
+
+        public Note SelectedNote
+        {
+            get => _selectedNote;
+            set
+            {
+                if (_selectedNote != value)
+                {
+                    _selectedNote = value;
+                    OnPropertyChanged(nameof(SelectedNote));
+                }
+            }
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ShowAllNoteViewModel(int limit = 100)
+        public ShowAllNoteViewModel(int limit = 1000)
         {
             _noteRepository = new NoteRepository();
             InitializeAsync(limit);
@@ -33,12 +55,14 @@ namespace Ol_der.Controls.Notes
 
         public async Task InitializeAsync(int limit)
         {
-            Notes = await _noteRepository.GetAmountOfNotes(limit);
+            var notes = await _noteRepository.GetAmountOfNotes(limit);
+            Notes = new ObservableCollection<Note>(notes); 
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }
