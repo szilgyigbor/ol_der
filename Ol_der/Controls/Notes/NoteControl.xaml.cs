@@ -1,4 +1,6 @@
 ﻿using Ol_der.Controls.Orders;
+using Ol_der.Controls.Suppliers;
+using Ol_der.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +24,51 @@ namespace Ol_der.Controls.Notes
     public partial class NoteControl : UserControl
     {
         private NoteViewModel _viewModel;
+        private ShowAllNoteControl _showAllNoteControl;
+        private AddNewNoteControl _addNewNoteControl;
 
         public NoteControl()
         {
             InitializeComponent();
             _viewModel = new NoteViewModel();
             DataContext = _viewModel;
+            ShowAllNote();
+        }
+
+        private void ShowAllNote()
+        {
+            _showAllNoteControl = new ShowAllNoteControl();
+            ContentArea.Content = _showAllNoteControl;
+        }
+
+        private void Show_All_Note_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAllNote();
+        }
+
+        private void Add_Note_Click(object sender, RoutedEventArgs e)
+        {
+            _addNewNoteControl = new AddNewNoteControl(null);
+            ContentArea.Content = _addNewNoteControl;
+        }
+
+        private void Modify_Note_Click(object sender, RoutedEventArgs e)
+        {
+            Note SelectedNote = _showAllNoteControl.GetSelectedNote();
+
+            if (SelectedNote == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs kiválasztott jegyzet!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            else
+            {
+                _addNewNoteControl = new AddNewNoteControl(SelectedNote);
+                ContentArea.Content = _addNewNoteControl;
+            }
+
         }
     }
 }
