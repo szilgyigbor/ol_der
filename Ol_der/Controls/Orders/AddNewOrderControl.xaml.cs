@@ -22,12 +22,20 @@ namespace Ol_der.Controls.Orders
     public partial class AddNewOrderControl : UserControl
     {
         private AddNewOrderViewModel _viewModel;
+        public Action OnOrderFinished;
 
         public AddNewOrderControl(Order order, int supplierId)
         {
             InitializeComponent();
             _viewModel = new(order, supplierId);
             this.DataContext = _viewModel;
+            _viewModel.OnOrderFinished -= ActivateEvent;
+            _viewModel.OnOrderFinished += ActivateEvent;
+        }
+
+        public void ActivateEvent()
+        {
+            OnOrderFinished?.Invoke();
         }
     }
 }
