@@ -57,8 +57,8 @@
                                         <WrapPanel Margin="3">
                                             <TextBlock Text="{Binding Quantity}" Width="30"/>
                                             <TextBlock Text=" db" Width="40"/>
-                                            <TextBlock Text="{Binding Product.ItemNumber}" Width="100"/>
-                                            <TextBlock Text="{Binding Product.Name}"  Width="500"/>
+                                            <TextBlock Text="{Binding Product.ItemNumber}" Width="150"/>
+                                            <TextBlock Text="{Binding Product.Name}"  Width="650"/>
                                             <TextBlock Text="Eladási ár(/db):" Width="140"/>
                                             <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Width="80"/>
                                             <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}" Width="200"/>
