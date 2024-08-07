@@ -22,7 +22,7 @@ namespace Ol_der.Controls.Notes
             }
         }
 
-        public async Task AddNewNote (Note note)
+        public async Task AddNewNote(Note note)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
@@ -31,11 +31,20 @@ namespace Ol_der.Controls.Notes
             }
         }
 
-        public async Task UpdateNote (Note note)
+        public async Task UpdateNote(Note note)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
                 context.Notes.Update(note);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteNote(Note note)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Notes.Remove(note);
                 await context.SaveChangesAsync();
             }
         }
