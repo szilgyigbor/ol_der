@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,11 @@ namespace Ol_der.Controls.Notes
             InitializeComponent();
             _viewModel = new ShowAllNoteViewModel();
             this.DataContext = _viewModel;
+        }
+
+        public Note GetSelectedNote()
+        {
+            return _viewModel.SelectedNote;
         }
     }
 }
