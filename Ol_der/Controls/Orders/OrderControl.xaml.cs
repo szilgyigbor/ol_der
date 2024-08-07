@@ -60,6 +60,9 @@ namespace Ol_der.Controls.Orders
            
             _addOrderControl = new AddNewOrderControl(order, supplierId);
             ContentArea.Content = _addOrderControl;
+
+            _addOrderControl.OnOrderFinished -= Refresh;
+            _addOrderControl.OnOrderFinished += Refresh;
         }
 
         private async void ModifyOrder_Click(object sender, RoutedEventArgs e)
@@ -81,6 +84,9 @@ namespace Ol_der.Controls.Orders
                     {
                         _addOrderControl = new AddNewOrderControl(order, order.SupplierId);
                         ContentArea.Content = _addOrderControl;
+
+                        _addOrderControl.OnOrderFinished -= Refresh;
+                        _addOrderControl.OnOrderFinished += Refresh;
                     }
 
                     return;
@@ -88,6 +94,9 @@ namespace Ol_der.Controls.Orders
 
                 _addOrderControl = new AddNewOrderControl(order, order.SupplierId);
                 ContentArea.Content = _addOrderControl;
+
+                _addOrderControl.OnOrderFinished -= Refresh;
+                _addOrderControl.OnOrderFinished += Refresh;
             }
 
             else
