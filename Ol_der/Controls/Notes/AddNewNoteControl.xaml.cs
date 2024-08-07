@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Ol_der.Models;
+
 namespace Ol_der.Controls.Notes
 {
     /// <summary>
@@ -22,10 +24,10 @@ namespace Ol_der.Controls.Notes
     {
         private AddNewNoteViewModel _viewModel;
 
-        public AddNewNoteControl()
+        public AddNewNoteControl(Note NoteToUpdate)
         {
             InitializeComponent();
-            _viewModel = new AddNewNoteViewModel();
+            _viewModel = new AddNewNoteViewModel(NoteToUpdate);
             DataContext = _viewModel;
         }
     }
