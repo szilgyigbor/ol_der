@@ -26,6 +26,7 @@ namespace Ol_der.Controls.Notes
         private NoteViewModel _viewModel;
         private ShowAllNoteControl _showAllNoteControl;
         private AddNewNoteControl _addNewNoteControl;
+        private NoteDetailControl _noteDetailControl;
 
         public NoteControl()
         {
@@ -94,6 +95,24 @@ namespace Ol_der.Controls.Notes
                     _viewModel.DeleteNote(SelectedNote);
                     ShowAllNote();
                 }
+            }
+        }
+
+        private void Note_Detail_Click(object sender, RoutedEventArgs e)
+        {
+            Note SelectedNote = _showAllNoteControl.GetSelectedNote();
+
+            if (SelectedNote == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs kiválasztott jegyzet a nagy nézethez!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            else
+            {
+                _noteDetailControl = new NoteDetailControl(SelectedNote);
+                ContentArea.Content = _noteDetailControl;
             }
         }
     }
