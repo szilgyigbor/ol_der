@@ -24,6 +24,8 @@ namespace Ol_der.Controls.Notes
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public event Action OnNoteAdded;
         public ICommand SaveNoteCommand { get; }
 
         public AddNewNoteViewModel(Note noteToUpdate)
@@ -58,6 +60,7 @@ namespace Ol_der.Controls.Notes
 
                 MessageBoxOkWindow messageBoxWindow = new("Jegyzet sikeresen mentve");
                 messageBoxWindow.ShowDialog();
+                OnNoteAdded?.Invoke();
             }
             else 
             {
@@ -65,8 +68,8 @@ namespace Ol_der.Controls.Notes
 
                 MessageBoxOkWindow messageBoxWindow = new("Jegyzet sikeresen módosítva");
                 messageBoxWindow.ShowDialog();
+                OnNoteAdded?.Invoke();
             }
-            
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

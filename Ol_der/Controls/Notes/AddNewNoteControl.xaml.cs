@@ -23,12 +23,20 @@ namespace Ol_der.Controls.Notes
     public partial class AddNewNoteControl : UserControl
     {
         private AddNewNoteViewModel _viewModel;
+        public event Action OnNoteAdded;
 
         public AddNewNoteControl(Note NoteToUpdate)
         {
             InitializeComponent();
             _viewModel = new AddNewNoteViewModel(NoteToUpdate);
             DataContext = _viewModel;
+            _viewModel.OnNoteAdded -= ActivateEvent;
+            _viewModel.OnNoteAdded += ActivateEvent;
+        }
+
+        public void ActivateEvent()
+        {
+            OnNoteAdded?.Invoke();
         }
     }
 }

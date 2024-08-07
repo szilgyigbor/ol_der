@@ -50,6 +50,8 @@ namespace Ol_der.Controls.Notes
         {
             _addNewNoteControl = new AddNewNoteControl(null);
             ContentArea.Content = _addNewNoteControl;
+            _addNewNoteControl.OnNoteAdded -= ShowAllNote;
+            _addNewNoteControl.OnNoteAdded += ShowAllNote;
         }
 
         private void Modify_Note_Click(object sender, RoutedEventArgs e)
@@ -67,8 +69,9 @@ namespace Ol_der.Controls.Notes
             {
                 _addNewNoteControl = new AddNewNoteControl(SelectedNote);
                 ContentArea.Content = _addNewNoteControl;
+                _addNewNoteControl.OnNoteAdded -= ShowAllNote;
+                _addNewNoteControl.OnNoteAdded += ShowAllNote;
             }
-
         }
     }
 }
