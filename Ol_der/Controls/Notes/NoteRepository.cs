@@ -30,5 +30,14 @@ namespace Ol_der.Controls.Notes
                 await context.SaveChangesAsync();
             }
         }
+
+        public async Task UpdateNote (Note note)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Notes.Update(note);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }
