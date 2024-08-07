@@ -32,6 +32,7 @@
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
                 <Button Content="Jegyzetek" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Show_All_Note_Click"/>
                 <Button Content="Jegyzet keresés" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" />
+                <Button Content="Nagyítás" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Note_Detail_Click" />
                 <Button Content="Új jegyzet" Background="#E5F5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Add_Note_Click"/>
                 <Button Content="Szerkesztés" Background="#F9F9E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Modify_Note_Click"/>
                 <Button Content="Törlés" Background="#F9E5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Delete_Note_Click"/>
