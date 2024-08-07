@@ -73,5 +73,28 @@ namespace Ol_der.Controls.Notes
                 _addNewNoteControl.OnNoteAdded += ShowAllNote;
             }
         }
+
+        private void Delete_Note_Click(object sender, RoutedEventArgs e)
+        {
+            Note SelectedNote = _showAllNoteControl.GetSelectedNote();
+
+            if (SelectedNote == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs kiválasztott jegyzet, mit törölnél!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            else
+            {
+                MessageBoxWindow messageBoxWindow = new($"Biztosan törölni akarod a {SelectedNote.NoteId}. jegyzetet?");
+                messageBoxWindow.ShowDialog();
+                if (messageBoxWindow.DialogResult == true)
+                {
+                    _viewModel.DeleteNote(SelectedNote);
+                    ShowAllNote();
+                }
+            }
+        }
     }
 }
