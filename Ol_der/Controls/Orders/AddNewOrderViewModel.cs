@@ -24,7 +24,8 @@ namespace Ol_der.Controls.Orders
         private OrderItem _selectedOrderItem;
         private OrderItem _orderItem;
 
-        
+
+        public Action OnOrderFinished;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public Order Order
@@ -208,6 +209,7 @@ namespace Ol_der.Controls.Orders
 
                 ProductDescription += product.ItemNumber + "   " + product.Name;
 
+                ItemNumber = "";
             }
             else
             {
@@ -280,7 +282,8 @@ namespace Ol_der.Controls.Orders
             MessageBoxOkWindow messageBoxWindow2 = new("Sikeresen hozzáadva!");
             messageBoxWindow2.ShowDialog();
 
-            Order = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(_supplierId);
+            int orderId = Order.OrderId;
+            Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
         }
 
         public async Task SaveComment()
@@ -313,16 +316,28 @@ namespace Ol_der.Controls.Orders
 
             await _orderRepository.UpdateOrderAsync(Order);
 
-            Order = await _orderRepository.GetLastOpenOrderBySupplierIdAsync(_supplierId);
-
             MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen frissítve!");
             messageBoxOkWindow.ShowDialog();
+
+            int orderId = Order.OrderId;
+            Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
         }
 
 
 
         public async Task CloseAndSaveOrder()
         {
+            if (Order.IsOpen == false)
+            {
+                MessageBoxOkWindow messageBoxWindow0 = new("A rendelés már le van zárva, de rámentettünk!");
+                messageBoxWindow0.ShowDialog();
+                Order.OrderDate = DateTime.Now;
+                await _orderRepository.UpdateOrderAsync(Order);
+                OnOrderFinished?.Invoke();
+                return;
+            }
+
+
             MessageBoxWindow messageBoxWindow = new("Biztosan le akarod zárni a rendelést?");
             messageBoxWindow.ShowDialog();
 
@@ -344,11 +359,10 @@ namespace Ol_der.Controls.Orders
 
             await _orderRepository.UpdateOrderAsync(Order);
 
-            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen lezárva, új rendelést nyitottunk!");
+            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen lezárva!");
             messageBoxOkWindow.ShowDialog();
 
-            Order = await CreateOrderAsync();
-
+            OnOrderFinished?.Invoke();
         }
 
         public async Task DeleteOrderItemFromOrder()
@@ -373,7 +387,8 @@ namespace Ol_der.Controls.Orders
             MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen törölve!");
             messageBoxOkWindow.ShowDialog();
 
-            Order = await _orderRepository.GetLastOpenOrderByOrderIdAsync(Order.OrderId);
+            int orderId = Order.OrderId;
+            Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
         }
 
         public async Task UpdateOrderItem()
@@ -404,7 +419,8 @@ namespace Ol_der.Controls.Orders
             MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen módosítva!");
             messageBoxOkWindow.ShowDialog();
 
-            Order = await _orderRepository.GetLastOpenOrderByOrderIdAsync(Order.OrderId);
+            int orderId = Order.OrderId;
+            Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
         }
 
         public async Task UpdateOrderFromSales() 
@@ -422,7 +438,8 @@ namespace Ol_der.Controls.Orders
             MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen frissítve!");
             messageBoxOkWindow.ShowDialog();
 
-            Order = await _orderRepository.GetLastOpenOrderByOrderIdAsync(Order.OrderId);
+            int orderId = Order.OrderId;
+            Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
         }
     }
 }
