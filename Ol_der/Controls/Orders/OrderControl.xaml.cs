@@ -39,6 +39,7 @@ namespace Ol_der.Controls.Orders
 
         public void Refresh()
         {
+            _showAllOrderControl = new ShowAllOrderControl(NumberToShow);
             ContentArea.Content = _showAllOrderControl;
         }
 
@@ -126,10 +127,14 @@ namespace Ol_der.Controls.Orders
                     messageBoxWindow.ShowDialog();
                     _greenifyOrderControl = new GreenifyOrderControl(orderId);
                     ContentArea.Content = _greenifyOrderControl;
+                    _greenifyOrderControl.OnGreened -= Refresh;
+                    _greenifyOrderControl.OnGreened += Refresh;
                 }
 
                 _greenifyOrderControl = new GreenifyOrderControl(orderId);
                 ContentArea.Content = _greenifyOrderControl;
+                _greenifyOrderControl.OnGreened -= Refresh;
+                _greenifyOrderControl.OnGreened += Refresh;
             }
 
             else

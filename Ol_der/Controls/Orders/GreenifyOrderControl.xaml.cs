@@ -22,11 +22,19 @@ namespace Ol_der.Controls.Orders
     public partial class GreenifyOrderControl : UserControl
     {
         private GreenifyOrderViewModel _viewModel;
+        public Action OnGreened;
         public GreenifyOrderControl(int orderId)
         {
             InitializeComponent();
             _viewModel = new GreenifyOrderViewModel(orderId);
             this.DataContext = _viewModel;
+            _viewModel.OnGreened -= ActivateEvent;
+            _viewModel.OnGreened += ActivateEvent;
+        }
+
+        public void ActivateEvent()
+        {
+            OnGreened?.Invoke();
         }
     }
 }

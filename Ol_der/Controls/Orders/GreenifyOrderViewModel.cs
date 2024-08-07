@@ -22,6 +22,7 @@ namespace Ol_der.Controls.Orders
         private OrderItem _selectedOrderItem;
         private OrderItem _orderItem;
 
+        public Action OnGreened;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string Quantity
@@ -199,9 +200,10 @@ Ebből: {SelectedOrderItem?.Product.ItemNumber}";
                 await _orderRepository.UpdateOrderAsync(_order);
                 Debug.WriteLine("Current order updated.");
 
-                MessageBoxOkWindow messageBoxOkWindow1 = new("Sikeresen zöldítve! Kattints valamelyik menüpontra");
+                MessageBoxOkWindow messageBoxOkWindow1 = new("Sikeresen zöldítve!");
                 Order = new Order();
                 messageBoxOkWindow1.ShowDialog();
+                OnGreened?.Invoke();
             }
             catch (InvalidOperationException ex)
             {
