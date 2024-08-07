@@ -14,9 +14,16 @@ namespace Ol_der.Controls.Notes
 {
     public class NoteViewModel
     {
+        private NoteRepository _noteRepository;
+
         public NoteViewModel()
         {
+            _noteRepository = new NoteRepository();
         }
 
+        public Task DeleteNote(Note NoteToRemove) 
+        {
+            return _noteRepository.DeleteNote(NoteToRemove);
+        }
     }
 }
