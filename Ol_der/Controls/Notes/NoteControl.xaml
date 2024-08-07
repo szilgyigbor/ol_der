@@ -6,16 +6,6 @@
              xmlns:local="clr-namespace:Ol_der.Controls.Notes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        
-        <DataTemplate DataType="{x:Type local:AddNewNoteViewModel}">
-            <local:AddNewNoteControl/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type local:ShowAllNoteViewModel}">
-            <local:ShowAllNoteControl/>
-        </DataTemplate>
-        
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -40,17 +30,17 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-                <Button Content="Jegyzetek" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Command="{Binding ShowAllNotesCommand}"/>
-                <Button Content="Jegyzet keresés" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Command="{Binding SearchNotesCommand}"/>
-                <Button Content="Új jegyzet" Background="#E5F5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Command="{Binding AddNoteCommand}"/>
-                <Button Content="Szerkesztés" Background="#F9F9E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Command="{Binding ModifyNoteCommand}"/>
-                <Button Content="Törlés" Background="#F9E5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Command="{Binding DeleteNoteCommand}"/>
+                <Button Content="Jegyzetek" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Show_All_Note_Click"/>
+                <Button Content="Jegyzet keresés" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" />
+                <Button Content="Új jegyzet" Background="#E5F5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Add_Note_Click"/>
+                <Button Content="Szerkesztés" Background="#F9F9E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="Modify_Note_Click"/>
+                <Button Content="Törlés" Background="#F9E5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" />
             </StackPanel>
 
             <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
                           Background="Black" VerticalAlignment="Stretch"/>
 
-            <ContentControl Grid.Column="1" VerticalAlignment="Top" Margin="5" Content="{Binding CurrentViewModel}"/>
+            <ContentControl Grid.Column="1" VerticalAlignment="Top" Margin="5" x:Name="ContentArea"/>
         </Grid>
     </Grid>
 </UserControl>
