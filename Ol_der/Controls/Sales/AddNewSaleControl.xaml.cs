@@ -31,6 +31,8 @@ namespace Ol_der.Controls.Sales
         private int _saleId;
         private Sale _saleToSave;
 
+        public Action OnFinished;
+
         public AddNewSaleControl()
         {
             InitializeComponent();
@@ -187,6 +189,8 @@ namespace Ol_der.Controls.Sales
             }
 
             await SaveSale();
+
+            OnFinished?.Invoke();
         }
 
         private async Task SaveSale()
