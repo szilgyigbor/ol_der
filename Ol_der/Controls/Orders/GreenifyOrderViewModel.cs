@@ -62,8 +62,7 @@ namespace Ol_der.Controls.Orders
             {
                 _selectedOrderItem = value;
                 Quantity = _selectedOrderItem?.QuantityReceived.ToString();
-                ProductDescription = $@"Ennyit rendeltünk:  {SelectedOrderItem?.QuantityOrdered}
-Ebből: {SelectedOrderItem?.Product.ItemNumber}";
+                ProductDescription = $@"Ennyit rendeltünk:  {SelectedOrderItem?.QuantityOrdered} Ebből: {SelectedOrderItem?.Product.ItemNumber}";
                 OnPropertyChanged();
             }
         }
