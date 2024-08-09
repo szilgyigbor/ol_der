@@ -110,8 +110,6 @@ namespace Ol_der.Controls.Orders
 
         public ICommand AddItemCommand { get; }
 
-        public ICommand SaveCommentCommand { get; }
-
         public ICommand UpdateOrderCommand { get; }
 
         public ICommand DeleteOrderItemFromOrderCommand { get; }
@@ -129,7 +127,6 @@ namespace Ol_der.Controls.Orders
             _supplierId = supplierId;
             SearchProductCommand = new RelayCommand(param => SearchProduct());
             AddItemCommand = new RelayCommand(param => AddItemToOrder());
-            SaveCommentCommand = new RelayCommand(param => SaveComment());
             UpdateOrderCommand = new RelayCommand(param => UpdateOrder());
             DeleteOrderItemFromOrderCommand = new RelayCommand(param => DeleteOrderItemFromOrder());
             UpdateOrderItemCommand = new RelayCommand(param => UpdateOrderItem());
@@ -284,22 +281,9 @@ namespace Ol_der.Controls.Orders
 
             int orderId = Order.OrderId;
             Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
-        }
 
-        public async Task SaveComment()
-        {
-            MessageBoxWindow messageBoxWindow = new("Biztosan el akarod menteni a megjegyzést?");
-            messageBoxWindow.ShowDialog();
-
-            if (messageBoxWindow.DialogResult != true)
-            {
-                return;
-            }
-
-            await _orderRepository.UpdateOrderAsync(Order);
-
-            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen elmentve!");
-            messageBoxOkWindow.ShowDialog();
+            Quantity = "";
+            ProductDescription = "";
         }
 
         public async Task UpdateOrder()
@@ -322,8 +306,6 @@ namespace Ol_der.Controls.Orders
             int orderId = Order.OrderId;
             Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
         }
-
-
 
         public async Task CloseAndSaveOrder()
         {
