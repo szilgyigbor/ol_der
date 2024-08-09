@@ -40,6 +40,16 @@ namespace Ol_der.Controls.SalePackages
         {
             _addPackageControl = new AddNewPackageControl();
             ContentArea.Content = _addPackageControl;
+
+            _addPackageControl.OnFinished -= async () =>
+            {
+                await ShowAllSale();
+            };
+
+            _addPackageControl.OnFinished += async () =>
+            {
+                await ShowAllSale();
+            };
         }
 
         private async void ModifySale_Click(object sender, RoutedEventArgs e)
@@ -52,6 +62,16 @@ namespace Ol_der.Controls.SalePackages
                 _addPackageControl = new AddNewPackageControl();
                 await _addPackageControl.LoadExistsSale(saleId);
                 ContentArea.Content = _addPackageControl;
+
+                _addPackageControl.OnFinished -= async () =>
+                {
+                    await ShowAllSale();
+                };
+
+                _addPackageControl.OnFinished += async () =>
+                {
+                    await ShowAllSale();
+                };
             }
 
             else

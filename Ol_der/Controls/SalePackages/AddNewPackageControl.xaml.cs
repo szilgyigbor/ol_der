@@ -30,6 +30,7 @@ namespace Ol_der.Controls.SalePackages
         private PackageViewModel _packageViewModel;
         private int _saleId;
         private Sale _saleToSave;
+        public Action OnFinished;
 
         public AddNewPackageControl()
         {
@@ -174,6 +175,7 @@ namespace Ol_der.Controls.SalePackages
             }
 
             await SaveSale();
+            OnFinished?.Invoke();
         }
 
         private async Task SaveSale()
