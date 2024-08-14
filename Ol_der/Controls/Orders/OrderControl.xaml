@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Orders"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="1450" d:DesignWidth="1920">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -27,18 +27,18 @@
 
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.2*"/>
-                <ColumnDefinition Width="8.8*"/>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="9.1*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-                <Button Content="Rendelések" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="ShowAllOrder_Click"/>
-                <Button Content="Termék keresés" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="ShowFilteredOrders_Click"/>
-                <Button Content="Részletek" Background="#E5F0F9" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="ShowOrderDetails_Click"/>
-                <Button Content="Új rendelés" Background="#E5F5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="AddOrder_Click"/>
-                <Button Content="Szerkesztés" Background="#F9F9E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="ModifyOrder_Click"/>
-                <Button Content="Zöldítés" Background="#8FBC8F" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="GreenifyOrder_Click"/>
-                <Button Content="Törlés" Background="#F9E5E5" Margin="5 5 5 15" Padding="15 5 15 5" FontSize="20" Click="btnDeleteOrder_Click"/>
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Margin="0 10 0 10">
+                <Button Content="Rendelések" Background="#E5F0F9" Margin="0 5 3 15" Padding="5" FontSize="20" Click="ShowAllOrder_Click"/>
+                <Button Content="Termék keresés" Background="#E5F0F9" Margin="0 5 3 15" Padding="5" FontSize="20" Click="ShowFilteredOrders_Click"/>
+                <Button Content="Részletek" Background="#E5F0F9" Margin="0 5 3 15" Padding="5" FontSize="20" Click="ShowOrderDetails_Click"/>
+                <Button Content="Új rendelés" Background="#E5F5E5" Margin="0 5 3 15" Padding="5" FontSize="20" Click="AddOrder_Click"/>
+                <Button Content="Szerkesztés" Background="#F9F9E5" Margin="0 5 3 15" Padding="5" FontSize="20" Click="ModifyOrder_Click"/>
+                <Button Content="Zöldítés" Background="#8FBC8F" Margin="0 5 3 15" Padding="5" FontSize="20" Click="GreenifyOrder_Click"/>
+                <Button Content="Törlés" Background="#F9E5E5" Margin="0 5 3 15" Padding="5" FontSize="20" Click="btnDeleteOrder_Click"/>
             </StackPanel>
 
             <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
