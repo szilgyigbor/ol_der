@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Orders"
              mc:Ignorable="d" 
-             FontSize="18"
-             d:DesignHeight="850" d:DesignWidth="1300">
+             FontSize="16"
+             d:DesignHeight="1350" d:DesignWidth="1500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,8 +14,8 @@
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.2*"/>
-            <ColumnDefinition Width="3.8*"/>
+            <ColumnDefinition Width="1.0*"/>
+            <ColumnDefinition Width="4.0*"/>
         </Grid.ColumnDefinitions>
 
         <TextBox Text="Rendelés részletei" TextWrapping="Wrap" Margin="10" HorizontalAlignment="Center" FontSize="26" 
@@ -23,12 +23,12 @@
                  IsReadOnlyCaretVisible="False"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
-            <Button Content="Mentés txt fájlba" Command="{Binding SaveToTxtFileCommand}" Margin="10"/>
-            <Button Content="Mentés xlsx fájlba" Command="{Binding SaveToXlsxFileCommand}" Margin="10"/>
+            <Button Content="Mentés txt fájlba" Background="#E5F5E5" Command="{Binding SaveToTxtFileCommand}" Margin="10" Padding="3" Width="150"/>
+            <Button Content="Mentés xlsx fájlba" Background="#E5F5E5" Command="{Binding SaveToXlsxFileCommand}" Margin="10" Padding="3" Width="150"/>
             <TextBlock Text="Megjegyzés" TextWrapping="Wrap" 
                      Grid.Row="1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
-            <TextBlock Text="{Binding Order.Comment}" Width="300" Background="AntiqueWhite" TextWrapping="Wrap" Height="Auto"
-                       Margin="10"/>
+            <TextBlock Text="{Binding Order.Comment}" Width="300" Background="#ffffff" TextWrapping="Wrap" Height="500"
+                       Margin="5 5 2 5"/>
         </StackPanel>
         
         <ListView ItemsSource="{Binding Order.OrderItems}" Grid.Row="1" Grid.Column="1" Margin="10">
