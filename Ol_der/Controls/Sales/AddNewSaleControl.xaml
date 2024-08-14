@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Sales"
              mc:Ignorable="d" 
-             FontSize="18"
+             FontSize="16"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -29,7 +29,7 @@
             <TextBox Margin="5" x:Name="txtCustomerName" Width="400"/>
         </WrapPanel>
 
-        <Button Grid.Row="0" Content="Mentés" Background="#E5F5E5" Margin="5" Width="200" FontSize="22" 
+        <Button Grid.Row="0" Content="Mentés" Background="#E5F5E5" Margin="5" Width="120" FontSize="22" 
                 Click="btnSaveSale_Click" HorizontalAlignment="Right"/>
 
         <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
@@ -77,7 +77,7 @@
         </WrapPanel>
 
         <WrapPanel Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Content="Termék hozzáadása" Background="#E5F0F9" Margin="5 5 25 5" Click="btnSearchProduct_Click" Width="220" FontSize="22"/>
+            <Button Content="Termék hozzáadása" Background="#E5F5E5" Margin="5 5 25 5" Click="btnSearchProduct_Click" Width="180" FontSize="18"/>
             <Button Content="Total számítása" Background="#E5F0F9" Margin="5" FontSize="18" Click="UpdateItem_Click"/>
             <Button Content="Termék törlése a listából" Background="#E5F0F9" Margin="5" FontSize="18" Click="DeleteItem_Click"/>
         </WrapPanel>
@@ -89,8 +89,8 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
                             <TextBlock Text="db" Width="40"/>
-                            <TextBlock Text="{Binding Product.ItemNumber}" Width="150"/>
-                            <TextBlock Text="{Binding Product.Name}" Width="550"/>
+                            <TextBlock Text="{Binding Product.ItemNumber}" Width="140"/>
+                            <TextBlock Text="{Binding Product.Name}" Width="600"/>
                             <TextBox Text="{Binding Price, Mode=TwoWay, StringFormat=F0}" Width="100"/>
                             <TextBlock Text=".-Ft." Width="40" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                             <CheckBox x:Name="chkNeedToOrder" Content="legyen rendelve?" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding NeedToOrder, Mode=TwoWay}">
