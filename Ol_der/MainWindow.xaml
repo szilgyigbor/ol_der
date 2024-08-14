@@ -10,8 +10,8 @@
         Background="#F4F4F4">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.2*"/>
-            <ColumnDefinition Width="8.8*"/>
+            <ColumnDefinition Width="1.0*"/>
+            <ColumnDefinition Width="9.0*"/>
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0" Background="DarkSeaGreen">
