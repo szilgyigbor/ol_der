@@ -22,11 +22,19 @@ namespace Ol_der.Controls.Warranties
     public partial class AddOrUpdateWarrantyControl : UserControl
     {
         private AddOrUpdateWarrantyViewModel _viewModel;
+        public Action OnWarrantyFinished;
         public AddOrUpdateWarrantyControl(Warranty warrantyToUpdate = null)
         {
             InitializeComponent();
             _viewModel = new(warrantyToUpdate);
             this.DataContext = _viewModel;
+            _viewModel.OnWarrantyFinished -= ActivateEvent;
+            _viewModel.OnWarrantyFinished += ActivateEvent;
+        }
+
+        public void ActivateEvent()
+        {
+            OnWarrantyFinished?.Invoke();
         }
     }
 }
