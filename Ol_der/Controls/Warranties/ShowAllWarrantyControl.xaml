@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1450" d:DesignWidth="1920">
     <Grid>
-        <ListView x:Name="ProductsListView" Background="White" AlternationCount="2" ItemsSource="{Binding Warranties}">
+        <ListView x:Name="WarrantiesListView" Background="White" AlternationCount="2" ItemsSource="{Binding Warranties}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Azonosító" DisplayMemberBinding="{Binding WarrantyId}" Width="100"/>
