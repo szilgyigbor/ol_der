@@ -44,22 +44,7 @@ namespace Ol_der.Controls.Warranties
                 };
 
                 context.Warranties.Add(warranty);
-
-                try
-                {
-                    await context.SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
-                    // A kivétel üzenetének naplózása vagy megjelenítése
-                    Console.WriteLine("Hiba történt a SaveChangesAsync során: " + ex.Message);
-
-                    // További részletes információk (opcionális)
-                    Console.WriteLine("StackTrace: " + ex.StackTrace);
-
-                    // Opcionálisan újra dobhatod a kivételt, hogy a hívó kód is kezelhesse
-                    throw;
-                }
+                await context.SaveChangesAsync();
 
                 return warranty;
             }
@@ -109,22 +94,7 @@ namespace Ol_der.Controls.Warranties
             using (var context = ApplicationDbContextFactory.Create())
             {
                 context.Warranties.Add(warranty);
-                try
-                {
-                    await context.SaveChangesAsync();
-                }
-
-                catch (Exception ex)
-                {
-                    // A kivétel üzenetének naplózása vagy megjelenítése
-                    Console.WriteLine("Hiba történt a SaveChangesAsync során: " + ex.Message);
-
-                    // További részletes információk (opcionális)
-                    Console.WriteLine("StackTrace: " + ex.StackTrace);
-
-                    // Opcionálisan újra dobhatod a kivételt, hogy a hívó kód is kezelhesse
-                    throw;
-                }
+                await context.SaveChangesAsync();
             }
         }
     }
