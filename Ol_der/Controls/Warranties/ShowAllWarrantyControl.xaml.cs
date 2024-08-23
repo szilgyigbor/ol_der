@@ -13,16 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ol_der.Controls.Warranty
+namespace Ol_der.Controls.Warranties
 {
     /// <summary>
     /// Interaction logic for ShowAllWarrantyControl.xaml
     /// </summary>
     public partial class ShowAllWarrantyControl : UserControl
     {
-        public ShowAllWarrantyControl()
+        private ShowAllWarrantyViewModel _viewModel;
+        public ShowAllWarrantyControl(int limit)
         {
             InitializeComponent();
+            _viewModel = new(limit);
+            this.DataContext = _viewModel;
         }
     }
 }
