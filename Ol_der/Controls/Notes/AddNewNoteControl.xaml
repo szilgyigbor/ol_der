@@ -17,7 +17,7 @@
         <Label Grid.Row="0" FontSize="22"  Content="Jegyzet:" HorizontalContentAlignment="Center"/>
         <TextBox Grid.Row="1" Text="{Binding Note.Content, Mode=TwoWay}" Width="600" AcceptsReturn="True" TextWrapping="Wrap" Height="225" VerticalScrollBarVisibility="Auto"/>
 
-        <CheckBox x:Name="chkNeedToOrder" Content="Teljesítve?" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding Note.IsCompleted, Mode=TwoWay}">
+        <CheckBox x:Name="chkIsFinished" Content="Teljesítve?" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding Note.IsCompleted, Mode=TwoWay}">
         </CheckBox>
         <Button Grid.Row="2" Content="Mentés" Background="#E5F5E5" Margin="5" Width="200" FontSize="22" 
             Command="{Binding SaveNoteCommand}" HorizontalAlignment="Center"/>
