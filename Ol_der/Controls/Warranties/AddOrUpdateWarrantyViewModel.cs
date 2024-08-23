@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace Ol_der.Controls.Warranties
         private Warranty _warranty;
         private bool _isUpdate;
 
+        public Action OnWarrantyFinished;
         public string DateString
         {
             get { return _dateString; }
@@ -67,6 +69,10 @@ namespace Ol_der.Controls.Warranties
             set
             {
                 _warranty = value;
+
+                var sortedStatuses = new ObservableCollection<WarrantyStatus>(_warranty.WarrantyStatuses.OrderByDescending(s => s.StatusDate));
+                _warranty.WarrantyStatuses = sortedStatuses;
+
                 OnPropertyChanged(nameof(Warranty));
             }
         }
@@ -86,7 +92,7 @@ namespace Ol_der.Controls.Warranties
             CheckWarranty(warranty);
             AddProductCommand = new RelayCommand(param => SearchProductbyItemNumberAsync());
             AddWarrantyStatusCommand = new RelayCommand(param => AddWarrantyStatus());
-            SaveWarrantyCommand = new RelayCommand(param => SaveWarrantyAsync());
+            SaveWarrantyCommand = new RelayCommand(param => SaveOrUpdateWarrantyAsync());
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -107,13 +113,34 @@ namespace Ol_der.Controls.Warranties
             {
                 Warranty = warranty;
                 DateString = Warranty.CreationDate.ToString("yyyy-MM-dd HH:mm");
+                ProductDescription = Warranty.Product.ItemNumber + "  " + Warranty.Product.Name;
                 _isUpdate = true;
             }
         }
 
-        public async Task UpdateWarranty()
+        public async Task SaveOrUpdateWarrantyAsync()
         {
+            if (_isUpdate)
+            {
+                await UpdateWarrantyAsync();
+            }
+            else
+            {
+                await SaveWarrantyAsync();
+            }
+        }
+
+        public async Task UpdateWarrantyAsync()
+        {
+            if (Warranty.IsCompleted)
+            {
+                Warranty.FulfilledDate = DateTime.Now;
+            }
+
             await _warrantyRepository.UpdateWarrantyAsync(Warranty);
+            MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Sikeresen frissítetted a garanciát!");
+            messageBoxOkWindow.ShowDialog();
+            OnWarrantyFinished?.Invoke();
         }
 
         public async Task SaveWarrantyAsync()
@@ -121,6 +148,7 @@ namespace Ol_der.Controls.Warranties
             await _warrantyRepository.SaveWarrantyAsync(Warranty);
             MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Sikeresen mentetted a garanciát!");
             messageBoxOkWindow.ShowDialog();
+            OnWarrantyFinished?.Invoke();
         }
 
         public async Task SearchProductbyItemNumberAsync()
