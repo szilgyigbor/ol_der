@@ -16,7 +16,7 @@ using Ol_der.Controls.Suppliers;
 using Ol_der.Controls.SalePackages;
 using Ol_der.Controls.Orders;
 using Ol_der.Controls.Notes;
-using Ol_der.Controls.Warranty;
+using Ol_der.Controls.Warranties;
 
 
 namespace Ol_der
