@@ -34,22 +34,6 @@ namespace Ol_der.Controls.Warranties
             }
         }
 
-        public async Task<Warranty> CreateNewWarranty()
-        {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                var warranty = new Warranty
-                {
-                    CreationDate = DateTime.Now
-                };
-
-                context.Warranties.Add(warranty);
-                await context.SaveChangesAsync();
-
-                return warranty;
-            }
-        }
-
         public async Task<WarrantyStatus> CreateNewWarrantyStatus(int warrantyId, string content)
         {
             using (var context = ApplicationDbContextFactory.Create())
