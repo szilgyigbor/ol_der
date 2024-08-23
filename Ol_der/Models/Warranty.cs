@@ -13,7 +13,7 @@ namespace Ol_der.Models
         public int WarrantyId { get; set; }
         public string CustomerName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public DateTime CreationDate { get; set; }
         public DateTime FulfilledDate { get; set; }
