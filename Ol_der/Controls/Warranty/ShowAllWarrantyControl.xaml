@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Ol_der.Controls.Warranty.ShowAllWarrantyControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ol_der.Controls.Warranty"
+             mc:Ignorable="d" 
+             d:DesignHeight="1450" d:DesignWidth="1920">
+    <Grid>
+        <ListView x:Name="ProductsListView" Background="White" AlternationCount="2" ItemsSource="{Binding Warranties}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Azonosító" DisplayMemberBinding="{Binding WarrantyId}" Width="100"/>
+                    <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Warranty.Supplier.Name}" Width="250"/>
+                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Warranty.Product.Name}" Width="250"/>
+                    <GridViewColumn Header="Létrehozva" DisplayMemberBinding="{Binding Warranty.CreationDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="280"/>
+                    <GridViewColumn Header="Teljesített?" DisplayMemberBinding="{Binding Warranty.IsCompleted}" Width="250"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Warranty.IsCompleted}" Value="True">
+                            <Setter Property="Background" Value="#8FBC8F"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
+</UserControl>
