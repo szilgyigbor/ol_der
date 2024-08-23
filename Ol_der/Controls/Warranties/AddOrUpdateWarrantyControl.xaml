@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="Ol_der.Controls.Warranties.AddOrUpdateWarrantyControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ol_der.Controls.Warranties"
+             mc:Ignorable="d" 
+             d:DesignHeight="1450" d:DesignWidth="1900">
+    <StackPanel Orientation="Horizontal" Margin="10">
+
+        
+        <!-- Első oszlop -->
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Ügyfél név -->
+            <WrapPanel Grid.Row="0" HorizontalAlignment="Left">
+                <Label Content="Ügyfél név:" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Warranty.CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerName" Width="300"/>
+            </WrapPanel>
+
+            <!-- E-mail cím -->
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
+                <Label Content="E-mail cím:" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Warranty.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerEmail" Width="200" HorizontalContentAlignment="Right"/>
+            </WrapPanel>
+
+            <!-- Telefonszám -->
+            <WrapPanel Grid.Row="2">
+                <Label Content="Telefonszám:" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Warranty.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerPhoneNumber" Width="140" HorizontalContentAlignment="Right"/>
+            </WrapPanel>
+
+            <!-- Hibaleírás -->
+            <WrapPanel Grid.Row="4" HorizontalAlignment="Left">
+                <Label Content="Hibaleírás:" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding Warranty.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtNotes" AcceptsReturn="False" Width="400" Height="75"/>
+            </WrapPanel>
+
+            <!-- Keresett cikkszám -->
+            <WrapPanel Grid.Row="6" HorizontalAlignment="Left">
+                <Label Content="Keresett cikkszám:" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtItemNumber" Text="{Binding ItemNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="200"/>
+            </WrapPanel>
+
+            <!-- Gombok a termékekhez -->
+            <WrapPanel Grid.Row="7" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="Termék felvétele" Command="{Binding AddProductCommand, UpdateSourceTrigger=PropertyChanged}" Background="#E5F5E5" Margin="5 5 25 5" Width="180" FontSize="18"/>
+                <Button Content="Termék törlése" Background="#E5F0F9" Margin="5" FontSize="18"/>
+            </WrapPanel>
+
+            <!-- Termékek listája -->
+            <StackPanel Orientation="Horizontal" Grid.Row="8">
+                <TextBlock Text="{Binding ProductDescription}" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" FontStyle="Normal" FontSize="17"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Második oszlop -->
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Státusz hozzáadása -->
+            <Label Content="Státusz hozzáadása a garanciához:" Margin="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22"/>
+
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
+                <TextBox x:Name="txtStatusz" Text="{Binding StatusContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="600" Height="25"/>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button Content="Státusz hozzáadása" Command="{Binding AddWarrantyStatusCommand}" Background="#E5F5E5" Margin="5 5 25 5" Width="180" FontSize="18"/>
+                <Button Content="Státusz törlése" Background="#E5F0F9" Margin="5" FontSize="18"/>
+            </WrapPanel>
+
+            <!-- Státusz lista -->
+            <ListBox ItemsSource="{Binding Warranty.WarrantyStatuses}" Grid.Row="3" Margin="5" Background="Transparent">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="2">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding StatusDescription}" Width="400"/>
+                                <TextBlock Text="{Binding StatusDate}" Width="140"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <!-- Harmadik oszlop -->
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Mentés gomb -->
+            <Button Grid.Row="0" Content="Mentés" Command="{Binding SaveWarrantyCommand}" Background="#E5F5E5" Margin="5" Width="120" FontSize="22" HorizontalAlignment="Right"/>
+
+            <!-- Létrehozás dátuma -->
+            <WrapPanel Grid.Row="3" HorizontalAlignment="Right">
+                <Label Content="Létrehozás dátuma:" HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding DateString, Mode=TwoWay}" Margin="5" x:Name="txtSaleDate" Width="140" HorizontalContentAlignment="Right"/>
+            </WrapPanel>
+        </Grid>
+    </StackPanel>
+</UserControl>
