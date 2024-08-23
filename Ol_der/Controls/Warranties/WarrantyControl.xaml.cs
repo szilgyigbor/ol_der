@@ -23,7 +23,7 @@ namespace Ol_der.Controls.Warranties
     public partial class WarrantyControl : UserControl
     {
         private ShowAllWarrantyControl _showAllWarrantyControl;
-        private AddOrUpdateWarrantyControl _addOrUpdateWarrantyContror;
+        private AddOrUpdateWarrantyControl _addOrUpdateWarrantyControl;
         public WarrantyControl()
         {
             InitializeComponent();
@@ -34,6 +34,11 @@ namespace Ol_der.Controls.Warranties
         {
             _showAllWarrantyControl = new ShowAllWarrantyControl(warrantyNumber);
             ContentArea.Content = _showAllWarrantyControl;
+        }
+
+        private void Refresh()
+        {
+            ShowAllWarranty();
         }
 
         private void ShowAllWarranty_Click(object sender, RoutedEventArgs e)
@@ -49,8 +54,11 @@ namespace Ol_der.Controls.Warranties
                 return;
             }
 
-            AddOrUpdateWarrantyControl _addOrUpdateWarrantyContror = new();
-            ContentArea.Content = _addOrUpdateWarrantyContror;
+            AddOrUpdateWarrantyControl _addOrUpdateWarrantyControl = new();
+            _addOrUpdateWarrantyControl.OnWarrantyFinished -= Refresh;
+            _addOrUpdateWarrantyControl.OnWarrantyFinished += Refresh;
+
+            ContentArea.Content = _addOrUpdateWarrantyControl;
         }
 
         private void UpdateWarranty_Click(object sender, RoutedEventArgs e)
@@ -64,8 +72,10 @@ namespace Ol_der.Controls.Warranties
                 return;
             }
 
-            AddOrUpdateWarrantyControl _addOrUpdateWarrantyContror = new(WarrantyToUpdate);
-            ContentArea.Content = _addOrUpdateWarrantyContror;
+            AddOrUpdateWarrantyControl _addOrUpdateWarrantyControl = new(WarrantyToUpdate);
+            _addOrUpdateWarrantyControl.OnWarrantyFinished -= Refresh;
+            _addOrUpdateWarrantyControl.OnWarrantyFinished += Refresh;
+            ContentArea.Content = _addOrUpdateWarrantyControl;
         }
     }
 }
