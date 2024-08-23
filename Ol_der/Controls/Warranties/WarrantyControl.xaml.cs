@@ -1,4 +1,5 @@
 ﻿using Ol_der.Controls.Orders;
+using Ol_der.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,21 @@ namespace Ol_der.Controls.Warranties
             }
 
             AddOrUpdateWarrantyControl _addOrUpdateWarrantyContror = new();
+            ContentArea.Content = _addOrUpdateWarrantyContror;
+        }
+
+        private void UpdateWarranty_Click(object sender, RoutedEventArgs e)
+        {
+            Warranty WarrantyToUpdate = _showAllWarrantyControl.GetSelectedWarranty();
+
+            if (WarrantyToUpdate == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs kiválasztva garanciális ügy!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            AddOrUpdateWarrantyControl _addOrUpdateWarrantyContror = new(WarrantyToUpdate);
             ContentArea.Content = _addOrUpdateWarrantyContror;
         }
     }
