@@ -11,10 +11,10 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Azonosító" DisplayMemberBinding="{Binding WarrantyId}" Width="100"/>
-                    <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Warranty.Supplier.Name}" Width="250"/>
-                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Warranty.Product.Name}" Width="250"/>
-                    <GridViewColumn Header="Létrehozva" DisplayMemberBinding="{Binding Warranty.CreationDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="280"/>
-                    <GridViewColumn Header="Teljesített?" DisplayMemberBinding="{Binding Warranty.IsCompleted}" Width="250"/>
+                    <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Supplier.Name}" Width="250"/>
+                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Product.Name}" Width="250"/>
+                    <GridViewColumn Header="Létrehozva" DisplayMemberBinding="{Binding CreationDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="280"/>
+                    <GridViewColumn Header="Teljesített?" DisplayMemberBinding="{Binding IsCompleted}" Width="250"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
