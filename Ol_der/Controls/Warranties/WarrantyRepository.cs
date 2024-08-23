@@ -24,5 +24,108 @@ namespace Ol_der.Controls.Warranties
                     .ToListAsync();
             }
         }
+
+        public async Task<Product> SearchProductByItemNumberAsync(string itemNumber)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Products.Where(s => !s.IsDeleted)
+                    .FirstOrDefaultAsync(p => p.ItemNumber == itemNumber);
+            }
+        }
+
+        public async Task<Warranty> CreateNewWarranty()
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var warranty = new Warranty
+                {
+                    CreationDate = DateTime.Now
+                };
+
+                context.Warranties.Add(warranty);
+
+                try
+                {
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    // A kivétel üzenetének naplózása vagy megjelenítése
+                    Console.WriteLine("Hiba történt a SaveChangesAsync során: " + ex.Message);
+
+                    // További részletes információk (opcionális)
+                    Console.WriteLine("StackTrace: " + ex.StackTrace);
+
+                    // Opcionálisan újra dobhatod a kivételt, hogy a hívó kód is kezelhesse
+                    throw;
+                }
+
+                return warranty;
+            }
+        }
+
+        public async Task<WarrantyStatus> CreateNewWarrantyStatus(int warrantyId, string content)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var warrantyStatus = new WarrantyStatus
+                {
+                    WarrantyId = warrantyId,
+                    StatusDescription = content,
+                    StatusDate = DateTime.Now
+                };
+
+                context.WarrantyStatuses.Add(warrantyStatus);
+                await context.SaveChangesAsync();
+
+                return warrantyStatus;
+            }
+        }
+
+        public async Task<Warranty> GetWarrantyByIdAsync(int warrantyId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Warranties
+                    .Include(w => w.Product)
+                    .Include(w => w.Supplier)
+                    .Include(w => w.WarrantyStatuses)
+                    .FirstOrDefaultAsync(w => w.WarrantyId == warrantyId);
+            }
+        }
+
+        public async Task UpdateWarrantyAsync(Warranty warranty)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Warranties.Update(warranty);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task SaveWarrantyAsync(Warranty warranty)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Warranties.Add(warranty);
+                try
+                {
+                    await context.SaveChangesAsync();
+                }
+
+                catch (Exception ex)
+                {
+                    // A kivétel üzenetének naplózása vagy megjelenítése
+                    Console.WriteLine("Hiba történt a SaveChangesAsync során: " + ex.Message);
+
+                    // További részletes információk (opcionális)
+                    Console.WriteLine("StackTrace: " + ex.StackTrace);
+
+                    // Opcionálisan újra dobhatod a kivételt, hogy a hívó kód is kezelhesse
+                    throw;
+                }
+            }
+        }
     }
 }
