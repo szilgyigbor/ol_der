@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Controls.Orders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace Ol_der.Controls.Warranties
     public partial class WarrantyControl : UserControl
     {
         private ShowAllWarrantyControl _showAllWarrantyControl;
+        private AddOrUpdateWarrantyControl _addOrUpdateWarrantyContror;
         public WarrantyControl()
         {
             InitializeComponent();
@@ -29,13 +31,25 @@ namespace Ol_der.Controls.Warranties
 
         public void ShowAllWarranty(int warrantyNumber = 100)
         {
-            _showAllWarrantyControl = new ShowAllWarrantyControl();
+            _showAllWarrantyControl = new ShowAllWarrantyControl(warrantyNumber);
             ContentArea.Content = _showAllWarrantyControl;
         }
 
         private void ShowAllWarranty_Click(object sender, RoutedEventArgs e)
         {
             ShowAllWarranty();
+        }
+
+        private void AddNewWarranty_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxWindow MessageBox = new("Biztosan nyitunk új garanciás ügyet?");
+            if (MessageBox.ShowDialog() == false)
+            {
+                return;
+            }
+
+            AddOrUpdateWarrantyControl _addOrUpdateWarrantyContror = new();
+            ContentArea.Content = _addOrUpdateWarrantyContror;
         }
     }
 }
