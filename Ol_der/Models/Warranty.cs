@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,6 @@ namespace Ol_der.Models
         public bool IsCompleted { get; set; } = false;
         public bool IsDeleted { get; set; } = false;
 
-        public ICollection<WarrantyStatus> WarrantyStatuses { get; set; } = new List<WarrantyStatus>();
+        public ObservableCollection<WarrantyStatus> WarrantyStatuses { get; set; } = new ObservableCollection<WarrantyStatus>();
     }
 }
