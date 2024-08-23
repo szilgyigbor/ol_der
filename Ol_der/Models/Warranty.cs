@@ -23,5 +23,7 @@ namespace Ol_der.Models
         public Supplier Supplier { get; set; }
         public bool IsCompleted { get; set; } = false;
         public bool IsDeleted { get; set; } = false;
+
+        public ICollection<WarrantyStatus> WarrantyStatuses { get; set; } = new List<WarrantyStatus>();
     }
 }
