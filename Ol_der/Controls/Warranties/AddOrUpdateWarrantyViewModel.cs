@@ -9,6 +9,8 @@ using System.Windows.Input;
 using Microsoft.Extensions.Primitives;
 using Ol_der.Controls.Orders;
 using Ol_der.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace Ol_der.Controls.Warranties
 {
@@ -21,6 +23,7 @@ namespace Ol_der.Controls.Warranties
         private string _itemNumber;
         private Warranty _warranty;
         private bool _isUpdate;
+        private WarrantyStatus _selectedWarrantyStatus;
 
         public Action OnWarrantyFinished;
         public string DateString
@@ -77,6 +80,17 @@ namespace Ol_der.Controls.Warranties
             }
         }
 
+        public WarrantyStatus SelectedWarrantyStatus
+        {
+            get { return _selectedWarrantyStatus; }
+            set
+            {
+                _selectedWarrantyStatus = value;
+                StatusContent = _selectedWarrantyStatus.StatusDescription;
+                OnPropertyChanged(nameof(SelectedWarrantyStatus));
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -84,6 +98,8 @@ namespace Ol_der.Controls.Warranties
         public ICommand RemoveProductCommand { get; }
         public ICommand AddWarrantyStatusCommand { get; }
         public ICommand SaveWarrantyCommand { get; }
+        public ICommand RemoveWarrantyStatusCommand { get; }
+        public ICommand UpdateWarrantyStatusCommand { get; }
 
 
         public AddOrUpdateWarrantyViewModel(Warranty warranty)
@@ -93,6 +109,8 @@ namespace Ol_der.Controls.Warranties
             AddProductCommand = new RelayCommand(param => SearchProductbyItemNumberAsync());
             AddWarrantyStatusCommand = new RelayCommand(param => AddWarrantyStatus());
             SaveWarrantyCommand = new RelayCommand(param => SaveOrUpdateWarrantyAsync());
+            RemoveWarrantyStatusCommand = new RelayCommand(param => RemoveWarrantyStatus());
+            UpdateWarrantyStatusCommand = new RelayCommand(param => UpdateWarrantyStatus());
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -201,9 +219,57 @@ namespace Ol_der.Controls.Warranties
 
             Warranty.WarrantyStatuses.Add(newStatus);
 
+            StatusContent = "";
+        }
 
-            MessageBoxOkWindow messageBoxOkWindow2 = new MessageBoxOkWindow("Sikeresen hozzáadtad a státuszt!");
-            messageBoxOkWindow2.ShowDialog();
+        public async Task RemoveWarrantyStatus()
+        {
+            if (SelectedWarrantyStatus == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Előbb válassz ki egy státuszt!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Biztosan törölni akarod a kiválasztott státuszt?");
+            messageBoxWindow.ShowDialog();
+
+            if (messageBoxWindow.DialogResult == false)
+            {
+                return;
+            }
+
+            if (_isUpdate && SelectedWarrantyStatus.WarrantyStatusId != 0)
+            {
+                _warrantyRepository.RemoveWarrantyStatusAsync(SelectedWarrantyStatus);
+            }
+            Warranty.WarrantyStatuses.Remove(SelectedWarrantyStatus);
+
+            StatusContent = "";
+        }
+
+
+        public async Task UpdateWarrantyStatus()
+        {
+            MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Biztosan frissíteni akarod a státuszt?");
+            messageBoxWindow.ShowDialog();
+
+            if (messageBoxWindow.DialogResult == false)
+            {
+                return;
+            }
+
+            SelectedWarrantyStatus.StatusDescription = StatusContent;
+
+            if (_isUpdate && SelectedWarrantyStatus.WarrantyStatusId != 0)
+            {
+                await _warrantyRepository.UpdateWarrantyStatusAsync(SelectedWarrantyStatus);
+
+                Warranty = await _warrantyRepository.GetWarrantyByIdAsync(Warranty.WarrantyId);
+            }
+
+            StatusContent = "";
+
         }
     }
 }
