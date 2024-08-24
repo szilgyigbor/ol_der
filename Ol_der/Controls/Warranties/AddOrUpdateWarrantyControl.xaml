@@ -7,8 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="1450" d:DesignWidth="1900">
     <StackPanel Orientation="Horizontal" Margin="10">
-
-        
         <!-- Első oszlop -->
         <Grid Margin="5">
             <Grid.RowDefinitions>
