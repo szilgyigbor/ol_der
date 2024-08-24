@@ -73,10 +73,9 @@ namespace Ol_der.Controls.Warranties
                     context.Warranties.Update(warranty);
                     await context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
                     throw;
-
                 }
             }
         }
@@ -85,8 +84,15 @@ namespace Ol_der.Controls.Warranties
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                context.Warranties.Add(warranty);
-                await context.SaveChangesAsync();
+                try
+                {
+                    context.Warranties.Add(warranty);
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
 
