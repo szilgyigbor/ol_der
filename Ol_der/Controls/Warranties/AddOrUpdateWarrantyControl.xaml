@@ -33,13 +33,13 @@
             <!-- E-mail cím -->
             <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
                 <Label Content="E-mail cím:" VerticalAlignment="Center"/>
-                <TextBox Text="{Binding Warranty.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerEmail" Width="200" HorizontalContentAlignment="Right"/>
+                <TextBox Text="{Binding Warranty.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerEmail" Width="200"/>
             </WrapPanel>
 
             <!-- Telefonszám -->
             <WrapPanel Grid.Row="2">
                 <Label Content="Telefonszám:" VerticalAlignment="Center"/>
-                <TextBox Text="{Binding Warranty.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerPhoneNumber" Width="140" HorizontalContentAlignment="Right"/>
+                <TextBox Text="{Binding Warranty.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerPhoneNumber" Width="140"/>
             </WrapPanel>
 
             <!-- Hibaleírás -->
