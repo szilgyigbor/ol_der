@@ -60,9 +60,10 @@
             </WrapPanel>
 
             <!-- Termékek megjelenítése -->
-            <StackPanel Orientation="Horizontal" Grid.Row="8" Background="#F1F1F1">
+            <StackPanel Orientation="Vertical" Grid.Row="8" Background="#F1F1F1">
                 <Label Content="Garanciális termék:" FontSize="16" Margin="0 0 10 0"/>
-                <TextBlock Text="{Binding ProductDescription}" Background="Transparent" TextWrapping="Wrap" HorizontalAlignment="Center" FontStyle="Normal" FontSize="16" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding ProductDescription}" Background="Transparent" TextWrapping="Wrap" 
+                           Width="500" HorizontalAlignment="Center" FontStyle="Normal" FontSize="16" VerticalAlignment="Center"/>
             </StackPanel>
         </Grid>
 
@@ -79,22 +80,26 @@
             <Label Content="Státusz hozzáadása a garanciához:" Margin="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22"/>
 
             <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
-                <TextBox x:Name="txtStatusz" Text="{Binding StatusContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="600" Height="25"/>
+                <TextBox x:Name="txtStatusz" Text="{Binding StatusContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                         Margin="5" Width="650" Height="70" AcceptsReturn="True"/>
             </WrapPanel>
 
             <WrapPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button Content="Státusz hozzáadása" Command="{Binding AddWarrantyStatusCommand}" Background="#E5F5E5" Margin="5 5 25 5" Width="180" FontSize="18"/>
-                <Button Content="Státusz törlése" Background="#E5F0F9" Margin="5" FontSize="18"/>
+                <Button Content="Státusz módosítása" Command="{Binding UpdateWarrantyStatusCommand}" Background="#E5F0F9" Margin="5" FontSize="18"/>
+                <Button Content="Státusz törlése" Command="{Binding RemoveWarrantyStatusCommand}" Background="#F9E5E5" Margin="5" FontSize="18"/>
             </WrapPanel>
 
             <!-- Státusz lista -->
-            <ListBox ItemsSource="{Binding Warranty.WarrantyStatuses}" Grid.Row="3" Margin="5" Background="Transparent">
+            <ListBox ItemsSource="{Binding Warranty.WarrantyStatuses}" 
+                     SelectedItem="{Binding SelectedWarrantyStatus, Mode=TwoWay}" Grid.Row="3" Margin="5" 
+                     Background="Transparent" Width="650" Height="400">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="LightGray" BorderThickness="2">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding StatusDescription}" Width="400"/>
-                                <TextBlock Text="{Binding StatusDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="140"/>
+                                <TextBlock Text="{Binding StatusDescription}" Width="480"/>
+                                <TextBlock Text="{Binding StatusDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="130"/>
                             </StackPanel>
                         </Border>
                     </DataTemplate>
