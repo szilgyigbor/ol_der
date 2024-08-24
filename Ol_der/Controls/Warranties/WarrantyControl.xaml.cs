@@ -22,12 +22,14 @@ namespace Ol_der.Controls.Warranties
     /// </summary>
     public partial class WarrantyControl : UserControl
     {
+        private WarrantyRepository _warrantyRepository;
         private ShowAllWarrantyControl _showAllWarrantyControl;
         private AddOrUpdateWarrantyControl _addOrUpdateWarrantyControl;
         public WarrantyControl()
         {
             InitializeComponent();
             ShowAllWarranty();
+            _warrantyRepository = new();
         }
 
         public void ShowAllWarranty(int warrantyNumber = 100)
@@ -76,6 +78,28 @@ namespace Ol_der.Controls.Warranties
             _addOrUpdateWarrantyControl.OnWarrantyFinished -= Refresh;
             _addOrUpdateWarrantyControl.OnWarrantyFinished += Refresh;
             ContentArea.Content = _addOrUpdateWarrantyControl;
+        }
+
+        private async void DeleteWarranty_Click(object sender, RoutedEventArgs e)
+        {
+            Warranty WarrantyToDelete = _showAllWarrantyControl.GetSelectedWarranty();
+
+            if (WarrantyToDelete == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs kiválasztva garanciális ügy!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            MessageBoxWindow MessageBox = new("Biztosan törölni szeretnéd a garanciális ügyet?");
+            if (MessageBox.ShowDialog() == false)
+            {
+                return;
+            }
+
+            await _warrantyRepository.RemoveWarrantyAsync(WarrantyToDelete);
+
+            Refresh();
         }
     }
 }
