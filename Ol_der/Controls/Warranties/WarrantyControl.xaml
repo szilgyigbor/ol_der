@@ -37,7 +37,7 @@
                 <Button Content="Részletek" Background="#E5F0F9" Margin="0 5 3 15" Padding="5" FontSize="20"/>
                 <Button Content="Új garancia" Background="#E5F5E5" Margin="0 5 3 15" Padding="5" FontSize="20" Click="AddNewWarranty_Click"/>
                 <Button Content="Szerkesztés" Background="#F9F9E5" Margin="0 5 3 15" Padding="5" FontSize="20" Click="UpdateWarranty_Click"/>
-                <Button Content="Törlés" Background="#F9E5E5" Margin="0 5 3 15" Padding="5" FontSize="20"/>
+                <Button Content="Törlés" Background="#F9E5E5" Margin="0 5 3 15" Padding="5" FontSize="20" Click="DeleteWarranty_Click"/>
             </StackPanel>
 
             <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
