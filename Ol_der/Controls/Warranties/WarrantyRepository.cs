@@ -68,8 +68,16 @@ namespace Ol_der.Controls.Warranties
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                context.Warranties.Update(warranty);
-                await context.SaveChangesAsync();
+                try
+                {
+                    context.Warranties.Update(warranty);
+                    await context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+
+                }
             }
         }
 
@@ -81,5 +89,59 @@ namespace Ol_der.Controls.Warranties
                 await context.SaveChangesAsync();
             }
         }
+
+        public async Task RemoveWarrantyStatusAsync(WarrantyStatus warrantyStatus)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                try
+                {
+                    context.WarrantyStatuses.Remove(warrantyStatus);
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public async Task UpdateWarrantyStatusAsync(WarrantyStatus warrantyStatus)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                try
+                {
+                    context.WarrantyStatuses.Update(warrantyStatus);
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
+        public async Task RemoveWarrantyAsync(Warranty warranty)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                try
+                {
+                    var warrantyStatuses = context.WarrantyStatuses.Where(ws => ws.WarrantyId == warranty.WarrantyId);
+
+                    context.WarrantyStatuses.RemoveRange(warrantyStatuses);
+
+                    context.Warranties.Remove(warranty);
+
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
+
     }
 }
