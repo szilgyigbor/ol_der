@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Extensions.Primitives;
 using Ol_der.Controls.Orders;
@@ -91,7 +92,6 @@ namespace Ol_der.Controls.Warranties
             }
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand AddProductCommand { get; }
@@ -163,7 +163,14 @@ namespace Ol_der.Controls.Warranties
 
         public async Task SaveWarrantyAsync()
         {
-            await _warrantyRepository.SaveWarrantyAsync(Warranty);
+            if (Warranty.ProductId == 0)
+            {
+                MessageBoxOkWindow messageBoxOkWindow0 = new MessageBoxOkWindow("Nem választottál terméket!");
+                messageBoxOkWindow0.ShowDialog();
+                return;
+            }
+
+            await _warrantyRepository.UpdateWarrantyAsync(Warranty);
             MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Sikeresen mentetted a garanciát!");
             messageBoxOkWindow.ShowDialog();
             OnWarrantyFinished?.Invoke();
@@ -218,7 +225,8 @@ namespace Ol_der.Controls.Warranties
             };
 
             Warranty.WarrantyStatuses.Add(newStatus);
-
+            await _warrantyRepository.UpdateWarrantyAsync(Warranty);
+            Warranty = await _warrantyRepository.GetWarrantyByIdAsync(Warranty.WarrantyId);
             StatusContent = "";
         }
 
@@ -251,6 +259,13 @@ namespace Ol_der.Controls.Warranties
 
         public async Task UpdateWarrantyStatus()
         {
+            if (SelectedWarrantyStatus == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Előbb válassz ki egy státuszt!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
             MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Biztosan frissíteni akarod a státuszt?");
             messageBoxWindow.ShowDialog();
 
@@ -260,16 +275,11 @@ namespace Ol_der.Controls.Warranties
             }
 
             SelectedWarrantyStatus.StatusDescription = StatusContent;
-
-            if (_isUpdate && SelectedWarrantyStatus.WarrantyStatusId != 0)
-            {
-                await _warrantyRepository.UpdateWarrantyStatusAsync(SelectedWarrantyStatus);
-
-                Warranty = await _warrantyRepository.GetWarrantyByIdAsync(Warranty.WarrantyId);
-            }
+            
+            await _warrantyRepository.UpdateWarrantyStatusAsync(SelectedWarrantyStatus);
+            Warranty = await _warrantyRepository.GetWarrantyByIdAsync(Warranty.WarrantyId);
 
             StatusContent = "";
-
         }
     }
 }
