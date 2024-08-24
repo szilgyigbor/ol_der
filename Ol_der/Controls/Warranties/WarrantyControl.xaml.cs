@@ -25,6 +25,7 @@ namespace Ol_der.Controls.Warranties
         private WarrantyRepository _warrantyRepository;
         private ShowAllWarrantyControl _showAllWarrantyControl;
         private AddOrUpdateWarrantyControl _addOrUpdateWarrantyControl;
+        private WarrantyDetailsControl _warrantyDetailsControl;
         public WarrantyControl()
         {
             InitializeComponent();
@@ -78,6 +79,22 @@ namespace Ol_der.Controls.Warranties
             _addOrUpdateWarrantyControl.OnWarrantyFinished -= Refresh;
             _addOrUpdateWarrantyControl.OnWarrantyFinished += Refresh;
             ContentArea.Content = _addOrUpdateWarrantyControl;
+        }
+
+
+        private void WarrantyDetails_Click(object sender, RoutedEventArgs e)
+        {
+            Warranty WarrantyToDetails = _showAllWarrantyControl.GetSelectedWarranty();
+
+            if (WarrantyToDetails == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs kiválasztva garanciális ügy!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            WarrantyDetailsControl _warrantyDetailsControl = new(WarrantyToDetails);
+            ContentArea.Content = _warrantyDetailsControl;
         }
 
         private async void DeleteWarranty_Click(object sender, RoutedEventArgs e)
