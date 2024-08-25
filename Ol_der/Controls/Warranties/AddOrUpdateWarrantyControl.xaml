@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Warranties"
              mc:Ignorable="d" 
+             FontSize="16"
              d:DesignHeight="1450" d:DesignWidth="1900">
     <StackPanel Orientation="Horizontal" Margin="10">
         <!-- Első oszlop -->
@@ -59,9 +60,9 @@
 
             <!-- Termékek megjelenítése -->
             <StackPanel Orientation="Vertical" Grid.Row="8" Background="#F1F1F1">
-                <Label Content="Garanciális termék:" FontSize="16" Margin="0 0 10 0"/>
+                <Label Content="Garanciális termék:" Margin="0 0 10 0"/>
                 <TextBlock Text="{Binding ProductDescription}" Background="Transparent" TextWrapping="Wrap" 
-                           Width="500" HorizontalAlignment="Center" FontStyle="Normal" FontSize="16" VerticalAlignment="Center"/>
+                           Width="500" HorizontalAlignment="Center" FontStyle="Normal" VerticalAlignment="Center"/>
             </StackPanel>
         </Grid>
 
