@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Ol_der.Controls.Warranties"
              mc:Ignorable="d" 
              FontSize="18"
-             d:DesignHeight="1850" d:DesignWidth="1200">
+             d:DesignHeight="1050" d:DesignWidth="1200">
     <StackPanel Orientation="Horizontal" Margin="10">
         <!-- Első oszlop -->
         <Grid Margin="5">
@@ -81,8 +81,46 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <StackPanel  Grid.Row="0">
+                <!-- Teljesítve dátum kijelzése -->
+                <TextBlock FontSize="22">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Warranty.IsCompleted}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                    <Setter Property="Foreground" Value="DarkGreen"/>
+                                    <Setter Property="Text">
+                                        <Setter.Value>
+                                            <MultiBinding StringFormat="{}Lezárva: {0:yyyy-MM-dd HH:mm}">
+                                                <Binding Path="Warranty.FulfilledDate"/>
+                                            </MultiBinding>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <!-- Nincs teljesítve szöveg kijelzése -->
+                <TextBlock Text="Nincs teljesítve" Foreground="Red" FontSize="22">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Warranty.IsCompleted}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+
             <!-- Státuszok -->
-            <Label Content="Garancia státuszok:" Margin="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22"/>
+            <Label Content="Garancia státuszok:" Margin="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22"/>
 
             <!-- Státusz lista -->
             <ListBox ItemsSource="{Binding Warranty.WarrantyStatuses}" 
@@ -90,7 +128,7 @@
                  Background="Transparent" Width="750" Height="500">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="3">
+                        <Border BorderBrush="DarkSeaGreen" BorderThickness="3">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding StatusDescription}" Width="550" Margin="5"/>
                                 <TextBlock Text="{Binding StatusDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="160" Margin="5"/>
