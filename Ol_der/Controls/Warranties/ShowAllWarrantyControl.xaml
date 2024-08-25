@@ -5,15 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Warranties"
              mc:Ignorable="d"
-             FontSize="17"
+             FontSize="18"
              d:DesignHeight="1450" d:DesignWidth="1920">
     <Grid>
         <ListView x:Name="WarrantiesListView" Background="White" AlternationCount="2" ItemsSource="{Binding Warranties}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Azonosító" DisplayMemberBinding="{Binding WarrantyId}" Width="90"/>
-                    <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Supplier.Name}" Width="240"/>
-                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Product.Name}" Width="480"/>
+                    <GridViewColumn Header="Azonosító" DisplayMemberBinding="{Binding WarrantyId}" Width="100"/>
+                    <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Supplier.Name}" Width="250"/>
+                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Product.Name}" Width="500"/>
                     <GridViewColumn Header="Létrehozva" DisplayMemberBinding="{Binding CreationDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="220"/>
                     <GridViewColumn Header="Teljesített?" DisplayMemberBinding="{Binding IsCompleted}" Width="100"/>
                     <GridViewColumn Header="Teljesítés dátuma" Width="250">
