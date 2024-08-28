@@ -23,6 +23,46 @@ namespace Ol_der.Controls.CustomerOrders
             }
         }
 
+        public async Task UpdateCustomerOrderAsync(CustomerOrder customerOrder)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                try
+                {
+                    context.CustomerOrders.Update(customerOrder);
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
 
+        public async Task<CustomerOrder> GetCustomerOrderByIdAsync(int customerOrderId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.CustomerOrders
+                    .Include(c => c.CustomerOrderStatuses)
+                    .FirstOrDefaultAsync(c => c.CustomerOrderId == customerOrderId);
+            }
+        }
+
+        public async Task UpdateCustomerOrderStatusAsync(CustomerOrderStatus customerOrderStatus)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                try
+                {
+                    context.CustomerOrderStatuses.Update(customerOrderStatus);
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }
