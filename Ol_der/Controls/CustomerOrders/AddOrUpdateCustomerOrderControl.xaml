@@ -5,8 +5,110 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.CustomerOrders"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="1050" d:DesignWidth="1800">
+    <StackPanel Orientation="Horizontal" Margin="10">
+        <!-- Első oszlop -->
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Ügyfél név -->
+            <WrapPanel Grid.Row="0" HorizontalAlignment="Left">
+                <Label Content="Ügyfél név:" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding CustomerOrder.CustomerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerName" Width="300"/>
+            </WrapPanel>
+
+            <!-- E-mail cím -->
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
+                <Label Content="E-mail cím:" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding CustomerOrder.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerEmail" Width="200"/>
+            </WrapPanel>
+
+            <!-- Telefonszám -->
+            <WrapPanel Grid.Row="2">
+                <Label Content="Telefonszám:" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding CustomerOrder.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtCustomerPhoneNumber" Width="140"/>
+            </WrapPanel>
+
+            <!-- Rendelésleírás -->
+            <WrapPanel Grid.Row="4" HorizontalAlignment="Left">
+                <Label Content="Részletek:" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding CustomerOrder.OrderDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" x:Name="txtNotes" AcceptsReturn="True" Width="400" Height="124"/>
+            </WrapPanel>
+        </Grid>
+
+        <!-- Második oszlop -->
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Státusz hozzáadása -->
+            <Label Content="Státusz hozzáadása a garanciához:" Margin="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22"/>
+
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
+                <TextBox x:Name="txtStatusz" Text="{Binding StatusContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="5" Width="650" Height="70" AcceptsReturn="True"/>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Content="Státusz hozzáadása" Command="{Binding AddCustomerOrderStatusCommand}" Background="#E5F5E5" Margin="5 5 25 5" Width="180" FontSize="18"/>
+                    <Button Content="Státusz módosítása" Command="{Binding UpdateCustomerOrderStatusCommand}" Background="#E5F0F9" Margin="5" FontSize="18"/>
+                    <Button Content="Státusz törlése" Command="{Binding RemoveCustomerOrderStatusCommand}" Background="#F9E5E5" Margin="5" FontSize="18"/>
+            </WrapPanel>
+
+            <!-- Státusz lista -->
+                <ListBox ItemsSource="{Binding CustomerOrder.CustomerOrderStatuses}" 
+                     SelectedItem="{Binding SelectedCustomerOrderStatus, Mode=TwoWay}" Grid.Row="3" Margin="5" 
+                     Background="Transparent" Width="650" Height="400">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="2">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding StatusDescription}" Width="480"/>
+                                <TextBlock Text="{Binding StatusDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="130"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+        <!-- Harmadik oszlop -->
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Mentés gomb -->
+                <Button Grid.Row="0" Content="Mentés" Command="{Binding SaveCustomerOrderCommand}" Background="#E5F5E5" Margin="5" Width="120" FontSize="22" HorizontalAlignment="Right"/>
+
+            <!-- Létrehozás dátuma -->
+            <WrapPanel Grid.Row="1" HorizontalAlignment="Right">
+                <Label Content="Létrehozás dátuma:" HorizontalAlignment="Right"/>
+                <TextBox Text="{Binding DateString, Mode=TwoWay}" Margin="5" x:Name="txtCustomerOrderDate" Width="140" HorizontalContentAlignment="Right"/>
+            </WrapPanel>
+
+            <WrapPanel Grid.Row="2">
+                    <CheckBox x:Name="chkIsFinished" Content="Teljesítve?" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding CustomerOrder.IsCompleted, Mode=TwoWay}">
+                </CheckBox>
+            </WrapPanel>
+        </Grid>
+    </StackPanel>
 </UserControl>
