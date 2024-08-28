@@ -1,4 +1,5 @@
 ﻿using Ol_der.Controls.Orders;
+using Ol_der.Controls.Warranties;
 using Ol_der.Models;
 using System;
 using System.Collections.Generic;
@@ -78,6 +79,42 @@ namespace Ol_der.Controls.CustomerOrders
             addOrUpdateCustomerOrderControl.OnCustomerOrderFinished += Refresh;
 
             ContentArea.Content = addOrUpdateCustomerOrderControl;
+        }
+
+        private void CustomerOrderDetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerOrder customerOrderToDetails = _showAllCustomerOrderControl.GetSelectedCustomerOrder();
+
+            if (customerOrderToDetails == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Nincs kiválasztva garanciális ügy!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            CustomerOrderDetailControl customerOrderDetailControl = new(customerOrderToDetails);
+            ContentArea.Content = customerOrderDetailControl;
+        }
+
+        private void DeleteCustomerOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerOrder customerOrderToDelete = _showAllCustomerOrderControl.GetSelectedCustomerOrder();
+
+            if (customerOrderToDelete == null)
+            {
+                MessageBoxWindow MessageBox = new("Nincs kiválasztott ügyfélrendelés!");
+                MessageBox.ShowDialog();
+                return;
+            }
+
+            MessageBoxWindow MessageBox1 = new("Biztosan törölni akarod az ügyfélrendelést?");
+            if (MessageBox1.ShowDialog() == false)
+            {
+                return;
+            }
+
+            _customerOrderRepository.RemoveCustomerOrderAsync(customerOrderToDelete);
+            Refresh();
         }
     }
 }
