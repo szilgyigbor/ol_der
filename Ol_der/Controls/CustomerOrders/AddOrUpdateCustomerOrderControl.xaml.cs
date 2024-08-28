@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,20 @@ namespace Ol_der.Controls.CustomerOrders
     /// </summary>
     public partial class AddOrUpdateCustomerOrderControl : UserControl
     {
-        public AddOrUpdateCustomerOrderControl()
+        private AddOrUpdateCustomerOrderViewModel _viewModel;
+        public Action OnCustomerOrderFinished;
+        public AddOrUpdateCustomerOrderControl(CustomerOrder customerOrderToUpdate = null)
         {
             InitializeComponent();
+            _viewModel = new(customerOrderToUpdate);
+            this.DataContext = _viewModel;
+            _viewModel.OnCustomerOrderFinished -= ActivateEvent;
+            _viewModel.OnCustomerOrderFinished += ActivateEvent;
+        }
+
+        public void ActivateEvent()
+        {
+            OnCustomerOrderFinished?.Invoke();
         }
     }
 }
