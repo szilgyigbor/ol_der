@@ -27,6 +27,7 @@
                     <Button Content="Eladások" Background="#E5F0F9" Name="btnSale" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
                     <Button Content="Csomagok" Background="#E5F0F9" Name="btnPackage" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
                     <Button Content="Rendelések" Background="#E5F0F9" Name="btnOrder" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
+                    <Button Content="Ügyfél Ren." Background="#E5F0F9" Name="btnCustomerOrder" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
                     <Button Content="Garanciák" Background="#E5F0F9" Name="btnWarranty" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
                     <Button Content="Jegyzetek" Background="#E5F0F9" Name="btnNote" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
                 </StackPanel>

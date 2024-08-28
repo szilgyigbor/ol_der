@@ -17,6 +17,7 @@ using Ol_der.Controls.SalePackages;
 using Ol_der.Controls.Orders;
 using Ol_der.Controls.Notes;
 using Ol_der.Controls.Warranties;
+using Ol_der.Controls.CustomerOrders;
 
 
 namespace Ol_der
@@ -56,6 +57,9 @@ namespace Ol_der
                     break;
                 case "btnWarranty":
                     ContentArea.Content = new WarrantyControl();
+                    break;
+                case "btnCustomerOrder":
+                    ContentArea.Content = new CustomerOrderControl();
                     break;
             }
         }
