@@ -64,5 +64,26 @@ namespace Ol_der.Controls.CustomerOrders
                 }
             }
         }
+
+        public async Task RemoveCustomerOrderAsync(CustomerOrder customerOrder)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                try
+                {
+                    var customerOrderStatuses = context.CustomerOrderStatuses.Where(cs => cs.CustomerOrderId == customerOrder.CustomerOrderId);
+
+                    context.CustomerOrderStatuses.RemoveRange(customerOrderStatuses);
+
+                    context.CustomerOrders.Remove(customerOrder);
+
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+        }
     }
 }
