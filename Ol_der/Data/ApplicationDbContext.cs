@@ -61,6 +61,14 @@ namespace Ol_der.Data
             modelBuilder.Entity<Note>()
                 .Property(n => n.NoteId)
                 .ValueGeneratedOnAdd();
+            
+            modelBuilder.Entity<CustomerOrder>()
+                .Property(co => co.CustomerOrderId)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<CustomerOrderStatus>()
+                .Property(cos => cos.CustomerOrderStatusId)
+                .ValueGeneratedOnAdd();
         }
 
         public DbSet<Product> Products { get; set; }
@@ -72,6 +80,8 @@ namespace Ol_der.Data
         public DbSet<Warranty> Warranties { get; set; }
         public DbSet<WarrantyStatus> WarrantyStatuses { get; set; }
         public DbSet<Note> Notes { get; set; }
+        public DbSet<CustomerOrder> CustomerOrders { get; set; }
+        public DbSet<CustomerOrderStatus> CustomerOrderStatuses { get; set; }
 
     }
 }
