@@ -13,7 +13,7 @@
                 <GridView>
                     <GridViewColumn Header="Azonosító" DisplayMemberBinding="{Binding CustomerOrderId}" Width="100"/>
                     <GridViewColumn Header="Ügyfélnév" DisplayMemberBinding="{Binding CustomerName}" Width="200"/>
-                    <GridViewColumn Header="Megrendelés" DisplayMemberBinding="{Binding OrderDescription}" Width="500"/>
+                    <GridViewColumn Header="Megrendelés" DisplayMemberBinding="{Binding OrderDescription}" Width="650"/>
                     <GridViewColumn Header="Létrehozva" DisplayMemberBinding="{Binding CreationDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="220"/>
                     <GridViewColumn Header="Teljesített?" DisplayMemberBinding="{Binding IsCompleted}" Width="100"/>
                     <GridViewColumn Header="Teljesítés dátuma" Width="250">
