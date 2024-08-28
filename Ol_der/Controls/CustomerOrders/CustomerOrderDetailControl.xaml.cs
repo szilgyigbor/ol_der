@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace Ol_der.Controls.CustomerOrders
     /// </summary>
     public partial class CustomerOrderDetailControl : UserControl
     {
-        public CustomerOrderDetailControl()
+        private CustomerOrderDetailViewModel _viewModel;
+        public CustomerOrderDetailControl(CustomerOrder customerOrderDetails)
         {
             InitializeComponent();
+            _viewModel = new CustomerOrderDetailViewModel(customerOrderDetails);
+            DataContext = _viewModel;
         }
     }
 }
