@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ol_der.Controls.Orders;
+using Ol_der.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +36,48 @@ namespace Ol_der.Controls.CustomerOrders
         {
             _showAllCustomerOrderControl = new ShowAllCustomerOrderControl(customerOrderNumber);
             ContentArea.Content = _showAllCustomerOrderControl;
+        }
+
+        private void Refresh()
+        {
+            ShowAllCustomerOrder();
+        }
+
+        private void AddCustomerOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxWindow MessageBox = new("Biztosan nyitunk új ügyfélrendelést?");
+            if (MessageBox.ShowDialog() == false)
+            {
+                return;
+            }
+
+            AddOrUpdateCustomerOrderControl addOrUpdateCustomerOrderControl = new();
+            addOrUpdateCustomerOrderControl.OnCustomerOrderFinished -= Refresh;
+            addOrUpdateCustomerOrderControl.OnCustomerOrderFinished += Refresh;
+
+            ContentArea.Content = addOrUpdateCustomerOrderControl;
+        }
+
+        private void UpdateCustomerOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerOrder customerOrderToUpdate = _showAllCustomerOrderControl.GetSelectedCustomerOrder();
+
+            if (customerOrderToUpdate == null)
+            {
+                MessageBoxWindow MessageBox = new("Nincs kiválasztott ügyfélrendelés!");
+                MessageBox.ShowDialog();
+                return;
+            }
+
+            MessageBoxOkWindow MessageBox1 = new("Ügyfélrendelés módosítása");
+            MessageBox1.ShowDialog();
+
+
+            AddOrUpdateCustomerOrderControl addOrUpdateCustomerOrderControl = new(customerOrderToUpdate);
+            addOrUpdateCustomerOrderControl.OnCustomerOrderFinished -= Refresh;
+            addOrUpdateCustomerOrderControl.OnCustomerOrderFinished += Refresh;
+
+            ContentArea.Content = addOrUpdateCustomerOrderControl;
         }
     }
 }
