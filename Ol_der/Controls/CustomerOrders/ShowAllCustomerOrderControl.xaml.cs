@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,15 @@ namespace Ol_der.Controls.CustomerOrders
             InitializeComponent();
             _viewModel = new(limit);
             this.DataContext = _viewModel;
+        }
+
+        public CustomerOrder GetSelectedCustomerOrder()
+        {
+            if (CustomerOrdersListView.SelectedItem is CustomerOrder SelectedCustomerOrder)
+            {
+                return SelectedCustomerOrder;
+            }
+            return null;
         }
     }
 }

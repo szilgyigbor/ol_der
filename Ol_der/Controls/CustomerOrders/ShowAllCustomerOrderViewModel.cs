@@ -29,6 +29,7 @@ namespace Ol_der.Controls.CustomerOrders
         public ShowAllCustomerOrderViewModel(int limit)
         {
             _customerOrderRepository = new CustomerOrderRepository();
+            LoadCustomerOrdersAsync(limit);
         }
 
         protected void OnPropertyChanged(string propertyName)
