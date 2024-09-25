@@ -65,6 +65,28 @@ namespace Ol_der.Controls.Orders
             }
         }
 
+        public async Task DeleteOrderByOrderIdAsync(int orderId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var order = await context.Orders
+                    .Where(o => o.OrderId == orderId)
+                    .Include(o => o.Supplier)
+                    .Include(o => o.OrderItems)
+                        .ThenInclude(oi => oi.Product)
+                            .ThenInclude(p => p.Supplier)
+                    .FirstOrDefaultAsync();
+
+                if (order == null)
+                {
+                    return;
+                }
+
+                context.Orders.Remove(order);
+                await context.SaveChangesAsync();
+            }
+        }
+
         public async Task<Supplier> GetSupplierByIdAsync(int supplierId)
         {
             using (var context = ApplicationDbContextFactory.Create())
