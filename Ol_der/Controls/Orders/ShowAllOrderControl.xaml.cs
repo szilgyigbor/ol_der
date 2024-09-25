@@ -44,5 +44,10 @@ namespace Ol_der.Controls.Orders
             _viewModel.SearchOrdersByProductNumber();
         }
 
+        public Task DeleteOrderByOrderIdAsync(int orderId)
+        {
+            return _viewModel.DeleteOrderByOrderIdAsync(orderId);
+        }
+
     }
 }
