@@ -206,8 +206,29 @@ namespace Ol_der.Controls.Orders
 
         private async void btnDeleteOrder_Click(object sender, RoutedEventArgs e)
         {
-            /*await _showAllSaleControl.DeleteSale();
-            await ShowAllSale();*/
+            ContentArea.Content = _showAllOrderControl;
+            int orderId = _showAllOrderControl.GetSelectedOrderId();
+
+            if (orderId != -1)
+            {
+
+                MessageBoxWindow messageBoxWindow = new("Biztosan törölni akarod a kiválasztott rendelést?");
+                messageBoxWindow.ShowDialog();
+
+                if (messageBoxWindow.DialogResult == true)
+                {
+                    await _showAllOrderControl.DeleteOrderByOrderIdAsync(orderId);
+                    Refresh();
+                }
+            }
+
+            else
+            {
+                MessageBoxOkWindow messageBoxWindow1 = new("Válassz ki egy rendelést a törléshez!");
+                messageBoxWindow1.ShowDialog();
+            }
+
+
         }
     }
 }
