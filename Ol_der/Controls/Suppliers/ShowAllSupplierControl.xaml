@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Suppliers"
              mc:Ignorable="d"
-             FontSize="18"
+             FontSize="16"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <ListView x:Name="SuppliersListView" Background="White" AlternationCount="2">
