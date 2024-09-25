@@ -40,7 +40,7 @@ namespace Ol_der.Controls.Notes
 
             if (scrollViewer != null)
             {
-                double scrollAmount = e.Delta > 0 ? -35.0 : 35.0; 
+                double scrollAmount = e.Delta > 0 ? -50.0 : 50.0; 
                 double newOffset = scrollViewer.VerticalOffset + scrollAmount;
 
                 scrollViewer.ScrollToVerticalOffset(newOffset);
