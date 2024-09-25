@@ -191,13 +191,7 @@ namespace Ol_der.Controls.Orders
                 _order.IsColored = true;
                 _order.ReOrdered = true;
 
-                Debug.WriteLine("Updating order to append...");
-                
-                Debug.WriteLine("Order to append updated.");
-
-                Debug.WriteLine("Updating current order...");
                 await _orderRepository.UpdateOrderAsync(_order);
-                Debug.WriteLine("Current order updated.");
 
                 MessageBoxOkWindow messageBoxOkWindow1 = new("Sikeresen zöldítve!");
                 Order = new Order();
