@@ -33,5 +33,20 @@ namespace Ol_der.Controls.Notes
         {
             return _viewModel.SelectedNote;
         }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scrollViewer = sender as ScrollViewer;
+
+            if (scrollViewer != null)
+            {
+                double scrollAmount = e.Delta > 0 ? -35.0 : 35.0; 
+                double newOffset = scrollViewer.VerticalOffset + scrollAmount;
+
+                scrollViewer.ScrollToVerticalOffset(newOffset);
+
+                e.Handled = true;
+            }
+        }
     }
 }
