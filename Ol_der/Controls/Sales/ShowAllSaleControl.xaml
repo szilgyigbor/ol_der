@@ -34,56 +34,58 @@
             </ListView.GroupStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="0">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="16" Margin="5" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="18" FontWeight="DemiBold" Margin="5 5 0 5" VerticalAlignment="Center"/>
-                            <TextBlock Text=".-Ft." FontSize="18" Margin="0 5 5 5" VerticalAlignment="Center"/>
-                            <TextBlock FontSize="18" Margin="5" VerticalAlignment="Center" FontWeight="SemiBold">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Text" Value="{Binding PaymentType}" />
-                                        <Style.Triggers>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding PaymentType}" Value="Card"/>
-                                                    <Condition Binding="{Binding IsCardTransactionProcessed}" Value="False"/>
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (nem könyvelt)'}"/>
-                                            </MultiDataTrigger>
+                    <Border BorderBrush="#dfd3c3" BorderThickness="2">
+                        <StackPanel Margin="0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="#dfd3c3">
+                                <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="16" Margin="5" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="18" FontWeight="DemiBold" Margin="5 5 0 5" VerticalAlignment="Center"/>
+                                <TextBlock Text=".-Ft." FontSize="18" Margin="0 5 5 5" VerticalAlignment="Center"/>
+                                <TextBlock FontSize="18" Margin="5" VerticalAlignment="Center" FontWeight="SemiBold">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="{Binding PaymentType}" />
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding PaymentType}" Value="Card"/>
+                                                        <Condition Binding="{Binding IsCardTransactionProcessed}" Value="False"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (nem könyvelt)'}"/>
+                                                </MultiDataTrigger>
 
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding PaymentType}" Value="Card"/>
-                                                    <Condition Binding="{Binding IsCardTransactionProcessed}" Value="True"/>
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (könyvelt)'}"/>
-                                            </MultiDataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                            <TextBlock Text="{Binding CustomerName}" FontSize="17" Margin="5" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Notes}" FontSize="17" FontStyle="Italic" Margin="5" VerticalAlignment="Center"/>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding PaymentType}" Value="Card"/>
+                                                        <Condition Binding="{Binding IsCardTransactionProcessed}" Value="True"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (könyvelt)'}"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock Text="{Binding CustomerName}" FontSize="17" Margin="5" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding Notes}" FontSize="17" FontStyle="Italic" Margin="5" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <ItemsControl ItemsSource="{Binding SaleItems}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="LightGray" BorderThickness="2">
+                                            <WrapPanel Margin="3">
+                                                <TextBlock Text="{Binding Quantity}" Width="30"/>
+                                                <TextBlock Text=" db" Width="40"/>
+                                                <TextBlock Text="{Binding Product.ItemNumber}" Width="140"/>
+                                                <TextBlock Text="{Binding Product.Name}"  Width="700"/>
+                                                <TextBlock Text="Eladási ár(/db):" Width="110"/>
+                                                <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Width="80"/>
+                                                <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}" Width="200"/>
+                                            </WrapPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </StackPanel>
-                        <ItemsControl ItemsSource="{Binding SaleItems}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border BorderBrush="LightGray" BorderThickness="2">
-                                        <WrapPanel Margin="3">
-                                            <TextBlock Text="{Binding Quantity}" Width="30"/>
-                                            <TextBlock Text=" db" Width="40"/>
-                                            <TextBlock Text="{Binding Product.ItemNumber}" Width="140"/>
-                                            <TextBlock Text="{Binding Product.Name}"  Width="700"/>
-                                            <TextBlock Text="Eladási ár(/db):" Width="110"/>
-                                            <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Width="80"/>
-                                            <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}" Width="200"/>
-                                        </WrapPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>
