@@ -185,9 +185,8 @@ namespace Ol_der.Controls.Orders
             {
                 if (product.SupplierId != _supplierId)
                 {
-                    MessageBoxOkWindow messageBoxWindow = new("Nem ehhez a beszállítóhoz tartozik a termék!");
+                    MessageBoxOkWindow messageBoxWindow = new("Ez a termék másik beszállitóhoz tartozik");
                     messageBoxWindow.ShowDialog();
-                    return;
                 }
 
 
@@ -276,9 +275,6 @@ namespace Ol_der.Controls.Orders
 
             await _orderRepository.UpdateOrderAsync(Order);
 
-            MessageBoxOkWindow messageBoxWindow2 = new("Sikeresen hozzáadva!");
-            messageBoxWindow2.ShowDialog();
-
             int orderId = Order.OrderId;
             Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
 
@@ -288,13 +284,6 @@ namespace Ol_der.Controls.Orders
 
         public async Task UpdateOrder()
         {
-            MessageBoxWindow messageBoxWindow = new("Biztosan rá akarsz menteni a rendelésre?");
-            messageBoxWindow.ShowDialog();
-
-            if (messageBoxWindow.DialogResult != true)
-            {
-                return;
-            }
 
             Order.OrderDate = DateTime.Now;
 
@@ -366,9 +355,6 @@ namespace Ol_der.Controls.Orders
 
             await _orderRepository.RemoveOrderItemAsync(SelectedOrderItem);
 
-            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen törölve!");
-            messageBoxOkWindow.ShowDialog();
-
             int orderId = Order.OrderId;
             Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
         }
@@ -397,9 +383,6 @@ namespace Ol_der.Controls.Orders
 
             OrderItem.QuantityOrdered = int.Parse(Quantity);
             await _orderRepository.UpdateOrderItemAsync(OrderItem);
-
-            MessageBoxOkWindow messageBoxOkWindow = new("Sikeresen módosítva!");
-            messageBoxOkWindow.ShowDialog();
 
             int orderId = Order.OrderId;
             Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
