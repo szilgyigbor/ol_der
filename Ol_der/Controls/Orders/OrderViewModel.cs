@@ -65,7 +65,11 @@ namespace Ol_der.Controls.Orders
         public async Task DeleteOrderAsync(Order order)
         {
             await _orderRepository.DeleteOrderAsync(order);
-            await LoadOrdersAsync(limitToShow);
+        }
+
+        public async Task DeleteOrderByOrderIdAsync(int orderId)
+        {
+            await _orderRepository.DeleteOrderByOrderIdAsync(orderId);
         }
 
         public async Task<Supplier> GetSupplierById(int supplierId)
