@@ -25,7 +25,7 @@ namespace Ol_der.Controls.Sales
             _saleRepository = new SaleRepository();
             Sales = new ObservableCollection<Sale>();
             GroupedSales = new CollectionViewSource();
-            LoadDataAsync(1000);
+            LoadDataAsync(200);
         }
 
         public async Task RefreshData(int limit) 

@@ -26,7 +26,7 @@ namespace Ol_der.Controls.SalePackages
             _packageRepository = new PackageRepository();
             Sales = new ObservableCollection<Sale>();
             GroupedSales = new CollectionViewSource();
-            LoadDataAsync(1000);
+            LoadDataAsync(200);
         }
 
         public async Task RefreshData(int limit) 

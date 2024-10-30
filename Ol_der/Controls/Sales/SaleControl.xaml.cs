@@ -77,7 +77,7 @@ namespace Ol_der.Controls.Sales
             }
         }
 
-        private async Task ShowAllSale(int limit = 1000)
+        private async Task ShowAllSale(int limit = 200)
         {
             await _showAllSaleControl.RefreshSales(limit);
             ContentArea.Content = _showAllSaleControl;
@@ -88,7 +88,7 @@ namespace Ol_der.Controls.Sales
             InputSaleNumberWindow dialog = new InputSaleNumberWindow();
             if (dialog.ShowDialog() == true)
             {
-                int numberToShow = dialog.NumberResult ?? 1000;
+                int numberToShow = dialog.NumberResult ?? 200;
                 await ShowAllSale(numberToShow);
             }
         }
