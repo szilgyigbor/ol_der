@@ -236,8 +236,6 @@ namespace Ol_der.Controls.Sales
                 }
                 await _saleViewModel.UpdateSaleAsync(_saleToSave);
 
-                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Eladás sikeresen módosítva!");
-                messageBoxOkWindow.ShowDialog();
             }
             else
             {
@@ -254,8 +252,6 @@ namespace Ol_der.Controls.Sales
                 }
                 await _saleViewModel.AddSaleAsync(_saleToSave);
 
-                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Eladás sikeresen hozzáadva!");
-                messageBoxOkWindow.ShowDialog();
             }
 
             _saleToSave = new Sale();

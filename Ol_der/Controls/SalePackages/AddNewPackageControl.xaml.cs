@@ -220,9 +220,6 @@ namespace Ol_der.Controls.SalePackages
                     });
                 }
                 await _packageViewModel.UpdateSaleAsync(_saleToSave);
-
-                MessageBoxOkWindow messageBoxOkWindow = new("Csomag sikeresen módosítva!");
-                messageBoxOkWindow.ShowDialog();
             }
             else
             {
@@ -238,8 +235,6 @@ namespace Ol_der.Controls.SalePackages
                     });
                 }
                 await _packageViewModel.AddSaleAsync(_saleToSave);
-                MessageBoxOkWindow messageBoxOkWindow = new("Csomag sikeresen hozzáadva!");
-                messageBoxOkWindow.ShowDialog();
             }
 
             _saleToSave = new Sale();
