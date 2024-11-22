@@ -22,10 +22,10 @@
                     </GroupStyle.ContainerStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="LightBlue" BorderThickness="4">
+                            <Border BorderBrush="#85a6b1" BorderThickness="4">
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Riport" Background="BlanchedAlmond" Click="SaveButton_Click" Margin="0"/>
-                                    <TextBlock Background="AliceBlue" Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="SemiBold" FontSize="20"/>
+                                    <TextBlock Padding="3" Background="#bae2be" Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="SemiBold" FontSize="21"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -34,9 +34,20 @@
             </ListView.GroupStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="#dfd3c3" BorderThickness="2">
+                    <Border BorderBrush="Black" BorderThickness="2">
                         <StackPanel Margin="0">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="#dfd3c3">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <StackPanel.Style>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Background" Value="#ebebeb" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding PaymentType}" Value="Card">
+                                                <Setter Property="Background" Value="#f4b0c7" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </StackPanel.Style>
+
                                 <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="16" Margin="5" VerticalAlignment="Center"/>
                                 <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="18" FontWeight="DemiBold" Margin="5 5 0 5" VerticalAlignment="Center"/>
                                 <TextBlock Text=".-Ft." FontSize="18" Margin="0 5 5 5" VerticalAlignment="Center"/>
@@ -67,10 +78,11 @@
                                 <TextBlock Text="{Binding CustomerName}" FontSize="17" Margin="5" VerticalAlignment="Center"/>
                                 <TextBlock Text="{Binding Notes}" FontSize="17" FontStyle="Italic" Margin="5" VerticalAlignment="Center"/>
                             </StackPanel>
+
                             <ItemsControl ItemsSource="{Binding SaleItems}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderBrush="LightGray" BorderThickness="2">
+                                        <Border BorderBrush="#dfdfdf" BorderThickness="2">
                                             <WrapPanel Margin="3">
                                                 <TextBlock Text="{Binding Quantity}" Width="30"/>
                                                 <TextBlock Text=" db" Width="40"/>
@@ -85,18 +97,14 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </StackPanel>
+
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="#F4F4F4"/>
+                    <Setter Property="Background" Value="#fbfbfb"/>
                     <Setter Property="Foreground" Value="Black"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding PaymentType}" Value="Card">
-                            <Setter Property="Background" Value="#E6E0F8"/>
-                        </DataTrigger>
-                    </Style.Triggers>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
