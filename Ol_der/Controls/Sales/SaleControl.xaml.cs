@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ol_der.Controls.DateFilter;
 
 namespace Ol_der.Controls.Sales
 {
@@ -90,6 +91,15 @@ namespace Ol_der.Controls.Sales
             {
                 int numberToShow = dialog.NumberResult ?? 200;
                 await ShowAllSale(numberToShow);
+            }
+        }
+
+        private async void DatePicker_Click(object sender, RoutedEventArgs e)
+        {
+            SetDateToFilter dialog = new SetDateToFilter();
+            if (dialog.ShowDialog() == true)
+            {
+                
             }
         }
 
