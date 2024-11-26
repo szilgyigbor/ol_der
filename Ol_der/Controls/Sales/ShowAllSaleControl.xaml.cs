@@ -27,12 +27,12 @@ namespace Ol_der.Controls.Sales
     /// </summary>
     public partial class ShowAllSaleControl : UserControl
     {
-        private SaleViewModel _viewModel;
+        private ShowAllSaleViewModel _viewModel;
         public List<Sale> Sales { get; set; }
         public ShowAllSaleControl()
         {
             InitializeComponent();
-            _viewModel = new SaleViewModel();
+            _viewModel = new ShowAllSaleViewModel();
             this.DataContext = _viewModel;
         }
 
