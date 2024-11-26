@@ -87,9 +87,9 @@ namespace Ol_der.Controls.Sales
             return -1;
         }
 
-        public async Task RefreshSales(int limit)
+        public async Task RefreshSales(object filterForSales)
         {
-            await _viewModel.RefreshData(limit);
+            await _viewModel.RefreshData(filterForSales);
         }
 
         public async Task DeleteSale()

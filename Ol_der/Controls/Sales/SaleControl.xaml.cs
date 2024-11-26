@@ -23,15 +23,17 @@ namespace Ol_der.Controls.Sales
     /// </summary>
     public partial class SaleControl : UserControl
     {
+        private object _filterForSales = 200;
 
         private AddNewSaleControl _addSaleControl;
         private ShowAllSaleControl _showAllSaleControl;
+
         public SaleControl()
         {
             InitializeComponent();
             _showAllSaleControl = new ShowAllSaleControl();
             _addSaleControl = new AddNewSaleControl();
-            ShowAllSale();
+            ShowFilteredSales();
         }
 
         private void AddSale_Click(object sender, RoutedEventArgs e)
@@ -41,12 +43,12 @@ namespace Ol_der.Controls.Sales
 
             _addSaleControl.OnFinished -= async () =>
             {
-                await ShowAllSale();
+                await ShowFilteredSales();
             };
 
             _addSaleControl.OnFinished += async () =>
             {
-                await ShowAllSale();
+                await ShowFilteredSales();
             };
         }
 
@@ -63,12 +65,12 @@ namespace Ol_der.Controls.Sales
 
                 _addSaleControl.OnFinished -= async () =>
                 {
-                    await ShowAllSale();
+                    await ShowFilteredSales();
                 };
 
                 _addSaleControl.OnFinished += async () =>
                 {
-                    await ShowAllSale();
+                    await ShowFilteredSales();
                 };
             }
 
@@ -78,19 +80,19 @@ namespace Ol_der.Controls.Sales
             }
         }
 
-        private async Task ShowAllSale(int limit = 200)
+        private async Task ShowFilteredSales()
         {
-            await _showAllSaleControl.RefreshSales(limit);
+            await _showAllSaleControl.RefreshSales(_filterForSales);
             ContentArea.Content = _showAllSaleControl;
         }
 
-        private async void ShowAllSale_Click(object sender, RoutedEventArgs e)
+        private async void ShowFixedNumberOfSales_Click(object sender, RoutedEventArgs e)
         {
             InputSaleNumberWindow dialog = new InputSaleNumberWindow();
             if (dialog.ShowDialog() == true)
             {
-                int numberToShow = dialog.NumberResult ?? 200;
-                await ShowAllSale(numberToShow);
+                _filterForSales = dialog.NumberResult ?? 200;
+                await ShowFilteredSales();
             }
         }
 
@@ -106,7 +108,7 @@ namespace Ol_der.Controls.Sales
         private async void btnDeleteSale_Click(object sender, RoutedEventArgs e)
         {
             await _showAllSaleControl.DeleteSale();
-            await ShowAllSale();
+            await ShowFilteredSales();
         }
 
         private async void SearchSalesByProductNumber_Click(object sender, RoutedEventArgs e)

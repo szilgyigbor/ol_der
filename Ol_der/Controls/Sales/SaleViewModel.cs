@@ -25,19 +25,31 @@ namespace Ol_der.Controls.Sales
             _saleRepository = new SaleRepository();
             Sales = new ObservableCollection<Sale>();
             GroupedSales = new CollectionViewSource();
-            LoadDataAsync(200);
         }
 
-        public async Task RefreshData(int limit) 
+        public async Task RefreshData(object filterForSales) 
         {
-            await LoadDataAsync(limit);
+            await LoadDataAsync(filterForSales);
         }
 
-        private async Task LoadDataAsync(int limit)
+        private async Task LoadDataAsync(object filterForSales)
         {
-            var salesData = await GetAllSaleAsync(limit);
-            FillSales(salesData);
-            SetupGrouping();
+            switch (filterForSales)
+            {
+                case int number:
+                    var salesData = await GetAllSaleAsync(number);
+                    FillSales(salesData);
+                    SetupGrouping();
+                    break;
+
+                case List<DateTime> dateTimes:
+                    foreach (var dateTime in dateTimes)
+                    {
+                    }
+                    break;
+            }
+
+            
         }
 
         public async Task LoadSearchedSalesAsync(string itemNumber)
