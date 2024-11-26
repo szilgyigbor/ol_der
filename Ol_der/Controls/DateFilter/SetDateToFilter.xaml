@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ol_der.Controls.DateFilter"
         mc:Ignorable="d"
         FontSize="20"
-        Title="SetDateToFilter" Height="450" Width="600">
+        Title="SetDateToFilter" Height="380" Width="600">
     <Grid>
         <StackPanel>
             <!-- Kezdő dátum -->
