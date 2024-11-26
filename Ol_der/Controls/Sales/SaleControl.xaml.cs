@@ -31,6 +31,7 @@ namespace Ol_der.Controls.Sales
         public SaleControl()
         {
             InitializeComponent();
+            DataContext = this;
             _showAllSaleControl = new ShowAllSaleControl();
             _addSaleControl = new AddNewSaleControl();
             ShowFilteredSales();
@@ -84,6 +85,7 @@ namespace Ol_der.Controls.Sales
         {
             await _showAllSaleControl.RefreshSales(_filterForSales);
             ContentArea.Content = _showAllSaleControl;
+            SalesTextBlock.Text = $"Eladások kezelése (megjelenített: {_filterForSales.ToString()})";
         }
 
         private async void ShowFixedNumberOfSales_Click(object sender, RoutedEventArgs e)
