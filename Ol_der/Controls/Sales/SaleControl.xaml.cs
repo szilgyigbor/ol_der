@@ -83,6 +83,8 @@ namespace Ol_der.Controls.Sales
 
         private async Task ShowFilteredSales()
         {
+            ContentArea.Content = "";
+            SalesTextBlock.Text = $"BETÖLTÉS!";
             await _showAllSaleControl.RefreshSales(_filterForSales);
             ContentArea.Content = _showAllSaleControl;
             SalesTextBlock.Text = $"Eladások kezelése (megjelenített: {_filterForSales.ToString()})";
