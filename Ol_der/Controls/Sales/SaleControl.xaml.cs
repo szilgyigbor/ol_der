@@ -89,7 +89,15 @@ namespace Ol_der.Controls.Sales
             SalesTextBlock.Text = $"BETÖLTÉS!";
             await _showAllSaleControl.RefreshSales(_filterForSales);
             ContentArea.Content = _showAllSaleControl;
-            SalesTextBlock.Text = $"Eladások kezelése (megjelenített: {_filterForSales.ToString()})";
+            if (_filterForSales is List<DateTime>)
+            {
+                var dates = _filterForSales as List<DateTime>;
+                SalesTextBlock.Text = $"Eladások kezelése (megjelenített: {dates[0]:yyyy.MM.dd} - {dates[1]:yyyy.MM.dd})";
+            }
+            else 
+            {
+                SalesTextBlock.Text = $"Eladások kezelése (megjelenített: {_filterForSales.ToString()})";
+            }
         }
 
         private async void ShowFixedNumberOfSales_Click(object sender, RoutedEventArgs e)
