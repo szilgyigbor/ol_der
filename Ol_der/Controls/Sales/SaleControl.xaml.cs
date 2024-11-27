@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ol_der.Controls.DateFilter;
+using Ol_der.Controls.Orders;
 
 namespace Ol_der.Controls.Sales
 {
@@ -77,7 +78,8 @@ namespace Ol_der.Controls.Sales
 
             else
             {
-                MessageBox.Show("Válassz ki egy eladást a módosításhoz!");
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Válassz ki egy eladást a módosításhoz!");
+                messageBoxOkWindow.ShowDialog();
             }
         }
 
