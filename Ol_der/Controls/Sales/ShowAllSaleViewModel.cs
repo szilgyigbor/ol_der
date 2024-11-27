@@ -50,15 +50,15 @@ namespace Ol_der.Controls.Sales
             switch (filterForSales)
             {
                 case int number:
-                    var salesList = await GetAllSaleAsync(number);
-                    Sales = new ObservableCollection<Sale>(salesList);
+                    var salesNumberList = await GetAllSaleAsync(number);
+                    Sales = new ObservableCollection<Sale>(salesNumberList);
                     SetupGrouping();
                     break;
 
                 case List<DateTime> dateTimes:
-                    foreach (var dateTime in dateTimes)
-                    {
-                    }
+                    var salesDateList = await GetSalesByDateRangeAsync(dateTimes[0].Date, dateTimes[1].Date);
+                    Sales = new ObservableCollection<Sale>(salesDateList);
+                    SetupGrouping();
                     break;
             }
         }
@@ -89,6 +89,11 @@ namespace Ol_der.Controls.Sales
         public async Task<List<Sale>> GetAllSaleAsync(int limit)
         {
             return await _saleRepository.GetAllSaleAsync(limit);
+        }
+
+        public async Task<List<Sale>> GetSalesByDateRangeAsync(DateTime startDate, DateTime endDate)
+        {
+            return await _saleRepository.GetSalesByDateRangeAsync(startDate, endDate);
         }
 
         public async Task DeleteSaleAsync(Sale sale)
