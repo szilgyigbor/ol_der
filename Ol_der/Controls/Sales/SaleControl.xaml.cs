@@ -104,10 +104,11 @@ namespace Ol_der.Controls.Sales
 
         private async void DatePicker_Click(object sender, RoutedEventArgs e)
         {
-            SetDateToFilter dialog = new SetDateToFilter();
-            if (dialog.ShowDialog() == true)
+            SetDateToFilter dateDialog = new SetDateToFilter();
+            if (dateDialog.ShowDialog() == true)
             {
-                
+                _filterForSales = dateDialog.dateTimes;
+                await ShowFilteredSales();
             }
         }
 
