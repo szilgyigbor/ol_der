@@ -86,7 +86,7 @@ namespace Ol_der.Controls.Sales
         private async Task ShowFilteredSales()
         {
             ContentArea.Content = "";
-            SalesTextBlock.Text = $"BETÖLTÉS!";
+            SalesTextBlock.Text = $"BETÖLTÉS...";
             await _showAllSaleControl.RefreshSales(_filterForSales);
             ContentArea.Content = _showAllSaleControl;
             if (_filterForSales is List<DateTime>)
