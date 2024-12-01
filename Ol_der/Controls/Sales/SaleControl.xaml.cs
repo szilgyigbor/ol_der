@@ -29,6 +29,16 @@ namespace Ol_der.Controls.Sales
         private AddNewSaleControl _addSaleControl;
         private ShowAllSaleControl _showAllSaleControl;
 
+        TextBlock loadingText = new TextBlock
+        {
+            Text = "BETÖLTÉS...",
+            FontSize = 110,
+            FontWeight = FontWeights.Bold,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
+            TextAlignment = TextAlignment.Center
+        };
+
         public SaleControl()
         {
             InitializeComponent();
@@ -85,16 +95,6 @@ namespace Ol_der.Controls.Sales
 
         private async Task ShowFilteredSales()
         {
-            TextBlock loadingText = new TextBlock
-            {
-                Text = "BETÖLTÉS...",
-                FontSize = 110,
-                FontWeight = FontWeights.Bold,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                TextAlignment = TextAlignment.Center               
-            };
-
             if (_filterForSales is List<DateTime>)
             {
                 var dates = _filterForSales as List<DateTime>;
@@ -148,6 +148,8 @@ namespace Ol_der.Controls.Sales
 
         private async Task ShowSalesByProductNumber(string productNumber)
         {
+            ContentArea.Content = loadingText;
+            SalesTextBlock.Text = $"Keresett termék cikkszáma: {productNumber}";
             await _showAllSaleControl.LoadSearchedSales(productNumber);
             ContentArea.Content = _showAllSaleControl;
         }

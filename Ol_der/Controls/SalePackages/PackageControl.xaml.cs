@@ -31,6 +31,17 @@ namespace Ol_der.Controls.SalePackages
 
         private AddNewPackageControl _addPackageControl;
         private ShowAllPackageControl _showAllPackageControl;
+
+        TextBlock loadingText = new TextBlock
+        {
+            Text = "BETÖLTÉS...",
+            FontSize = 110,
+            FontWeight = FontWeights.Bold,
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
+            TextAlignment = TextAlignment.Center
+        };
+
         public PackageControl()
         {
             InitializeComponent();
@@ -86,15 +97,6 @@ namespace Ol_der.Controls.SalePackages
 
         private async Task ShowFilteredPackages()
         {
-            TextBlock loadingText = new TextBlock
-            {
-                Text = "BETÖLTÉS...",
-                FontSize = 110,
-                FontWeight = FontWeights.Bold,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                TextAlignment = TextAlignment.Center
-            };
 
             if (_filterForPackages is List<DateTime>)
             {
@@ -149,6 +151,8 @@ namespace Ol_der.Controls.SalePackages
 
         private async Task ShowPackagesByProductNumber(string productNumber)
         {
+            ContentArea.Content = loadingText;
+            PackagesTextBlock.Text = $"Keresett termék cikkszáma: {productNumber}";
             await _showAllPackageControl.LoadSearchedSales(productNumber);
             ContentArea.Content = _showAllPackageControl;
         }
