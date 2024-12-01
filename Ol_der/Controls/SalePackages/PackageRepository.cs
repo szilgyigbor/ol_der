@@ -36,6 +36,21 @@ namespace Ol_der.Controls.SalePackages
             }
         }
 
+        public async Task<List<Sale>> GetSalesByDateRangeAsync(DateTime startDate, DateTime endDate)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Sales
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product)
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product.Supplier)
+                    .OrderByDescending(s => s.Date)
+                    .Where(s => s.Date.Date >= startDate.Date && s.Date.Date <= endDate.Date && s.IsPackage)
+                    .ToListAsync();
+            }
+        }
+
         public async Task<Product> SearchProductByItemNumberAsync(string itemNumber)
         {
             using (var context = ApplicationDbContextFactory.Create())

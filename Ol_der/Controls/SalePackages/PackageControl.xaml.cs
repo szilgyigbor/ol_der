@@ -1,4 +1,6 @@
-﻿using Ol_der.Controls.Orders;
+﻿using Ol_der.Controls.DateFilter;
+using Ol_der.Controls.Orders;
+using Ol_der.Controls.Sales;
 using Ol_der.Controls.Suppliers;
 using Ol_der.Data;
 using Ol_der.Models;
@@ -25,6 +27,7 @@ namespace Ol_der.Controls.SalePackages
     /// </summary>
     public partial class PackageControl : UserControl
     {
+        private object _filterForPackages = 200;
 
         private AddNewPackageControl _addPackageControl;
         private ShowAllPackageControl _showAllPackageControl;
@@ -33,26 +36,26 @@ namespace Ol_der.Controls.SalePackages
             InitializeComponent();
             _showAllPackageControl = new ShowAllPackageControl();
             _addPackageControl = new AddNewPackageControl();
-            ShowAllSale();
+            ShowFilteredPackages();
         }
 
-        private void AddSale_Click(object sender, RoutedEventArgs e)
+        private void AddPackage_Click(object sender, RoutedEventArgs e)
         {
             _addPackageControl = new AddNewPackageControl();
             ContentArea.Content = _addPackageControl;
 
             _addPackageControl.OnFinished -= async () =>
             {
-                await ShowAllSale();
+                await ShowFilteredPackages();
             };
 
             _addPackageControl.OnFinished += async () =>
             {
-                await ShowAllSale();
+                await ShowFilteredPackages();
             };
         }
 
-        private async void ModifySale_Click(object sender, RoutedEventArgs e)
+        private async void ModifyPackage_Click(object sender, RoutedEventArgs e)
         {
             ContentArea.Content = _showAllPackageControl;
             int saleId = _showAllPackageControl.SaleIdToModify();
@@ -65,12 +68,12 @@ namespace Ol_der.Controls.SalePackages
 
                 _addPackageControl.OnFinished -= async () =>
                 {
-                    await ShowAllSale();
+                    await ShowFilteredPackages();
                 };
 
                 _addPackageControl.OnFinished += async () =>
                 {
-                    await ShowAllSale();
+                    await ShowFilteredPackages();
                 };
             }
 
@@ -81,39 +84,70 @@ namespace Ol_der.Controls.SalePackages
             }
         }
 
-        private async Task ShowAllSale(int limit = 200)
+        private async Task ShowFilteredPackages()
         {
-            await _showAllPackageControl.RefreshSales(limit);
+            TextBlock loadingText = new TextBlock
+            {
+                Text = "BETÖLTÉS...",
+                FontSize = 110,
+                FontWeight = FontWeights.Bold,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                TextAlignment = TextAlignment.Center
+            };
+
+            if (_filterForPackages is List<DateTime>)
+            {
+                var dates = _filterForPackages as List<DateTime>;
+                PackagesTextBlock.Text = $"Eladások kezelése (megjelenített: {dates[0]:yyyy.MM.dd} - {dates[1]:yyyy.MM.dd})";
+            }
+            else
+            {
+                PackagesTextBlock.Text = $"Eladások kezelése (megjelenített: {_filterForPackages.ToString()})";
+            }
+
+            ContentArea.Content = loadingText;
+            await _showAllPackageControl.RefreshSales(_filterForPackages);
             ContentArea.Content = _showAllPackageControl;
         }
 
-        private async void ShowAllSale_Click(object sender, RoutedEventArgs e)
+        private async void ShowFixedNumberOfPackages_Click(object sender, RoutedEventArgs e)
         {
             InputPackageNumberWindow dialog = new InputPackageNumberWindow();
             if (dialog.ShowDialog() == true)
             {
-                int numberToShow = dialog.NumberResult ?? 200;
-                await ShowAllSale(numberToShow);
+                _filterForPackages = dialog.NumberResult ?? 200;
+                await ShowFilteredPackages();
             }
         }
 
-        private async void btnDeleteSale_Click(object sender, RoutedEventArgs e)
+        private async void DatePicker_Click(object sender, RoutedEventArgs e)
         {
-            await _showAllPackageControl.DeleteSale();
-            await ShowAllSale();
+            SetDateToFilter dateDialog = new SetDateToFilter();
+            if (dateDialog.ShowDialog() == true)
+            {
+                _filterForPackages = dateDialog.dateTimes;
+                await ShowFilteredPackages();
+            }
         }
 
-        private async void SearchSalesByProductNumber_Click(object sender, RoutedEventArgs e)
+        private async void btnDeletePackage_Click(object sender, RoutedEventArgs e)
+        {
+            await _showAllPackageControl.DeleteSale();
+            await ShowFilteredPackages();
+        }
+
+        private async void SearchPackagesByProductNumber_Click(object sender, RoutedEventArgs e)
         {
             InputProductNumberWindow dialog = new InputProductNumberWindow();
             if (dialog.ShowDialog() == true)
             {
                 string productNumber = dialog.ProductNumber;
-                await ShowSalesByProductNumber(productNumber);
+                await ShowPackagesByProductNumber(productNumber);
             }
         }
 
-        private async Task ShowSalesByProductNumber(string productNumber)
+        private async Task ShowPackagesByProductNumber(string productNumber)
         {
             await _showAllPackageControl.LoadSearchedSales(productNumber);
             ContentArea.Content = _showAllPackageControl;

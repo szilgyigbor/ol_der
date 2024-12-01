@@ -17,33 +17,45 @@ namespace Ol_der.Controls.SalePackages
     internal class PackageViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private readonly PackageRepository _packageRepository;
+        private readonly SaleRepository _saleRepository;
         public ObservableCollection<Sale> Sales { get; private set; }
         public CollectionViewSource GroupedSales { get; private set; }
 
         public PackageViewModel()
         {
-            _packageRepository = new PackageRepository();
+            _saleRepository = new SaleRepository();
             Sales = new ObservableCollection<Sale>();
             GroupedSales = new CollectionViewSource();
-            LoadDataAsync(200);
         }
 
-        public async Task RefreshData(int limit) 
+        public async Task RefreshData(object filterForSales)
         {
-            await LoadDataAsync(limit);
+            await LoadDataAsync(filterForSales);
         }
 
-        private async Task LoadDataAsync(int limit)
+        private async Task LoadDataAsync(object filterForSales)
         {
-            var salesData = await GetAllSaleAsync(limit);
-            FillSales(salesData);
-            SetupGrouping();
+            switch (filterForSales)
+            {
+                case int number:
+                    var salesData = await GetAllSaleAsync(number);
+                    FillSales(salesData);
+                    SetupGrouping();
+                    break;
+
+                case List<DateTime> dateTimes:
+                    foreach (var dateTime in dateTimes)
+                    {
+                    }
+                    break;
+            }
+
+
         }
 
         public async Task LoadSearchedSalesAsync(string itemNumber)
         {
-            var salesData = await _packageRepository.GetSalesByItemNumberAsync(itemNumber);
+            var salesData = await _saleRepository.GetSalesByItemNumberAsync(itemNumber);
             FillSales(salesData);
             SetupGrouping();
         }
@@ -75,37 +87,37 @@ namespace Ol_der.Controls.SalePackages
 
         public async Task AddSaleAsync(Sale newSale)
         {
-            await _packageRepository.AddSaleAsync(newSale);
+            await _saleRepository.AddSaleAsync(newSale);
         }
 
         public async Task<List<Sale>> GetAllSaleAsync(int limit)
         {
-            return await _packageRepository.GetAllSaleAsync(limit);
+            return await _saleRepository.GetAllSaleAsync(limit);
         }
 
         public async Task<Product> SearchProductByItemNumberAsync(string itemNumber)
         {
-            return await _packageRepository.SearchProductByItemNumberAsync(itemNumber);
+            return await _saleRepository.SearchProductByItemNumberAsync(itemNumber);
         }
 
         public async Task DeleteSaleAsync(Sale sale)
         {
-            await _packageRepository.DeleteSaleAsync(sale);
+            await _saleRepository.DeleteSaleAsync(sale);
         }
 
         public async Task<Sale> GetSaleAsync(int saleId)
         {
-            return await _packageRepository.GetSaleAsync(saleId);
+            return await _saleRepository.GetSaleAsync(saleId);
         }
 
         public async Task UpdateSaleAsync(Sale sale)
         {
-            await _packageRepository.UpdateSaleAsync(sale);
+            await _saleRepository.UpdateSaleAsync(sale);
         }
 
         public async Task RemoveAllSaleItemsFromSaleAsync(int saleId)
         {
-            await _packageRepository.RemoveAllSaleItemsFromSaleAsync(saleId);
+            await _saleRepository.RemoveAllSaleItemsFromSaleAsync(saleId);
         }
 
     }

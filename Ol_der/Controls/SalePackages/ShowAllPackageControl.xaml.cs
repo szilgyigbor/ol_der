@@ -12,12 +12,12 @@ namespace Ol_der.Controls.SalePackages
     /// </summary>
     public partial class ShowAllPackageControl : UserControl
     {
-        private PackageViewModel _viewModel;
+        private ShowAllPackageViewModel _viewModel;
         public List<Sale> Sales { get; set; }
         public ShowAllPackageControl()
         {
             InitializeComponent();
-            _viewModel = new PackageViewModel();
+            _viewModel = new ShowAllPackageViewModel();
             this.DataContext = _viewModel;
         }
 
@@ -72,9 +72,9 @@ namespace Ol_der.Controls.SalePackages
             return -1;
         }
 
-        public async Task RefreshSales(int limit)
+        public async Task RefreshSales(object filterForSales)
         {
-            await _viewModel.RefreshData(limit);
+            await _viewModel.RefreshData(filterForSales);
         }
 
         public async Task DeleteSale()
