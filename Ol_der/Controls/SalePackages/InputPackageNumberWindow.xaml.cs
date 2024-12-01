@@ -26,6 +26,7 @@ namespace Ol_der.Controls.SalePackages
         public InputPackageNumberWindow()
         {
             InitializeComponent();
+            NumberInput.Focus();
         }
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
