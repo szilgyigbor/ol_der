@@ -85,19 +85,29 @@ namespace Ol_der.Controls.Sales
 
         private async Task ShowFilteredSales()
         {
-            ContentArea.Content = "";
-            SalesTextBlock.Text = $"BETÖLTÉS...";
-            await _showAllSaleControl.RefreshSales(_filterForSales);
-            ContentArea.Content = _showAllSaleControl;
+            TextBlock loadingText = new TextBlock
+            {
+                Text = "BETÖLTÉS...",
+                FontSize = 110,
+                FontWeight = FontWeights.Bold,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                TextAlignment = TextAlignment.Center               
+            };
+
             if (_filterForSales is List<DateTime>)
             {
                 var dates = _filterForSales as List<DateTime>;
                 SalesTextBlock.Text = $"Eladások kezelése (megjelenített: {dates[0]:yyyy.MM.dd} - {dates[1]:yyyy.MM.dd})";
             }
-            else 
+            else
             {
                 SalesTextBlock.Text = $"Eladások kezelése (megjelenített: {_filterForSales.ToString()})";
             }
+
+            ContentArea.Content = loadingText;
+            await _showAllSaleControl.RefreshSales(_filterForSales);
+            ContentArea.Content = _showAllSaleControl;
         }
 
         private async void ShowFixedNumberOfSales_Click(object sender, RoutedEventArgs e)
