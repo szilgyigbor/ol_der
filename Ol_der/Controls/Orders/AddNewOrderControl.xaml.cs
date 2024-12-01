@@ -33,6 +33,14 @@ namespace Ol_der.Controls.Orders
             _viewModel.OnOrderFinished += ActivateEvent;
         }
 
+        private void txtItemNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                btnSearch.Command.Execute(null);
+            }
+        }
+
         public void ActivateEvent()
         {
             OnOrderFinished?.Invoke();
