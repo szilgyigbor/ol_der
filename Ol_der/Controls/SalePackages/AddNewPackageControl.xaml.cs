@@ -178,6 +178,11 @@ namespace Ol_der.Controls.SalePackages
             OnFinished?.Invoke();
         }
 
+        private async void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            OnFinished?.Invoke();
+        }
+
         private async Task SaveSale()
         {
             decimal totalAmount;

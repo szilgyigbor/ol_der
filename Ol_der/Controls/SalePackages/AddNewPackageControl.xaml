@@ -29,8 +29,15 @@
             <TextBox Margin="5" x:Name="txtCustomerName" Width="400"/>
         </WrapPanel>
 
-        <Button Grid.Row="0" Content="Mentés" Background="#E5F5E5" Margin="5" Width="120" FontSize="22" 
-                Click="btnSaveSale_Click" HorizontalAlignment="Right"/>
+
+        <WrapPanel Grid.Row="0" HorizontalAlignment="Right">
+            <Button Grid.Row="0" Content="Mégse" Background="LightPink" Margin="5" Width="120" FontSize="22" 
+                    Click="btnCancel_Click" HorizontalAlignment="Right"/>
+            <Button Grid.Row="0" Content="Mentés" Background="#E5F5E5" Margin="5" Width="120" FontSize="22" 
+                    Click="btnSaveSale_Click" HorizontalAlignment="Right"/>
+        </WrapPanel>
+
+
 
         <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
             <Label Content="Teljes összeg:" Grid.Row="1" VerticalAlignment="Center"/>
