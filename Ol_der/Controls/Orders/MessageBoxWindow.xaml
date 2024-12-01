@@ -10,8 +10,8 @@
     <StackPanel Margin="10">
         <TextBlock x:Name="messageToShow" Text="Message" Margin="10" HorizontalAlignment="Center"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
-            <Button Content="OK" Padding="10,5,10,5" FontSize="16" Click="OkButton_Click"/>
-            <Button Content="Mégsem" Padding="10,5,10,5" FontSize="16" Click="CancelButton_Click" Margin="5,0,0,0"/>
+            <Button Content="OK" Padding="10,5,10,5" FontSize="16" Click="OkButton_Click" IsDefault="True"/>
+            <Button Content="Mégsem" Padding="10,5,10,5" FontSize="16" Click="CancelButton_Click" IsCancel="True" Margin="5,0,0,0"/>
         </StackPanel>
     </StackPanel>
 </Window>
