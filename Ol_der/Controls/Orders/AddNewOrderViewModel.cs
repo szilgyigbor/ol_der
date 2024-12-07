@@ -20,7 +20,10 @@ namespace Ol_der.Controls.Orders
         private string _title;
         private int _supplierId;
         private string _productDescription;
-        private string _quantity;
+        private string _newQuantity;
+        private string _updateQuantity;
+        private string _newProductComment = "";
+        private string _updateProductComment = "";
         private OrderItem _selectedOrderItem;
         private OrderItem _orderItem;
 
@@ -71,12 +74,42 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public string Quantity
+        public string NewQuantity
         {
-            get { return _quantity; }
+            get { return _newQuantity; }
             set
             {
-                _quantity = value;
+                _newQuantity = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string UpdateQuantity
+        {
+            get { return _updateQuantity; }
+            set
+            {
+                _updateQuantity = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string NewProductComment
+        {
+            get { return _newProductComment; }
+            set
+            {
+                _newProductComment = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string UpdateProductComment
+        {
+            get { return _updateProductComment; }
+            set
+            {
+                _updateProductComment = value;
                 OnPropertyChanged();
             }
         }
@@ -97,10 +130,8 @@ namespace Ol_der.Controls.Orders
             set
             {
                 _selectedOrderItem = value;
-                OrderItem = _selectedOrderItem;
-                Quantity = _selectedOrderItem?.QuantityOrdered.ToString();
-                ProductDescription = "";
-                ProductDescription += SelectedOrderItem.Product.ItemNumber + "   " + SelectedOrderItem.Product.Name;
+                UpdateQuantity = _selectedOrderItem?.QuantityOrdered.ToString();
+                UpdateProductComment = _selectedOrderItem?.Comment;
                 OnPropertyChanged();
             }
         }
@@ -214,17 +245,17 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public bool CheckQuantity() 
+        public bool CheckQuantity(string quantityToCheck) 
         {
 
-            if (string.IsNullOrEmpty(Quantity))
+            if (string.IsNullOrEmpty(quantityToCheck))
             {
                 MessageBoxOkWindow messageBoxWindow = new("Nem adtál meg mennyiséget!");
                 messageBoxWindow.ShowDialog();
                 return false;
             }
 
-            if (!int.TryParse(Quantity, out int quantity))
+            if (!int.TryParse(quantityToCheck, out int quantity))
             {
                 MessageBoxOkWindow messageBoxWindow = new("Nem számot adtál meg!");
                 messageBoxWindow.ShowDialog();
@@ -244,8 +275,13 @@ namespace Ol_der.Controls.Orders
         {
             if (OrderItem == null)
             {
-                MessageBoxOkWindow messageBoxWindow1 = new("Előbb adj hozzá egy terméket");
+                MessageBoxOkWindow messageBoxWindow1 = new("Előbb cikkszámmal keress rá egy termékre.");
                 messageBoxWindow1.ShowDialog();
+                return;
+            }
+
+            if (CheckQuantity(NewQuantity) == false)
+            {
                 return;
             }
 
@@ -257,16 +293,13 @@ namespace Ol_der.Controls.Orders
                 return;
             }
 
-            if (CheckQuantity() == false)
-            {
-                return;
-            }
+            OrderItem.Comment = NewProductComment;
 
             var existingItem = Order.OrderItems.FirstOrDefault(oi => oi.ProductId == OrderItem.ProductId);
 
             if (existingItem != null)
             {
-                existingItem.QuantityOrdered += int.Parse(Quantity);
+                existingItem.QuantityOrdered += int.Parse(NewQuantity);
             }
             else
             {
@@ -278,7 +311,9 @@ namespace Ol_der.Controls.Orders
             int orderId = Order.OrderId;
             Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
 
-            Quantity = "";
+            OrderItem = null;
+            NewProductComment = "";
+            NewQuantity = "";
             ProductDescription = "";
         }
 
@@ -376,13 +411,15 @@ namespace Ol_der.Controls.Orders
                 return;
             }
 
-            if (CheckQuantity() == false)
+            if (CheckQuantity(UpdateQuantity) == false)
             {
                 return;
             }
 
-            OrderItem.QuantityOrdered = int.Parse(Quantity);
-            await _orderRepository.UpdateOrderItemAsync(OrderItem);
+            SelectedOrderItem.QuantityOrdered = int.Parse(UpdateQuantity);
+            SelectedOrderItem.Comment = UpdateProductComment;
+
+            await _orderRepository.UpdateOrderItemAsync(SelectedOrderItem);
 
             int orderId = Order.OrderId;
             Order = await _orderRepository.GetOrderByOrderIdAsync(orderId);
