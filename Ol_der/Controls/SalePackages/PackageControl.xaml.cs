@@ -101,11 +101,11 @@ namespace Ol_der.Controls.SalePackages
             if (_filterForPackages is List<DateTime>)
             {
                 var dates = _filterForPackages as List<DateTime>;
-                PackagesTextBlock.Text = $"Eladások kezelése (megjelenített: {dates[0]:yyyy.MM.dd} - {dates[1]:yyyy.MM.dd})";
+                PackagesTextBlock.Text = $"Csomagok kezelése (megjelenített: {dates[0]:yyyy.MM.dd} - {dates[1]:yyyy.MM.dd})";
             }
             else
             {
-                PackagesTextBlock.Text = $"Eladások kezelése (megjelenített: {_filterForPackages.ToString()})";
+                PackagesTextBlock.Text = $"Csomagok kezelése (megjelenített: {_filterForPackages.ToString()})";
             }
 
             ContentArea.Content = loadingText;
