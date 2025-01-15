@@ -79,11 +79,13 @@ namespace Ol_der
             {
                 if (button.Name == buttonName) 
                 {
-                    button.Background = new SolidColorBrush(Colors.LightGreen);
+                    button.Background = new SolidColorBrush(Colors.SlateGray);
+                    button.Foreground = new SolidColorBrush(Colors.White);
                 }
                 else 
                 {
                     button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E5F0F9"));
+                    button.Foreground = new SolidColorBrush(Colors.Black);
                 }
             }
         }
