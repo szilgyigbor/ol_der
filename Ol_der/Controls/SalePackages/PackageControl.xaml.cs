@@ -27,7 +27,7 @@ namespace Ol_der.Controls.SalePackages
     /// </summary>
     public partial class PackageControl : UserControl
     {
-        private object _filterForPackages = 200;
+        private object _filterForPackages = 100;
 
         private AddNewPackageControl _addPackageControl;
         private ShowAllPackageControl _showAllPackageControl;

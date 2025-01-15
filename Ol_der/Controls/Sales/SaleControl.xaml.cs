@@ -24,7 +24,7 @@ namespace Ol_der.Controls.Sales
     /// </summary>
     public partial class SaleControl : UserControl
     {
-        private object _filterForSales = 200;
+        private object _filterForSales = 100;
 
         private AddNewSaleControl _addSaleControl;
         private ShowAllSaleControl _showAllSaleControl;
