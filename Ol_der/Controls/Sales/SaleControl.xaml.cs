@@ -68,6 +68,7 @@ namespace Ol_der.Controls.Sales
 
         private async void ModifySale_Click(object sender, RoutedEventArgs e)
         {
+            RefreshTitle();
             ContentArea.Content = _showAllSaleControl;
             int saleId = _showAllSaleControl.SaleIdToModify();
 
@@ -99,6 +100,15 @@ namespace Ol_der.Controls.Sales
 
         private async Task ShowFilteredSales()
         {
+            RefreshTitle();
+
+            ContentArea.Content = loadingText;
+            await _showAllSaleControl.RefreshSales(_filterForSales);
+            ContentArea.Content = _showAllSaleControl;
+        }
+
+        private void RefreshTitle() 
+        {
             if (_filterForSales is List<DateTime>)
             {
                 var dates = _filterForSales as List<DateTime>;
@@ -109,9 +119,6 @@ namespace Ol_der.Controls.Sales
                 SalesTextBlock.Text = $"Eladások kezelése (megjelenített: {_filterForSales.ToString()})";
             }
 
-            ContentArea.Content = loadingText;
-            await _showAllSaleControl.RefreshSales(_filterForSales);
-            ContentArea.Content = _showAllSaleControl;
         }
 
         private async void ShowFixedNumberOfSales_Click(object sender, RoutedEventArgs e)
