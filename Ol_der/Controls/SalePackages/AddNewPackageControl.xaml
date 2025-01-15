@@ -8,7 +8,13 @@
              FontSize="16"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid Margin="10">
@@ -31,9 +37,9 @@
 
 
         <WrapPanel Grid.Row="0" HorizontalAlignment="Right">
-            <Button Grid.Row="0" Content="Mentés" Background="#E5F5E5" Margin="5" Width="120" FontSize="22" 
+            <Button Grid.Row="0" Content="Mentés" Style="{StaticResource CommonButtonStyle}" Width="100" FontSize="20" 
                     Click="btnSaveSale_Click" HorizontalAlignment="Right"/>
-            <Button Grid.Row="0" Content="Mégse" Background="LightPink" Margin="5" Width="120" FontSize="22" 
+            <Button Grid.Row="0" Content="Mégse" Style="{StaticResource RedButtonStyle}" Width="100" FontSize="20" 
                     Click="btnCancel_Click" HorizontalAlignment="Right"/>
         </WrapPanel>
 
@@ -59,14 +65,15 @@
                HorizontalAlignment="Left" FontSize="22"/>
 
         <WrapPanel Grid.Row="5" HorizontalAlignment="Left">
-            <Label Content="Keresett cikkszám:" VerticalAlignment="Center"/>
-            <TextBox x:Name="txtItemNumber" Margin="5" Width="200" KeyDown="txtItemNumber_KeyDown"/>
+            <Label Content="Cikkszám:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtItemNumber" Margin="5" Width="116" KeyDown="txtItemNumber_KeyDown"/>
+            <Button Content="Hozzáadás" Style="{StaticResource CommonButtonStyle}" Click="btnSearchProduct_Click"/>
         </WrapPanel>
 
         <WrapPanel Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Content="Termék hozzáadása" Background="#E5F5E5" Margin="5 5 25 5" Click="btnSearchProduct_Click" Width="180" FontSize="18"/>
-            <Button Content="Total számítása" Background="#E5F0F9" Margin="5" FontSize="18" Click="UpdateItem_Click"/>
-            <Button Content="Termék törlése a listából" Background="#E5F0F9" Margin="5" FontSize="18" Click="DeleteItem_Click"/>
+            <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}"/>
+            <Button Content="Total" Style="{StaticResource CommonButtonStyle}" Click="UpdateItem_Click"/>
+            <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" Click="DeleteItem_Click"/>
         </WrapPanel>
 
         <ListBox x:Name="lstSaleItems" Grid.Row="7" Margin="5"  Background="Transparent">
