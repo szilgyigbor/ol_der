@@ -54,6 +54,7 @@ namespace Ol_der.Controls.SalePackages
         {
             _addPackageControl = new AddNewPackageControl();
             ContentArea.Content = _addPackageControl;
+            PackagesTextBlock.Text = $"Új csomag";
 
             _addPackageControl.OnFinished -= async () =>
             {
@@ -68,14 +69,15 @@ namespace Ol_der.Controls.SalePackages
 
         private async void ModifyPackage_Click(object sender, RoutedEventArgs e)
         {
+            RefreshTitle();
             ContentArea.Content = _showAllPackageControl;
             int saleId = _showAllPackageControl.SaleIdToModify();
-
             if (saleId != -1)
             {
                 _addPackageControl = new AddNewPackageControl();
                 await _addPackageControl.LoadExistsSale(saleId);
                 ContentArea.Content = _addPackageControl;
+                PackagesTextBlock.Text = $"Csomag módosítása";
 
                 _addPackageControl.OnFinished -= async () =>
                 {
@@ -97,7 +99,14 @@ namespace Ol_der.Controls.SalePackages
 
         private async Task ShowFilteredPackages()
         {
+            RefreshTitle();
+            ContentArea.Content = loadingText;
+            await _showAllPackageControl.RefreshSales(_filterForPackages);
+            ContentArea.Content = _showAllPackageControl;
+        }
 
+        private void RefreshTitle() 
+        {
             if (_filterForPackages is List<DateTime>)
             {
                 var dates = _filterForPackages as List<DateTime>;
@@ -107,10 +116,6 @@ namespace Ol_der.Controls.SalePackages
             {
                 PackagesTextBlock.Text = $"Csomagok kezelése (megjelenített: {_filterForPackages.ToString()})";
             }
-
-            ContentArea.Content = loadingText;
-            await _showAllPackageControl.RefreshSales(_filterForPackages);
-            ContentArea.Content = _showAllPackageControl;
         }
 
         private async void ShowFixedNumberOfPackages_Click(object sender, RoutedEventArgs e)
