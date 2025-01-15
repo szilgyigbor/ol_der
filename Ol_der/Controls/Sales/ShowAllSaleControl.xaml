@@ -42,7 +42,7 @@
                                         <Setter Property="Background" Value="#ebebeb" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding PaymentType}" Value="Card">
-                                                <Setter Property="Background" Value="#f4b0c7" />
+                                                <Setter Property="Background" Value="#FFB6C1" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
