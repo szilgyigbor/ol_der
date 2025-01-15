@@ -29,14 +29,14 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel x:Name="stackPanelButtons" Grid.Row="0" Orientation="Vertical">
-                    <Button Content="Beszállítók" Background="#E5F0F9" Name="btnSupplier" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
-                    <Button Content="Termékek" Background="#E5F0F9" Name="btnProduct" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
-                    <Button Content="Eladások" Background="#E5F0F9" Name="btnSale" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
-                    <Button Content="Csomagok" Background="#E5F0F9" Name="btnPackage" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
-                    <Button Content="Rendelések" Background="#E5F0F9" Name="btnOrder" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
-                    <Button Content="Ügyfél Ren." Background="#E5F0F9" Name="btnCustomerOrder" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
-                    <Button Content="Garanciák" Background="#E5F0F9" Name="btnWarranty" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
-                    <Button Content="Jegyzetek" Background="#E5F0F9" Name="btnNote" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Beszállítók" Name="btnSupplier" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Termékek" Name="btnProduct" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Eladások" Name="btnSale" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Csomagok" Name="btnPackage" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Rendelések" Name="btnOrder" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Ügyfél Ren." Name="btnCustomerOrder" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Garanciák" Name="btnWarranty" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Jegyzetek" Name="btnNote" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
                 </StackPanel>
 
                 <Button Content="Kilépés" Name="btnExit" Grid.Row="1" Style="{StaticResource ExitButtonStyle}" Click="Exit_Button_Click"/>
