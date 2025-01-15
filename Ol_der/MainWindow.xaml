@@ -21,7 +21,7 @@
             <ColumnDefinition Width="9.3*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Background="LightGray">
+        <Border Grid.Column="0" Background="Gainsboro">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
