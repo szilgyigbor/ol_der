@@ -36,9 +36,9 @@
         </WrapPanel>
 
         <WrapPanel Grid.Row="0" HorizontalAlignment="Right">
-            <Button Grid.Row="0" Content="Mentés" Style="{StaticResource CommonButtonStyle}" Width="100" FontSize="20" 
+            <Button Grid.Row="0" Content="Mentés" Style="{StaticResource CommonButtonStyle}" MinHeight="35" Width="100" FontSize="20" 
                 Click="btnSaveSale_Click" HorizontalAlignment="Right"/>
-            <Button Grid.Row="0" Content="Mégse" Style="{StaticResource RedButtonStyle}" Width="100" FontSize="20" 
+            <Button Grid.Row="0" Content="Mégse" Style="{StaticResource RedButtonStyle}" MinHeight="35" Width="100" FontSize="20" 
                 Click="btnCancel_Click" HorizontalAlignment="Right"/>
         </WrapPanel>
         
