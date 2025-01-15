@@ -17,8 +17,8 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.8*"/>
-            <ColumnDefinition Width="9.2*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="9.3*"/>
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0" Background="LightGray">
@@ -39,7 +39,7 @@
                     <Button Content="Jegyzetek" Name="btnNote" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
                 </StackPanel>
 
-                <Button Content="Kilépés" Name="btnExit" Grid.Row="1" Style="{StaticResource ExitButtonStyle}" Click="Exit_Button_Click"/>
+                <Button Content="Kilépés" Name="btnExit" Grid.Row="1" Style="{StaticResource RedButtonStyle}" Click="Exit_Button_Click"/>
             </Grid>
         </Border>
 
