@@ -25,7 +25,7 @@
                             <Border BorderBrush="#85a6b1" BorderThickness="4">
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Riport" Background="BlanchedAlmond" Click="SaveButton_Click" Margin="0"/>
-                                    <TextBlock Padding="3" Background="#bae2be" Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="SemiBold" FontSize="21"/>
+                                    <TextBlock Padding="3" Background="#bae2be" Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="SemiBold" FontSize="21" Width="1564"/>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -35,7 +35,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="2">
-                        <StackPanel Margin="0">
+                        <StackPanel Margin="0" Width="1600">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <StackPanel.Style>
                                     <Style TargetType="StackPanel">
