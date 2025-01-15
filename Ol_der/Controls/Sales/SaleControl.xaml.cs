@@ -53,6 +53,8 @@ namespace Ol_der.Controls.Sales
             _addSaleControl = new AddNewSaleControl();
             ContentArea.Content = _addSaleControl;
 
+            SalesTextBlock.Text = $"Új eladás";
+
             _addSaleControl.OnFinished -= async () =>
             {
                 await ShowFilteredSales();
@@ -74,6 +76,8 @@ namespace Ol_der.Controls.Sales
                 _addSaleControl = new AddNewSaleControl();
                 await _addSaleControl.LoadExistsSale(saleId);
                 ContentArea.Content = _addSaleControl;
+
+                SalesTextBlock.Text = $"Eladás módosítása";
 
                 _addSaleControl.OnFinished -= async () =>
                 {
