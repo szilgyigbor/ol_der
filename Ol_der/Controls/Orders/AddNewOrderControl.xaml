@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml"/>
+                <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -50,8 +50,7 @@
                         <Button x:Name="btnSearch" 
                             Content="Keresés" 
                             Command="{Binding SearchProductCommand}" 
-                            Style="{StaticResource ModernButtonStyle}" 
-                            Width="80" />
+                            Style="{StaticResource CommonButtonStyle}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <TextBox Text="{Binding NewQuantity, Mode=TwoWay}" Width="40" />
@@ -62,7 +61,7 @@
                     <TextBlock Text="Megjegyzés a termékhez" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 5" />
                     <TextBox Text="{Binding NewProductComment, Mode=TwoWay}" Width="350" AcceptsReturn="True" TextWrapping="Wrap" Margin="0 0 0 10" />
                     <Button Content="Hozzáadás" Command="{Binding AddItemCommand}" 
-                        Style="{StaticResource ModernButtonStyle}" Width="100" HorizontalAlignment="Center" />
+                        Style="{StaticResource CommonButtonStyle}" HorizontalAlignment="Center" />
                 </StackPanel>
             </Border>
 
@@ -85,9 +84,9 @@
                     <TextBox Text="{Binding UpdateProductComment, Mode=TwoWay}" Width="350" AcceptsReturn="True" TextWrapping="Wrap" Margin="0 0 0 10" />
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <Button Content="Módosítás" Command="{Binding UpdateOrderItemCommand}" 
-                                Style="{StaticResource ModernButtonStyle}" Width="100" Margin="5" />
+                                Style="{StaticResource CommonButtonStyle}"/>
                         <Button Content="Törlés" Command="{Binding DeleteOrderItemFromOrderCommand}" 
-                                Style="{StaticResource CancelButtonStyle}" Width="100" Margin="5" />
+                                Style="{StaticResource RedButtonStyle}"/>
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -100,12 +99,12 @@
                     <TextBox Text="{Binding Order.Comment, Mode=TwoWay}" Width="350" Height="75" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="0 5" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button Content="Átnézés" Command="{Binding UpdateOrderFromSalesCommand}" 
-                            Style="{StaticResource ModernButtonStyle}" Width="80" Margin="5" />
+                            Style="{StaticResource CommonButtonStyle}"/>
                         <Button Content="Mentés" Command="{Binding UpdateOrderCommand}" 
-                            Style="{StaticResource ModernButtonStyle}" Width="80" Margin="5" />
+                            Style="{StaticResource CommonButtonStyle}"/>
                     </StackPanel>
                     <Button Content="LEZÁRÁS" FontSize="18" Command="{Binding CloseAndSaveOrderCommand}" 
-                        Style="{StaticResource ModernButtonStyle}" Width="100" HorizontalAlignment="Center" Margin="10" />
+                        Style="{StaticResource CommonButtonStyle}" Width="100" HorizontalAlignment="Center" Margin="10" />
                 </StackPanel>
             </Border>
         </Grid>
