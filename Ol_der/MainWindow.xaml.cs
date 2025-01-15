@@ -38,31 +38,56 @@ namespace Ol_der
             switch (button.Name)
             {
                 case "btnSupplier":
+                    SetActiveButtonColor("btnSupplier");
                     ContentArea.Content = new SupplierControl();
                     break;
                 case "btnProduct":
+                    SetActiveButtonColor("btnProduct");
                     ContentArea.Content = new ProductControl();
                     break;
                 case "btnSale":
+                    SetActiveButtonColor("btnSale");
                     ContentArea.Content = new SaleControl();
                     break;
                 case "btnPackage":
+                    SetActiveButtonColor("btnPackage");
                     ContentArea.Content = new PackageControl();
                     break;
                 case "btnOrder":
+                    SetActiveButtonColor("btnOrder");
                     ContentArea.Content = new OrderControl();
                     break;
                 case "btnNote":
+                    SetActiveButtonColor("btnNote");
                     ContentArea.Content = new NoteControl();
                     break;
                 case "btnWarranty":
+                    SetActiveButtonColor("btnWarranty");
                     ContentArea.Content = new WarrantyControl();
                     break;
                 case "btnCustomerOrder":
+                    SetActiveButtonColor("btnCustomerOrder");
                     ContentArea.Content = new CustomerOrderControl();
                     break;
             }
         }
+        private void SetActiveButtonColor(string buttonName) 
+        {
+            var buttons = stackPanelButtons.Children.OfType<Button>().ToList();
+
+            foreach (var button in buttons)
+            {
+                if (button.Name == buttonName) 
+                {
+                    button.Background = new SolidColorBrush(Colors.LightGreen);
+                }
+                else 
+                {
+                    button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E5F0F9"));
+                }
+            }
+        }
+
 
         private void Exit_Button_Click(object sender, RoutedEventArgs e)
         {
