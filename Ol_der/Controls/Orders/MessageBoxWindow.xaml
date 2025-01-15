@@ -6,12 +6,19 @@
         xmlns:local="clr-namespace:Ol_der.Controls.Orders"
         mc:Ignorable="d"
         FontSize="20"
-        Title="MessageBoxWindow" Height="200" Width="800">
+        Title="Question" Height="200" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <StackPanel Margin="10">
         <TextBlock x:Name="messageToShow" Text="Message" Margin="10" HorizontalAlignment="Center"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
-            <Button Content="OK" Padding="10,5,10,5" FontSize="16" Click="OkButton_Click" IsDefault="True"/>
-            <Button Content="Mégsem" Padding="10,5,10,5" FontSize="16" Click="CancelButton_Click" IsCancel="True" Margin="5,0,0,0"/>
+            <Button Content="OK" Style="{StaticResource CommonButtonStyle}" Click="OkButton_Click" IsDefault="True"/>
+            <Button Content="Mégsem" Style="{StaticResource RedButtonStyle}" Click="CancelButton_Click" IsCancel="True"/>
         </StackPanel>
     </StackPanel>
 </Window>
