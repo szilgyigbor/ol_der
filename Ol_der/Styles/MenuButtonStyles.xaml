@@ -4,9 +4,9 @@
         <Setter Property="Background" Value="#E5F0F9"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="Margin" Value="10"/>
-        <Setter Property="MinHeight" Value="50"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Margin" Value="8 8 12 8"/>
+        <Setter Property="MinHeight" Value="45"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -26,7 +26,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ExitButtonStyle" TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}">
+    <Style x:Key="RedButtonStyle" TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}">
         <Setter Property="Background" Value="PaleVioletRed"/>
     </Style>
 </ResourceDictionary>
