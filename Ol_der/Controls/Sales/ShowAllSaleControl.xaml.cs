@@ -106,6 +106,7 @@ namespace Ol_der.Controls.Sales
             else
             {
                 MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Válassz ki egy eladást a törléshez!");
+                messageBoxOkWindow.ShowDialog();
             }
 
         }
