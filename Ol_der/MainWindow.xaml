@@ -8,31 +8,38 @@
         Title="Ol-der" Height="1850" Width="1920" 
         WindowState="Maximized" FontSize="15"
         Background="#F4F4F4">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/MenuButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.8*"/>
             <ColumnDefinition Width="9.2*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Background="DarkSeaGreen">
+        <Border Grid.Column="0" Background="LightGray">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Orientation="Vertical">
-                    <Button Content="Beszállítók" Background="#E5F0F9" Name="btnSupplier" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
-                    <Button Content="Termékek" Background="#E5F0F9" Name="btnProduct" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
-                    <Button Content="Eladások" Background="#E5F0F9" Name="btnSale" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
-                    <Button Content="Csomagok" Background="#E5F0F9" Name="btnPackage" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
-                    <Button Content="Rendelések" Background="#E5F0F9" Name="btnOrder" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
-                    <Button Content="Ügyfél Ren." Background="#E5F0F9" Name="btnCustomerOrder" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
-                    <Button Content="Garanciák" Background="#E5F0F9" Name="btnWarranty" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
-                    <Button Content="Jegyzetek" Background="#E5F0F9" Name="btnNote" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="22" Click="Menu_Button_Click"/>
+                <StackPanel x:Name="stackPanelButtons" Grid.Row="0" Orientation="Vertical">
+                    <Button Content="Beszállítók" Background="#E5F0F9" Name="btnSupplier" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Termékek" Background="#E5F0F9" Name="btnProduct" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Eladások" Background="#E5F0F9" Name="btnSale" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Csomagok" Background="#E5F0F9" Name="btnPackage" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Rendelések" Background="#E5F0F9" Name="btnOrder" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Ügyfél Ren." Background="#E5F0F9" Name="btnCustomerOrder" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Garanciák" Background="#E5F0F9" Name="btnWarranty" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Jegyzetek" Background="#E5F0F9" Name="btnNote" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
                 </StackPanel>
 
-                <Button Content="Kilépés" Background="#F9E5E5" Name="btnExit" Grid.Row="1" Margin="10 10 15 10" HorizontalAlignment="Stretch" Padding="5" FontSize="20" Click="Exit_Button_Click"/>
+                <Button Content="Kilépés" Name="btnExit" Grid.Row="1" Style="{StaticResource ExitButtonStyle}" Click="Exit_Button_Click"/>
             </Grid>
         </Border>
 
