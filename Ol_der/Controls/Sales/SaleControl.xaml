@@ -45,6 +45,7 @@
                 <Button Content="Új eladás" Style="{StaticResource SubMenuButtonStyle}" Click="AddSale_Click"/>
                 <Button Content="Módosítás" Style="{StaticResource SubMenuButtonStyle}" Click="ModifySale_Click"/>
                 <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" Click="btnDeleteSale_Click"/>
+                <Button Content="Riport" Style="{StaticResource SubMenuButtonStyle}" Click="DatePickerForSummary_Click" />
             </StackPanel>
 
             <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
