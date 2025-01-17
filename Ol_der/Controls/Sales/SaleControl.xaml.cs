@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ol_der.Controls.DateFilter;
 using Ol_der.Controls.Orders;
+using System.IO;
 
 namespace Ol_der.Controls.Sales
 {
@@ -28,6 +29,7 @@ namespace Ol_der.Controls.Sales
 
         private AddNewSaleControl _addSaleControl;
         private ShowAllSaleControl _showAllSaleControl;
+        private SaleRepository saleRepository;
 
         TextBlock loadingText = new TextBlock
         {
@@ -45,6 +47,7 @@ namespace Ol_der.Controls.Sales
             DataContext = this;
             _showAllSaleControl = new ShowAllSaleControl();
             _addSaleControl = new AddNewSaleControl();
+            saleRepository = new SaleRepository();
             ShowFilteredSales();
         }
 
@@ -141,6 +144,15 @@ namespace Ol_der.Controls.Sales
             }
         }
 
+        private async void DatePickerForSummary_Click(object sender, RoutedEventArgs e)
+        {
+            SetDateToFilter dateDialog = new SetDateToFilter();
+            if (dateDialog.ShowDialog() == true)
+            {
+                await GenerateSalesReport(dateDialog.dateTimes[0], dateDialog.dateTimes[1]);
+            }
+        }
+
         private async void btnDeleteSale_Click(object sender, RoutedEventArgs e)
         {
             await _showAllSaleControl.DeleteSale();
@@ -164,6 +176,59 @@ namespace Ol_der.Controls.Sales
             await _showAllSaleControl.LoadSearchedSales(productNumber);
             ContentArea.Content = _showAllSaleControl;
         }
+
+        public async Task GenerateSalesReport(DateTime startDate, DateTime endDate)
+        {
+            var sales = await saleRepository.GetSalesByDateRangeForRiportAsync(startDate, endDate);
+
+            var groupedByMonth = sales
+                .GroupBy(s => new { s.Date.Year, s.Date.Month })
+                .Select(g => new
+                {
+                    Year = g.Key.Year,
+                    Month = g.Key.Month,
+                    TotalRevenue = g.Sum(s => s.TotalAmount)
+                })
+                .OrderBy(g => g.Year).ThenBy(g => g.Month)
+                .ToList();
+
+            var groupedByYear = sales
+                .GroupBy(s => s.Date.Year)
+                .Select(g => new
+                {
+                    Year = g.Key,
+                    TotalRevenue = g.Sum(s => s.TotalAmount)
+                })
+                .OrderBy(g => g.Year)
+                .ToList();
+
+            var filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Összegző riport.txt");
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"Összegző riport ({startDate.ToShortDateString()} - {endDate.ToShortDateString()})");
+            sb.AppendLine();
+
+            sb.AppendLine("Éves bevétel:");
+            foreach (var yearGroup in groupedByYear)
+            {
+                sb.AppendLine($"Év: {yearGroup.Year}, Bevétel: {yearGroup.TotalRevenue} Ft");
+            }
+
+            sb.AppendLine();
+            sb.AppendLine("Havi bevétel:");
+            foreach (var monthGroup in groupedByMonth)
+            {
+                sb.AppendLine($"Év: {monthGroup.Year}, Hónap: {monthGroup.Month}, Bevétel: {monthGroup.TotalRevenue} Ft");
+            }
+
+            File.WriteAllText(filePath, sb.ToString());
+
+            MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow($"A riport sikeresen elmentve az asztalra: Összegző riport.txt");
+            messageBoxOkWindow.ShowDialog();
+
+        }
+
 
     }
 }
