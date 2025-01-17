@@ -14,7 +14,6 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -26,11 +25,10 @@
 
         <Grid Grid.Row="0" Grid.Column="0" Background="Gainsboro">
             <TextBlock Name="SalesTextBlock" Text="Eladások kezelése"
-           FontSize="28"
-           HorizontalAlignment="Center"
-           VerticalAlignment="Center"/>
+                   FontSize="28"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
         </Grid>
-
 
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
@@ -40,18 +38,21 @@
 
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Width="120">
                 <Button Content="Megjelenített" Style="{StaticResource SubMenuButtonStyle}" Click="ShowFixedNumberOfSales_Click"/>
-                <Button Content="Dátum " Style="{StaticResource SubMenuButtonStyle}" Click="DatePicker_Click"/>
+                <Button Content="Dátum" Style="{StaticResource SubMenuButtonStyle}" Click="DatePicker_Click"/>
                 <Button Content="Keresés" Style="{StaticResource SubMenuButtonStyle}" Click="SearchSalesByProductNumber_Click"/>
                 <Button Content="Új eladás" Style="{StaticResource SubMenuButtonStyle}" Click="AddSale_Click"/>
                 <Button Content="Módosítás" Style="{StaticResource SubMenuButtonStyle}" Click="ModifySale_Click"/>
                 <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" Click="btnDeleteSale_Click"/>
-                <Button Content="Riport" Style="{StaticResource SubMenuButtonStyle}" Click="DatePickerForSummary_Click" />
             </StackPanel>
-
+  
             <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
-                Background="Black" VerticalAlignment="Stretch"/>
+                      Background="Black" VerticalAlignment="Stretch"/>
 
             <ContentControl Grid.Column="1" VerticalAlignment="Top" Margin="5" x:Name="ContentArea"/>
         </Grid>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="80">
+            <Button Content="Riport" Style="{StaticResource SubMenuButtonStyle}" Click="DatePickerForSummary_Click" />
+        </StackPanel>
     </Grid>
 </UserControl>
