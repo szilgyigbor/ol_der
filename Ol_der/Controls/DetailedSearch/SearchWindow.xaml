@@ -1,0 +1,58 @@
+﻿<Window x:Class="Ol_der.Controls.DetailedSearch.SearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ol_der.Controls.DetailedSearch"
+        mc:Ignorable="d"
+        FontSize="16"
+        Title="SearchWindow" Height="700" Width="1000">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="#F4F4F4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Részletes keresés:" Margin="5" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22"/>
+
+        <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
+            <Label Content="Cikkszám:" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding ItemNumber, Mode=TwoWay}" Margin="5" Width="116"/>
+            <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}" Command="{Binding SearchProductsByItemNumberCommand}"/>
+
+            <Label Padding = "30 0 0 0" Content="Megnevezés:" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding ProductName, Mode=TwoWay}" Margin="5" Width="200"/>
+            <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}" Command="{Binding SearchProductsByNameCommand}"/>
+        </WrapPanel>
+
+        <WrapPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Content="Kiválaszt" Style="{StaticResource CommonButtonStyle}" Click="FinishSelectionClick"/>
+        </WrapPanel>
+
+        <ListView ItemsSource="{Binding Products}" Grid.Row="3" Margin="10"
+                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Cikkszám" DisplayMemberBinding="{Binding ItemNumber}" Width="140" />
+                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Name}" Width="650" />
+                    <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Supplier.Name}" Width="140" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="#F4F4F4" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
+</Window>
