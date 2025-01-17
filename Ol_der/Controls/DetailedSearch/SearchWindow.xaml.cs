@@ -46,9 +46,12 @@ namespace Ol_der.Controls.DetailedSearch
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (_viewModel.SelectedProduct != null)
+            {
+                FinishSelectionClick(sender, e);
+            }
         }
     }
 }

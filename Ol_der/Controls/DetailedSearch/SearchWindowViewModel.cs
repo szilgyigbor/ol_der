@@ -68,8 +68,8 @@ namespace Ol_der.Controls.DetailedSearch
         public SearchWindowViewModel() 
         {
             _repository = new SearchWindowRepository();
-            SearchProductsByItemNumberCommand = new RelayCommand(param => SearchProductsByItemNumber());
-            SearchProductsByNameCommand = new RelayCommand(param => SearchProductsByName());
+            SearchProductsByItemNumberCommand = new RelayCommand(async param => await SearchProductsByItemNumber());
+            SearchProductsByNameCommand = new RelayCommand(async param => await SearchProductsByName());
         }
 
 

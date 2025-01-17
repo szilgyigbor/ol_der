@@ -26,11 +26,20 @@
 
         <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
             <Label Content="Cikkszám:" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding ItemNumber, Mode=TwoWay}" Margin="5" Width="116"/>
+            <TextBox Text="{Binding ItemNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="116">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding SearchProductsByItemNumberCommand}" Key="Enter" />
+                </TextBox.InputBindings>
+            </TextBox>
             <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}" Command="{Binding SearchProductsByItemNumberCommand}"/>
 
             <Label Padding = "30 0 0 0" Content="Megnevezés:" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding ProductName, Mode=TwoWay}" Margin="5" Width="200"/>
+            <TextBox Text="{Binding ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="116">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding SearchProductsByNameCommand}" Key="Enter" />
+                </TextBox.InputBindings>
+            </TextBox>
+
             <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}" Command="{Binding SearchProductsByNameCommand}"/>
         </WrapPanel>
 
@@ -39,7 +48,8 @@
         </WrapPanel>
 
         <ListView ItemsSource="{Binding Products}" Grid.Row="3" Margin="10"
-                    SelectedItem="{Binding SelectedProduct, Mode=TwoWay}">
+          SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+          MouseDoubleClick="ListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Cikkszám" DisplayMemberBinding="{Binding ItemNumber}" Width="140" />
