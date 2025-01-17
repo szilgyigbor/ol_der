@@ -71,7 +71,7 @@
         </WrapPanel>
 
         <WrapPanel Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
-            <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}"/>
+            <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}" Click="DetailedSearch_Click"/>
             <Button Content="Total" Style="{StaticResource CommonButtonStyle}" Click="UpdateItem_Click"/>
             <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" Click="DeleteItem_Click"/>
         </WrapPanel>

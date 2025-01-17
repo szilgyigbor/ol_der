@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
+using Ol_der.Controls.DetailedSearch;
 
 namespace Ol_der.Controls.SalePackages
 {
@@ -181,6 +182,51 @@ namespace Ol_der.Controls.SalePackages
         private async void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             OnFinished?.Invoke();
+        }
+
+        private void DetailedSearch_Click(object sender, RoutedEventArgs e)
+        {
+            SearchWindow searchWindow = new SearchWindow();
+            searchWindow.ProductSelected -= OnProductSelected;
+            searchWindow.ProductSelected += OnProductSelected;
+
+            searchWindow.ShowDialog();
+        }
+
+        private void OnProductSelected(object sender, Product selectedProduct)
+        {
+            bool productAlreadyAdded = false;
+            foreach (SaleItem existingItem in lstSaleItems.Items)
+            {
+                if (existingItem.Product.ItemNumber == selectedProduct.ItemNumber)
+                {
+                    productAlreadyAdded = true;
+                    break;
+                }
+            }
+
+            if (productAlreadyAdded)
+            {
+                MessageBoxWindow messageBoxWindow = new("Ez a termék már szerepel a listában, újból hozzáadjam?");
+                messageBoxWindow.ShowDialog();
+
+                if (messageBoxWindow.DialogResult == false)
+                {
+                    txtItemNumber.Text = "";
+                    return;
+                }
+            }
+
+            var saleItem = new SaleItem
+            {
+                ProductId = selectedProduct.ProductId,
+                Product = selectedProduct,
+                Quantity = 1,
+                Price = 0
+            };
+
+            lstSaleItems.Items.Add(saleItem);
+            txtItemNumber.Text = "";
         }
 
         private async Task SaveSale()
