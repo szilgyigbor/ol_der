@@ -34,7 +34,7 @@
             <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}" Command="{Binding SearchProductsByItemNumberCommand}"/>
 
             <Label Padding = "30 0 0 0" Content="Megnevezés:" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="116">
+            <TextBox Text="{Binding ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="160">
                 <TextBox.InputBindings>
                     <KeyBinding Command="{Binding SearchProductsByNameCommand}" Key="Enter" />
                 </TextBox.InputBindings>
