@@ -7,6 +7,13 @@
              mc:Ignorable="d" 
              FontSize="16"
              d:DesignHeight="1350" d:DesignWidth="1500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -14,8 +21,8 @@
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.0*"/>
-            <ColumnDefinition Width="4.0*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="3.5*"/>
         </Grid.ColumnDefinitions>
 
         <TextBox Text="Rendelés részletei" TextWrapping="Wrap" Margin="10" HorizontalAlignment="Center" FontSize="26" 
@@ -23,11 +30,11 @@
                  IsReadOnlyCaretVisible="False"/>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="10">
-            <Button Content="Mentés txt fájlba" Background="#E5F5E5" Command="{Binding SaveToTxtFileCommand}" Margin="10" Padding="3" Width="150"/>
-            <Button Content="Mentés xlsx fájlba" Background="#E5F5E5" Command="{Binding SaveToXlsxFileCommand}" Margin="10" Padding="3" Width="150"/>
+            <Button Content="Mentés txt" Style="{StaticResource CommonButtonStyle}" Command="{Binding SaveToTxtFileCommand}" Margin="10" Padding="3" Width="100"/>
+            <Button Content="Mentés xlsx" Style="{StaticResource CommonButtonStyle}" Command="{Binding SaveToXlsxFileCommand}" Margin="10" Padding="3" Width="100"/>
             <TextBlock Text="Megjegyzés" TextWrapping="Wrap" 
                      Grid.Row="1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="10"/>
-            <TextBlock Text="{Binding Order.Comment}" Width="300" Background="#ffffff" TextWrapping="Wrap" Height="500"
+            <TextBlock Text="{Binding Order.Comment}" Width="170" Background="#ffffff" TextWrapping="Wrap" Height="500"
                        Margin="5 5 2 5"/>
         </StackPanel>
         
@@ -37,7 +44,7 @@
                     <GridViewColumn Header="Rendeltük" DisplayMemberBinding="{Binding QuantityOrdered}" Width="90"/>
                     <GridViewColumn Header="Jött" DisplayMemberBinding="{Binding QuantityReceived}" Width="60"/>
                     <GridViewColumn Header="Cikkszám" DisplayMemberBinding="{Binding Product.ItemNumber}" Width="120"/>
-                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Product.Name}" Width="550"/>
+                    <GridViewColumn Header="Terméknév" DisplayMemberBinding="{Binding Product.Name}" Width="600"/>
                     <GridViewColumn Header="Megjegyzés" DisplayMemberBinding="{Binding Comment}" Width="400"/>
                 </GridView>
             </ListView.View>
