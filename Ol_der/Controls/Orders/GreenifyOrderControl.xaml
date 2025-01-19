@@ -8,7 +8,12 @@
              FontSize="16"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -31,12 +36,12 @@
             <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
 
             <StackPanel Grid.Row="2"  Margin="0 15 0 0">
-                <Button Content="Beállítás" Command="{Binding UpdateOrderItemCommand}" Width="130" Padding="5"/>
+                <Button Content="Beállítás" Style="{StaticResource CommonButtonStyle}" Command="{Binding UpdateOrderItemCommand}" Width="130" Padding="5"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2"  Margin="0 50 0 0" Visibility="{Binding Order.IsColored, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <TextBlock Text="Rendelés lezárása, és átemelés egy új, vagy már nyitott rendelésbe." HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" Margin="0 15 0 15"/>
-                <Button Content="Átemelés" Command="{Binding FinalizeGreenifyCommand}" Width="130" Padding="5" FontSize="20"/>
+                <TextBlock Text="Rendelés lezárása, és átemelés egy új, vagy már nyitott rendelésbe." FontWeight="Bold" TextWrapping="Wrap" Margin="0 15 0 15"/>
+                <Button Content="Átemelés" Style="{StaticResource CommonButtonStyle}" Command="{Binding FinalizeGreenifyCommand}" FontSize="20"/>
                 <TextBlock Text="(minden beállítás automatikusan mentve van)" HorizontalAlignment="Center" FontSize="15" TextWrapping="Wrap" Margin="0 15 0 15"/>
             </StackPanel>
         </StackPanel>
