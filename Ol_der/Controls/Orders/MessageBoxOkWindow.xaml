@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ol_der.Controls.Orders"
         mc:Ignorable="d"
         FontSize="20"
-        Title="MEssage" Height="200" Width="800">
+        Title="MessageBox" Height="200" Width="800">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
