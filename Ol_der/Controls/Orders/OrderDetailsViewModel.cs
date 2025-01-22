@@ -51,7 +51,7 @@ namespace Ol_der.Controls.Orders
                 var filePath = Path.Combine(desktopPath, "orderItems.txt");
 
                 var sb = new StringBuilder();
-                sb.AppendLine("Darab".PadRight(8) + "Cikkszám".PadRight(12) + "Terméknév".PadRight(15) +
+                sb.AppendLine("Mennyiség".PadRight(8) + "Cikkszám".PadRight(12) + "Terméknév".PadRight(15) +
                     "( Azonosító szám: " + Order.OrderId + " )" );
                 sb.AppendLine("----------------------------------------------------------------------------");
 
@@ -86,7 +86,7 @@ namespace Ol_der.Controls.Orders
                 {
                     ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("OrderItems");
 
-                    worksheet.Cells[1, 1].Value = "Darab";
+                    worksheet.Cells[1, 1].Value = "Mennyiség";
                     worksheet.Cells[1, 2].Value = "Cikkszám";
                     worksheet.Cells[1, 3].Value = "Terméknév";
 
