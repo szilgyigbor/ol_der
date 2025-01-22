@@ -33,10 +33,16 @@
             
             <TextBlock Text="{Binding ProductDescription}" Background="White" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" FontSize="18"/>
             <TextBlock Text="Mennyi jött belőle?" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="0 15 0 15"/>
-            <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
+            <TextBox Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="40">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding UpdateOrderItemCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
 
             <StackPanel Grid.Row="2"  Margin="0 15 0 0" >
-                <Button Content="Beállítás" Style="{StaticResource CommonButtonStyle}" Command="{Binding UpdateOrderItemCommand}" Padding="5"/>
+                <Button Content="Beállítás" Style="{StaticResource CommonButtonStyle}"
+                        Command="{Binding UpdateOrderItemCommand}" Padding="5" 
+                        IsDefault="True"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Margin="0 50 0 0" Visibility="{Binding Order.IsColored, Converter={StaticResource BooleanToVisibilityConverter}}">
