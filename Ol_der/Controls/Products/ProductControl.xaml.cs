@@ -31,24 +31,30 @@ namespace Ol_der.Controls.Products
         private ModifyProductControl _modifyProductControl;
         private SearchProductControl _searchProductControl;
 
-
+        public Task InitializationTask { get; }
 
         public ProductControl()
+        {
+            InitializationTask = InitializeAsync();
+        }
+
+        private async Task InitializeAsync()
         {
             InitializeComponent();
             _viewModel = new ProductViewModel();
             this.DataContext = _viewModel;
             LoadProductCount();
-            _addProductControl = new AddProductControl(GetAllSupplier());
+            _addProductControl = new AddProductControl(await _viewModel.GetAllSupplierAsync());
             _showAllProductControl = new ShowAllProductControl();
             _modifyProductControl = new ModifyProductControl();
             _searchProductControl = new SearchProductControl();
-            ShowAllProduct();
+            await ShowAllProduct();
         }
 
-        public void LoadProductCount()
+
+        public async void LoadProductCount()
         {
-            _viewModel.ProductCount = _viewModel.GetProductCount();
+            _viewModel.ProductCount = await _viewModel.GetProductCountAsync();
         }
 
         public void Add_New_Product_Click(object sender, RoutedEventArgs e)
@@ -59,17 +65,17 @@ namespace Ol_der.Controls.Products
             _addProductControl.OnProductAdded += Add_Product;
         }
 
-        public void Delete_Product_Click(object sender, RoutedEventArgs e)
+        public async void Delete_Product_Click(object sender, RoutedEventArgs e)
         {
             _showAllProductControl.OnProductDeleted -= Delete_Product;
             _showAllProductControl.OnProductDeleted += Delete_Product;
             _showAllProductControl.DeleteProduct();
-            ShowAllProduct();
+            await ShowAllProduct();
         }
 
-        public void Show_All_Product_Click(object sender, RoutedEventArgs e)
+        public async void Show_All_Product_Click(object sender, RoutedEventArgs e)
         {
-            ShowAllProduct();
+            await ShowAllProduct();
         }
 
         public void Search_Product_Click(object sender, RoutedEventArgs e)
@@ -79,9 +85,9 @@ namespace Ol_der.Controls.Products
             _searchProductControl.OnProductId += SearchProductById;
         }
 
-        public void Add_Product(Product newProduct)
+        public async void Add_Product(Product newProduct)
         {
-            bool isProductAdded = _viewModel.AddProduct(newProduct);
+            bool isProductAdded = await _viewModel.AddProductAsync(newProduct);
 
             if (!isProductAdded)
             {
@@ -95,12 +101,12 @@ namespace Ol_der.Controls.Products
             messageBoxOkWindow1.ShowDialog();
 
             LoadProductCount();
-            ShowAllProduct();
+            await ShowAllProduct();
         }
 
-        private void SearchProductById(string productId)
+        private async void SearchProductById(string productId)
         {
-            List<Product> product = _viewModel.SearchProductByItemNumber(productId);
+            List<Product> product = await _viewModel.SearchProductByItemNumberAsync(productId);
             if (product == null)
             {
                 MessageBoxOkWindow messageBoxOkWindow = new("Nincs ilyen termék az adatbázisban!");
@@ -113,16 +119,16 @@ namespace Ol_der.Controls.Products
             ContentArea.Content = _showAllProductControl;
         }
 
-        private void Delete_Product(Product product)
+        private async void Delete_Product(Product product)
         {
-            _viewModel.DeleteProduct(product);
+            await _viewModel.DeleteProductAsync(product);
             MessageBoxOkWindow messageBoxOkWindow = new("A termék sikeresen törölve lett!");
             messageBoxOkWindow.ShowDialog();
             LoadProductCount();
-            ShowAllProduct();
+            await ShowAllProduct();
         }
 
-        private void Modify_Product_Click(object sender, RoutedEventArgs e)
+        private async void Modify_Product_Click(object sender, RoutedEventArgs e)
         {
             Product selectedProduct = _showAllProductControl.ProductToModify();
 
@@ -137,36 +143,23 @@ namespace Ol_der.Controls.Products
             _modifyProductControl.OnProductModified -= ModifyProduct;
             _modifyProductControl.OnProductModified += ModifyProduct;
 
-            _modifyProductControl.GetDatasToModify(selectedProduct, GetAllSupplier());
+            _modifyProductControl.GetDatasToModify(selectedProduct,await _viewModel.GetAllSupplierAsync());
             ContentArea.Content = _modifyProductControl;
         }
 
-        private void ModifyProduct(Product modifiedProduct)
+        private async void ModifyProduct(Product modifiedProduct)
         {
-            _viewModel.UpdateProduct(modifiedProduct);
+            await _viewModel.UpdateProductAsync(modifiedProduct);
             MessageBoxOkWindow messageBoxOkWindow = new("A termék adatai sikeresen módosításra kerültek!");
             messageBoxOkWindow.ShowDialog();
-            ShowAllProduct();
+            await ShowAllProduct();
         }
 
-        public void ShowAllProduct()
+        public async Task ShowAllProduct()
         {
             ContentArea.Content = _showAllProductControl;
-            _showAllProductControl.ShowAllProduct(GetAllProduct());
+            _showAllProductControl.ShowAllProduct(await _viewModel.GetAllProductAsync());
         }
-
-        public List<Supplier> GetAllSupplier()
-        {
-            return _viewModel.GetAllSupplier();
-        }
-
-        public List<Product> GetAllProduct()
-        {
-            return _viewModel.GetAllProduct();
-        }
-
-        
-
         
     }
 }

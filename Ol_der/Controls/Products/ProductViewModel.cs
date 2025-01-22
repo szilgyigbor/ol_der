@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Ol_der.Controls.Sales;
 using Ol_der.Data;
 using Ol_der.Models;
 using System;
@@ -13,6 +14,7 @@ namespace Ol_der.Controls.Products
     internal class ProductViewModel : INotifyPropertyChanged
     {
         private int _productCount;
+        private readonly ProductRepository productRepository;
         public int ProductCount
         {
             get => _productCount;
@@ -28,86 +30,51 @@ namespace Ol_der.Controls.Products
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+
+        public ProductViewModel() 
+        {
+            productRepository = new ProductRepository();
+        }
+
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public bool AddProduct(Product product)
+        public async Task<bool> AddProductAsync(Product product)
         {
-            if (SearchProductByItemNumber(product.ItemNumber).Count != 0) 
-            {
-                return false;
-            }
-
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                context.Products.Add(product);
-                context.SaveChanges();
-            }
-
-            return true;
+            return await productRepository.AddProductAsync(product);
         }
 
-        public void UpdateProduct(Product product)
+        public async Task UpdateProductAsync(Product product)
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                context.Products.Update(product);
-                context.SaveChanges();
-            }
+            await productRepository.UpdateProductAsync(product);
         }
 
-        public List<Product> SearchProductByItemNumber(string itemNumber)
+        public async Task<List<Product>> SearchProductByItemNumberAsync(string itemNumber)
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                return context.Products.Where(s => !s.IsDeleted)
-                              .Include(p => p.Supplier)
-                              .Where(p => p.ItemNumber == itemNumber)
-                              .ToList();
-            }
+            return await productRepository.SearchProductByItemNumberAsync(itemNumber);
         }
 
-        public void DeleteProduct(Product product)
+        public async Task DeleteProductAsync(Product product)
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                var productInDb = context.Products.Find(product.ProductId);
-                if (productInDb != null)
-                {
-                    productInDb.IsDeleted = true;
-                    context.SaveChanges();
-                }
-            }
+            await productRepository.DeleteProductAsync(product);
         }
 
-        public List<Product> GetAllProduct()
+        public async Task<List<Product>> GetAllProductAsync()
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                return context.Products
-                              .Where(p => !p.IsDeleted)
-                              .Include(p => p.Supplier)
-                              .OrderByDescending(p => p.ProductId)
-                              .ToList();
-            }
+            return await productRepository.GetAllProductAsync();
         }
 
-        public List<Supplier> GetAllSupplier()
+        public async Task<List<Supplier>> GetAllSupplierAsync()
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                return context.Suppliers.Where(s => !s.IsDeleted).ToList();
-            }
+            return await productRepository.GetAllSupplierAsync();
         }
 
-        public int GetProductCount()
+        public async Task<int> GetProductCountAsync()
         {
-            using (var context = ApplicationDbContextFactory.Create())
-            {
-                return context.Products.Where(p => !p.IsDeleted).Count();
-            }
+            return await productRepository.GetProductCountAsync();
         }
     }
 }
