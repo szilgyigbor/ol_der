@@ -23,13 +23,17 @@ namespace Ol_der.Controls.Products
     /// </summary>
     public partial class ModifyProductControl : UserControl
     {
+        private List<Supplier> _suppliers;
+        private ProductRepository _productRepository;
+
         public event Action<Product> OnProductModified;
         public Product _productToModify;
-        private List<Supplier> _suppliers;
+        
 
         public ModifyProductControl()
         {
             InitializeComponent();
+            _productRepository = new ProductRepository();
             _productToModify = new Product();
         }
 
@@ -46,7 +50,7 @@ namespace Ol_der.Controls.Products
         }
 
 
-        public void SubmitButton_Click(object sender, RoutedEventArgs e)
+        public async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(nameTextBox.Text))
             {
@@ -70,7 +74,17 @@ namespace Ol_der.Controls.Products
 
             _productToModify.Name = nameTextBox.Text;
             _productToModify.ItemNumber = itemNumberTextBox.Text;
-            _productToModify.Supplier = selectedSupplier; 
+            _productToModify.Supplier = selectedSupplier;
+
+            if ((await _productRepository.SearchProductByItemNumberAsync(_productToModify.ItemNumber)).Count != 0)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Ez a cikkszám már szerepel az adatbázisban");
+                messageBoxOkWindow.ShowDialog();
+
+                return;
+            }
+
+
 
             OnProductModified?.Invoke(_productToModify);
 
