@@ -106,16 +106,15 @@ namespace Ol_der.Controls.Products
 
         private async void SearchProductById(string productId)
         {
-            List<Product> product = await _viewModel.SearchProductByItemNumberAsync(productId);
-            if (product == null)
+            List<Product> products = await _viewModel.SearchProductByItemNumberAsync(productId);
+            if (products == null || products.Count == 0)
             {
                 MessageBoxOkWindow messageBoxOkWindow = new("Nincs ilyen termék az adatbázisban!");
                 messageBoxOkWindow.ShowDialog();
-
                 return;
             }
 
-            _showAllProductControl.ShowAllProduct(product);
+            await _showAllProductControl.ShowAllProductAsync(products);
             ContentArea.Content = _showAllProductControl;
         }
 
@@ -158,7 +157,8 @@ namespace Ol_der.Controls.Products
         public async Task ShowAllProduct()
         {
             ContentArea.Content = _showAllProductControl;
-            _showAllProductControl.ShowAllProduct(await _viewModel.GetAllProductAsync());
+            var products = await _viewModel.GetAllProductAsync();
+            await _showAllProductControl.ShowAllProductAsync(products);
         }
         
     }
