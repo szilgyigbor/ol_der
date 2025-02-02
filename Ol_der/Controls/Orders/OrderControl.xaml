@@ -45,6 +45,7 @@
                 <Button Content="Új rendelés" Style="{StaticResource SubMenuButtonStyle}" Click="AddOrder_Click"/>
                 <Button Content="Módosítás" Style="{StaticResource SubMenuButtonStyle}" Click="ModifyOrder_Click"/>
                 <Button Content="Zöldítés" Style="{StaticResource SubMenuButtonStyle}" Click="GreenifyOrder_Click"/>
+                <Button Content="Duplikáció" Style="{StaticResource SubMenuButtonStyle}" Click="RemoveDuplicates_Click"/>
                 <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" Click="btnDeleteOrder_Click"/>
             </StackPanel>
 
