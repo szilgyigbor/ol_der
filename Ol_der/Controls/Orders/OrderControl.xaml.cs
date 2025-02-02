@@ -47,6 +47,7 @@ namespace Ol_der.Controls.Orders
            
             _addOrderControl = new AddNewOrderControl(order, supplierId);
             ContentArea.Content = _addOrderControl;
+            _showAllOrderControl = new ShowAllOrderControl(NumberToShow);
 
             _addOrderControl.OnOrderFinished -= Refresh;
             _addOrderControl.OnOrderFinished += Refresh;
