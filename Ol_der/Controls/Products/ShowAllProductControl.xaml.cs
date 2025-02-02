@@ -28,7 +28,7 @@ namespace Ol_der.Controls.Products
             InitializeComponent();
         }
 
-        public void ShowAllProduct(List<Product> products)
+        public async Task ShowAllProductAsync(List<Product> products)
         {
             ProductsListView.ItemsSource = products;
         }
