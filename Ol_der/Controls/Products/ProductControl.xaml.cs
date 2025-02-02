@@ -156,6 +156,7 @@ namespace Ol_der.Controls.Products
 
         public async Task ShowAllProduct()
         {
+            _showAllProductControl = new();
             ContentArea.Content = _showAllProductControl;
             var products = await _viewModel.GetAllProductAsync();
             await _showAllProductControl.ShowAllProductAsync(products);
