@@ -76,15 +76,13 @@ namespace Ol_der.Controls.Products
             _productToModify.ItemNumber = itemNumberTextBox.Text;
             _productToModify.Supplier = selectedSupplier;
 
-            if ((await _productRepository.SearchProductByItemNumberAsync(_productToModify.ItemNumber)).Count != 0)
+            if ((await _productRepository.SearchProductByItemNumberAsync(_productToModify.ItemNumber))
+                .Any(p => p.ProductId != _productToModify.ProductId))
             {
-                MessageBoxOkWindow messageBoxOkWindow = new("Ez a cikkszám már szerepel az adatbázisban");
+                MessageBoxOkWindow messageBoxOkWindow = new("Ez a cikkszám már szerepel az adatbázisban!");
                 messageBoxOkWindow.ShowDialog();
-
                 return;
             }
-
-
 
             OnProductModified?.Invoke(_productToModify);
 
