@@ -101,10 +101,10 @@ namespace Ol_der.Controls.Orders
 
         public async void SearchOrdersByProductNumber()
         {
-            Sales.SearchDetailsWindow dialog = new Sales.SearchDetailsWindow();
+            SearchDetailsWindow dialog = new SearchDetailsWindow();
             if (dialog.ShowDialog() == true)
             {
-                string productNumber = dialog.ProductNumber;
+                string productNumber = dialog.SearchCriteria["ProductNumber"];
                 var orders = await _orderRepository.GetFilteredOrdersByProductNumberAsync(limitToShow ,productNumber);
                 Orders = new ObservableCollection<Order>(orders);
             }
