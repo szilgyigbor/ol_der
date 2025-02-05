@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Controls.Orders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Ol_der.Controls.Sales
     /// </summary>
     public partial class SearchDetailsWindow : Window
     {
-        public string ProductNumber { get; private set; }
+        public Dictionary<string, string> SearchCriteria { get; private set; }
 
         public SearchDetailsWindow()
         {
@@ -29,12 +30,21 @@ namespace Ol_der.Controls.Sales
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-            ProductNumber = ProductNumberInput.Text;
-            if (string.IsNullOrWhiteSpace(ProductNumber))
+            string productNumber = ProductNumberInput.Text.Trim();
+            string customerName = CustomerNameInput.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(productNumber) && string.IsNullOrWhiteSpace(customerName))
             {
-                MessageBox.Show("Add meg a cikkszámot!");
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Adj meg legalább egy keresési feltételt!");
+                messageBoxOkWindow.ShowDialog();
                 return;
             }
+
+            SearchCriteria = new Dictionary<string, string>
+            {
+                { "ProductNumber", string.IsNullOrWhiteSpace(productNumber) ? null : productNumber },
+                { "CustomerName", string.IsNullOrWhiteSpace(customerName) ? null : customerName }
+            };
 
             DialogResult = true;
         }

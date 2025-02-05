@@ -39,7 +39,7 @@
             <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Width="120">
                 <Button Content="Megjelenített" Style="{StaticResource SubMenuButtonStyle}" Click="ShowFixedNumberOfSales_Click"/>
                 <Button Content="Dátum" Style="{StaticResource SubMenuButtonStyle}" Click="DatePicker_Click"/>
-                <Button Content="Keresés" Style="{StaticResource SubMenuButtonStyle}" Click="SearchSalesByProductNumber_Click"/>
+                <Button Content="Keresés" Style="{StaticResource SubMenuButtonStyle}" Click="SearchSales_Click"/>
                 <Button Content="Új eladás" Style="{StaticResource SubMenuButtonStyle}" Click="AddSale_Click"/>
                 <Button Content="Módosítás" Style="{StaticResource SubMenuButtonStyle}" Click="ModifySale_Click"/>
                 <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" Click="btnDeleteSale_Click"/>

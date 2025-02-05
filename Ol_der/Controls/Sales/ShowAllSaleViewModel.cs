@@ -63,9 +63,9 @@ namespace Ol_der.Controls.Sales
             }
         }
 
-        public async Task LoadSearchedSalesAsync(string itemNumber)
+        public async Task LoadSearchedSalesAsync(Dictionary<string, string> SearchCriteria)
         {
-            var salesList = await _saleRepository.GetSalesByItemNumberAsync(itemNumber);
+            var salesList = await _saleRepository.GetSalesByCriteriaAsync(SearchCriteria);
             Sales = new ObservableCollection<Sale>(salesList);
             SetupGrouping();
         }
