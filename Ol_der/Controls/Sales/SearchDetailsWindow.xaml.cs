@@ -17,11 +17,11 @@ namespace Ol_der.Controls.Sales
     /// <summary>
     /// Interaction logic for InputProductNumberWindow.xaml
     /// </summary>
-    public partial class InputProductNumberWindow : Window
+    public partial class SearchDetailsWindow : Window
     {
         public string ProductNumber { get; private set; }
 
-        public InputProductNumberWindow()
+        public SearchDetailsWindow()
         {
             InitializeComponent();
             ProductNumberInput.Focus();

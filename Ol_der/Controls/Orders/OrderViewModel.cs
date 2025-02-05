@@ -101,7 +101,7 @@ namespace Ol_der.Controls.Orders
 
         public async void SearchOrdersByProductNumber()
         {
-            Sales.InputProductNumberWindow dialog = new Sales.InputProductNumberWindow();
+            Sales.SearchDetailsWindow dialog = new Sales.SearchDetailsWindow();
             if (dialog.ShowDialog() == true)
             {
                 string productNumber = dialog.ProductNumber;

@@ -161,7 +161,7 @@ namespace Ol_der.Controls.Sales
 
         private async void SearchSalesByProductNumber_Click(object sender, RoutedEventArgs e)
         {
-            InputProductNumberWindow dialog = new InputProductNumberWindow();
+            SearchDetailsWindow dialog = new SearchDetailsWindow();
             if (dialog.ShowDialog() == true)
             {
                 string productNumber = dialog.ProductNumber;
