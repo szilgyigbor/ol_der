@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 using Ol_der.Controls.DetailedSearch;
+using Ol_der.Controls.Products;
 
 namespace Ol_der.Controls.Sales
 {
@@ -27,6 +28,7 @@ namespace Ol_der.Controls.Sales
     /// </summary>
     public partial class AddNewSaleControl : UserControl
     {
+        private Window? _addNewProductWindow;
         private ShowAllSaleControl _showAllSaleControl;
         private SaleViewModel _saleViewModel;
         private int _saleId;
@@ -217,8 +219,27 @@ namespace Ol_der.Controls.Sales
             }
             else
             {
-                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Nincs ilyen termék!");
-                messageBoxOkWindow.ShowDialog();
+                MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Nincs ilyen termék! Rögzítsük?");
+                messageBoxWindow.ShowDialog();
+
+                if (messageBoxWindow.DialogResult == true)
+                {
+                    AddProductControl AddNewProductControl = new AddProductControl(itemNumber);
+
+                    AddNewProductControl.OnProductAdded -= AddNewProductToSale;
+                    AddNewProductControl.OnProductAdded += AddNewProductToSale;
+
+                    _addNewProductWindow = new Window
+                    {
+                        Title = "UserControl Ablakban",
+                        Content = AddNewProductControl,
+                        Width = 900,
+                        Height = 300
+                    };
+
+                    _addNewProductWindow.Show();
+                }
+
             }
         }
 
@@ -324,6 +345,47 @@ namespace Ol_der.Controls.Sales
         {
             var upperItemNumber = itemNumber.ToUpper();
             return await _saleViewModel.SearchProductByItemNumberAsync(upperItemNumber);
+        }
+
+        public async void AddNewProductToSale(Product newProduct)
+        {
+            ProductViewModel viewModel = new ProductViewModel();
+            bool isProductAdded = await viewModel.AddProductAsync(newProduct);
+
+            if (!isProductAdded)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("A termék cikkszáma már szerepel az adatbázisban!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            _addNewProductWindow?.Close();
+
+            var product = await FindProductByItemNumberAsync(newProduct.ItemNumber);
+            if (product != null)
+            {
+                var saleItem = new SaleItem
+                {
+                    ProductId = product.ProductId,
+                    Product = product,
+                    Quantity = 1,
+                    Price = 0
+                };
+
+                lstSaleItems.Items.Add(saleItem);
+                txtItemNumber.Text = "";
+
+                MessageBoxOkWindow messageBoxOkWindow1 = new("Sikeresen rögzítve és hozzáadva az eladáshoz!");
+                messageBoxOkWindow1.ShowDialog();
+
+            }
+
+            else 
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new("Valami hina történt!");
+                messageBoxOkWindow.ShowDialog();
+            }
+            
         }
     }
 }
