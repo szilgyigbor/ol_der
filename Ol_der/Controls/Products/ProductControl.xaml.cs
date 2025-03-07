@@ -44,7 +44,7 @@ namespace Ol_der.Controls.Products
             _viewModel = new ProductViewModel();
             this.DataContext = _viewModel;
             LoadProductCount();
-            _addProductControl = new AddProductControl(await _viewModel.GetAllSupplierAsync());
+            _addProductControl = new AddProductControl();
             _showAllProductControl = new ShowAllProductControl();
             _modifyProductControl = new ModifyProductControl();
             _searchProductControl = new SearchProductControl();
