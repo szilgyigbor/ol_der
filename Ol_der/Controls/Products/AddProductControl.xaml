@@ -40,12 +40,9 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Cikkszám:" Grid.Row="0" Grid.Column="0" 
-                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
-            <Label Content="Megnevezés:" Grid.Row="1" Grid.Column="0" 
-                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
-            <Label Content="Beszállító:" Grid.Row="2" Grid.Column="0" 
-                    VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0"/>
+            <Label Content="Cikkszám:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+            <Label Content="Megnevezés:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+            <Label Content="Beszállító:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
 
             <TextBox x:Name="itemNumberTextBox" Grid.Row="0" Grid.Column="1" Margin="5" Width="300" HorizontalAlignment="Left"/>
             <TextBox x:Name="nameTextBox" Grid.Row="1" Grid.Column="1" Margin="5" Width="600" HorizontalAlignment="Left"/>
@@ -57,7 +54,5 @@
                     Style="{StaticResource CommonButtonStyle}" Width="100"
                     VerticalAlignment="Center" HorizontalAlignment="Center" 
                     Click="SubmitButton_Click" IsDefault="True" Margin="10"/>
-
     </Grid>
-
 </UserControl>
