@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Products"
              mc:Ignorable="d" 
-             FontSize="18"
+             FontSize="17"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -14,20 +14,18 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0 20 0 0">
-            <TextBlock Text="Termék módosítása"
-                FontSize="22"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Grid.Row="0"
-                Grid.Column="0"/>
-        </Grid>
+        <TextBlock Text="Termék módosítása"
+                   FontSize="22"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Margin="0 0 0 20"/>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -35,22 +33,26 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Cikkszám:" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="itemNumberTextBox" Grid.Row="0" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-            <Label Content="Megnevezés:" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="nameTextBox" Grid.Row="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <Label Content="Cikkszám:" Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center"/>
+            <Label Content="Megnevezés:" Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center"/>
+            <Label Content="Beszállító:" Grid.Row="2" Grid.Column="0"  VerticalAlignment="Center"/>
 
-            <Label Content="Beszállító:" Grid.Row="2" VerticalAlignment="Center"/>
-            <ComboBox x:Name="suppliersComboBox" Grid.Row="2" Margin="5" HorizontalAlignment="Center" Width="600"
+            <TextBox x:Name="itemNumberTextBox" Grid.Row="0" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <TextBox x:Name="nameTextBox" Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <ComboBox x:Name="suppliersComboBox" Grid.Row="2" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"
                 DisplayMemberPath="Name" SelectedValuePath="SupplierId" />
-
-            <Button Content="Módosítás" Grid.Row="4" Style="{StaticResource CommonButtonStyle}"
-                    VerticalAlignment="Center" HorizontalAlignment="Center" Click="SubmitButton_Click" Width="100"/>
+            
         </Grid>
-
+        <Button Content="Módosítás" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                Style="{StaticResource CommonButtonStyle}" Width="100"
+                VerticalAlignment="Center" HorizontalAlignment="Center"
+                Click="SubmitButton_Click"  IsDefault="True" Margin="10"/>
     </Grid>
 </UserControl>
