@@ -23,10 +23,18 @@ namespace Ol_der.Controls.Products
     public partial class AddProductControl : UserControl
     {
         public event Action<Product> OnProductAdded;
-        public AddProductControl(List<Supplier> suppliers)
+
+        private ProductRepository repository = new ProductRepository();
+
+        public AddProductControl(string itemNumber = "")
         {
             InitializeComponent();
-            LoadSuppliers(suppliers);
+            LoadSuppliers();
+
+            if (itemNumber != "" || itemNumber != string.Empty)
+            {
+                itemNumberTextBox.Text = itemNumber;
+            }
         }
 
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
@@ -53,8 +61,10 @@ namespace Ol_der.Controls.Products
            
         }
 
-        private void LoadSuppliers(List<Supplier>suppliers)
+        private async void LoadSuppliers()
         {
+            List<Supplier> suppliers = await repository.GetAllSupplierAsync();
+
             suppliersComboBox.ItemsSource = suppliers;
             suppliersComboBox.SelectedIndex = 0;
         }
