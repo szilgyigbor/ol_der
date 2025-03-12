@@ -343,8 +343,7 @@ namespace Ol_der.Controls.Sales
 
         private async Task<Product> FindProductByItemNumberAsync(string itemNumber)
         {
-            var upperItemNumber = itemNumber.ToUpper();
-            return await _saleViewModel.SearchProductByItemNumberAsync(upperItemNumber);
+            return await _saleViewModel.SearchProductByItemNumberAsync(itemNumber);
         }
 
         public async void AddNewProductToSale(Product newProduct)
