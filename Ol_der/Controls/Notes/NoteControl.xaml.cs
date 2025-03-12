@@ -23,6 +23,7 @@ namespace Ol_der.Controls.Notes
     /// </summary>
     public partial class NoteControl : UserControl
     {
+        private int numberOfNotes = 500;
         private NoteViewModel _viewModel;
         private ShowAllNoteControl _showAllNoteControl;
         private AddNewNoteControl _addNewNoteControl;
@@ -38,8 +39,9 @@ namespace Ol_der.Controls.Notes
 
         private void ShowAllNote()
         {
-            _showAllNoteControl = new ShowAllNoteControl();
+            _showAllNoteControl = new ShowAllNoteControl(numberOfNotes);
             ContentArea.Content = _showAllNoteControl;
+            RefreshTitle();
         }
 
         private void Show_All_Note_Click(object sender, RoutedEventArgs e)
@@ -114,6 +116,11 @@ namespace Ol_der.Controls.Notes
                 _noteDetailControl = new NoteDetailControl(SelectedNote);
                 ContentArea.Content = _noteDetailControl;
             }
+        }
+
+        private void RefreshTitle()
+        {
+            NoteTextBlock.Text = $"Jegyzetek kezelése (megjelenített: {numberOfNotes.ToString()})";
         }
     }
 }
