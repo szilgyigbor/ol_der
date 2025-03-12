@@ -47,7 +47,7 @@ namespace Ol_der.Controls.Notes
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ShowAllNoteViewModel(int limit = 1000)
+        public ShowAllNoteViewModel(int limit)
         {
             _noteRepository = new NoteRepository();
             InitializeAsync(limit);
