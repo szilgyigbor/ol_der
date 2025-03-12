@@ -76,8 +76,10 @@ namespace Ol_der.Controls.Products
             _productToModify.ItemNumber = itemNumberTextBox.Text;
             _productToModify.Supplier = selectedSupplier;
 
-            if ((await _productRepository.SearchProductByItemNumberAsync(_productToModify.ItemNumber))
-                .Any(p => p.ProductId != _productToModify.ProductId))
+            var existingProducts = await _productRepository.SearchProductByItemNumberAsync(_productToModify.ItemNumber);
+
+            bool isDuplicate = existingProducts.Any(p => p.ProductId != _productToModify.ProductId);
+            if (isDuplicate)
             {
                 MessageBoxOkWindow messageBoxOkWindow = new("Ez a cikkszám már szerepel az adatbázisban!");
                 messageBoxOkWindow.ShowDialog();
