@@ -231,7 +231,7 @@ namespace Ol_der.Controls.Sales
 
                     _addNewProductWindow = new Window
                     {
-                        Title = "UserControl Ablakban",
+                        Title = "Termék rögzítése",
                         Content = AddNewProductControl,
                         Width = 900,
                         Height = 300
@@ -376,6 +376,9 @@ namespace Ol_der.Controls.Sales
 
                 MessageBoxOkWindow messageBoxOkWindow1 = new("Sikeresen rögzítve és hozzáadva az eladáshoz!");
                 messageBoxOkWindow1.ShowDialog();
+
+                Application.Current.MainWindow?.Activate();
+                Application.Current.MainWindow?.Focus();
 
             }
 
