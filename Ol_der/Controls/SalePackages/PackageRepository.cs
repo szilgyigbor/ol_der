@@ -124,5 +124,33 @@ namespace Ol_der.Controls.SalePackages
             }
         }
 
+        public async Task<List<Sale>> GetSalesByCriteriaAsync(Dictionary<string, string> criteria)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var query = context.Sales
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product)
+                    .Include(s => s.SaleItems)
+                        .ThenInclude(si => si.Product.Supplier)
+                    .AsQueryable();
+
+                if (!string.IsNullOrWhiteSpace(criteria["ProductNumber"]))
+                {
+                    query = query.Where(s => s.SaleItems.Any(si => si.Product.ItemNumber == criteria["ProductNumber"]));
+                }
+
+                if (!string.IsNullOrWhiteSpace(criteria["CustomerName"]))
+                {
+                    query = query.Where(s => s.CustomerName.Contains(criteria["CustomerName"]));
+                }
+
+                query = query.Where(s => s.IsPackage)
+                             .OrderByDescending(s => s.Date);
+
+                return await query.ToListAsync();
+            }
+        }
+
     }
 }
