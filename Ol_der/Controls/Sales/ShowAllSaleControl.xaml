@@ -10,6 +10,7 @@
     <UserControl.Resources>
         <local:DateToDayConverter x:Key="DateToDayConverter"/>
         <local:OrderStatusConverter x:Key="OrderStatusConverter"/>
+        <local:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>
         <ListView x:Name="SalesListView" ItemsSource="{Binding GroupedSales.View}">
@@ -36,47 +37,55 @@
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="2">
                         <StackPanel Margin="0" Width="1600">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <StackPanel.Style>
-                                    <Style TargetType="StackPanel">
-                                        <Setter Property="Background" Value="#ebebeb" />
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding PaymentType}" Value="Card">
-                                                <Setter Property="Background" Value="#FFB6C1" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </StackPanel.Style>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="#f5f5f5" Height="40">
+                                <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 0 0" Width="50" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="18" FontWeight="DemiBold"
+                                           Width="90" VerticalAlignment="Center" TextAlignment="Right"/>
+                                <TextBlock Text=".-Ft." FontSize="18" Margin="0 5" Width="30" VerticalAlignment="Center"/>
 
-                                <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="16" Margin="5" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="18" FontWeight="DemiBold" Margin="5 5 0 5" VerticalAlignment="Center"/>
-                                <TextBlock Text=".-Ft." FontSize="18" Margin="0 5 5 5" VerticalAlignment="Center"/>
-                                <TextBlock FontSize="18" Margin="5" VerticalAlignment="Center" FontWeight="SemiBold">
-                                    <TextBlock.Style>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Text" Value="{Binding PaymentType}" />
-                                            <Style.Triggers>
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PaymentType}" Value="Card"/>
-                                                        <Condition Binding="{Binding IsCardTransactionProcessed}" Value="False"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (nem könyvelt)'}"/>
-                                                </MultiDataTrigger>
+                                <Border x:Name="PaymentTypeBorder" Margin="5" Padding="3" VerticalAlignment="Center">
+                                    <TextBlock FontSize="18" VerticalAlignment="Center" FontWeight="SemiBold" Width="75" Padding="2" TextAlignment="Left">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Text" Value="{Binding PaymentType}" />
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding PaymentType}" Value="Card"/>
+                                                            <Condition Binding="{Binding IsCardTransactionProcessed}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (✗)'}"/>
+                                                        <Setter Property="Background" Value="#FFB6C1"/>
+                                                    </MultiDataTrigger>
 
-                                                <MultiDataTrigger>
-                                                    <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding PaymentType}" Value="Card"/>
-                                                        <Condition Binding="{Binding IsCardTransactionProcessed}" Value="True"/>
-                                                    </MultiDataTrigger.Conditions>
-                                                    <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (könyvelt)'}"/>
-                                                </MultiDataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBlock.Style>
-                                </TextBlock>
-                                <TextBlock Text="{Binding CustomerName}" FontSize="17" Margin="5" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding Notes}" FontSize="17" FontStyle="Italic" Margin="5" VerticalAlignment="Center"/>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding PaymentType}" Value="Card"/>
+                                                            <Condition Binding="{Binding IsCardTransactionProcessed}" Value="True"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (✓)'}"/>
+                                                        <Setter Property="Background" Value="#D8BFD8"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Border>
+
+                                <Border BorderBrush="DarkGray"
+                                        BorderThickness="1"
+                                        CornerRadius="3"
+                                        Padding="5 0 5 0"
+                                        Margin="2"
+                                        Visibility="{Binding CustomerName, Converter={StaticResource StringToVisibilityConverter}}">
+                                    <TextBlock Text="{Binding CustomerName}"
+                                       FontSize="17"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Left"/>
+                                </Border>
+
+                                <TextBlock Text="{Binding Notes}" FontSize="17" FontStyle="Italic" Margin="2" VerticalAlignment="Center" TextAlignment="Left"/>
                             </StackPanel>
 
                             <ItemsControl ItemsSource="{Binding SaleItems}">
@@ -98,12 +107,13 @@
                             </ItemsControl>
                         </StackPanel>
 
+
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="#fbfbfb"/>
+                    <Setter Property="Background" Value="#fcfcfc"/>
                     <Setter Property="Foreground" Value="Black"/>
                 </Style>
             </ListView.ItemContainerStyle>
