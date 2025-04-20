@@ -146,19 +146,40 @@ namespace Ol_der.Controls.SalePackages
 
         private async void SearchPackagesByProductNumber_Click(object sender, RoutedEventArgs e)
         {
-            InputProductNumberWindow dialog = new InputProductNumberWindow();
+            Sales.SearchDetailsWindow dialog = new Sales.SearchDetailsWindow();
             if (dialog.ShowDialog() == true)
             {
-                string productNumber = dialog.ProductNumber;
-                await ShowPackagesByProductNumber(productNumber);
+                var searchCriteria = dialog.SearchCriteria;
+                await ShowSalesByCriteria(searchCriteria);
             }
         }
 
-        private async Task ShowPackagesByProductNumber(string productNumber)
+        private async Task ShowSalesByCriteria(Dictionary<string, string> SearchCriteria)
         {
             ContentArea.Content = loadingText;
-            PackagesTextBlock.Text = $"Keresett termék cikkszáma: {productNumber}";
-            await _showAllPackageControl.LoadSearchedSales(productNumber);
+
+            var searchCriteriaText = "Keresési feltételek: ";
+
+            if (!string.IsNullOrWhiteSpace(SearchCriteria["CustomerName"]) && !string.IsNullOrWhiteSpace(SearchCriteria["ProductNumber"]))
+            {
+                searchCriteriaText += $"Név: {SearchCriteria["CustomerName"]}, Cikkszám: {SearchCriteria["ProductNumber"]}";
+            }
+            else if (!string.IsNullOrWhiteSpace(SearchCriteria["CustomerName"]))
+            {
+                searchCriteriaText += $"Név: {SearchCriteria["CustomerName"]}";
+            }
+            else if (!string.IsNullOrWhiteSpace(SearchCriteria["ProductNumber"]))
+            {
+                searchCriteriaText += $"Cikkszám: {SearchCriteria["ProductNumber"]}";
+            }
+            else
+            {
+                searchCriteriaText = "Nincsenek megadott keresési feltételek.";
+            }
+
+            PackagesTextBlock.Text = searchCriteriaText;
+
+            await _showAllPackageControl.LoadSearchedSales(SearchCriteria);
             ContentArea.Content = _showAllPackageControl;
         }
 

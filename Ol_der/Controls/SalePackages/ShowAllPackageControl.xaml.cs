@@ -97,9 +97,9 @@ namespace Ol_der.Controls.SalePackages
 
         }
 
-        public async Task LoadSearchedSales(string productNumber)
+        public async Task LoadSearchedSales(Dictionary<string, string> SearchCriteria)
         {
-            await _viewModel.LoadSearchedSalesAsync(productNumber);
+            await _viewModel.LoadSearchedSalesAsync(SearchCriteria);
         }
 
     }
