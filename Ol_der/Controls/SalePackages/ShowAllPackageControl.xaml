@@ -11,6 +11,7 @@
     <UserControl.Resources>
         <local:DateToDayConverter x:Key="DateToDayConverter"/>
         <converters:OrderStatusConverter x:Key="OrderStatusConverter"/>
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </UserControl.Resources>
     <Grid>
         <ListView x:Name="SalesListView" ItemsSource="{Binding GroupedSales.View}">
@@ -37,22 +38,27 @@
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="2">
                         <StackPanel Margin="0" Width="1600">
-                            <StackPanel Background="#ebebeb">
-                                <Grid VerticalAlignment="Center">
-                                    <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" Text="{Binding Date, StringFormat='HH:mm'}" FontSize="16" Margin="5" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="18" FontWeight="DemiBold" Margin="5 5 0 5" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="2" Text=".-Ft." FontSize="18" Margin="0 5 5 5" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="3" Text="{Binding CustomerName}" FontSize="17" Margin="5" VerticalAlignment="Center"/>
-                                    <TextBlock Grid.Column="4" Text="{Binding Notes}" FontSize="17" FontStyle="Italic" Margin="5" VerticalAlignment="Center"/>
-                                </Grid>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="#f5f5f5" Height="40">
+                                <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 0 0" Width="50" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="18" FontWeight="DemiBold"
+                               Width="90" VerticalAlignment="Center" TextAlignment="Right"/>
+                                <TextBlock Text=".-Ft." FontSize="18" Margin="0 5" Width="30" VerticalAlignment="Center"/>
+                                
+                                <Border BorderBrush="DarkGray"
+                                        BorderThickness="1"
+                                        CornerRadius="3"
+                                        Padding="5 0 5 0"
+                                        Margin="2"
+                                        Visibility="{Binding CustomerName, Converter={StaticResource StringToVisibilityConverter}}">
+                                <TextBlock Text="{Binding CustomerName}"
+                                           FontSize="17"
+                                           VerticalAlignment="Center"
+                                           TextAlignment="Left"/>
+                                </Border>
+
+                                <TextBlock Text="{Binding Notes}" FontSize="17" FontStyle="Italic" Margin="2" VerticalAlignment="Center" TextAlignment="Left"/>
                             </StackPanel>
+
                             <ItemsControl ItemsSource="{Binding SaleItems}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -71,13 +77,12 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </StackPanel>
- 
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Background" Value="#fcfcfc"/>
                     <Setter Property="Foreground" Value="Black"/>
                 </Style>
             </ListView.ItemContainerStyle>
