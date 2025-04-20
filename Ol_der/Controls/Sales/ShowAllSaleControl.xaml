@@ -5,50 +5,58 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Sales"
              mc:Ignorable="d" 
-             FontSize="16"
+             FontSize="15"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:DateToDayConverter x:Key="DateToDayConverter"/>
         <local:OrderStatusConverter x:Key="OrderStatusConverter"/>
         <local:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </UserControl.Resources>
-    <Grid>
-        <ListView x:Name="SalesListView" ItemsSource="{Binding GroupedSales.View}">
+
+    <Grid Background="#f9f9f9">
+        <ListView x:Name="SalesListView"
+                  ItemsSource="{Binding GroupedSales.View}" 
+                  BorderThickness="0"
+                  Background="Transparent"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+            
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
                         <Style TargetType="GroupItem">
-                            <Setter Property="Margin" Value="5 10 5 15"/>
+                            <Setter Property="Margin" Value="5 10 5 20"/>
                         </Style>
                     </GroupStyle.ContainerStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="#85a6b1" BorderThickness="4">
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Content="Riport" Background="BlanchedAlmond" Click="SaveButton_Click" Margin="0"/>
-                                    <TextBlock Padding="3" Background="#bae2be" Text="{Binding Converter={StaticResource DateToDayConverter}}" FontWeight="SemiBold" FontSize="21" Width="1564"/>
-                                </StackPanel>
+                            <Border BorderBrush="#aac4d1" Background="#e1f0ea" BorderThickness="1" CornerRadius="6" Padding="10" Margin="0 0 0 10">
+                                <DockPanel>
+                                    <Button Content="Riport" Background="#4caf50" Foreground="White" Padding="10 5" BorderThickness="0" Cursor="Hand" 
+                                            Click="SaveButton_Click" Margin="0 0 10 0"/>
+                                    <TextBlock Text="{Binding Converter={StaticResource DateToDayConverter}}"
+                                               FontWeight="Bold" FontSize="20" Foreground="#2c3e50" VerticalAlignment="Center"/>
+                                </DockPanel>
                             </Border>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
             </ListView.GroupStyle>
+
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="2">
-                        <StackPanel Margin="0" Width="1600">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Background="#f5f5f5" Height="40">
-                                <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" HorizontalAlignment="Left" FontSize="16" Margin="10 0 0 0" Width="50" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="18" FontWeight="DemiBold"
+                    <Border Background="White" CornerRadius="8" Padding="6" Margin="2" BorderBrush="#dddddd" BorderThickness="1">
+                        <StackPanel>
+                            <DockPanel Margin="3">
+                                <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="15" Margin="0 0 10 0" Width="50" VerticalAlignment="Center"/>
+                                <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="17" FontWeight="SemiBold"
                                            Width="90" VerticalAlignment="Center" TextAlignment="Right"/>
-                                <TextBlock Text=".-Ft." FontSize="18" Margin="0 5" Width="30" VerticalAlignment="Center"/>
+                                <TextBlock Text=".-Ft" FontSize="17" Margin="0 5" Width="30" VerticalAlignment="Center"/>
 
-                                <Border x:Name="PaymentTypeBorder" Margin="5" Padding="3" VerticalAlignment="Center">
-                                    <TextBlock FontSize="18" VerticalAlignment="Center" FontWeight="SemiBold" Width="75" Padding="2" TextAlignment="Left">
+                                <Border x:Name="PaymentTypeBorder" Margin="2" Padding="2" VerticalAlignment="Center" Background="#f0f0f0" CornerRadius="4">
+                                    <TextBlock FontSize="16" FontWeight="SemiBold" Width="70" Padding="3">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="Text" Value="{Binding PaymentType}" />
-                                                <Setter Property="Background" Value="Transparent" />
                                                 <Style.Triggers>
                                                     <MultiDataTrigger>
                                                         <MultiDataTrigger.Conditions>
@@ -56,7 +64,7 @@
                                                             <Condition Binding="{Binding IsCardTransactionProcessed}" Value="False"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (✗)'}"/>
-                                                        <Setter Property="Background" Value="#FFB6C1"/>
+                                                        <Setter Property="Background" Value="#ffcdd2"/>
                                                     </MultiDataTrigger>
 
                                                     <MultiDataTrigger>
@@ -65,7 +73,7 @@
                                                             <Condition Binding="{Binding IsCardTransactionProcessed}" Value="True"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (✓)'}"/>
-                                                        <Setter Property="Background" Value="#D8BFD8"/>
+                                                        <Setter Property="Background" Value="#c8e6c9"/>
                                                     </MultiDataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -73,51 +81,47 @@
                                     </TextBlock>
                                 </Border>
 
-                                <Border BorderBrush="DarkGray"
-                                        BorderThickness="1"
-                                        CornerRadius="3"
-                                        Padding="5 0 5 0"
-                                        Margin="2"
+                                <Border Background="#e9f9fd" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1"
                                         Visibility="{Binding CustomerName, Converter={StaticResource StringToVisibilityConverter}}">
-                                    <TextBlock Text="{Binding CustomerName}"
-                                       FontSize="17"
-                                       VerticalAlignment="Center"
-                                       TextAlignment="Left"/>
+                                    <TextBlock Text="{Binding CustomerName}" Foreground="#2c3e50" FontSize="16" VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
-                                <TextBlock Text="{Binding Notes}" FontSize="17" FontStyle="Italic" Margin="2" VerticalAlignment="Center" TextAlignment="Left"/>
-                            </StackPanel>
+                                <TextBlock Text="{Binding Notes}" FontSize="16" FontStyle="Italic" Margin="10 0" Foreground="#555" VerticalAlignment="Center" TextAlignment="Left"/>
+                            </DockPanel>
 
-                            <ItemsControl ItemsSource="{Binding SaleItems}">
+                            <ItemsControl ItemsSource="{Binding SaleItems}" Margin="5 0 0 5">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderBrush="#dfdfdf" BorderThickness="2">
-                                            <WrapPanel Margin="3">
-                                                <TextBlock Text="{Binding Quantity}" Width="30"/>
+                                        <Border Background="#fafafa" BorderBrush="#e0e0e0" BorderThickness="1" CornerRadius="4" Margin="0 2">
+                                            <WrapPanel Margin="5">
+                                                <TextBlock Text="{Binding Quantity}" Width="30" FontWeight="SemiBold"/>
                                                 <TextBlock Text=" db" Width="40"/>
-                                                <TextBlock Text="{Binding Product.ItemNumber}" Width="140"/>
-                                                <TextBlock Text="{Binding Product.Name}"  Width="700"/>
-                                                <TextBlock Text="Eladási ár(/db):" Width="110"/>
-                                                <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Width="80"/>
-                                                <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}" Width="200"/>
+                                                <TextBlock Text="{Binding Product.ItemNumber}" Width="130" Foreground="#333"/>
+                                                <TextBlock Text="{Binding Product.Name}" Width="600" TextTrimming="CharacterEllipsis" Foreground="#2c3e50"/>
+                                                <TextBlock Text="Eladási ár(/db):" Width="120"/>
+                                                <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Width="70" Foreground="#005500"/>
+                                                <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}" Width="160" FontStyle="Italic" Foreground="#444"/>
                                             </WrapPanel>
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </StackPanel>
-
-
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
+
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="#fcfcfc"/>
-                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="#212121"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
-        
     </Grid>
 </UserControl>
