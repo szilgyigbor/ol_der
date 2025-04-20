@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.SalePackages"
              mc:Ignorable="d" 
-             FontSize="16"
+             FontSize="15"
+             Background="#f7f7f7"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -76,20 +77,19 @@
             <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" Click="DeleteItem_Click"/>
         </WrapPanel>
 
-        <ListBox x:Name="lstSaleItems" Grid.Row="7" Margin="5"  Background="Transparent">
+        <ListBox x:Name="lstSaleItems" Grid.Row="7" Margin="2" Background="WhiteSmoke" BorderBrush="#ccc" BorderThickness="1" Padding="2" Height="Auto">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="LightGray" BorderThickness="2">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="40"/>
-                            <TextBlock Text="db" Width="40"/>
-                            <TextBlock Text="{Binding Product.ItemNumber}" Width="140"/>
-                            <TextBlock Text="{Binding Product.Name}" Width="600"/>
-                            <TextBox Text="{Binding Price, Mode=TwoWay, StringFormat=F0}" Width="100"/>
-                            <TextBlock Text=".-Ft." Width="40" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <CheckBox x:Name="chkNeedToOrder" Content="legyen rendelve?" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding NeedToOrder, Mode=TwoWay}">
-                            </CheckBox>
-                        </StackPanel>
+                    <Border CornerRadius="8" BorderBrush="#ddd" BorderThickness="1" Margin="0">
+                        <DockPanel Margin="4" VerticalAlignment="Center">
+                            <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="50" Margin="3"/>
+                            <TextBlock Text="db" Width="30" Margin="3 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Product.ItemNumber}" Width="130" Margin="3 0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Product.Name}" Width="600" Margin="3 0" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding Price, Mode=TwoWay, StringFormat=F0}" Width="80" Margin="3 0" HorizontalContentAlignment="Right"/>
+                            <TextBlock Text=".-Ft." Width="40" Margin="3 0" VerticalAlignment="Center"/>
+                            <CheckBox Content="legyen rendelve?" IsChecked="{Binding NeedToOrder, Mode=TwoWay}" VerticalAlignment="Center" Margin="5 0"/>
+                        </DockPanel>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
