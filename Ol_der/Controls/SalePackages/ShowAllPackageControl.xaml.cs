@@ -23,7 +23,7 @@ namespace Ol_der.Controls.SalePackages
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button button && button.Parent is StackPanel panel)
+            if (sender is Button button && button.Parent is DockPanel panel)
             {
                 var textBlock = panel.Children.OfType<TextBlock>().FirstOrDefault();
                 if (textBlock != null)
