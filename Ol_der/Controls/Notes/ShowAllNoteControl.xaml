@@ -55,12 +55,12 @@
                                        TextTrimming="CharacterEllipsis"
                                        Margin="6,2,6,2"
                                        FontSize="15"
-                                       Foreground="#444"
+                                       Foreground="Black"
                                        Grid.Row="1"/>
 
                                 <TextBlock Text="{Binding CreationDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
                                        FontSize="13"
-                                       Foreground="#777"
+                                       Foreground="#333"
                                        Margin="6,2,6,6"
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Bottom"
