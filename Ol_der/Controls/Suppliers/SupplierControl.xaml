@@ -47,7 +47,7 @@
             </StackPanel>
 
             <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
-              Background="Black" VerticalAlignment="Stretch"/>
+              Background="Gray" VerticalAlignment="Stretch"/>
 
             <ContentControl Grid.Column="1" VerticalAlignment="Top" Margin="5" x:Name="ContentArea"/>
         </Grid>
