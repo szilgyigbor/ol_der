@@ -20,7 +20,7 @@ namespace Ol_der.Controls.Sales
                 else if (!saleItem.NeedToOrder && saleItem.IsOrdered)
                     return "/Icons/approved.png";
                 else
-                    return saleItem.IsOrdered ? "/Icons/approved.png" : "/Icons/time.png";
+                    return saleItem.IsOrdered ? "/Icons/approved.png" : "/Icons/clock1.png";
             }
             return "";
         }
