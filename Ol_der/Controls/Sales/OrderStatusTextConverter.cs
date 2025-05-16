@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace Ol_der.Controls.Sales
 {
-    public class OrderStatusConverter : IValueConverter
+    public class OrderStatusTextConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
