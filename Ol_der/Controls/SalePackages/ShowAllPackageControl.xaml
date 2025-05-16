@@ -10,7 +10,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:DateToDayConverter x:Key="DateToDayConverter"/>
-        <converters:OrderStatusConverter x:Key="OrderStatusConverter"/>
+        <converters:OrderStatusTextConverter x:Key="OrderStatusTextConverter"/>
+        <converters:OrderStatusIconConverter x:Key="OrderStatusIconConverter"/>
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </UserControl.Resources>
 
@@ -63,7 +64,7 @@
                             BorderThickness="1"
                             CornerRadius="8"
                             Background="White"
-                            Margin="2"
+                            Margin="0 3 0 3"
                             Padding="6">
                         <StackPanel>
                             <DockPanel Margin="0 0 0 6">
@@ -138,10 +139,12 @@
                                                 <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}"
                                                            Width="70"
                                                            Foreground="#005500"/>
-                                                <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}"
-                                                           Width="160"
-                                                           FontStyle="Italic"
-                                                           Foreground="#444"/>
+                                                <StackPanel Orientation="Horizontal" Width="220">
+                                                    <Image Source="{Binding Converter={StaticResource OrderStatusIconConverter}}"
+                                                           Width="20" Height="20" Margin="0,0,3,0" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding Converter={StaticResource OrderStatusTextConverter}}"
+                                                           FontStyle="Italic" Foreground="#444"/>
+                                                </StackPanel>
                                             </WrapPanel>
                                         </Border>
                                     </DataTemplate>

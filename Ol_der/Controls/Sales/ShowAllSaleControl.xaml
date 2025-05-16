@@ -9,7 +9,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <local:DateToDayConverter x:Key="DateToDayConverter"/>
-        <local:OrderStatusConverter x:Key="OrderStatusConverter"/>
+        <local:OrderStatusTextConverter x:Key="OrderStatusTextConverter"/>
+        <local:OrderStatusIconConverter x:Key="OrderStatusIconConverter"/>
         <local:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </UserControl.Resources>
 
@@ -44,7 +45,7 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Background="White" CornerRadius="8" Padding="6" Margin="2" BorderBrush="#dddddd" BorderThickness="1">
+                    <Border Background="White" CornerRadius="8" Padding="6" Margin="0 3 0 3" BorderBrush="#dddddd" BorderThickness="1">
                         <StackPanel>
                             <DockPanel Margin="3">
                                 <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="15" Margin="0 0 10 0" Width="50" VerticalAlignment="Center"/>
@@ -89,7 +90,7 @@
                                 <TextBlock Text="{Binding Notes}" FontSize="16" FontStyle="Italic" Margin="10 0" Foreground="#555" VerticalAlignment="Center" TextAlignment="Left"/>
                             </DockPanel>
 
-                            <ItemsControl ItemsSource="{Binding SaleItems}" Margin="5 0 0 5">
+                            <ItemsControl ItemsSource="{Binding SaleItems}" Margin="0 2">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Border Background="#fafafa" BorderBrush="#e0e0e0" BorderThickness="1" CornerRadius="4" Margin="0 2">
@@ -100,7 +101,12 @@
                                                 <TextBlock Text="{Binding Product.Name}" Width="600" TextTrimming="CharacterEllipsis" Foreground="#2c3e50"/>
                                                 <TextBlock Text="Eladási ár(/db):" Width="120"/>
                                                 <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Width="70" Foreground="#005500"/>
-                                                <TextBlock Text="{Binding Converter={StaticResource OrderStatusConverter}}" Width="160" FontStyle="Italic" Foreground="#444"/>
+                                                <StackPanel Orientation="Horizontal" Width="220">
+                                                    <Image Source="{Binding Converter={StaticResource OrderStatusIconConverter}}"
+                                                           Width="20" Height="20" Margin="0,0,3,0" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{Binding Converter={StaticResource OrderStatusTextConverter}}"
+                                                               FontStyle="Italic" Foreground="#444"/>
+                                                </StackPanel>
                                             </WrapPanel>
                                         </Border>
                                     </DataTemplate>
