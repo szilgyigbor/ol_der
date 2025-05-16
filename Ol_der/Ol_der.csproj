@@ -11,8 +11,9 @@
 
   <ItemGroup>
     <None Remove="Icons\approved.png" />
+    <None Remove="Icons\clock.png" />
+    <None Remove="Icons\clock1.png" />
     <None Remove="Icons\rejected.png" />
-    <None Remove="Icons\time.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,10 +54,13 @@
     <Resource Include="Icons\approved.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Icons\rejected.png">
+    <Resource Include="Icons\clock.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Icons\time.png">
+    <Resource Include="Icons\clock1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\rejected.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
