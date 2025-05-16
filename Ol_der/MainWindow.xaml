@@ -44,7 +44,7 @@
         </Border>
 
         <GridSplitter Grid.Column="0" Width="5" HorizontalAlignment="Right"
-                      Background="Black" VerticalAlignment="Stretch"/>
+                      Background="Gray" VerticalAlignment="Stretch"/>
 
         <ContentControl Grid.Column="1" x:Name="ContentArea"/>
     </Grid>
