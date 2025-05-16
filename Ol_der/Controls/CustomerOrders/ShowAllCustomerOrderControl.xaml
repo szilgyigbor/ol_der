@@ -42,7 +42,7 @@
                     <Setter Property="Foreground" Value="Black"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsCompleted}" Value="True">
-                            <Setter Property="Background" Value="#8FBC8F"/>
+                            <Setter Property="Background" Value="#DFFBE4"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
