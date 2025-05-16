@@ -7,30 +7,83 @@
              mc:Ignorable="d"
              FontSize="17"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <ListView x:Name="ProductsListView" Background="White" AlternationCount="2" ItemsSource="{Binding Orders}">
+    <Grid Background="#FAFAFA">
+        <ListView x:Name="ProductsListView" 
+              ItemsSource="{Binding Orders}" 
+              Background="Transparent"
+              BorderThickness="0"
+              AlternationCount="2"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.Resources>
+                <Style TargetType="Separator">
+                    <Setter Property="Background" Value="#E0E0E0"/>
+                    <Setter Property="Height" Value="1"/>
+                    <Setter Property="Margin" Value="0,5"/>
+                    <Setter Property="Padding" Value="5"/>
+                </Style>
+            </ListView.Resources>
+
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Azonosító" DisplayMemberBinding="{Binding OrderId}" Width="100"/>
-                    <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Supplier.Name}" Width="250"/>
-                    <GridViewColumn Header="Módosítva" DisplayMemberBinding="{Binding OrderDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Width="280"/>
-                    <GridViewColumn Header="Megjegyzés" DisplayMemberBinding="{Binding Comment}" Width="850"/>
+                    <GridViewColumn Header="Azonosító">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding OrderId}" Margin="8,4"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Beszállító">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Supplier.Name}" Margin="8,4"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Módosítva">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding OrderDate, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Margin="8,4"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Megjegyzés" Width="500">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Comment}" TextWrapping="Wrap" Margin="8,4"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
+
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="LightGray"/>
+                    <Setter Property="Padding" Value="5"/>
+                    <Setter Property="Margin" Value="0,2"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                    <Setter Property="Background" Value="#e9e6e9"/>
                     <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsColored}" Value="True">
-                            <Setter Property="Background" Value="#8FBC8F"/>
+                            <Setter Property="Background" Value="#DFFBE4"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsOpen}" Value="True">
-                            <Setter Property="Background" Value="#F4F4F4"/>
+                            <Setter Property="Background" Value= "#F9F9F9"/>
                         </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#E6F7FF"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
                     </Style.Triggers>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
     </Grid>
+
 </UserControl>
