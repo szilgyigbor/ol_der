@@ -122,7 +122,7 @@
             </ListView.View>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="#F4F4F4" />
+                    <Setter Property="Background" Value="#F9F9F9" />
                     <Setter Property="Foreground" Value="Black" />
                 </Style>
             </ListView.ItemContainerStyle>
