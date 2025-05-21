@@ -31,7 +31,6 @@ namespace Ol_der.Controls.Products
         private AddProductControl _addProductControl;
         private ShowAllProductControl _showAllProductControl;
         private ModifyProductControl _modifyProductControl;
-        private SearchProductControl _searchProductControl;
 
         public Task InitializationTask { get; }
 
@@ -49,7 +48,6 @@ namespace Ol_der.Controls.Products
             _addProductControl = new AddProductControl();
             _showAllProductControl = new ShowAllProductControl();
             _modifyProductControl = new ModifyProductControl();
-            _searchProductControl = new SearchProductControl();
             await ShowAllProduct();
         }
 
