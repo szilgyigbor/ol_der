@@ -71,7 +71,7 @@
 
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsColored}" Value="True">
-                            <Setter Property="Background" Value="#DFFBE4"/>
+                            <Setter Property="Background" Value="#E6F9E6"/>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsOpen}" Value="True">
                             <Setter Property="Background" Value= "#F9F9F9"/>
