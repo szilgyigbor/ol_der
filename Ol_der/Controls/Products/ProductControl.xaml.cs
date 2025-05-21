@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Internal;
+using Ol_der.Controls.DetailedSearch;
+using Ol_der.Controls.Orders;
 using Ol_der.Controls.Suppliers;
 using Ol_der.Data;
 using Ol_der.Models;
-using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -133,17 +134,37 @@ namespace Ol_der.Controls.Products
 
             if (selectedProduct == null)
             {
-                MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy terméket a módosításhoz!");
-                messageBoxOkWindow.ShowDialog();
-                ContentArea.Content = _showAllProductControl;
-                return;
+                DetailedSearch();
             }
 
+            else 
+            {
+                GetModifyWindow(selectedProduct);
+            }
+        }
+
+        private async void GetModifyWindow(Product productToModify) 
+        {
             _modifyProductControl.OnProductModified -= ModifyProduct;
             _modifyProductControl.OnProductModified += ModifyProduct;
 
-            _modifyProductControl.GetDatasToModify(selectedProduct,await _viewModel.GetAllSupplierAsync());
+            _modifyProductControl.SetDatasToModify(productToModify, await _viewModel.GetAllSupplierAsync());
             ContentArea.Content = _modifyProductControl;
+        }
+
+
+        private void DetailedSearch()
+        {
+            SearchWindow searchWindow = new SearchWindow();
+            searchWindow.ProductSelected -= OnProductSelected;
+            searchWindow.ProductSelected += OnProductSelected;
+
+            searchWindow.ShowDialog();
+        }
+
+        private void OnProductSelected(object sender, Product productToModify)
+        {
+            GetModifyWindow(productToModify);
         }
 
         private async void ModifyProduct(Product modifiedProduct)
