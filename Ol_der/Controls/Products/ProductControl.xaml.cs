@@ -6,6 +6,7 @@ using Ol_der.Data;
 using Ol_der.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,9 +82,7 @@ namespace Ol_der.Controls.Products
 
         public void Search_Product_Click(object sender, RoutedEventArgs e)
         {
-            ContentArea.Content = _searchProductControl;
-            _searchProductControl.OnProductId -= SearchProductById;
-            _searchProductControl.OnProductId += SearchProductById;
+            DetailedSearch(SearchProductById);
         }
 
         public async void Add_Product(Product newProduct)
@@ -105,9 +104,9 @@ namespace Ol_der.Controls.Products
             await ShowAllProduct();
         }
 
-        private async void SearchProductById(string productId)
+        private async void SearchProductById(object sender, Product product)
         {
-            List<Product> products = await _viewModel.SearchProductByItemNumberAsync(productId);
+            List<Product> products = new List<Product> { product };
             if (products == null || products.Count == 0)
             {
                 MessageBoxOkWindow messageBoxOkWindow = new("Nincs ilyen termék az adatbázisban!");
@@ -134,7 +133,7 @@ namespace Ol_der.Controls.Products
 
             if (selectedProduct == null)
             {
-                DetailedSearch();
+                DetailedSearch(OnProductSelected);
             }
 
             else 
@@ -153,11 +152,11 @@ namespace Ol_der.Controls.Products
         }
 
 
-        private void DetailedSearch()
+        private void DetailedSearch(EventHandler<Product> handler)
         {
             SearchWindow searchWindow = new SearchWindow();
-            searchWindow.ProductSelected -= OnProductSelected;
-            searchWindow.ProductSelected += OnProductSelected;
+            searchWindow.ProductSelected -= handler;
+            searchWindow.ProductSelected += handler;
 
             searchWindow.ShowDialog();
         }
