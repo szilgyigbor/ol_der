@@ -37,7 +37,7 @@ namespace Ol_der.Controls.Products
             _productToModify = new Product();
         }
 
-        public void GetDatasToModify(Product productToModify, List<Supplier> suppliers)
+        public void SetDatasToModify(Product productToModify, List<Supplier> suppliers)
         {
             _suppliers = suppliers;
             suppliersComboBox.ItemsSource = _suppliers;
