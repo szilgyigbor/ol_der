@@ -90,7 +90,12 @@ namespace Ol_der.Controls.DetailedSearch
             Products = products.ToList();
 
             ItemNumber = string.Empty;
-            
+
+            if (Products.Count == 0)
+            {
+                NoResult();
+            }
+
         }
 
         public async Task SearchProductsByName()
@@ -106,8 +111,17 @@ namespace Ol_der.Controls.DetailedSearch
 
             ProductName = string.Empty;
 
+            if (Products.Count == 0)
+            {
+                NoResult();
+            }
+
         }
 
-
+        public void NoResult()
+        {
+            MessageBoxOkWindow messageBox = new MessageBoxOkWindow("Nincs ilyen termék");
+            messageBox.ShowDialog();
+        }
     }
 }
