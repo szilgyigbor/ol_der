@@ -12,8 +12,8 @@ using Ol_der.Data;
 namespace Ol_der.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250827060833_AddCustomerClass")]
-    partial class AddCustomerClass
+    [Migration("20250827163715_AddCustomers")]
+    partial class AddCustomers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,7 @@ namespace Ol_der.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Ol_der.Models.CustomerOrder", b =>

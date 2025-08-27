@@ -56,7 +56,7 @@ namespace Ol_der.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Ol_der.Models.CustomerOrder", b =>
