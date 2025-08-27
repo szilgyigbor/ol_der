@@ -25,6 +25,7 @@ namespace Ol_der.Controls.SalePackages
             using (var context = ApplicationDbContextFactory.Create())
             {
                 return await context.Sales
+                    .Include(s => s.Customer)
                     .Include(s => s.SaleItems)
                         .ThenInclude(si => si.Product)
                     .Include(s => s.SaleItems)
@@ -41,6 +42,7 @@ namespace Ol_der.Controls.SalePackages
             using (var context = ApplicationDbContextFactory.Create())
             {
                 return await context.Sales
+                    .Include(s => s.Customer)
                     .Include(s => s.SaleItems)
                         .ThenInclude(si => si.Product)
                     .Include(s => s.SaleItems)
@@ -74,6 +76,7 @@ namespace Ol_der.Controls.SalePackages
             using (var context = ApplicationDbContextFactory.Create())
             {
                 return await context.Sales
+                    .Include(s => s.Customer)
                     .Include(s => s.SaleItems)
                         .ThenInclude(si => si.Product)
                     .Include(s => s.SaleItems)
@@ -96,6 +99,7 @@ namespace Ol_der.Controls.SalePackages
             using (var context = ApplicationDbContextFactory.Create())
             {
                 var sale = await context.Sales
+                    .Include(s => s.Customer)
                     .Include(s => s.SaleItems)
                     .FirstOrDefaultAsync(s => s.SaleId == saleId);
 
@@ -113,6 +117,7 @@ namespace Ol_der.Controls.SalePackages
             using (var context = ApplicationDbContextFactory.Create())
             {
                 return await context.Sales
+                    .Include(s => s.Customer)
                     .Include(s => s.SaleItems)
                         .ThenInclude(si => si.Product)
                     .Include(s => s.SaleItems)
@@ -129,6 +134,7 @@ namespace Ol_der.Controls.SalePackages
             using (var context = ApplicationDbContextFactory.Create())
             {
                 var query = context.Sales
+                    .Include(s => s.Customer)
                     .Include(s => s.SaleItems)
                         .ThenInclude(si => si.Product)
                     .Include(s => s.SaleItems)
