@@ -31,6 +31,7 @@
                 <StackPanel x:Name="stackPanelButtons" Grid.Row="0" Orientation="Vertical">
                     <Button Content="Beszállítók" Name="btnSupplier" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
                     <Button Content="Termékek" Name="btnProduct" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
+                    <Button Content="Ügyfelek" Name="btnCustomer" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
                     <Button Content="Eladások" Name="btnSale" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
                     <Button Content="Csomagok" Name="btnPackage" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
                     <Button Content="Rendelések" Name="btnOrder" Style="{StaticResource MenuButtonStyle}" Click="Menu_Button_Click"/>
