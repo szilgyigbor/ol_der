@@ -1,4 +1,5 @@
-﻿using Ol_der.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Ol_der.Data;
 using Ol_der.Models;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,14 @@ namespace Ol_der.Controls.Customers
             }
         }
 
-        
+        public async Task<List<Customer>> GetAllCustomersAsync()
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Customers
+                    .OrderBy(c => c.Name).ToListAsync();
+            }
+        }
+
     }
 }
