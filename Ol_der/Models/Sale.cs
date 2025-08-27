@@ -17,14 +17,9 @@ namespace Ol_der.Models
         public PaymentType PaymentType { get; set; }
         public decimal TotalAmount { get; set; }
         public bool IsCardTransactionProcessed { get; set; }
-
-        // snapshot: amit a tranzakció időpontjában elmentettél
         public string CustomerName { get; set; } = string.Empty;
-
-        // új kapcsolat (nullable, hogy a régi rekordok ne törjenek)
         public int? CustomerId { get; set; }
         public Customer? Customer { get; set; }
-
         public string Notes { get; set; } = string.Empty;
         public bool IsPackage { get; set; } = false;
     }
