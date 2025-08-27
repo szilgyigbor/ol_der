@@ -14,7 +14,6 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid HorizontalAlignment="Left" VerticalAlignment="Center">
-
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -38,34 +37,43 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Label Content="Név:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="nameTextBox" Grid.Row="0" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Cím:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="addressTextBox" Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Telefon:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="phoneTextBox" Grid.Row="2" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Email:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="emailTextBox" Grid.Row="3" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Adószám:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="taxNumberTextBox" Grid.Row="4" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding TaxNumber, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Label Content="Megjegyzés:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="notesTextBox" Grid.Row="5" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <Label Content="Megjegyzés:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600" Height="80"
+                     Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"/>
 
 
-            <Button Content="Hozzáadás" Grid.Row="6" Grid.Column="1" Style="{StaticResource CommonButtonStyle}"
-                VerticalAlignment="Center" HorizontalAlignment="Center" Width="100"/>
+            <Button Content="Hozzáadás" Grid.Row="7" Grid.Column="1" Style="{StaticResource CommonButtonStyle}"
+                    VerticalAlignment="Center" HorizontalAlignment="Center" Width="100"
+                    Command="{Binding AddCommand}" />
         </Grid>
     </Grid>
 </UserControl>
+
