@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ol_der.Models
 {
-    class Customer
+    public class Customer
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CustomerId { get; set; }
