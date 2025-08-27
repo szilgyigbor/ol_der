@@ -18,6 +18,7 @@ using Ol_der.Controls.Orders;
 using Ol_der.Controls.Notes;
 using Ol_der.Controls.Warranties;
 using Ol_der.Controls.CustomerOrders;
+using Ol_der.Controls.Customers;
 
 
 namespace Ol_der
@@ -44,6 +45,10 @@ namespace Ol_der
                 case "btnProduct":
                     SetActiveButtonColor("btnProduct");
                     ContentArea.Content = new ProductControl();
+                    break;
+                case "btnCustomer":
+                    SetActiveButtonColor("btnCustomer");
+                    ContentArea.Content = new CustomerControl();
                     break;
                 case "btnSale":
                     SetActiveButtonColor("btnSale");
