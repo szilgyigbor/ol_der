@@ -65,7 +65,7 @@
 
 
             <Button Content="Hozzáadás" Grid.Row="6" Grid.Column="1" Style="{StaticResource CommonButtonStyle}"
-                VerticalAlignment="Center" HorizontalAlignment="Center" Click="SubmitButton_Click" Width="100"/>
+                VerticalAlignment="Center" HorizontalAlignment="Center" Width="100"/>
         </Grid>
     </Grid>
 </UserControl>
