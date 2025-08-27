@@ -69,6 +69,10 @@ namespace Ol_der.Data
             modelBuilder.Entity<CustomerOrderStatus>()
                 .Property(cos => cos.CustomerOrderStatusId)
                 .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Customer>()
+                .Property(c => c.CustomerId)
+                .ValueGeneratedOnAdd();
         }
 
         public DbSet<Product> Products { get; set; }
@@ -82,6 +86,7 @@ namespace Ol_der.Data
         public DbSet<Note> Notes { get; set; }
         public DbSet<CustomerOrder> CustomerOrders { get; set; }
         public DbSet<CustomerOrderStatus> CustomerOrderStatuses { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
-    }
+        }
 }
