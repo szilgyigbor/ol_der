@@ -6,7 +6,49 @@
              xmlns:local="clr-namespace:Ol_der.Controls.Customers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/SubMenuButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-            
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Background="Gainsboro">
+            <TextBlock Text="Ügyfelek kezelése"
+           FontSize="28"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center"/>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="9.3*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="120">
+                <Button Content="Ügyfelek" Style="{StaticResource SubMenuButtonStyle}" />
+                <Button Content="Új ügyfél" Style="{StaticResource SubMenuButtonStyle}" />
+                <Button Content="Szerkesztés" Style="{StaticResource SubMenuButtonStyle}" />
+                <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" />
+            </StackPanel>
+
+            <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
+          Background="Gray" VerticalAlignment="Stretch"/>
+
+            <ContentControl Grid.Column="1" VerticalAlignment="Top" Margin="5" x:Name="ContentArea"/>
+        </Grid>
     </Grid>
 </UserControl>
