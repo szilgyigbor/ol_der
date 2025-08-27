@@ -7,6 +7,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <ListView x:Name="CustomersListView" Background="White" AlternationCount="2" ItemsSource="{Binding Customers}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Név" DisplayMemberBinding="{Binding Name}" Width="240"/>
+                    <GridViewColumn Header="Cím" DisplayMemberBinding="{Binding Address}" Width="460"/>
+                    <GridViewColumn Header="Telefon" DisplayMemberBinding="{Binding Phone}" Width="180"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="280"/>
+                    <GridViewColumn Header="Adószám" DisplayMemberBinding="{Binding TaxNumber}" Width="180"/>
+                    <GridViewColumn Header="Megjegyzés" DisplayMemberBinding="{Binding Notes}" Width="180"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="#F9F9F9"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
     </Grid>
 </UserControl>
