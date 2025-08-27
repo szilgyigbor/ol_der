@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ol_der.Controls.Suppliers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,27 @@ namespace Ol_der.Controls.Customers
     /// </summary>
     public partial class CustomerControl : UserControl
     {
+        private AddOrModifyCustomerControl _addCustomerControl = new();
+        private ShowAllCustomerControl _showAllCustomerControl = new();
+
         public CustomerControl()
         {
             InitializeComponent();
+        }
+
+        private void Show_All_Customer()
+        {
+            ContentArea.Content = _showAllCustomerControl;
+        }
+
+        private void Add_Customer_Click(object sender, RoutedEventArgs e)
+        {
+            ContentArea.Content = _addCustomerControl;
+        }
+
+        private void Show_All_Customer_Click(object sender, RoutedEventArgs e)
+        {
+            Show_All_Customer();
         }
     }
 }
