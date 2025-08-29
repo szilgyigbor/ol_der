@@ -1,4 +1,5 @@
-﻿using Ol_der.Controls.Suppliers;
+﻿using Ol_der.Controls.Orders;
+using Ol_der.Controls.Suppliers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +28,12 @@ namespace Ol_der.Controls.Customers
         public CustomerControl()
         {
             InitializeComponent();
+            Show_All_Customer();
         }
 
         private void Show_All_Customer()
         {
+            _showAllCustomerControl = new ShowAllCustomerControl();
             ContentArea.Content = _showAllCustomerControl;
         }
 
@@ -42,6 +45,21 @@ namespace Ol_der.Controls.Customers
         private void Show_All_Customer_Click(object sender, RoutedEventArgs e)
         {
             Show_All_Customer();
+        }
+
+        private void Modify_Customer_Click(object sender, RoutedEventArgs e)
+        {
+            int selectedCustomerId = _showAllCustomerControl.GetSelectedCustomerId();
+            if (selectedCustomerId != -1)
+            {
+                
+            }
+            else
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Válassz ki egy ügyfelet a módosításhoz!");
+                messageBoxOkWindow.ShowDialog();
+
+            }
         }
     }
 }
