@@ -18,14 +18,13 @@ namespace Ol_der.Controls.Customers
         private string _email = string.Empty;
         private string _taxNumber = string.Empty;
         private string _notes = string.Empty;
-        private string _statusMessage = string.Empty;
         private bool _isBusy = false;
 
         private readonly CustomerRepository _repository = new CustomerRepository();
 
         public RelayCommand AddCommand { get; }
 
-        public AddOrModifyCustomerViewModel()
+        public AddOrModifyCustomerViewModel(int customerId)
         {
             AddCommand = new RelayCommand(async _ => await ExecuteAddAsync(), _ => CanAdd());
         }
@@ -48,7 +47,6 @@ namespace Ol_der.Controls.Customers
         public string TaxNumber { get => _taxNumber; set => SetProperty(ref _taxNumber, value); }
         public string Notes { get => _notes; set => SetProperty(ref _notes, value); }
 
-        public string StatusMessage { get => _statusMessage; private set => SetProperty(ref _statusMessage, value); }
         public bool IsBusy { get => _isBusy; private set { if (SetProperty(ref _isBusy, value)) AddCommand.RaiseCanExecuteChanged(); } }
 
         private bool CanAdd() => !IsBusy && !string.IsNullOrWhiteSpace(Name);
@@ -58,7 +56,6 @@ namespace Ol_der.Controls.Customers
             try
             {
                 IsBusy = true;
-                StatusMessage = string.Empty;
 
                 var newCustomer = new Customer
                 {
