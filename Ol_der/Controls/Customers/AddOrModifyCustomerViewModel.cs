@@ -12,6 +12,8 @@ namespace Ol_der.Controls.Customers
 {
     public class AddOrModifyCustomerViewModel : INotifyPropertyChanged
     {
+        private int customerId;
+        private string _buttonText = "Hozzáadás";
         private string _name = string.Empty;
         private string _address = string.Empty;
         private string _phone = string.Empty;
@@ -27,6 +29,17 @@ namespace Ol_der.Controls.Customers
         public AddOrModifyCustomerViewModel(int customerId)
         {
             AddCommand = new RelayCommand(async _ => await ExecuteAddAsync(), _ => CanAdd());
+            this.customerId = customerId;
+            if (customerId > 0)
+            {
+                LoadCustomerData(customerId);
+            }
+        }
+
+        public string ButtonText
+        {
+            get => _buttonText;
+            set => SetProperty(ref _buttonText, value);
         }
 
         public string Name
@@ -52,6 +65,18 @@ namespace Ol_der.Controls.Customers
         private bool CanAdd() => !IsBusy && !string.IsNullOrWhiteSpace(Name);
 
         private async Task ExecuteAddAsync()
+        {
+            if (customerId > 0)
+            {
+                await UpdateCustomerAsync();
+            }
+            else
+            {
+                await AddCustomerAsync();
+            }
+        }
+
+        private async Task AddCustomerAsync()
         {
             try
             {
@@ -86,6 +111,34 @@ namespace Ol_der.Controls.Customers
             }
         }
 
+        private async Task UpdateCustomerAsync()
+        {
+            try
+            {
+                IsBusy = true;
+                var modifiedDatas = new Customer
+                {
+                    Name = this.Name.Trim(),
+                    Address = this.Address?.Trim() ?? string.Empty,
+                    Phone = this.Phone?.Trim() ?? string.Empty,
+                    Email = this.Email?.Trim() ?? string.Empty,
+                    TaxNumber = this.TaxNumber?.Trim() ?? string.Empty,
+                    Notes = this.Notes?.Trim() ?? string.Empty
+                };
+                await _repository.UpdateCustomerAsync(modifiedDatas, customerId);
+            }
+            catch (Exception ex)
+            {
+                // can logs here
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow($"Hiba történt: {ex.Message}");
+                messageBoxOkWindow.ShowDialog();
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
         private void ClearFields()
         {
             Name = string.Empty;
@@ -94,6 +147,21 @@ namespace Ol_der.Controls.Customers
             Email = string.Empty;
             TaxNumber = string.Empty;
             Notes = string.Empty;
+        }
+
+        private async void LoadCustomerData(int customerId)
+        {
+            var customer = await _repository.GetCustomerByIdAsync(customerId);
+            if (customer != null)
+            {
+                Name = customer.Name;
+                Address = customer.Address;
+                Phone = customer.Phone;
+                Email = customer.Email;
+                TaxNumber = customer.TaxNumber;
+                Notes = customer.Notes;
+                ButtonText = "Módosítás";
+            }
         }
 
         #region INotifyPropertyChanged
