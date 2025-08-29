@@ -56,5 +56,18 @@ namespace Ol_der.Controls.Customers
             }
         }
 
+        public async Task DeleteCustomerAsync(int customerId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                var existing = await context.Customers.FindAsync(customerId);
+                if (existing != null)
+                {
+                    context.Customers.Remove(existing);
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
+
     }
 }
