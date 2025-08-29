@@ -52,7 +52,8 @@ namespace Ol_der.Controls.Customers
             int selectedCustomerId = _showAllCustomerControl.GetSelectedCustomerId();
             if (selectedCustomerId != -1)
             {
-                
+                _addCustomerControl = new AddOrModifyCustomerControl(selectedCustomerId);
+                ContentArea.Content = _addCustomerControl;
             }
             else
             {
