@@ -24,6 +24,8 @@ namespace Ol_der.Controls.Customers
 
         private readonly CustomerRepository _repository = new CustomerRepository();
 
+        public Action OnFinished { get; set; } = () => { };
+
         public RelayCommand AddCommand { get; }
 
         public AddOrModifyCustomerViewModel(int customerId)
@@ -69,10 +71,12 @@ namespace Ol_der.Controls.Customers
             if (customerId > 0)
             {
                 await UpdateCustomerAsync();
+                OnFinished();
             }
             else
             {
                 await AddCustomerAsync();
+                OnFinished();
             }
         }
 
@@ -126,6 +130,11 @@ namespace Ol_der.Controls.Customers
                     Notes = this.Notes?.Trim() ?? string.Empty
                 };
                 await _repository.UpdateCustomerAsync(modifiedDatas, customerId);
+
+                // successfuly updated, clear fields
+                ClearFields();
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Az ügyfél sikeresen módosítva.");
+                messageBoxOkWindow.ShowDialog();
             }
             catch (Exception ex)
             {

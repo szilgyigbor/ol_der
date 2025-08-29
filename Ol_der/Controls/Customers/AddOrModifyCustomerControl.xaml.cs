@@ -21,11 +21,19 @@ namespace Ol_der.Controls.Customers
     public partial class AddOrModifyCustomerControl : UserControl
     {
         private AddOrModifyCustomerViewModel _viewModel;
+        public Action OnFinished = () => { };
         public AddOrModifyCustomerControl(int customerId = -1)
         {
             InitializeComponent();
             _viewModel = new AddOrModifyCustomerViewModel(customerId);
             this.DataContext = _viewModel;
+            _viewModel.OnFinished -= ActivateEvent;
+            _viewModel.OnFinished += ActivateEvent;
+        }
+
+        public void ActivateEvent()
+        {
+            OnFinished();
         }
     }
 }
