@@ -29,5 +29,22 @@ namespace Ol_der.Controls.Customers
             }
         }
 
+        public async Task UpdateCustomerAsync(Customer customer)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                context.Customers.Update(customer);
+                await context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<Customer> GetCustomerByIdAsync(int customerId)
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Customers.FindAsync(customerId);
+            }
+        }
+
     }
 }
