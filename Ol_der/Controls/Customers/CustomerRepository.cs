@@ -29,12 +29,22 @@ namespace Ol_der.Controls.Customers
             }
         }
 
-        public async Task UpdateCustomerAsync(Customer customer)
+        public async Task UpdateCustomerAsync(Customer modifiedDatas, int customerId)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
-                context.Customers.Update(customer);
-                await context.SaveChangesAsync();
+                var existing = await context.Customers.FindAsync(customerId);
+                if (existing != null)
+                {
+                    existing.Name = modifiedDatas.Name;
+                    existing.Address = modifiedDatas.Address;
+                    existing.Phone = modifiedDatas.Phone;
+                    existing.Email = modifiedDatas.Email;
+                    existing.TaxNumber = modifiedDatas.TaxNumber;
+                    existing.Notes = modifiedDatas.Notes;
+
+                    await context.SaveChangesAsync();
+                }
             }
         }
 
