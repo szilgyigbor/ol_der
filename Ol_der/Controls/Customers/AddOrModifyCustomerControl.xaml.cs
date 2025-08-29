@@ -21,10 +21,10 @@ namespace Ol_der.Controls.Customers
     public partial class AddOrModifyCustomerControl : UserControl
     {
         private AddOrModifyCustomerViewModel _viewModel;
-        public AddOrModifyCustomerControl()
+        public AddOrModifyCustomerControl(int customerId = -1)
         {
             InitializeComponent();
-            _viewModel = new AddOrModifyCustomerViewModel();
+            _viewModel = new AddOrModifyCustomerViewModel(customerId);
             this.DataContext = _viewModel;
         }
     }
