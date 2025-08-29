@@ -24,6 +24,7 @@ namespace Ol_der.Controls.Customers
     {
         private AddOrModifyCustomerControl _addCustomerControl = new();
         private ShowAllCustomerControl _showAllCustomerControl = new();
+        private CustomerRepository _repository = new();
 
         public CustomerControl()
         {
@@ -39,7 +40,10 @@ namespace Ol_der.Controls.Customers
 
         private void Add_Customer_Click(object sender, RoutedEventArgs e)
         {
+            _addCustomerControl = new AddOrModifyCustomerControl();
             ContentArea.Content = _addCustomerControl;
+            _addCustomerControl.OnFinished -= Show_All_Customer;
+            _addCustomerControl.OnFinished += Show_All_Customer;
         }
 
         private void Show_All_Customer_Click(object sender, RoutedEventArgs e)
@@ -54,6 +58,8 @@ namespace Ol_der.Controls.Customers
             {
                 _addCustomerControl = new AddOrModifyCustomerControl(selectedCustomerId);
                 ContentArea.Content = _addCustomerControl;
+                _addCustomerControl.OnFinished -= Show_All_Customer;
+                _addCustomerControl.OnFinished += Show_All_Customer;
             }
             else
             {
@@ -62,5 +68,31 @@ namespace Ol_der.Controls.Customers
 
             }
         }
+
+        private void Delete_Customer_Click(object sender, RoutedEventArgs e)
+        {
+            int selectedCustomerId = _showAllCustomerControl.GetSelectedCustomerId();
+            if (selectedCustomerId != -1)
+            {
+                MessageBoxWindow messageBoxWindow = new MessageBoxWindow("Biztosan törölni akarod a kiválasztott ügyfelet?");
+                messageBoxWindow.ShowDialog();
+                if (messageBoxWindow.DialogResult == true)
+                {
+                    DeleteCustomerAsync(selectedCustomerId);
+                }
+            }
+            else
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Válassz ki egy ügyfelet a törléshez!");
+                messageBoxOkWindow.ShowDialog();
+            }
+        }
+
+        private async void DeleteCustomerAsync(int customerId)
+        {
+            await _repository.DeleteCustomerAsync(customerId);
+            Show_All_Customer();
+        }
+
     }
 }

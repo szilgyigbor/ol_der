@@ -42,7 +42,7 @@
                 <Button Content="Ügyfelek" Style="{StaticResource SubMenuButtonStyle}" Click="Show_All_Customer_Click"/>
                 <Button Content="Új ügyfél" Style="{StaticResource SubMenuButtonStyle}" Click="Add_Customer_Click" />
                 <Button Content="Szerkesztés" Style="{StaticResource SubMenuButtonStyle}" Click="Modify_Customer_Click" />
-                <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" />
+                <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" Click="Delete_Customer_Click" />
             </StackPanel>
 
             <GridSplitter Grid.Column="0" Width="3" HorizontalAlignment="Right"
