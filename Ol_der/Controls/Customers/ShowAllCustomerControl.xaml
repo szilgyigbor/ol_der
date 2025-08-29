@@ -15,7 +15,7 @@
                     <GridViewColumn Header="Telefon" DisplayMemberBinding="{Binding Phone}" Width="180"/>
                     <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="280"/>
                     <GridViewColumn Header="Adószám" DisplayMemberBinding="{Binding TaxNumber}" Width="180"/>
-                    <GridViewColumn Header="Megjegyzés" DisplayMemberBinding="{Binding Notes}" Width="180"/>
+                    <GridViewColumn Header="Megjegyzés" DisplayMemberBinding="{Binding Notes}" Width="300"/>
                 </GridView>
             </ListView.View>
             <ListView.ItemContainerStyle>
