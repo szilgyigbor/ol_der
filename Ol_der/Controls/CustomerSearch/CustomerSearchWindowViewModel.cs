@@ -59,6 +59,7 @@ namespace Ol_der.Controls.CustomerSearch
         {
             _repository = new CustomerSearchWindowRepository();
             SearchCustomersByNameCommand = new RelayCommand(async _ => await SearchCustomersByNameAsync());
+            SetAllCustomers();
         }
 
 
@@ -91,6 +92,11 @@ namespace Ol_der.Controls.CustomerSearch
         {
             MessageBoxOkWindow messageBox = new MessageBoxOkWindow("Nincs ilyen ügyfél");
             messageBox.ShowDialog();
+        }
+
+        public async void SetAllCustomers()
+        {
+            Customers = await _repository.GetAllCustomersAsync();
         }
     }
 }
