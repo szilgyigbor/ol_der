@@ -41,7 +41,7 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="120">
                 <Button Content="Ügyfelek" Style="{StaticResource SubMenuButtonStyle}" Click="Show_All_Customer_Click"/>
                 <Button Content="Új ügyfél" Style="{StaticResource SubMenuButtonStyle}" Click="Add_Customer_Click" />
-                <Button Content="Szerkesztés" Style="{StaticResource SubMenuButtonStyle}" />
+                <Button Content="Szerkesztés" Style="{StaticResource SubMenuButtonStyle}" Click="Modify_Customer_Click" />
                 <Button Content="Törlés" Style="{StaticResource RedButtonStyle}" />
             </StackPanel>
 
