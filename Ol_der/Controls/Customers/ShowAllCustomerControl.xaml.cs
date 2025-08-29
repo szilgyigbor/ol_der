@@ -27,5 +27,14 @@ namespace Ol_der.Controls.Customers
             _viewModel = new ShowAllCustomerViewModel();
             this.DataContext = _viewModel;
         }
+
+        public int GetSelectedCustomerId()
+        {
+            if (CustomersListView.SelectedItem is Models.Customer selectedCustomer)
+            {
+                return selectedCustomer.CustomerId;
+            }
+            return -1;
+        }
     }
 }
