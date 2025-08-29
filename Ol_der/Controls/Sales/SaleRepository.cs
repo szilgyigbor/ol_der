@@ -170,5 +170,14 @@ namespace Ol_der.Controls.Sales
             }
         }
 
+        public async Task<List<Customer>> GetAllCustomersAsync()
+        {
+            using (var context = ApplicationDbContextFactory.Create())
+            {
+                return await context.Customers
+                    .OrderBy(c => c.Name).ToListAsync();
+            }
+        }
+
     }
 }

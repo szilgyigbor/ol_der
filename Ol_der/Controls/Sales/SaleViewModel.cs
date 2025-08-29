@@ -27,7 +27,7 @@ namespace Ol_der.Controls.Sales
             GroupedSales = new CollectionViewSource();
         }
 
-        public async Task RefreshData(object filterForSales) 
+        public async Task RefreshData(object filterForSales)
         {
             await LoadDataAsync(filterForSales);
         }
@@ -49,7 +49,7 @@ namespace Ol_der.Controls.Sales
                     break;
             }
 
-            
+
         }
 
         public async Task LoadSearchedSalesAsync(string itemNumber)
@@ -119,5 +119,10 @@ namespace Ol_der.Controls.Sales
             await _saleRepository.RemoveAllSaleItemsFromSaleAsync(saleId);
         }
 
+        public async Task<List<Customer>> GetCustomersAsync()
+        {
+            return await _saleRepository.GetAllCustomersAsync();
+
+        }
     }
 }
