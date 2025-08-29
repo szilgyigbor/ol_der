@@ -14,7 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Background="#F4F4F4">
+    <Grid Background="#f7f7f7">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -59,7 +59,7 @@
             </ListView.View>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="#F4F4F4" />
+                    <Setter Property="Background" Value="#f7f7f7" />
                     <Setter Property="Foreground" Value="Black" />
                 </Style>
             </ListView.ItemContainerStyle>
