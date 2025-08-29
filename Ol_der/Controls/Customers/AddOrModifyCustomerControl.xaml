@@ -70,7 +70,7 @@
                      Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"/>
 
 
-            <Button Content="Hozzáadás" Grid.Row="7" Grid.Column="1" Style="{StaticResource CommonButtonStyle}"
+            <Button Content="{Binding ButtonText}" Grid.Row="7" Grid.Column="1" Style="{StaticResource CommonButtonStyle}"
                     VerticalAlignment="Center" HorizontalAlignment="Center" Width="100"
                     Command="{Binding AddCommand}" />
         </Grid>
