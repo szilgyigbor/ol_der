@@ -60,6 +60,10 @@ namespace Ol_der.Controls.Customers
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
+                var sales = context.Sales.Where(s => s.CustomerId == customerId);
+
+                await sales.ForEachAsync(s => s.CustomerId = null);
+
                 var existing = await context.Customers.FindAsync(customerId);
                 if (existing != null)
                 {
