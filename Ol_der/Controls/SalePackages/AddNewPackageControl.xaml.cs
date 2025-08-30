@@ -1,9 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Ol_der.Controls.CustomerSearch;
+using Ol_der.Controls.DetailedSearch;
+using Ol_der.Controls.Orders;
+using Ol_der.Controls.Products;
 using Ol_der.Data;
 using Ol_der.Models;
-using Ol_der.Controls.Orders;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +21,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Globalization;
-using Ol_der.Controls.DetailedSearch;
-using Ol_der.Controls.Products;
 
 namespace Ol_der.Controls.SalePackages
 {
@@ -58,6 +59,7 @@ namespace Ol_der.Controls.SalePackages
                 _saleToSave = await _packageViewModel.GetSaleAsync(_saleId);
                 if (_saleToSave != null)
                 {
+                    txtExistsCustomerName.Text = _saleToSave.Customer?.Name;
                     txtCustomerName.Text = _saleToSave.CustomerName;
                     txtNotes.Text = _saleToSave.Notes;
                     txtTotalAmount.Text = _saleToSave.TotalAmount.ToString("0");
@@ -211,6 +213,27 @@ namespace Ol_der.Controls.SalePackages
             searchWindow.ProductSelected += OnProductSelected;
 
             searchWindow.ShowDialog();
+        }
+
+        private void AddCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            CustomerSearchWindow customerSearchWindow = new CustomerSearchWindow();
+            customerSearchWindow.CustomerSelected -= OnCustomerSelected;
+            customerSearchWindow.CustomerSelected += OnCustomerSelected;
+            customerSearchWindow.ShowDialog();
+        }
+
+        private void RemoveCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            _saleToSave.CustomerId = null;
+            _saleToSave.Customer = null;
+            txtExistsCustomerName.Text = "";
+        }
+
+        private void OnCustomerSelected(object sender, Customer selectedCustomer)
+        {
+            txtExistsCustomerName.Text = selectedCustomer.Name;
+            _saleToSave.CustomerId = selectedCustomer.CustomerId;
         }
 
         private void OnProductSelected(object sender, Product selectedProduct)

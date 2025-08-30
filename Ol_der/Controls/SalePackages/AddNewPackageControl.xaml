@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              FontSize="15"
              Background="#f7f7f7"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1300">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -32,8 +32,15 @@
         </Grid.RowDefinitions>
 
         <WrapPanel Grid.Row="0" HorizontalAlignment="Left">
-            <Label Content="Vásárló neve:" VerticalAlignment="Center"/>
-            <TextBox Margin="5" x:Name="txtCustomerName" Width="400"/>
+            <Label Content="Ügyfél:" VerticalAlignment="Center"/>
+            <Border Background="#eef2e2" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1" VerticalAlignment="Center"
+             Visibility="{Binding Customer.Name}" Width="280">
+                <TextBlock x:Name="txtExistsCustomerName" Foreground="#2c3e50" FontSize="17" VerticalAlignment="Center" TextAlignment="Left"/>
+            </Border>
+            <Button Content="Kiválaszt" Style="{StaticResource CommonButtonStyle}" Click="AddCustomer_Click" Width="70"/>
+            <Button Content="Eltávolít" Style="{StaticResource RedButtonStyle}" Click="RemoveCustomer_Click" Width="70"/>
+            <Label Content="Csomagszám:" VerticalAlignment="Center" Margin="15 0 0 0"/>
+            <TextBox Margin="3" Padding="1 5 1 1" x:Name="txtCustomerName" Width="300"/>
         </WrapPanel>
 
 
