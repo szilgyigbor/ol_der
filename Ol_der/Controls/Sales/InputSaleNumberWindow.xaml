@@ -7,12 +7,19 @@
         mc:Ignorable="d"
         FontSize="20"
         Title="InputSaleNumberWindow" Height="250" Width="400">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <StackPanel Margin="10">
         <TextBlock Text="Megjelenített eladások száma:" Margin="10" HorizontalAlignment="Center"/>
         <TextBox x:Name="NumberInput" Margin="0,5" Width="100"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
-            <Button Content="OK" Padding="10,5,10,5" FontSize="16" Click="OkButton_Click" IsDefault="True"/>
-            <Button Content="Mégsem" Padding="10,5,10,5" FontSize="16" Click="CancelButton_Click" IsCancel="True" Margin="5,0,0,0"/>
+            <Button Content="OK" Style="{StaticResource CommonButtonStyle}" Padding="10,5,10,5" FontSize="16" Click="OkButton_Click" IsDefault="True"/>
+            <Button Content="Mégsem" Style="{StaticResource RedButtonStyle}" Padding="10,5,10,5" FontSize="16" Click="CancelButton_Click" IsCancel="True" Margin="5,0,0,0"/>
         </StackPanel>
     </StackPanel>
 </Window>
