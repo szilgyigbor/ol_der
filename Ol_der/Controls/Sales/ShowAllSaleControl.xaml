@@ -80,10 +80,17 @@
                                             </Style>
                                         </TextBlock.Style>
                                     </TextBlock>
+                                </Border> 
+
+                                <Border Background="#edf7fa" CornerRadius="3" Padding="3" Margin="3" 
+                                        BorderBrush="#bbbbbb" BorderThickness="1" Width="300">
+                                    <TextBlock Text="{Binding Customer.Name}" 
+                                               Foreground="#2c3e50" FontSize="16"
+                                               VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
-                                <Border Background="#e9f9fd" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1"
-                                        Visibility="{Binding CustomerName, Converter={StaticResource StringToVisibilityConverter}}">
+                                <Border Background="#eeeeee" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1"
+                                        Width="300">
                                     <TextBlock Text="{Binding CustomerName}" Foreground="#2c3e50" FontSize="16" VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
