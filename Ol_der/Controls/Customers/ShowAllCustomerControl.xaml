@@ -10,7 +10,7 @@
         <ListView x:Name="CustomersListView" Background="White" AlternationCount="2" ItemsSource="{Binding Customers}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Név" DisplayMemberBinding="{Binding Name}" Width="240"/>
+                    <GridViewColumn Header="Név" DisplayMemberBinding="{Binding Name}" Width="350"/>
                     <GridViewColumn Header="Cím" DisplayMemberBinding="{Binding Address}" Width="460"/>
                     <GridViewColumn Header="Telefon" DisplayMemberBinding="{Binding Phone}" Width="180"/>
                     <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="280"/>
