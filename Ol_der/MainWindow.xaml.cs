@@ -89,7 +89,7 @@ namespace Ol_der
                 }
                 else 
                 {
-                    button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D2E4FA"));
+                    button.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#e3e3e3"));
                     button.Foreground = new SolidColorBrush(Colors.Black);
                 }
             }
