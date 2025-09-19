@@ -12,6 +12,7 @@
         <local:OrderStatusTextConverter x:Key="OrderStatusTextConverter"/>
         <local:OrderStatusIconConverter x:Key="OrderStatusIconConverter"/>
         <local:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <local:EnumToDisplayNameConverter x:Key="EnumToDisplayNameConverter" />
     </UserControl.Resources>
 
     <Grid Background="#f9f9f9">
@@ -54,17 +55,28 @@
                                 <TextBlock Text=".-Ft" FontSize="17" Margin="0 5" Width="30" VerticalAlignment="Center"/>
 
                                 <Border x:Name="PaymentTypeBorder" Margin="2" Padding="2" VerticalAlignment="Center" Background="#f0f0f0" CornerRadius="4">
-                                    <TextBlock FontSize="16" FontWeight="SemiBold" Width="70" Padding="3">
+                                    <TextBlock FontSize="16" FontWeight="SemiBold" Width="75" Padding="3">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
-                                                <Setter Property="Text" Value="{Binding PaymentType}" />
+                                                <Setter Property="Text">
+                                                    <Setter.Value>
+                                                        <Binding Path="PaymentType" Converter="{StaticResource EnumToDisplayNameConverter}" />
+                                                    </Setter.Value>
+                                                </Setter>
+
                                                 <Style.Triggers>
                                                     <MultiDataTrigger>
                                                         <MultiDataTrigger.Conditions>
                                                             <Condition Binding="{Binding PaymentType}" Value="Card"/>
                                                             <Condition Binding="{Binding IsCardTransactionProcessed}" Value="False"/>
                                                         </MultiDataTrigger.Conditions>
-                                                        <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (✗)'}"/>
+                                                        <Setter Property="Text">
+                                                            <Setter.Value>
+                                                                <Binding Path="PaymentType"
+                                                                         Converter="{StaticResource EnumToDisplayNameConverter}"
+                                                                         StringFormat="{}{0}(✗)"/>
+                                                            </Setter.Value>
+                                                        </Setter>
                                                         <Setter Property="Background" Value="#ffcdd2"/>
                                                     </MultiDataTrigger>
 
@@ -73,11 +85,18 @@
                                                             <Condition Binding="{Binding PaymentType}" Value="Card"/>
                                                             <Condition Binding="{Binding IsCardTransactionProcessed}" Value="True"/>
                                                         </MultiDataTrigger.Conditions>
-                                                        <Setter Property="Text" Value="{Binding PaymentType, StringFormat='{}{0} (✓)'}"/>
+                                                        <Setter Property="Text">
+                                                            <Setter.Value>
+                                                                <Binding Path="PaymentType"
+                                                                         Converter="{StaticResource EnumToDisplayNameConverter}"
+                                                                         StringFormat="{}{0}(✓)"/>
+                                                            </Setter.Value>
+                                                        </Setter>
                                                         <Setter Property="Background" Value="#c8e6c9"/>
                                                     </MultiDataTrigger>
                                                 </Style.Triggers>
                                             </Style>
+
                                         </TextBlock.Style>
                                     </TextBlock>
                                 </Border>
