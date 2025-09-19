@@ -33,7 +33,7 @@
 
         <WrapPanel Grid.Row="0" HorizontalAlignment="Left">
             <Label Content="Ügyfél:" VerticalAlignment="Center"/>
-            <Border Background="#fafafa" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1" VerticalAlignment="Center"
+            <Border Background="#eaf6f6" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1" VerticalAlignment="Center"
              Visibility="{Binding Customer.Name}" Width="280">
                 <TextBlock x:Name="txtExistsCustomerName" Foreground="#2c3e50" FontSize="17" VerticalAlignment="Center" TextAlignment="Left"/>
             </Border>

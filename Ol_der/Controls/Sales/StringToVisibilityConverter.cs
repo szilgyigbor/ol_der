@@ -13,8 +13,13 @@ namespace Ol_der.Controls.Sales
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var str = value as string;
-            return string.IsNullOrWhiteSpace(str) ? Visibility.Collapsed : Visibility.Visible;
+            if (value == null)
+                return Visibility.Collapsed;
+
+            if (value is string s)
+                return string.IsNullOrWhiteSpace(s) ? Visibility.Collapsed : Visibility.Visible;
+
+            return Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

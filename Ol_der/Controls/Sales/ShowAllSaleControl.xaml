@@ -82,19 +82,21 @@
                                     </TextBlock>
                                 </Border>
 
-                                <Border Background="#fafafa" CornerRadius="3" Padding="3" Margin="3" 
-                                        BorderBrush="#bbbbbb" BorderThickness="1" Width="300">
-                                    <TextBlock Text="{Binding Customer.Name}" 
+                                <Border Background="#eaf6f6" CornerRadius="3" Padding="3" Margin="3" 
+                                        Visibility="{Binding Customer, Converter={StaticResource StringToVisibilityConverter}}"
+                                        BorderBrush="#bbbbbb" BorderThickness="1" Width="auto">
+                                    <TextBlock Text="{Binding Customer.Name}"
+                                               
                                                Foreground="#2c3e50" FontSize="16"
                                                VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
-                                <Border Background="#fafafa" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1"
-                                        Width="300">
+                                <Border Background="#fcfefe" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1"
+                                        Visibility="{Binding CustomerName, Converter={StaticResource StringToVisibilityConverter}}" Width="auto">
                                     <TextBlock Text="{Binding CustomerName}" Foreground="#2c3e50" FontSize="16" VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
-                                <TextBlock Text="{Binding Notes}" FontSize="16" FontStyle="Italic" Margin="10 0" Foreground="#555" VerticalAlignment="Center" TextAlignment="Left"/>
+                                <TextBlock Text="{Binding Notes}" FontSize="16" FontStyle="Normal"  Margin="10 0" Foreground="#555" VerticalAlignment="Center" TextAlignment="Left"/>
                             </DockPanel>
 
                             <ItemsControl ItemsSource="{Binding SaleItems}" Margin="0 2">
