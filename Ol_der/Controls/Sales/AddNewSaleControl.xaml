@@ -33,12 +33,12 @@
         <WrapPanel Grid.Row="0" HorizontalAlignment="Left">
             <Label Content="Ügyfél:" VerticalAlignment="Center"/>
             <Border Background="#eaf6f6" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1" VerticalAlignment="Center"
-                     Visibility="{Binding Customer.Name}" Width="280">
-                <TextBlock x:Name="txtExistsCustomerName" Foreground="#2c3e50" FontSize="17" VerticalAlignment="Center" TextAlignment="Left"/>
+                     Visibility="{Binding Customer.Name}" Width="320">
+                <TextBlock x:Name="txtExistsCustomerName" Foreground="#2c3e50" FontSize="16" VerticalAlignment="Center" TextAlignment="Left"/>
             </Border>
             <Button Content="Kiválaszt" Style="{StaticResource CommonButtonStyle}" Click="AddCustomer_Click" Width="70"/>
             <Button Content="Eltávolít" Style="{StaticResource RedButtonStyle}" Click="RemoveCustomer_Click" Width="70"/>
-            <Label Content="Vásárló leírás:" VerticalAlignment="Center" Margin="15 0 0 0"/>
+            <Label Content="Alkalmi vásárló:" VerticalAlignment="Center" Margin="15 0 0 0"/>
             <TextBox Margin="3" Padding="1 5 1 1" x:Name="txtCustomerName" Width="300"/>
         </WrapPanel>
 
