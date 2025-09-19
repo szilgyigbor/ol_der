@@ -93,19 +93,19 @@
                                         BorderBrush="#bbbbbb" BorderThickness="1" Width="auto"
                                         Visibility="{Binding Customer, Converter={StaticResource StringToVisibilityConverter}}">
                                     <TextBlock Text="{Binding Customer.Name}" 
-                                               Foreground="#2c3e50" FontSize="16"
+                                               Foreground="#111" FontSize="16" FontWeight="SemiBold"
                                                VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
                                 <Border Background="#fcfefe" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1"
                                         Visibility="{Binding CustomerName, Converter={StaticResource StringToVisibilityConverter}}" Width="auto">
-                                    <TextBlock Text="{Binding CustomerName}" Foreground="#2c3e50" FontSize="16" VerticalAlignment="Center" TextAlignment="Left"/>
+                                    <TextBlock Text="{Binding CustomerName}" Foreground="#222" FontSize="16" VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
                                 <TextBlock Text="{Binding Notes}"
                                            FontSize="16"
-                                           FontStyle="Italic"
-                                           Foreground="#555"
+                                           FontStyle="Normal"
+                                           Foreground="#333"
                                            Margin="10 0"
                                            VerticalAlignment="Center"
                                            TextWrapping="Wrap"

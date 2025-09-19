@@ -35,7 +35,7 @@
             <Label Content="Ügyfél:" VerticalAlignment="Center"/>
             <Border Background="#eaf6f6" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1" VerticalAlignment="Center"
              Visibility="{Binding Customer.Name}" Width="320">
-                <TextBlock x:Name="txtExistsCustomerName" Foreground="#2c3e50" FontSize="16" VerticalAlignment="Center" TextAlignment="Left"/>
+                <TextBlock x:Name="txtExistsCustomerName" Foreground="#111" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center" TextAlignment="Left"/>
             </Border>
             <Button Content="Kiválaszt" Style="{StaticResource CommonButtonStyle}" Click="AddCustomer_Click" Width="70"/>
             <Button Content="Eltávolít" Style="{StaticResource RedButtonStyle}" Click="RemoveCustomer_Click" Width="70"/>
