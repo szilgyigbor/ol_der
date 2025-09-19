@@ -65,7 +65,7 @@ namespace Ol_der.Controls.Sales
                     txtCustomerName.Text = _saleToSave.CustomerName;
                     txtNotes.Text = _saleToSave.Notes;
                     txtSaleDate.Text = _saleToSave.Date.ToString("yyyy-MM-dd HH:mm");
-                    cmbPaymentType.SelectedItem = _saleToSave.PaymentType;
+                    cmbPaymentType.SelectedValue = _saleToSave.PaymentType;
                     txtTotalAmount.Text = _saleToSave.TotalAmount.ToString("0");
                     lstSaleItems.Items.Clear();
                     foreach (var item in _saleToSave.SaleItems)
@@ -79,7 +79,17 @@ namespace Ol_der.Controls.Sales
 
         public void LoadPaymentTypes()
         {
-            cmbPaymentType.ItemsSource = Enum.GetValues(typeof(PaymentType));
+            cmbPaymentType.ItemsSource = Enum.GetValues(typeof(PaymentType))
+                                             .Cast<PaymentType>()
+                                             .Select(pt => new
+                                             {
+                                                 Value = pt,
+                                                 Display = pt.GetDisplayName()
+                                             })
+                                             .ToList();
+
+            cmbPaymentType.DisplayMemberPath = "Display";
+            cmbPaymentType.SelectedValuePath = "Value";
             cmbPaymentType.SelectedIndex = 0;
         }
 
@@ -300,7 +310,7 @@ namespace Ol_der.Controls.Sales
             }
 
             _saleToSave.CustomerName = txtCustomerName.Text;
-            _saleToSave.PaymentType = (PaymentType)cmbPaymentType.SelectedItem;
+            _saleToSave.PaymentType = (PaymentType)cmbPaymentType.SelectedValue;
             _saleToSave.TotalAmount = totalAmount;
             _saleToSave.Notes = txtNotes.Text;
             _saleToSave.IsCardTransactionProcessed = chkIsTransactionProcessed.IsChecked ?? false;
