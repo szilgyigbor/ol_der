@@ -141,6 +141,8 @@ namespace Ol_der.Controls.Sales
 
         private void OnCustomerSelected(object sender, Customer selectedCustomer)
         {
+            RemoveCustomer_Click(this, new RoutedEventArgs());
+
             txtExistsCustomerName.Text = selectedCustomer.Name;
             _saleToSave.CustomerId = selectedCustomer.CustomerId;
         }
