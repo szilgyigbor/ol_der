@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Sales"
+             xmlns:models="clr-namespace:Ol_der.Models"
              mc:Ignorable="d" 
              FontSize="15"
              Background="#f7f7f7"
@@ -55,18 +56,28 @@
             <Label Content="Teljes összeg:" Grid.Row="1" VerticalAlignment="Center"/>
             <TextBox Margin="5" x:Name="txtTotalAmount" Width="100" HorizontalContentAlignment="Right"/>
             <TextBlock Text=".-Ft." Width="40" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <CheckBox x:Name="chkIsTransactionProcessed" Content="Könyvelt" Margin="10,0" VerticalAlignment="Center" IsChecked="{Binding IsTransactionProcessed, Mode=TwoWay}">
+            <CheckBox x:Name="chkIsTransactionProcessed"
+                      Content="Könyvelt"
+                      Margin="10,0"
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding IsTransactionProcessed, Mode=TwoWay}">
                 <CheckBox.Style>
                     <Style TargetType="CheckBox">
+                        <!-- default: hidden -->
+                        <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedItem, ElementName=cmbPaymentType}" Value="Card">
+                            <!-- if selected value is card (visibly) -->
+                            <DataTrigger Binding="{Binding SelectedValue, ElementName=cmbPaymentType}"
+                             Value="{x:Static models:PaymentType.Card}">
                                 <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedItem, ElementName=cmbPaymentType}" Value="{x:Null}">
+
+                            <!-- if selected is null -->
+                            <DataTrigger Binding="{Binding SelectedValue, ElementName=cmbPaymentType}"
+                             Value="{x:Null}">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                             </DataTrigger>
                         </Style.Triggers>
-                        <Setter Property="Visibility" Value="Collapsed"/>
                     </Style>
                 </CheckBox.Style>
             </CheckBox>
