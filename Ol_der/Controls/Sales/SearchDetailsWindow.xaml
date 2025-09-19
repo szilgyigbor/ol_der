@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ol_der.Controls.Sales"
         mc:Ignorable="d"
         FontSize="18"
-        Title="SearchWindow" Height="350" Width="350">
+        Title="SearchWindow" Height="400" Width="500">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,7 +15,8 @@
         </ResourceDictionary>
     </Window.Resources>
     <StackPanel Margin="10">
-        <TextBlock Text="Részletes keresés" Margin="10" FontSize="22" HorizontalAlignment="Center"/>
+        <TextBlock Text="Mire keresünk?" Margin="5 10 5 0" FontSize="22" HorizontalAlignment="Center"/>
+        <TextBlock Text="(lehet kombinálni is)" Margin="0" FontSize="13" HorizontalAlignment="Center"/>
         <TextBlock Text="Cikkszám:" Margin="10" HorizontalAlignment="Center"/>
         <TextBox x:Name="ProductNumberInput" Margin="0,5" Width="200"/>
         <TextBlock Text="Vásárló neve:" Margin="10" HorizontalAlignment="Center"/>
