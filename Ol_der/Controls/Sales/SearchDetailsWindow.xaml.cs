@@ -50,8 +50,9 @@ namespace Ol_der.Controls.Sales
         {
             string productNumber = ProductNumberInput.Text.Trim();
             string customerName = CustomerNameInput.Text.Trim();
+            string notes = NotesInput.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(productNumber) && string.IsNullOrWhiteSpace(customerName) && CustomerId == null)
+            if (string.IsNullOrWhiteSpace(productNumber) && string.IsNullOrWhiteSpace(customerName) && CustomerId == null && string.IsNullOrWhiteSpace(notes))
             {
                 MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Adj meg legalább egy keresési feltételt!");
                 messageBoxOkWindow.ShowDialog();
@@ -62,7 +63,8 @@ namespace Ol_der.Controls.Sales
             {
                 { "ProductNumber", string.IsNullOrWhiteSpace(productNumber) ? null : productNumber },
                 { "CustomerName", string.IsNullOrWhiteSpace(customerName) ? null : customerName },
-                { "CustomerId", string.IsNullOrWhiteSpace(CustomerId) ? null : CustomerId }
+                { "CustomerId", string.IsNullOrWhiteSpace(CustomerId) ? null : CustomerId },
+                { "Notes", string.IsNullOrWhiteSpace(notes) ? null : notes }
             };
 
             DialogResult = true;

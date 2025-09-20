@@ -183,7 +183,8 @@ namespace Ol_der.Controls.Sales
             {
                 { "CustomerName", "Név" },
                 { "ProductNumber", "Cikkszám" },
-                { "CustomerId", "Ügyfélazonosító" }
+                { "CustomerId", "Ügyfélazonosító" },
+                { "Notes", "Megjegyzés" }
             };
 
             var parts = new List<string>();

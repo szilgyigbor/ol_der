@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Ol_der.Controls.Sales"
         mc:Ignorable="d"
         FontSize="18"
-        Title="SearchWindow" Height="450" Width="800"
+        Title="SearchWindow" Height="550" Width="800"
         Background="#F8FAFD">
     <Window.Resources>
         <ResourceDictionary>
@@ -80,6 +80,12 @@
                 <TextBlock Grid.Row="4" Text="Vásárló neve:" FontSize="16" Margin="0,0,0,5" Foreground="#333333"/>
                 <TextBox Grid.Column="0" x:Name="CustomerNameInput" Style="{StaticResource ModernTextBoxStyle}" 
                          Width="300" IsReadOnly="False" HorizontalAlignment="Left"/>
+            </StackPanel>
+
+            <StackPanel Margin="0 15 10 0" >
+                <TextBlock  Text="Megjegyzés:" FontSize="16" Margin="0,0,0,5" Foreground="#333333"/>
+                <TextBox    x:Name="NotesInput" Style="{StaticResource ModernTextBoxStyle}" 
+                            Width="650" HorizontalAlignment="Left"/>
             </StackPanel>
         </WrapPanel>
 
