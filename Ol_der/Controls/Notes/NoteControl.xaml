@@ -23,13 +23,18 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Background="Gainsboro">
-            <TextBlock Name="NoteTextBlock"
-                       Text="Jegyzetek kezelése"
-                       FontSize="28"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
-        </Grid>
+
+        <Border CornerRadius="8" Grid.Row="0" Grid.Column="0" Background="#f6f8f9" Padding="6" Margin="6" BorderBrush="#e6eef0" BorderThickness="1">
+            <Grid>
+                <TextBlock x:Name="NoteTextBlock"
+                   Text="Jegyzetek kezelése"
+                   FontSize="24"
+                   FontWeight="SemiBold"
+                   Foreground="#2c3e50"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
 
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
