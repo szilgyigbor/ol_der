@@ -165,7 +165,13 @@ namespace Ol_der.Controls.SalePackages
                             query = query.Where(s => s.CustomerId == customerId);
 
                         }
+                    }
 
+                    // Notes
+                    if (criteria.TryGetValue("Notes", out var notesRaw) && !string.IsNullOrWhiteSpace(notesRaw))
+                    {
+                        var n = notesRaw.Trim();
+                        query = query.Where(s => s.Notes != null && EF.Functions.Like(s.Notes, $"%{n}%"));
                     }
                 }
 
