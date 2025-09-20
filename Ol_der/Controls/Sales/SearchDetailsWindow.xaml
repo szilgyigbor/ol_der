@@ -6,26 +6,107 @@
         xmlns:local="clr-namespace:Ol_der.Controls.Sales"
         mc:Ignorable="d"
         FontSize="18"
-        Title="SearchWindow" Height="400" Width="500">
+        Title="SearchWindow" Height="450" Width="800"
+        Background="#F8FAFD">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="ModernTextBoxStyle" TargetType="TextBox">
+                <Setter Property="Background" Value="#FFFFFF"/>
+                <Setter Property="Foreground" Value="#1A1A1A"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Padding" Value="5,5"/>
+                <Setter Property="BorderBrush" Value="#D0D7E1"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="MinHeight" Value="36"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Border x:Name="border"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="6"
+                                    SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#A8D5BA"/>
+                                    <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                                    <Setter TargetName="border" Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="4" ShadowDepth="0" Opacity="0.2" Color="#A8D5BA"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Background" Value="#F5F5F5"/>
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#E0E0E0"/>
+                                    <Setter Property="Foreground" Value="#A0A0A0"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel Margin="10">
-        <TextBlock Text="Mire keresünk?" Margin="5 10 5 0" FontSize="22" HorizontalAlignment="Center"/>
-        <TextBlock Text="(lehet kombinálni is)" Margin="0" FontSize="13" HorizontalAlignment="Center"/>
-        <TextBlock Text="Cikkszám:" Margin="10" HorizontalAlignment="Center"/>
-        <TextBox x:Name="ProductNumberInput" Margin="0,5" Width="200"/>
-        <TextBlock Text="Vásárló neve:" Margin="10" HorizontalAlignment="Center"/>
-        <TextBox x:Name="CustomerNameInput" Margin="0,5" Width="200"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
-            <Button Content="OK" Padding="10,5,10,5" Style="{StaticResource CommonButtonStyle}" 
-                    Click="OkButton_Click" IsDefault="True"/>
-            <Button Content="Mégsem" Padding="10,5,10,5" Style="{StaticResource RedButtonStyle}"
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Keresési feltételek" FontSize="24" FontWeight="SemiBold" 
+                   HorizontalAlignment="Left" Margin="0,0,0,10" Foreground="#1A1A1A"/>
+        <TextBlock Grid.Row="1" Text="(tetszőlegesen kombinálható)" FontSize="14" 
+                   HorizontalAlignment="Left" Margin="0,0,0,20" Foreground="#666666"/>
+
+        <WrapPanel Grid.Row="2" Margin="0 10 0 40">
+            <StackPanel Margin="0 0 50 0" >
+                <TextBlock  Text="Cikkszám:" FontSize="16" Margin="0,0,0,5" Foreground="#333333"/>
+                <TextBox  x:Name="ProductNumberInput" Style="{StaticResource ModernTextBoxStyle}" 
+                          Width="300" HorizontalAlignment="Left"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Grid.Row="4" Text="Vásárló neve:" FontSize="16" Margin="0,0,0,5" Foreground="#333333"/>
+                <TextBox Grid.Column="0" x:Name="CustomerNameInput" Style="{StaticResource ModernTextBoxStyle}" 
+                         Width="300" IsReadOnly="False" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </WrapPanel>
+
+        <TextBlock Grid.Row="4" Text="Ügyfél kiválasztása:" FontSize="16" Margin="0,0,0,5" Foreground="#333333"/>
+
+        <Grid Grid.Row="5" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <WrapPanel>
+                <Border Background="#eef1f6" Grid.Column="0" CornerRadius="6" Padding="6" Margin="0 0 0 0" BorderBrush="#ddd" 
+                        BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="320" Height="40">
+                    <TextBlock x:Name="txtExistsCustomerName" Foreground="#222" FontWeight="SemiBold" FontSize="16" TextAlignment="Left" Text="{Binding Customer.Name}"/>
+                </Border>
+                <Button Content="Kiválasztás" Grid.Column="1" Style="{StaticResource CommonButtonStyle}" 
+                        Width="120" Height="42" Margin="20,0,0,0" Click="SelectCustomerButton_Click"/>
+            </WrapPanel>
+            
+        </Grid>
+
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <Button Content="OK" Style="{StaticResource CommonButtonStyle}" Height="42"
+                    Click="OkButton_Click" IsDefault="True" Margin="0,0,10,0"/>
+            <Button Content="Mégsem" Style="{StaticResource RedButtonStyle}" Height="42"
                     Click="CancelButton_Click" IsCancel="True"/>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>

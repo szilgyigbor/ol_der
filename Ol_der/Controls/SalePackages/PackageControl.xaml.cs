@@ -158,28 +158,49 @@ namespace Ol_der.Controls.SalePackages
         {
             ContentArea.Content = loadingText;
 
-            var searchCriteriaText = "Keresési feltételek: ";
+            if (SearchCriteria == null)
+            {
+                PackagesTextBlock.Text = "Nincsenek megadott keresési feltételek.";
+                return;
+            }
 
-            if (!string.IsNullOrWhiteSpace(SearchCriteria["CustomerName"]) && !string.IsNullOrWhiteSpace(SearchCriteria["ProductNumber"]))
+            var labels = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-                searchCriteriaText += $"Név: {SearchCriteria["CustomerName"]}, Cikkszám: {SearchCriteria["ProductNumber"]}";
+                { "CustomerName", "Név" },
+                { "ProductNumber", "Cikkszám" },
+                { "CustomerId", "Ügyfélazonosító" }
+            };
+
+            var parts = new List<string>();
+
+            foreach (var kvp in labels)
+            {
+                if (!SearchCriteria.TryGetValue(kvp.Key, out var value))
+                    continue;
+
+                if (string.IsNullOrWhiteSpace(value))
+                    continue;
+
+                var clean = value.Trim();
+
+                parts.Add($"{kvp.Value}: {clean}");
             }
-            else if (!string.IsNullOrWhiteSpace(SearchCriteria["CustomerName"]))
+
+            string searchCriteriaText;
+
+            if (parts.Count == 0)
             {
-                searchCriteriaText += $"Név: {SearchCriteria["CustomerName"]}";
-            }
-            else if (!string.IsNullOrWhiteSpace(SearchCriteria["ProductNumber"]))
-            {
-                searchCriteriaText += $"Cikkszám: {SearchCriteria["ProductNumber"]}";
+                searchCriteriaText = "Nincsenek megadott keresési feltételek.";
             }
             else
             {
-                searchCriteriaText = "Nincsenek megadott keresési feltételek.";
+                searchCriteriaText = "Keresési feltételek: " + string.Join(", ", parts);
             }
 
             PackagesTextBlock.Text = searchCriteriaText;
 
             await _showAllPackageControl.LoadSearchedSales(SearchCriteria);
+
             ContentArea.Content = _showAllPackageControl;
         }
 
