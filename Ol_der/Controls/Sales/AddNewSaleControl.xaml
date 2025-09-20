@@ -231,7 +231,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,20,0">
                 <Label Content="Ügyfél:" VerticalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold"/>
 
-                <Border Background="#eaf6f6" CornerRadius="6" Padding="6" Margin="6" BorderBrush="#ddd" BorderThickness="1" VerticalAlignment="Center" Visibility="{Binding Customer.Name}" Width="320">
+                <Border Background="#eef1f6" CornerRadius="6" Padding="6" Margin="6" BorderBrush="#ddd" BorderThickness="1" VerticalAlignment="Center" Visibility="{Binding Customer.Name}" Width="320">
                     <TextBlock x:Name="txtExistsCustomerName" Foreground="#222" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding Customer.Name}"/>
                 </Border>
 

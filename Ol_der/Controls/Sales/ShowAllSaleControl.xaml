@@ -31,7 +31,7 @@
                     </GroupStyle.ContainerStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="#aac4d1" Background="#e1f0ea" BorderThickness="1" CornerRadius="6" Padding="10" Margin="0 0 0 10">
+                            <Border BorderBrush="#aac4d1" Background="#f1f6f8" BorderThickness="1" CornerRadius="6" Padding="10" Margin="0 0 0 10">
                                 <DockPanel>
                                     <Button Content="Riport" Background="#4caf50" Foreground="White" Padding="10 5" BorderThickness="0" Cursor="Hand" 
                                             Click="SaveButton_Click" Margin="0 0 10 0"/>
@@ -101,7 +101,7 @@
                                     </TextBlock>
                                 </Border>
 
-                                <Border Background="#eaf6f6" CornerRadius="3" Padding="3" Margin="3" 
+                                <Border Background="#eef1f6" CornerRadius="3" Padding="3" Margin="3" 
                                         Visibility="{Binding Customer, Converter={StaticResource StringToVisibilityConverter}}"
                                         BorderBrush="#bbbbbb" BorderThickness="1" Width="auto">
                                     <TextBlock Text="{Binding Customer.Name}"

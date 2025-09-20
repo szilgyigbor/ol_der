@@ -89,7 +89,7 @@
                                            Margin="5 0"
                                            VerticalAlignment="Center"/>
 
-                                <Border Background="#eaf6f6" CornerRadius="3" Padding="3" Margin="3" 
+                                <Border Background="#eef1f6" CornerRadius="3" Padding="3" Margin="3" 
                                         BorderBrush="#bbbbbb" BorderThickness="1" Width="auto"
                                         Visibility="{Binding Customer, Converter={StaticResource StringToVisibilityConverter}}">
                                     <TextBlock Text="{Binding Customer.Name}" 
