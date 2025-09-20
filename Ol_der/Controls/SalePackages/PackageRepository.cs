@@ -141,14 +141,32 @@ namespace Ol_der.Controls.SalePackages
                         .ThenInclude(si => si.Product.Supplier)
                     .AsQueryable();
 
-                if (!string.IsNullOrWhiteSpace(criteria["ProductNumber"]))
+                if (criteria != null)
                 {
-                    query = query.Where(s => s.SaleItems.Any(si => si.Product.ItemNumber == criteria["ProductNumber"]));
-                }
+                    // ProductNumber
+                    if (criteria.TryGetValue("ProductNumber", out var productNumber) && !string.IsNullOrWhiteSpace(productNumber))
+                    {
+                        var pn = productNumber.Trim();
+                        query = query.Where(s => s.SaleItems.Any(si => si.Product.ItemNumber == pn));
+                    }
 
-                if (!string.IsNullOrWhiteSpace(criteria["CustomerName"]))
-                {
-                    query = query.Where(s => s.CustomerName.Contains(criteria["CustomerName"]));
+                    // CustomerName
+                    if (criteria.TryGetValue("CustomerName", out var customerName) && !string.IsNullOrWhiteSpace(customerName))
+                    {
+                        var cn = customerName.Trim();
+                        query = query.Where(s => s.CustomerName.Contains(cn));
+                    }
+
+                    // CustomerId
+                    if (criteria.TryGetValue("CustomerId", out var customerIdRaw) && !string.IsNullOrWhiteSpace(customerIdRaw))
+                    {
+                        if (int.TryParse(customerIdRaw.Trim(), out var customerId))
+                        {
+                            query = query.Where(s => s.CustomerId == customerId);
+
+                        }
+
+                    }
                 }
 
                 query = query.Where(s => s.IsPackage)
