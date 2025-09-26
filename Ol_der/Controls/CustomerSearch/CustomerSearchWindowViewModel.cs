@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Bibliography;
+using Ol_der.Controls.Customers;
 using Ol_der.Controls.DetailedSearch;
 using Ol_der.Controls.Orders;
 using Ol_der.Models;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Ol_der.Controls.CustomerSearch
@@ -20,6 +22,7 @@ namespace Ol_der.Controls.CustomerSearch
         private string _customerName;
         private List<Customer> _customers;
         private Customer _selectedCustomer;
+        private Window _createCustomerindow;
 
         public string CustomerName
         {
@@ -53,12 +56,14 @@ namespace Ol_der.Controls.CustomerSearch
         public ICommand SearchCustomersByNameCommand { get; }
 
         public ICommand SelectSearchedCustomerCommand { get; }
+        public ICommand CreateCustomerCommand { get; }
 
-        
+
         public CustomerSearchWindowViewModel()
         {
             _repository = new CustomerSearchWindowRepository();
-            SearchCustomersByNameCommand = new RelayCommand(async _ => await SearchCustomersByNameAsync());
+            SearchCustomersByNameCommand = new Customers.RelayCommand(async _ => await SearchCustomersByNameAsync());
+            CreateCustomerCommand = new Customers.RelayCommand(async _ => await CreateCustomer());
             SetAllCustomers();
         }
 
@@ -87,6 +92,37 @@ namespace Ol_der.Controls.CustomerSearch
             }
 
         }
+
+        public async Task CreateCustomer()
+        {
+            AddOrModifyCustomerControl addOrModifyCustomerControl = new AddOrModifyCustomerControl();
+
+            _createCustomerindow = new Window
+            {
+                Title = "Új ügyfél létrehozása",
+                Content = addOrModifyCustomerControl,
+                SizeToContent = SizeToContent.WidthAndHeight,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                ResizeMode = ResizeMode.NoResize
+            };
+
+            addOrModifyCustomerControl.OnFinished -= CloseWindow;
+            addOrModifyCustomerControl.OnFinished += CloseWindow;
+
+            _createCustomerindow.ShowDialog();
+            
+        }
+
+        private void CloseWindow()
+        {
+            if (_createCustomerindow != null)
+            {
+                SetAllCustomers();
+                _createCustomerindow.Close();
+            }
+        }
+
+
 
         public void NoResult()
         {

@@ -94,6 +94,7 @@
                 </TextBox.InputBindings>
             </TextBox>
             <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}" Command="{Binding SearchCustomersByNameCommand}"/>
+            <Button Content="Új ügyfél" Style="{StaticResource CommonButtonStyle}" Command="{Binding CreateCustomerCommand}" Margin="100 5 5 5"/>
         </WrapPanel>
 
         <WrapPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,15">
