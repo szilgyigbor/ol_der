@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Customers"
              mc:Ignorable="d" 
+             FontSize="15"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -47,35 +48,35 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Név:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <Label Content="Név:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
             <TextBox Grid.Row="0" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
                      Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
-                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6"  Foreground="#1F2937"/>
 
-            <Label Content="Cím:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <Label Content="Cím:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
             <TextBox Grid.Row="1" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
                      Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" 
-                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" Foreground="#1F2937"/>
 
-            <Label Content="Telefon:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <Label Content="Telefon:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
             <TextBox Grid.Row="2" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
                      Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" 
-                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" Foreground="#1F2937"/>
 
-            <Label Content="Email:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <Label Content="Email:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
             <TextBox Grid.Row="3" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
                      Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
-                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" Foreground="#1F2937"/>
 
-            <Label Content="Adószám:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <Label Content="Adószám:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
             <TextBox Grid.Row="4" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
                      Text="{Binding TaxNumber, UpdateSourceTrigger=PropertyChanged}" 
-                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" Foreground="#1F2937"/>
 
-            <Label Content="Megjegyzés:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <Label Content="Megjegyzés:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
             <TextBox Grid.Row="5" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600" Height="80"
                      Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"
-                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" Foreground="#1F2937"/>
 
             <Button Content="{Binding ButtonText}" Grid.Row="7" Grid.Column="1" Style="{StaticResource CommonButtonStyle}"
                     VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Margin="4"

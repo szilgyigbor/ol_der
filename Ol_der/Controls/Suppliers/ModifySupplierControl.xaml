@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Ol_der.Controls.Suppliers"
              mc:Ignorable="d" 
-             FontSize="17"
+             FontSize="15"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -14,22 +14,24 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid HorizontalAlignment="Left" VerticalAlignment="Center">
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Background="#F5F7FA">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0 20 0 0">
-            <TextBlock Text="Meglévő beszállító módosítása"
-                       FontSize="22"
+        <Grid Grid.Row="0" Margin="0 12 0 12">
+            <TextBlock Text="Új beszállító hozzáadása"
+                       FontSize="18"
+                       FontWeight="SemiBold"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Grid.Row="0"
-                       Grid.Column="0"/>
+                       Grid.Column="0"
+                       Foreground="#1F2937"/>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -43,21 +45,25 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Név:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="nameTextBox" Grid.Row="0" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <Label Content="Név:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox x:Name="nameTextBox" Grid.Row="0" Grid.Column="1" Margin="4" HorizontalAlignment="Center" Width="600"
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" Foreground="#1F2937"/>
 
-            <Label Content="Cím:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="addressTextBox" Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <Label Content="Cím:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox x:Name="addressTextBox" Grid.Row="1" Grid.Column="1" Margin="4" HorizontalAlignment="Center" Width="600"
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" Foreground="#1F2937"/>
 
-            <Label Content="Email:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="emailTextBox" Grid.Row="2" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <Label Content="Email:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox x:Name="emailTextBox" Grid.Row="2" Grid.Column="1" Margin="4" HorizontalAlignment="Center" Width="600"
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" Foreground="#1F2937"/>
 
-            <Label Content="Telefon:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="phoneTextBox" Grid.Row="3" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Width="600"/>
+            <Label Content="Telefon:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox x:Name="phoneTextBox" Grid.Row="3" Grid.Column="1" Margin="4" HorizontalAlignment="Center" Width="600"
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" Foreground="#1F2937"/>
 
             <Button Content="Módosítás" Grid.Row="4" Grid.Column="1" Style="{StaticResource CommonButtonStyle}"
-                    VerticalAlignment="Center" HorizontalAlignment="Center" Click="ModifyButton_Click" Width="100"/>
+                    VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Margin="4"
+                    Click="ModifyButton_Click" Background="#3B82F6" Foreground="White" Padding="12 6" BorderThickness="0" FontWeight="Medium"/>
         </Grid>
-
     </Grid>
 </UserControl>
