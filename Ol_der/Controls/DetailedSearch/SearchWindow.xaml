@@ -12,9 +12,50 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <!-- ListViewItem Style -->
+            <Style TargetType="ListViewItem">
+                <Setter Property="Background" Value="#FFFFFF"/>
+                <Setter Property="Foreground" Value="#1F2937"/>
+                <Setter Property="Padding" Value="6"/>
+                <Setter Property="Margin" Value="0 2"/>
+                <Setter Property="BorderBrush" Value="#E5E7EB"/>
+                <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#E8F0FE"/>
+                        <Setter Property="BorderBrush" Value="#3B82F6"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#F9FAFB"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <!-- GridViewColumnHeader Style -->
+            <Style TargetType="GridViewColumnHeader">
+                <Setter Property="Background" Value="#F3F4F6"/>
+                <Setter Property="Foreground" Value="#1F2937"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="BorderBrush" Value="#D1D5DB"/>
+                <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewColumnHeader">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Background="#f7f7f7">
+    <Grid Background="#F5F7FA">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -22,19 +63,21 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Részletes keresés:" Margin="5" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="22"/>
+        <Label Content="Részletes keresés:" Margin="12" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold" Foreground="#1F2937"/>
 
-        <WrapPanel Grid.Row="1" HorizontalAlignment="Left">
-            <Label Content="Cikkszám:" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding ItemNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="116">
+        <WrapPanel Grid.Row="1" HorizontalAlignment="Left" Margin="12">
+            <Label Content="Cikkszám:" VerticalAlignment="Center" Foreground="#4B5563" FontSize="15" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox Text="{Binding ItemNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4" Width="116" VerticalAlignment="Center" Padding="6"
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" FontSize="15" Foreground="#1F2937">
                 <TextBox.InputBindings>
                     <KeyBinding Command="{Binding SearchProductsByItemNumberCommand}" Key="Enter" />
                 </TextBox.InputBindings>
             </TextBox>
             <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}" Command="{Binding SearchProductsByItemNumberCommand}"/>
 
-            <Label Padding = "30 0 0 0" Content="Megnevezés:" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="160">
+            <Label Content="Megnevezés:" VerticalAlignment="Center" Foreground="#4B5563" FontSize="15" FontWeight="Medium" Margin="30 0 12 0"/>
+            <TextBox Text="{Binding ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="4" Width="160" VerticalAlignment="Center" Padding="6"
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" FontSize="15" Foreground="#1F2937">
                 <TextBox.InputBindings>
                     <KeyBinding Command="{Binding SearchProductsByNameCommand}" Key="Enter" />
                 </TextBox.InputBindings>
@@ -43,13 +86,14 @@
             <Button Content="Keresés" Style="{StaticResource CommonButtonStyle}" Command="{Binding SearchProductsByNameCommand}"/>
         </WrapPanel>
 
-        <WrapPanel Grid.Row="2" Margin="5" Orientation="Horizontal" HorizontalAlignment="Left">
+        <WrapPanel Grid.Row="2" Margin="12" Orientation="Horizontal" HorizontalAlignment="Left">
             <Button Content="Kiválaszt" Style="{StaticResource CommonButtonStyle}" Click="FinishSelectionClick"/>
         </WrapPanel>
 
-        <ListView ItemsSource="{Binding Products}" Grid.Row="3" Margin="10"
-          SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-          MouseDoubleClick="ListView_MouseDoubleClick">
+        <ListView ItemsSource="{Binding Products}" Grid.Row="3" Margin="12"
+                  SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                  MouseDoubleClick="ListView_MouseDoubleClick"
+                  Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Cikkszám" DisplayMemberBinding="{Binding ItemNumber}" Width="140" />
@@ -57,12 +101,6 @@
                     <GridViewColumn Header="Beszállító" DisplayMemberBinding="{Binding Supplier.Name}" Width="140" />
                 </GridView>
             </ListView.View>
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="#f7f7f7" />
-                    <Setter Property="Foreground" Value="Black" />
-                </Style>
-            </ListView.ItemContainerStyle>
         </ListView>
     </Grid>
 </Window>

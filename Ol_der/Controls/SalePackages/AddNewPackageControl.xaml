@@ -62,17 +62,19 @@
             </Style>
 
             <Style TargetType="Button" x:Key="ModernGhostButton" BasedOn="{StaticResource ModernPrimaryButton}">
-                <Setter Property="Background" Value="Lightblue" />
+                <Setter Property="Background" Value="#bbe4e9" />
                 <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="BorderBrush" Value="#e0e7e7" />
+                <Setter Property="MinWidth" Value="100" />
             </Style>
 
             <Style TargetType="Button" x:Key="ModernGhostRedButton" BasedOn="{StaticResource ModernPrimaryButton}">
-                <Setter Property="Background" Value="LightPink" />
+                <Setter Property="Background" Value="#FEE2E2" />
                 <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="BorderBrush" Value="#e0e7e7" />
+                <Setter Property="MinWidth" Value="100" />
             </Style>
 
             <!-- TextBox -->
@@ -149,7 +151,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,20,0">
                 <Label Content="Ügyfél:" VerticalAlignment="Center" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold"/>
 
-                <Border Background="#eef1f6" CornerRadius="6" Padding="6" Margin="6" BorderBrush="#ddd" BorderThickness="1" VerticalAlignment="Center" Visibility="{Binding Customer.Name}" Width="320">
+                <Border Background="#F9FAFB" CornerRadius="6" Padding="6" Margin="6" BorderBrush="#ddd" BorderThickness="1" VerticalAlignment="Center" Visibility="{Binding Customer.Name}" Width="320">
                     <TextBlock x:Name="txtExistsCustomerName" Foreground="#222" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center" TextAlignment="Left" Text="{Binding Customer.Name}"/>
                 </Border>
 

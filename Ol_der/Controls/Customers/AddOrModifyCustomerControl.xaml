@@ -13,22 +13,24 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid HorizontalAlignment="Left" VerticalAlignment="Center">
+    <Grid HorizontalAlignment="Left" VerticalAlignment="Center" Background="#F5F7FA">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0 20 0 0">
+        <Grid Grid.Row="0" Margin="0 12 0 12">
             <TextBlock Text="Új ügyfél hozzáadása"
-                   FontSize="22"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Grid.Row="0"
-                   Grid.Column="0"/>
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Foreground="#1F2937"/>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="12">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -45,35 +47,39 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Név:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
-                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="Név:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" 
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
 
-            <Label Content="Cím:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
-                     Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="Cím:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" 
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
 
-            <Label Content="Telefon:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
-                     Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="Telefon:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" 
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
 
-            <Label Content="Email:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
-                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="Email:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
 
-            <Label Content="Adószám:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600"
-                     Text="{Binding TaxNumber, UpdateSourceTrigger=PropertyChanged}" />
+            <Label Content="Adószám:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600"
+                     Text="{Binding TaxNumber, UpdateSourceTrigger=PropertyChanged}" 
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
 
-            <Label Content="Megjegyzés:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Margin="5" HorizontalAlignment="Stretch" Width="600" Height="80"
-                     Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"/>
-
+            <Label Content="Megjegyzés:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" Foreground="#4B5563" FontSize="14" FontWeight="Medium" Margin="0 0 12 0"/>
+            <TextBox Grid.Row="5" Grid.Column="1" Margin="4" HorizontalAlignment="Stretch" Width="600" Height="80"
+                     Text="{Binding Notes, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"
+                     Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="14" Foreground="#1F2937"/>
 
             <Button Content="{Binding ButtonText}" Grid.Row="7" Grid.Column="1" Style="{StaticResource CommonButtonStyle}"
-                    VerticalAlignment="Center" HorizontalAlignment="Center" Width="100"
-                    Command="{Binding AddCommand}" />
+                    VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Margin="4"
+                    Command="{Binding AddCommand}" Background="#3B82F6" Foreground="White" Padding="12 6" BorderThickness="0" FontWeight="Medium"/>
         </Grid>
     </Grid>
 </UserControl>
-

@@ -98,7 +98,7 @@
             </Grid.ColumnDefinitions>
 
             <WrapPanel>
-                <Border Background="#eef1f6" Grid.Column="0" CornerRadius="6" Padding="6" Margin="0 0 0 0" BorderBrush="#ddd" 
+                <Border Background="#F9FAFB" Grid.Column="0" CornerRadius="6" Padding="6" Margin="0 0 0 0" BorderBrush="#ddd" 
                         BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Left" Width="320" Height="40">
                     <TextBlock x:Name="txtExistsCustomerName" Foreground="#222" FontWeight="SemiBold" FontSize="16" TextAlignment="Left" Text="{Binding Customer.Name}"/>
                 </Border>

@@ -15,28 +15,28 @@
         <local:EnumToDisplayNameConverter x:Key="EnumToDisplayNameConverter" />
     </UserControl.Resources>
 
-    <Grid Background="#f9f9f9">
+    <Grid Background="#F5F7FA">
         <ListView x:Name="SalesListView"
                   ItemsSource="{Binding GroupedSales.View}" 
                   BorderThickness="0"
                   Background="Transparent"
                   ScrollViewer.VerticalScrollBarVisibility="Auto">
-            
+
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
                         <Style TargetType="GroupItem">
-                            <Setter Property="Margin" Value="5 10 5 20"/>
+                            <Setter Property="Margin" Value="0 0 0 20"/>
                         </Style>
                     </GroupStyle.ContainerStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <Border BorderBrush="#aac4d1" Background="#f1f6f8" BorderThickness="1" CornerRadius="6" Padding="10" Margin="0 0 0 10">
+                            <Border BorderBrush="#D6E2EA" Background="#FFFFFF" BorderThickness="1" CornerRadius="8" Padding="12" Margin="2">
                                 <DockPanel>
-                                    <Button Content="Riport" Background="#4caf50" Foreground="White" Padding="10 5" BorderThickness="0" Cursor="Hand" 
-                                            Click="SaveButton_Click" Margin="0 0 10 0"/>
+                                    <Button Content="Riport" Background="#3B82F6" Foreground="White" Padding="12 6" BorderThickness="0" Cursor="Hand" 
+                                            Click="SaveButton_Click" Margin="0 0 12 0" FontWeight="Medium"/>
                                     <TextBlock Text="{Binding Converter={StaticResource DateToDayConverter}}"
-                                               FontWeight="Bold" FontSize="20" Foreground="#2c3e50" VerticalAlignment="Center"/>
+                                               FontWeight="SemiBold" FontSize="18" Foreground="#1F2937" VerticalAlignment="Center"/>
                                 </DockPanel>
                             </Border>
                         </DataTemplate>
@@ -46,16 +46,16 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Background="White" CornerRadius="8" Padding="6" Margin="0 3 0 3" BorderBrush="#dddddd" BorderThickness="1">
+                    <Border Background="White" CornerRadius="8" Padding="4" Margin="2" BorderBrush="#E5E7EB" BorderThickness="1">
                         <StackPanel>
-                            <DockPanel Margin="3">
-                                <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="15" Margin="0 0 10 0" Width="50" VerticalAlignment="Center"/>
-                                <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="17" FontWeight="SemiBold"
-                                           Width="90" VerticalAlignment="Center" TextAlignment="Right"/>
-                                <TextBlock Text=".-Ft" FontSize="17" Margin="0 5" Width="30" VerticalAlignment="Center"/>
+                            <DockPanel Margin="2">
+                                <TextBlock Text="{Binding Date, StringFormat='HH:mm'}" FontSize="14" Margin="0 0 12 0" Width="50" VerticalAlignment="Center" Foreground="#4B5563"/>
+                                <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}" FontSize="16" FontWeight="SemiBold"
+                                           Width="90" VerticalAlignment="Center" TextAlignment="Right" Foreground="#222"/>
+                                <TextBlock Text=".-Ft" FontSize="16" Margin="0 5" Width="30" VerticalAlignment="Center" Foreground="#4B5563"/>
 
-                                <Border x:Name="PaymentTypeBorder" Margin="2" Padding="2" VerticalAlignment="Center" Background="#f0f0f0" CornerRadius="4">
-                                    <TextBlock FontSize="16" FontWeight="SemiBold" Width="75" Padding="3">
+                                <Border x:Name="PaymentTypeBorder" Margin="2" Padding="2" VerticalAlignment="Center" Background="#F3F4F6" CornerRadius="6">
+                                    <TextBlock FontSize="15" FontWeight="Medium" Width="70" Padding="2 4 2 4 " Foreground="#222" TextAlignment="Center">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="Text">
@@ -77,7 +77,7 @@
                                                                          StringFormat="{}{0}(✗)"/>
                                                             </Setter.Value>
                                                         </Setter>
-                                                        <Setter Property="Background" Value="#ffcdd2"/>
+                                                        <Setter Property="Background" Value="#FEE2E2"/>
                                                     </MultiDataTrigger>
 
                                                     <MultiDataTrigger>
@@ -92,49 +92,47 @@
                                                                          StringFormat="{}{0}(✓)"/>
                                                             </Setter.Value>
                                                         </Setter>
-                                                        <Setter Property="Background" Value="#c8e6c9"/>
+                                                        <Setter Property="Background" Value="#D1FAE5"/>
                                                     </MultiDataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-
                                         </TextBlock.Style>
                                     </TextBlock>
                                 </Border>
 
-                                <Border Background="#eef1f6" CornerRadius="3" Padding="3" Margin="3" 
+                                <Border Background="#F9FAFB" CornerRadius="6" Padding="4" Margin="4" 
                                         Visibility="{Binding Customer, Converter={StaticResource StringToVisibilityConverter}}"
-                                        BorderBrush="#bbbbbb" BorderThickness="1" Width="auto">
+                                        BorderBrush="#D1D5DB" BorderThickness="1" Width="auto">
                                     <TextBlock Text="{Binding Customer.Name}"
-                                               
-                                               Foreground="#111" FontSize="16"
-                                               FontWeight="SemiBold"
+                                               Foreground="#222" FontSize="15"
+                                               FontWeight="Medium"
                                                VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
-                                <Border Background="#fcfefe" CornerRadius="3" Padding="3" Margin="3" BorderBrush="#bbbbbb" BorderThickness="1"
+                                <Border Background="#FFFF" CornerRadius="6" Padding="4" Margin="4" BorderBrush="#D1D5DB" BorderThickness="1"
                                         Visibility="{Binding CustomerName, Converter={StaticResource StringToVisibilityConverter}}" Width="auto">
-                                    <TextBlock Text="{Binding CustomerName}" Foreground="#222" FontSize="16" VerticalAlignment="Center" TextAlignment="Left"/>
+                                    <TextBlock Text="{Binding CustomerName}" Foreground="#1F2937" FontSize="15" VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
-                                <TextBlock Text="{Binding Notes}" FontSize="16" FontStyle="Normal"  Margin="10 0" Foreground="#333" VerticalAlignment="Center" TextAlignment="Left"/>
+                                <TextBlock Text="{Binding Notes}" FontSize="15" FontStyle="Normal" Margin="12 0" Foreground="#333" VerticalAlignment="Center" TextAlignment="Left"/>
                             </DockPanel>
 
                             <ItemsControl ItemsSource="{Binding SaleItems}" Margin="0 2">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border Background="#fafafa" BorderBrush="#e0e0e0" BorderThickness="1" CornerRadius="4" Margin="0 2">
-                                            <WrapPanel Margin="5">
-                                                <TextBlock Text="{Binding Quantity}" Width="30" FontWeight="SemiBold"/>
-                                                <TextBlock Text=" db" Width="40"/>
+                                        <Border Background="#FFFFFF" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="6" Margin="0 0">
+                                            <WrapPanel Margin="6">
+                                                <TextBlock Text="{Binding Quantity}" Width="30" FontWeight="SemiBold" Foreground="#1F2937"/>
+                                                <TextBlock Text=" db" Width="40" Foreground="#4B5563"/>
                                                 <TextBlock Text="{Binding Product.ItemNumber}" Width="130" Foreground="#333"/>
-                                                <TextBlock Text="{Binding Product.Name}" Width="600" TextTrimming="CharacterEllipsis" Foreground="#2c3e50"/>
-                                                <TextBlock Text="Eladási ár(/db):" Width="120"/>
-                                                <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Width="70" Foreground="#005500"/>
+                                                <TextBlock Text="{Binding Product.Name}" Width="600" TextTrimming="CharacterEllipsis" Foreground="#1F2937"/>
+                                                <TextBlock Text="Eladási ár(/db):" Width="120" Foreground="#4B5563"/>
+                                                <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}" Width="70" Foreground="#047857"/>
                                                 <StackPanel Orientation="Horizontal" Width="220">
                                                     <Image Source="{Binding Converter={StaticResource OrderStatusIconConverter}}"
-                                                           Width="20" Height="20" Margin="0,0,3,0" VerticalAlignment="Center"/>
+                                                           Width="18" Height="18" Margin="0,0,4,0" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding Converter={StaticResource OrderStatusTextConverter}}"
-                                                               FontStyle="Italic" Foreground="#444"/>
+                                                               FontStyle="Italic" Foreground="#6B7280"/>
                                                 </StackPanel>
                                             </WrapPanel>
                                         </Border>
@@ -153,7 +151,7 @@
                     <Setter Property="BorderThickness" Value="0"/>
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="#212121"/>
+                    <Setter Property="Foreground" Value="#1F2937"/>
                     <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
                 </Style>
             </ListView.ItemContainerStyle>
