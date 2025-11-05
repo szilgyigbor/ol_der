@@ -15,7 +15,7 @@
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </UserControl.Resources>
 
-    <Grid Background="#F5F7FA">
+    <Grid Background="#FBFBFB">
         <ListView x:Name="SalesListView"
                   ItemsSource="{Binding GroupedSales.View}"
                   BorderThickness="0"
@@ -62,7 +62,7 @@
                     <Border BorderBrush="#E5E7EB"
                             BorderThickness="1"
                             CornerRadius="8"
-                            Background="White"
+                            Background="#FBFBFB"
                             Margin="2"
                             Padding="4">
                         <StackPanel>
@@ -75,7 +75,7 @@
                                            VerticalAlignment="Center"/>
 
                                 <TextBlock Text="{Binding TotalAmount, StringFormat='{}{0:F0}'}"
-                                           FontSize="16"
+                                           FontSize="17"
                                            FontWeight="SemiBold"
                                            Width="90"
                                            Foreground="#222"
@@ -88,7 +88,7 @@
                                            Margin="0 5"
                                            VerticalAlignment="Center"/>
 
-                                <Border Background="#F9FAFB" CornerRadius="6" Padding="4" Margin="4" 
+                                <Border Background="#ECF3F6" CornerRadius="6" Padding="4" Margin="4" 
                                         BorderBrush="#D1D5DB" BorderThickness="1" Width="auto"
                                         Visibility="{Binding Customer, Converter={StaticResource StringToVisibilityConverter}}">
                                     <TextBlock Text="{Binding Customer.Name}" 
@@ -96,9 +96,9 @@
                                                VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
-                                <Border Background="#FFFF" CornerRadius="6" Padding="4" Margin="4" BorderBrush="#D1D5DB" BorderThickness="1"
+                                <Border Background="#F0F9F9" CornerRadius="6" Padding="4" Margin="4" BorderBrush="#D1D5DB" BorderThickness="1"
                                         Visibility="{Binding CustomerName, Converter={StaticResource StringToVisibilityConverter}}" Width="auto">
-                                    <TextBlock Text="{Binding CustomerName}" Foreground="#1F2937" FontSize="15" VerticalAlignment="Center" TextAlignment="Left"/>
+                                    <TextBlock Text="{Binding CustomerName}" Foreground="#222" FontSize="15" VerticalAlignment="Center" TextAlignment="Left"/>
                                 </Border>
 
                                 <TextBlock Text="{Binding Notes}"
@@ -118,33 +118,34 @@
                                                 BorderThickness="1"
                                                 CornerRadius="6"
                                                 Margin="0 0"
-                                                Background="#FFFFFF">
+                                                Background="#F9F9F9">
                                             <WrapPanel Margin="6">
                                                 <TextBlock Text="{Binding Quantity}"
+                                                           TextAlignment="Center"
                                                            Width="30"
                                                            FontWeight="SemiBold"
-                                                           Foreground="#1F2937"/>
+                                                           Foreground="#222"/>
                                                 <TextBlock Text=" db"
                                                            Width="40"
-                                                           Foreground="#4B5563"/>
+                                                           Foreground="#1F2937"/>
                                                 <TextBlock Text="{Binding Product.ItemNumber}"
                                                            Width="130"
-                                                           Foreground="#333"/>
+                                                           Foreground="#222"/>
                                                 <TextBlock Text="{Binding Product.Name}"
                                                            Width="600"
                                                            TextTrimming="CharacterEllipsis"
-                                                           Foreground="#1F2937"/>
+                                                           Foreground="#222"/>
                                                 <TextBlock Text="Eladási ár(/db):"
                                                            Width="120"
-                                                           Foreground="#4B5563"/>
+                                                           Foreground="#333"/>
                                                 <TextBlock Text="{Binding Price, StringFormat='{}{0:F0}'}"
                                                            Width="70"
-                                                           Foreground="#047857"/>
+                                                           Foreground="#016632"/>
                                                 <StackPanel Orientation="Horizontal" Width="220">
                                                     <Image Source="{Binding Converter={StaticResource OrderStatusIconConverter}}"
                                                            Width="18" Height="18" Margin="0,0,4,0" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{Binding Converter={StaticResource OrderStatusTextConverter}}"
-                                                           FontStyle="Italic" Foreground="#6B7280"/>
+                                                           FontStyle="Italic" Foreground="#444"/>
                                                 </StackPanel>
                                             </WrapPanel>
                                         </Border>
