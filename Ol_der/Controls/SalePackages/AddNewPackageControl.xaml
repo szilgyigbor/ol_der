@@ -210,11 +210,11 @@
         <ListBox x:Name="lstSaleItems" Grid.Row="7" Margin="2" Background="Transparent" BorderBrush="Transparent" Padding="6" Height="Auto" ItemContainerStyle="{StaticResource ModernListBoxItem}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border CornerRadius="5" Background="#f9f9f9" BorderBrush="#e8eef0" BorderThickness="0" Margin="0" Padding="0">
+                    <Border CornerRadius="5" Background="#F9F9F9" BorderBrush="#e8eef0" BorderThickness="0" Margin="0" Padding="0">
                         <DockPanel x:Name="ItemPanel"
                            Margin="2"
                            VerticalAlignment="Center"
-                           Background="#f9f9f9">
+                           Background="#F9F9F9">
                             <TextBox Text="{Binding Quantity, Mode=TwoWay}" Width="50" Margin="2" Style="{StaticResource ModernTextBox}"/>
                             <TextBlock Text="db" Width="30" Margin="2 0" VerticalAlignment="Center" Foreground="#111"/>
                             <TextBlock Text="{Binding Product.ItemNumber}" Width="150" Margin="2 0" VerticalAlignment="Center" Foreground="#111"/>
