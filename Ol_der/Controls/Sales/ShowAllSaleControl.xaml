@@ -54,7 +54,7 @@
                                            Width="90" VerticalAlignment="Center" TextAlignment="Right" Foreground="#222"/>
                                 <TextBlock Text=".-Ft" FontSize="16" Margin="0 5" Width="30" VerticalAlignment="Center" Foreground="#4B5563"/>
 
-                                <Border x:Name="PaymentTypeBorder" Margin="2" Padding="2" VerticalAlignment="Center" Background="#F3F4F6" CornerRadius="6">
+                                <Border x:Name="PaymentTypeBorder" Margin="2" Padding="2" VerticalAlignment="Center" Background="#E0E7FF" CornerRadius="6">
                                     <TextBlock FontSize="15" FontWeight="Medium" Width="70" Padding="2 4 2 4 " Foreground="#222" TextAlignment="Center">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
@@ -92,7 +92,7 @@
                                                                          StringFormat="{}{0}(✓)"/>
                                                             </Setter.Value>
                                                         </Setter>
-                                                        <Setter Property="Background" Value="#D1FAE5"/>
+                                                        <Setter Property="Background" Value="#D0FAE5"/>
                                                     </MultiDataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -122,7 +122,7 @@
                                     <DataTemplate>
                                         <Border Background="#FFFFFF" BorderBrush="#E5E7EB" BorderThickness="1" CornerRadius="6" Margin="0 0">
                                             <WrapPanel Margin="6">
-                                                <TextBlock Text="{Binding Quantity}" Width="30" FontWeight="SemiBold" Foreground="#1F2937"/>
+                                                <TextBlock Text="{Binding Quantity}" Width="30" FontWeight="SemiBold" Foreground="#1F2937" TextAlignment="Center"/>
                                                 <TextBlock Text=" db" Width="40" Foreground="#4B5563"/>
                                                 <TextBlock Text="{Binding Product.ItemNumber}" Width="130" Foreground="#333"/>
                                                 <TextBlock Text="{Binding Product.Name}" Width="600" TextTrimming="CharacterEllipsis" Foreground="#1F2937"/>
