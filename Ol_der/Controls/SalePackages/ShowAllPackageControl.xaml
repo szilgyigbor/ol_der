@@ -32,7 +32,7 @@
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
                             <Border BorderBrush="#D6E2EA"
-                                    Background="#FFFFFF"
+                                    Background="#E2E8F0"
                                     BorderThickness="1"
                                     CornerRadius="8"
                                     Padding="12"
@@ -47,7 +47,7 @@
                                             Click="SaveButton_Click" Margin="0 0 12 0" FontWeight="Medium"/>
                                     <TextBlock Text="{Binding Converter={StaticResource DateToDayConverter}}"
                                                FontWeight="SemiBold"
-                                               FontSize="18"
+                                               FontSize="19"
                                                Foreground="#1F2937"
                                                VerticalAlignment="Center"/>
                                 </DockPanel>
