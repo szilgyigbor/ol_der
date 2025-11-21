@@ -11,88 +11,11 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml" />
+                <ResourceDictionary Source="/Styles/ModernComboBoxStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <Style TargetType="ComboBox">
-                <Setter Property="Background" Value="#FFFFFF"/>
-                <Setter Property="BorderBrush" Value="#D1D5DB"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Foreground" Value="#1F2937"/>
-                <Setter Property="FontSize" Value="15"/>
-                <Setter Property="Padding" Value="6"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ComboBox">
-                            <Grid>
-                                <Border Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        CornerRadius="6">
-                                    <Grid>
-                                        <ToggleButton x:Name="ToggleButton" 
-                                                         Grid.Column="1"
-                                                         Background="Transparent" 
-                                                         BorderThickness="0" 
-                                                         IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                                         ClickMode="Press"
-                                                         HorizontalAlignment="Right"
-                                                         Width="30" RenderTransformOrigin="3.181,0.538">
-                                            <Path x:Name="Arrow" 
-                                                  Data="M 0 0 L 16 0 L 8 10 Z" 
-                                                  HorizontalAlignment="Center" 
-                                                  VerticalAlignment="Center" 
-                                                  Margin="0,0,5,0" 
-                                                  Fill="#444"/>
-                                        </ToggleButton>
-                                        <ContentPresenter x:Name="ContentSite"
-                                                          Content="{TemplateBinding SelectionBoxItem}"
-                                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                                          Margin="{TemplateBinding Padding}"
-                                                          VerticalAlignment="Center"
-                                                          HorizontalAlignment="Left"/>
-                                        
-                                        <TextBlock x:Name="PlaceholderText"
-                                                   Text="Válassz beszállítót"
-                                                   Foreground="#6B7280"
-                                                   Margin="{TemplateBinding Padding}"
-                                                   Visibility="Collapsed"/>
-                                        <Popup x:Name="Popup"
-                                               IsOpen="{TemplateBinding IsDropDownOpen}"
-                                               AllowsTransparency="True"
-                                               Focusable="False"
-                                               PopupAnimation="Slide">
-                                            <Border Background="#FFFFFF"
-                                                    BorderBrush="#D1D5DB"
-                                                    BorderThickness="1"
-                                                    CornerRadius="6"
-                                                    MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                                <ScrollViewer>
-                                                    <ItemsPresenter/>
-                                                </ScrollViewer>
-                                            </Border>
-                                        </Popup>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="BorderBrush" Value="#3B82F6"/>
-                                </Trigger>
-                                <Trigger Property="IsDropDownOpen" Value="True">
-                                    <Setter Property="BorderBrush" Value="#3B82F6"/>
-                                </Trigger>
-                                <Trigger Property="HasItems" Value="False">
-                                    <Setter TargetName="PlaceholderText" Property="Visibility" Value="Visible"/>
-                                </Trigger>
-                                <Trigger Property="IsSelectionBoxHighlighted" Value="True">
-                                    <Setter Property="BorderBrush" Value="#3B82F6"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+            
+
 
         </ResourceDictionary>
     </UserControl.Resources>
@@ -132,7 +55,7 @@
                      Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="15" Foreground="#1F2937"/>
             <TextBox x:Name="nameTextBox" Grid.Row="1" Grid.Column="1" Margin="4" Width="600" HorizontalAlignment="Left"
                      Background="#FFFFFF" BorderBrush="#D1D5DB" BorderThickness="1" Padding="6" FontSize="15" Foreground="#1F2937"/>
-            <ComboBox x:Name="suppliersComboBox" Grid.Row="2" Grid.Column="1" Margin="4" Width="250"
+            <ComboBox x:Name="suppliersComboBox" Grid.Row="2" Grid.Column="1" Margin="4" Width="250" Style="{StaticResource ModernComboBoxForSuppliers}"
                       DisplayMemberPath="Name" SelectedValuePath="SupplierId" HorizontalAlignment="Left"/>
 
         </Grid>
