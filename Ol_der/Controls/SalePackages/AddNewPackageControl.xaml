@@ -17,68 +17,6 @@
                 <ResourceDictionary Source="/Styles/ListBoxStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- Palette -->
-            <Color x:Key="AccentColor">#9FCF35</Color>
-            <Color x:Key="AccentDark">Blue</Color>
-            <Color x:Key="Surface">#FFFFFF</Color>
-            <Color x:Key="Muted">#f1f4f5</Color>
-            <Color x:Key="TextPrimary">#2c3e50</Color>
-            <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
-            <SolidColorBrush x:Key="AccentDarkBrush" Color="{StaticResource AccentDark}" />
-            <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource Surface}" />
-            <SolidColorBrush x:Key="MutedBrush" Color="{StaticResource Muted}" />
-            <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimary}" />
-
-            <!-- Common subtle shadow (light) -->
-            <DropShadowEffect x:Key="CardShadow" Color="#22000000" BlurRadius="2" ShadowDepth="2" />
-
-            <!-- Modern controls styles (keeps existing bindings intact) -->
-            <Style TargetType="Button" x:Key="ModernPrimaryButton">
-                <Setter Property="Background" Value="#9FCF35" />
-                <Setter Property="Foreground" Value="White" />
-                <Setter Property="Padding" Value="10,6" />
-                <Setter Property="FontWeight" Value="SemiBold" />
-                <Setter Property="BorderThickness" Value="0" />
-                <Setter Property="Cursor" Value="Hand" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="5" Padding="{TemplateBinding Padding}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="#34A6F4"/>
-                                </Trigger>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Opacity" Value="0.9"/>
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value="0.5"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <Style TargetType="Button" x:Key="ModernGhostButton" BasedOn="{StaticResource ModernPrimaryButton}">
-                <Setter Property="Background" Value="#BEE1F4" />
-                <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="BorderBrush" Value="#e0e7e7" />
-                <Setter Property="MinWidth" Value="80" />
-            </Style>
-
-            <Style TargetType="Button" x:Key="ModernGhostRedButton" BasedOn="{StaticResource ModernPrimaryButton}">
-                <Setter Property="Background" Value="#FEE2E2" />
-                <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="BorderBrush" Value="#e0e7e7" />
-                <Setter Property="MinWidth" Value="80" />
-            </Style>
-
-
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         </ResourceDictionary>
     </UserControl.Resources>
