@@ -13,6 +13,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/CommonButtonStyles.xaml" />
+                <ResourceDictionary Source="/Styles/TextBoxStyles.xaml" />
+                <ResourceDictionary Source="/Styles/ListBoxStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!-- Palette -->
@@ -76,57 +78,6 @@
                 <Setter Property="MinWidth" Value="80" />
             </Style>
 
-            <!-- TextBox -->
-            <Style TargetType="TextBox" x:Key="ModernTextBox">
-                <Setter Property="Background" Value="{StaticResource SurfaceBrush}" />
-                <Setter Property="BorderBrush" Value="#e0e7e7" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="Height" Value="32" />
-                <Setter Property="VerticalContentAlignment" Value="Center" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="TextBox">
-                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="6">
-                                <ScrollViewer x:Name="PART_ContentHost" Margin="2"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="BorderBrush" Value="#d0dbe0" />
-                                </Trigger>
-                                <Trigger Property="IsFocused" Value="True">
-                                    <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <!-- ListBoxItem (card) -->
-            <Style TargetType="ListBoxItem" x:Key="ModernListBoxItem">
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="Margin" Value="0" />
-                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="2" BorderBrush="#e8eef0" BorderThickness="1">
-                                <ContentPresenter Margin="0" />
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#d1f1e9"/>
-                                    <Setter Property="BorderBrush" Value="Lightblue"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="Lightblue"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         </ResourceDictionary>
