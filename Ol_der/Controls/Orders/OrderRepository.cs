@@ -169,7 +169,7 @@ namespace Ol_der.Controls.Orders
             }
         }
 
-        public async Task UpdateOrderFromSalesForSupplierAsync(int supplierId, int monthsToLookBack = 9)
+        public async Task UpdateOrderFromSalesForSupplierAsync(int supplierId, int monthsToLookBack = 12)
         {
             using (var context = ApplicationDbContextFactory.Create())
             {
