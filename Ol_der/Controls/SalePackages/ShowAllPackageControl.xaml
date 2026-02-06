@@ -67,6 +67,27 @@
                             Padding="4">
                         <StackPanel>
                             <DockPanel Margin="2">
+                                <Button Content="Bizonylat"
+                                        FontSize="14"
+                                        Background="#1B89A6"
+                                        Foreground="White"
+                                        Padding="5 0 5 0"
+                                        BorderThickness="0"
+                                        Cursor="Hand"
+                                        Click="SaleToPDFButton_Click"
+                                        Margin="5 0 10 0"
+                                        FontWeight="Medium">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="5"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
                                 <TextBlock Text="{Binding Date, StringFormat='HH:mm'}"
                                            FontSize="14"
                                            Foreground="#4B5563"
