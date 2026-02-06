@@ -225,45 +225,67 @@ namespace Ol_der.Controls.Sales
         {
             var sales = await saleRepository.GetSalesByDateRangeForRiportAsync(startDate, endDate);
 
-            var groupedByMonth = sales
-                .GroupBy(s => new { s.Date.Year, s.Date.Month })
-                .Select(g => new
-                {
-                    Year = g.Key.Year,
-                    Month = g.Key.Month,
-                    TotalRevenue = g.Sum(s => s.TotalAmount)
-                })
-                .OrderBy(g => g.Year).ThenBy(g => g.Month)
-                .ToList();
-
-            var groupedByYear = sales
+            var groupedData = sales
                 .GroupBy(s => s.Date.Year)
-                .Select(g => new
+                .OrderBy(g => g.Key)
+                .Select(yearGroup => new
                 {
-                    Year = g.Key,
-                    TotalRevenue = g.Sum(s => s.TotalAmount)
+                    Year = yearGroup.Key,
+                    YearTotal = yearGroup.Sum(s => s.TotalAmount),
+
+                    Months = yearGroup
+                        .GroupBy(s => s.Date.Month)
+                        .OrderBy(g => g.Key)
+                        .Select(monthGroup => new
+                        {
+                            Month = monthGroup.Key,
+                            MonthTotal = monthGroup.Sum(s => s.TotalAmount),
+
+                            PaymentBreakdown = monthGroup
+                                .GroupBy(s => s.PaymentType)
+                                .Select(pg => new
+                                {
+                                    PaymentType = pg.Key,
+                                    Total = pg.Sum(s => s.TotalAmount)
+                                })
+                                .OrderBy(p => p.PaymentType)
+                                .ToList()
+                        })
+                        .ToList()
                 })
-                .OrderBy(g => g.Year)
                 .ToList();
 
-            var filePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Összegző riport.txt");
+            var filePath = System.IO.Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                "Összegző_riport.txt");
 
             var sb = new StringBuilder();
 
-            sb.AppendLine($"Összegző riport ({startDate.ToShortDateString()} - {endDate.ToShortDateString()})");
+            sb.AppendLine($"Összegző riport ({startDate:yyyy.MM.dd} - {endDate:yyyy.MM.dd})");
+            sb.AppendLine(new string('=', 50));
             sb.AppendLine();
 
-            sb.AppendLine("Éves bevétel:");
-            foreach (var yearGroup in groupedByYear)
+            foreach (var year in groupedData)
             {
-                sb.AppendLine($"Év: {yearGroup.Year}, Bevétel: {yearGroup.TotalRevenue} Ft");
-            }
+                sb.AppendLine($"ÉV: {year.Year}");
+                sb.AppendLine($"Éves összes bevétel: {year.YearTotal:N0} Ft");
+                sb.AppendLine();
 
-            sb.AppendLine();
-            sb.AppendLine("Havi bevétel:");
-            foreach (var monthGroup in groupedByMonth)
-            {
-                sb.AppendLine($"Év: {monthGroup.Year}, Hónap: {monthGroup.Month}, Bevétel: {monthGroup.TotalRevenue} Ft");
+                foreach (var month in year.Months)
+                {
+                    sb.AppendLine($"  Hónap: {month.Month}. hónap");
+
+                    foreach (var payment in month.PaymentBreakdown)
+                    {
+                        sb.AppendLine(
+                            $"    {payment.PaymentType.GetDisplayName(),-12}: {payment.Total:N0} Ft");
+                    }
+
+                    sb.AppendLine($"    Havi összesen: {month.MonthTotal:N0} Ft");
+                    sb.AppendLine();
+                }
+
+                sb.AppendLine(new string('-', 50));
             }
 
             File.WriteAllText(filePath, sb.ToString());
