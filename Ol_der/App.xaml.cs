@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.IO;
 using System.Windows;
+using QuestPDF.Infrastructure;
 
 namespace Ol_der
 {
@@ -19,6 +20,7 @@ namespace Ol_der
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            QuestPDF.Settings.License = LicenseType.Community;
             base.OnStartup(e);
 
             var builder = new ConfigurationBuilder()
