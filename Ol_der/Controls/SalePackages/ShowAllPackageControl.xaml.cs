@@ -1,9 +1,11 @@
-﻿using Ol_der.Controls.Orders;
+﻿using Microsoft.Win32;
+using Ol_der.Controls.Orders;
+using Ol_der.Controls.Sales;
 using Ol_der.Models;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.IO;
 
 namespace Ol_der.Controls.SalePackages
 {
@@ -32,6 +34,35 @@ namespace Ol_der.Controls.SalePackages
 
                     SaveText(textToSave);
                 }
+            }
+        }
+
+        private void SaleToPDFButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (sender is Button button && button.DataContext is Sale sale)
+                {
+                    var dialog = new SaveFileDialog
+                    {
+                        Filter = "PDF fájl (*.pdf)|*.pdf",
+                        FileName = $"Eladas_{sale.SaleId}.pdf"
+                    };
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        SalePackagePdfGenerator.Generate(sale, dialog.FileName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "PDF mentési hiba",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
             }
         }
 
