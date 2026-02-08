@@ -69,7 +69,7 @@
                             <DockPanel Margin="2">
                                 <Button Content="Bizonylat"
                                         FontSize="14"
-                                        Background="#1B89A6"
+                                        Background="#6F99C9"
                                         Foreground="White"
                                         Padding="5 0 5 0"
                                         BorderThickness="0"
