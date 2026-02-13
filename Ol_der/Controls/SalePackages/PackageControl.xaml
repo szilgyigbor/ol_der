@@ -56,5 +56,8 @@
 
             <ContentControl Grid.Column="1" VerticalAlignment="Top" Margin="5" x:Name="ContentArea"/>
         </Grid>
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="90">
+            <Button Content="Bizonylat" Style="{StaticResource SubMenuButtonStyle}" Click="SavePackageToPdf_Click" />
+        </StackPanel>
     </Grid>
 </UserControl>
