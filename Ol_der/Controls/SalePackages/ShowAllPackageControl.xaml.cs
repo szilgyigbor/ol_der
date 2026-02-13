@@ -37,34 +37,6 @@ namespace Ol_der.Controls.SalePackages
             }
         }
 
-        private void SaleToPDFButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (sender is Button button && button.DataContext is Sale sale)
-                {
-                    var dialog = new SaveFileDialog
-                    {
-                        Filter = "PDF fájl (*.pdf)|*.pdf",
-                        FileName = $"Eladas_{sale.SaleId}.pdf"
-                    };
-
-                    if (dialog.ShowDialog() == true)
-                    {
-                        SalePackagePdfGenerator.Generate(sale, dialog.FileName);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    ex.Message,
-                    "PDF mentési hiba",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error
-                );
-            }
-        }
 
         private void SaveText(string text)
         {
@@ -101,6 +73,16 @@ namespace Ol_der.Controls.SalePackages
             }
 
             return -1;
+        }
+
+        public Sale? SaveSaleToPdf()
+        {
+            if (SalesListView.SelectedItem is Sale SelectedSale)
+            {
+                return SelectedSale;
+            }
+
+            return null;
         }
 
         public async Task RefreshSales(object filterForSales)
