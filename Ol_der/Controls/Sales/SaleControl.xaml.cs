@@ -1,12 +1,17 @@
-﻿using Ol_der.Controls.Suppliers;
+﻿using Ol_der.Controls.DateFilter;
+using Ol_der.Controls.Orders;
+using Ol_der.Controls.Suppliers;
 using Ol_der.Data;
+using Ol_der.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -14,9 +19,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Ol_der.Controls.DateFilter;
-using Ol_der.Controls.Orders;
-using System.IO;
 
 namespace Ol_der.Controls.Sales
 {
@@ -100,6 +102,57 @@ namespace Ol_der.Controls.Sales
                 messageBoxOkWindow.ShowDialog();
             }
         }
+
+        public void SaveSaleToPdf_Click(object sender, RoutedEventArgs e)
+        {
+            Sale? saleToPdf;
+
+            if (_showAllSaleControl != null)
+            {
+                saleToPdf = _showAllSaleControl.SaveSaleToPdf();
+            }
+
+            else
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Válassz ki egy eladást a PDF mentéshez!");
+                messageBoxOkWindow.ShowDialog();
+                _showAllSaleControl = new ShowAllSaleControl();
+                saleToPdf = _showAllSaleControl.SaveSaleToPdf();
+                return;
+            }
+
+            if (saleToPdf == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Válassz ki egy eladást a PDF mentéshez!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            try
+            {
+                var dialog = new SaveFileDialog
+                {
+                    Filter = "PDF fájl (*.pdf)|*.pdf",
+                    FileName = $"Eladas_{saleToPdf.SaleId}.pdf"
+                };
+
+                if (dialog.ShowDialog() == true)
+                {
+                    SalePdfGenerator.Generate(saleToPdf, dialog.FileName);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "PDF mentési hiba",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+            }
+        }
+
 
         private async Task ShowFilteredSales()
         {
