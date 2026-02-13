@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -94,6 +95,56 @@ namespace Ol_der.Controls.SalePackages
             {
                 MessageBoxOkWindow messageBoxOkWindow = new("Válassz ki egy csomagot a módosításhoz!");
                 messageBoxOkWindow.ShowDialog();
+            }
+        }
+
+        public void SavePackageToPdf_Click(object sender, RoutedEventArgs e)
+        {
+            Sale? packageToPdf;
+
+            if (_showAllPackageControl != null)
+            {
+                packageToPdf = _showAllPackageControl.SaveSaleToPdf();
+            }
+
+            else
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Válassz ki egy csomagot a PDF mentéshez!");
+                messageBoxOkWindow.ShowDialog();
+                _showAllPackageControl = new ShowAllPackageControl();
+                packageToPdf = _showAllPackageControl.SaveSaleToPdf();
+                return;
+            }
+
+            if (packageToPdf == null)
+            {
+                MessageBoxOkWindow messageBoxOkWindow = new MessageBoxOkWindow("Válassz ki egy csomagot a PDF mentéshez!");
+                messageBoxOkWindow.ShowDialog();
+                return;
+            }
+
+            try
+            {
+                var dialog = new SaveFileDialog
+                {
+                    Filter = "PDF fájl (*.pdf)|*.pdf",
+                    FileName = $"Eladas_{packageToPdf.SaleId}.pdf"
+                };
+
+                if (dialog.ShowDialog() == true)
+                {
+                    SalePackagePdfGenerator.Generate(packageToPdf, dialog.FileName);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "PDF mentési hiba",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
             }
         }
 
